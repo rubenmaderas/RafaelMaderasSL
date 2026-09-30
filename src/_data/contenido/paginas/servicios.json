@@ -1,40 +1,40 @@
 {
   "seo": {
     "titulo": "Servicios de yeso y reformas en Jaén | {empresa}",
-    "descripcion": "Yeso proyectado, guarnecido y enlucido, alisado de paredes con gotelé y reparaciones. Además, reformas integrales con gremios coordinados en Jaén."
+    "descripcion": "Yesista en Jaén con equipo propio: yeso proyectado, enlucidos, alisado de gotelé y reparación de grietas. También reformas integrales coordinadas."
   },
   "cabecera": {
     "antetitulo": "Servicios",
     "titulo": "Servicios de yeso y reformas en Jaén",
-    "entradilla": "El yeso es la actividad principal de {empresa} y lo realiza nuestro propio equipo. Para reformas y obras en general, coordinamos además a los profesionales de cada oficio."
+    "entradilla": "**Trabajos de yeso con equipo propio** y reformas completas con un solo interlocutor, en Jaén capital, la provincia y Andalucía."
   },
   "yeso": {
-    "antetitulo": "Actividad principal",
-    "titulo": "Trabajos de yeso: nuestra especialidad",
-    "entradilla": "Paredes y techos rectos, lisos y preparados para pintar. Estos son los trabajos de yeso que realizamos en viviendas de Jaén y su provincia."
+    "antetitulo": "Nuestra especialidad",
+    "titulo": "Trabajos de yeso: paredes lisas y listas para pintar",
+    "entradilla": "Lo hace **nuestro propio equipo**, a mano o con máquina. Además, el yeso es un material **incombustible** que ayuda a **regular la humedad** de la vivienda."
   },
   "obra": {
-    "antetitulo": "Actividad complementaria",
+    "antetitulo": "Reformas y obra",
     "titulo": "Reformas y obra en general, con gremios coordinados",
-    "entradilla": "Cuando la obra va más allá del yeso, la organizamos con profesionales con los que colaboramos habitualmente: albañilería, alicatado, fontanería, electricidad y cualquier otro oficio necesario.",
+    "entradilla": "Cuando la obra va más allá del yeso, **la organizamos nosotros**: albañilería, alicatado, fontanería, electricidad y cualquier otro oficio. Tú hablas solo con la empresa.",
     "enlace": "Más sobre las reformas y la coordinación de gremios"
   },
   "consejos": {
     "antetitulo": "Antes de empezar",
     "titulo": "Consejos para preparar un trabajo de yeso",
-    "entradilla": "Pequeños detalles que ayudan a que el trabajo salga mejor y a que la vivienda sufra lo menos posible.",
+    "entradilla": "Tres detalles que ayudan a que el trabajo salga mejor y a que la casa sufra lo menos posible.",
     "tarjetas": [
       {
         "titulo": "Despeja o protege la zona",
-        "texto": "Retira muebles, cuadros y objetos de las paredes que se van a trabajar. Lo que no se pueda mover conviene cubrirlo bien."
+        "texto": "Retira muebles, cuadros y objetos de las paredes que vamos a trabajar. Lo que no se pueda mover, lo cubrimos bien."
       },
       {
-        "titulo": "Piensa en las instalaciones",
-        "texto": "Si vas a cambiar enchufes, puntos de luz o tuberías, hazlo antes del yeso. Así las rozas se cierran en el mismo trabajo."
+        "titulo": "Piensa antes en las instalaciones",
+        "texto": "Si vas a cambiar enchufes, luces o tuberías, hazlo antes del yeso. Así cerramos las rozas en el mismo trabajo."
       },
       {
         "titulo": "Deja tiempo para el secado",
-        "texto": "El yeso debe secar bien antes de pintar. Ventilar la estancia ayuda; el tiempo exacto depende de la época del año y del espesor."
+        "texto": "El yeso debe secar bien antes de pintar. Ventilar ayuda; el tiempo exacto depende de la época del año y del espesor."
       }
     ]
   }

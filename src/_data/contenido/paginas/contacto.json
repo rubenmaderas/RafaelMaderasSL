@@ -6,7 +6,7 @@
   "cabecera": {
     "antetitulo": "Contacto",
     "titulo": "Contacto: llama, escribe por WhatsApp o envía un correo",
-    "entradilla": "Cuéntanos qué necesitas: un trabajo de yeso, una reforma o una obra. Elige el medio que te resulte más cómodo."
+    "entradilla": "¿Un trabajo de yeso, una reforma o una obra? **Cuéntanoslo por el medio que prefieras** y te orientamos sobre cómo plantearlo."
   },
   "medios": {
     "telefono": {
@@ -15,7 +15,7 @@
     },
     "whatsapp": {
       "titulo": "WhatsApp",
-      "texto": "Ideal para enviar fotos y medidas de la obra."
+      "texto": "Ideal para enviarnos **fotos y medidas** de la obra."
     },
     "correo": {
       "titulo": "Correo electrónico",

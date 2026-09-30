@@ -6,27 +6,27 @@
   "cabecera": {
     "antetitulo": "Quiénes somos",
     "titulo": "Una empresa de yeso y reformas en Jaén",
-    "entradilla": "{empresa} nace del oficio de yesista. Hoy somos una empresa con equipo propio para los trabajos de yeso que, además, organiza reformas completas en Jaén y en el resto de Andalucía."
+    "entradilla": "Somos una **empresa familiar de Jaén** especializada en yeso. Nacimos del oficio de yesista y hoy, con equipo propio, también organizamos reformas completas en Jaén y Andalucía."
   },
   "historia": {
     "titulo": "Nuestra historia",
-    "texto": "La sociedad se constituyó en {fundacion}, pero el oficio viene de antes: su fundador lleva {años} años trabajando como {oficio}.\n\nTanto tiempo en obra da para conocer muchos tipos de paredes, de soportes y de situaciones: la pared antigua que no está a plomo, el gotelé que hay que alisar, la roza que tiene que desaparecer bajo la pintura. Esa experiencia es la base de la empresa y la que aplicamos en cada trabajo, tanto si se trata de alisar una habitación como de revestir una vivienda completa."
+    "texto": "La empresa se constituyó en {fundacion}, pero el oficio viene de mucho antes: nuestro fundador lleva **{años} años trabajando como {oficio}**.\n\nEn tanto tiempo se aprende a resolver casi cualquier pared:\n\n- La pared antigua que no está a plomo.\n- El gotelé que hay que alisar.\n- La roza que tiene que desaparecer bajo la pintura.\n\nEsa experiencia es la base de la empresa. La aplicamos igual en una habitación que en una vivienda completa."
   },
   "equipo": {
     "titulo": "Nuestro equipo",
-    "texto": "{fundador}, {cargo}, sigue al frente de la empresa.\n\nLos trabajos de yeso los realiza nuestro propio equipo. Para el resto de la obra (albañilería, alicatado, fontanería, electricidad y otros oficios) colaboramos con profesionales de confianza a los que coordinamos nosotros, de modo que tú tratas siempre con la empresa."
+    "texto": "{fundador}, {cargo}, sigue al frente de la empresa.\n\n**Los trabajos de yeso los hace nuestro propio equipo.** Para el resto de la obra colaboramos con profesionales de confianza —albañilería, alicatado, fontanería, electricidad— a los que coordinamos nosotros. Así tú tratas siempre con la empresa."
   },
   "forma": {
     "antetitulo": "Forma de trabajar",
     "titulo": "Cómo trabajamos",
     "tarjetas": [
       {
-        "titulo": "Un único interlocutor",
-        "texto": "Desde la primera llamada hasta el final de la obra tienes un mismo contacto en la empresa para cualquier duda."
+        "titulo": "Un solo interlocutor",
+        "texto": "Un mismo contacto en la empresa de la primera llamada al final de la obra."
       },
       {
         "titulo": "Explicaciones claras",
-        "texto": "Antes de empezar sabes qué vamos a hacer, por qué y en qué orden, sin tecnicismos innecesarios."
+        "texto": "Antes de empezar sabes qué vamos a hacer, por qué y en qué orden. Sin tecnicismos."
       },
       {
         "titulo": "Cuidado del acabado",
@@ -34,21 +34,45 @@
       },
       {
         "titulo": "Obra coordinada",
-        "texto": "En las reformas, cada oficio entra en su momento. Nosotros organizamos a los gremios; tú no tienes que coordinar a nadie."
+        "texto": "En las reformas, cada oficio entra en su momento. Tú no tienes que coordinar a nadie."
       }
     ]
   },
   "datos": {
     "titulo": "La empresa en datos",
     "filas": [
-      { "etiqueta": "Razón social", "valor": "{razon_social}" },
-      { "etiqueta": "Forma jurídica", "valor": "Sociedad limitada inscrita en el Registro Mercantil de Jaén" },
-      { "etiqueta": "Año de constitución", "valor": "{fundacion}" },
-      { "etiqueta": "CIF", "valor": "{cif}" },
-      { "etiqueta": "Especialidad", "valor": "Trabajos de yeso, con equipo propio" },
-      { "etiqueta": "También hacemos", "valor": "Reformas y obras en general, con gremios coordinados" },
-      { "etiqueta": "Domicilio social", "valor": "Jaén" },
-      { "etiqueta": "Zona de trabajo", "valor": "Jaén capital, provincia de Jaén y Andalucía" }
+      {
+        "etiqueta": "Razón social",
+        "valor": "{razon_social}"
+      },
+      {
+        "etiqueta": "Forma jurídica",
+        "valor": "Sociedad limitada inscrita en el Registro Mercantil de Jaén"
+      },
+      {
+        "etiqueta": "Año de constitución",
+        "valor": "{fundacion}"
+      },
+      {
+        "etiqueta": "CIF",
+        "valor": "{cif}"
+      },
+      {
+        "etiqueta": "Especialidad",
+        "valor": "Trabajos de yeso, con equipo propio"
+      },
+      {
+        "etiqueta": "También hacemos",
+        "valor": "Reformas y obras en general, con gremios coordinados"
+      },
+      {
+        "etiqueta": "Domicilio social",
+        "valor": "Jaén"
+      },
+      {
+        "etiqueta": "Zona de trabajo",
+        "valor": "Jaén capital, provincia de Jaén y Andalucía"
+      }
     ],
     "nota": "Los datos registrales completos figuran en el [aviso legal](/aviso-legal/)."
   }

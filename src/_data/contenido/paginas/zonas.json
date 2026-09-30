@@ -6,17 +6,17 @@
   "cabecera": {
     "antetitulo": "Zonas de servicio",
     "titulo": "Zonas de servicio: Jaén capital, provincia de Jaén y Andalucía",
-    "entradilla": "En {empresa} trabajamos principalmente en Jaén capital y en los municipios de la provincia. Para obras en otras provincias andaluzas, estudiamos cada caso según el trabajo y la disponibilidad."
+    "entradilla": "Trabajos de yeso y reformas **en Jaén capital y toda la provincia**. En el resto de Andalucía estudiamos cada obra y te decimos con franqueza si podemos atenderla."
   },
   "capital": {
     "antetitulo": "Zona principal",
     "titulo": "Yesista y reformas en Jaén capital",
-    "texto": "Es la zona de trabajo habitual: pisos y casas en cualquier barrio de la ciudad, desde el casco antiguo hasta las zonas de expansión más recientes.\n\nCada tipo de vivienda pide un enfoque distinto. En las casas antiguas del centro es habitual encontrar paredes irregulares o con varias capas de reparaciones, que conviene regularizar antes del acabado. En pisos de las últimas décadas del siglo XX lo más frecuente es alisar el gotelé para modernizar la vivienda. Y en obra nueva o en reformas integrales, el yeso proyectado permite revestir muchos metros con un acabado uniforme."
+    "texto": "Es nuestra zona de trabajo habitual: pisos y casas en cualquier barrio, del casco antiguo a las zonas más nuevas.\n\nCada vivienda pide un enfoque distinto:\n\n- **Casas antiguas del centro:** paredes irregulares o con parches que conviene regularizar.\n- **Pisos de finales del siglo XX:** alisar el gotelé para modernizar la casa.\n- **Obra nueva y reformas integrales:** yeso proyectado para revestir muchos metros con un acabado uniforme."
   },
   "cercanias": {
     "antetitulo": "Cerca de Jaén",
     "titulo": "Área metropolitana y pueblos cercanos",
-    "texto": "Municipios del entorno de Jaén capital, a poca distancia de la ciudad. Por su cercanía, en estos municipios nos resulta sencillo visitar la obra, hacer la valoración y seguir los trabajos de cerca.",
+    "texto": "Municipios del entorno de Jaén capital, a poca distancia de la ciudad. Aquí nos resulta sencillo **visitar la obra, valorarla y seguirla de cerca**.",
     "localidades": [
       "Los Villares",
       "La Guardia de Jaén",
@@ -34,7 +34,7 @@
   "provincia": {
     "antetitulo": "Provincia",
     "titulo": "Resto de la provincia de Jaén",
-    "texto": "Obras en otros municipios de la provincia, planificando los desplazamientos según el tipo de trabajo. Contar con fotos y medidas desde el primer contacto ayuda a preparar mejor la visita.",
+    "texto": "Obras en otros municipios de la provincia, planificando los desplazamientos según el trabajo. **Con fotos y medidas desde el primer contacto** preparamos mejor la visita.",
     "localidades": [
       "Linares",
       "Úbeda",

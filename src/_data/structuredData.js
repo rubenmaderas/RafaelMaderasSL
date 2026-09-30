@@ -1,6 +1,6 @@
 import { getSite } from "../_lib/site.js";
 import { getFaq, getServices } from "../_lib/data.js";
-import { applyTokens } from "../_lib/text.js";
+import { applyTokens, plainText } from "../_lib/text.js";
 
 /**
  * DATOS ESTRUCTURADOS (JSON-LD, Schema.org)
@@ -19,7 +19,7 @@ function business(site, abs, businessId) {
     name: site.name,
     legalName: site.registeredName,
     taxID: site.taxId,
-    description: applyTokens(site.description, site),
+    description: plainText(site.description, site),
     founder: { "@type": "Person", name: site.founder.name, jobTitle: "Fundador y gerente" },
     foundingDate: String(site.foundedYear),
     url: abs("/"),
@@ -43,8 +43,8 @@ function business(site, abs, businessId) {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: applyTokens(s.titulo, site),
-          description: applyTokens(s.resumen, site),
+          name: plainText(s.titulo, site),
+          description: plainText(s.resumen, site),
           url: abs(`/servicios/#${s.id}`),
         },
       })),
@@ -120,7 +120,7 @@ export default {
         mainEntity: getFaq().map((item) => ({
           "@type": "Question",
           name: item.question,
-          acceptedAnswer: { "@type": "Answer", text: item.answer },
+          acceptedAnswer: { "@type": "Answer", text: item.paragraphs.join(" ") },
         })),
       });
     }

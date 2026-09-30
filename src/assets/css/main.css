@@ -59,7 +59,16 @@
   --gutter: clamp(1.25rem, 0.8rem + 2.5vw, 2.5rem);
   --shadow-soft: 0 1px 2px rgb(38 36 31 / 0.05), 0 8px 24px -12px rgb(38 36 31 / 0.18);
   --shadow-card: 0 1px 2px rgb(38 36 31 / 0.04), 0 18px 36px -22px rgb(38 36 31 / 0.3);
+  --shadow-lift: 0 1px 2px rgb(38 36 31 / 0.05), 0 30px 46px -26px rgb(38 36 31 / 0.42);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --mobile-cta-height: 4.25rem;
+}
+
+/* Ángulo del aro «40 años»; registrado para poder animarlo. */
+@property --ring-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 360deg;
 }
 
 /* --------------------------------------------------------------------------
@@ -808,6 +817,28 @@ main:focus {
   color: var(--color-accent-on-dark);
 }
 
+/* Listas y negritas escritas en los textos editables (markdown). */
+:is(.service, .zone-block, .card, .split) ul:not([class]) {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+}
+
+:is(.service, .zone-block, .card, .split) ul:not([class]) li + li {
+  margin-top: 0.4rem;
+}
+
+:is(.service, .zone-block, .card, .split) ul:not([class]) li::marker {
+  color: var(--color-accent);
+}
+
+:is(.hero__subtitle, .lead, .section-head, .service, .zone-block, .split, .card, .process__step) strong {
+  color: var(--color-ink);
+}
+
+:is(.section--dark, .cta-final) strong {
+  color: #fff;
+}
+
 /* --------------------------------------------------------------------------
    Imágenes
    -------------------------------------------------------------------------- */
@@ -1005,15 +1036,26 @@ main:focus {
 }
 
 .hero-badge__ring {
+  position: relative;
   display: grid;
   place-items: center;
   width: 3.9rem;
   height: 3.9rem;
-  border: 3px solid var(--color-brand-coral);
   border-radius: 50%;
   font-size: 0.7rem;
   line-height: 1;
   text-align: center;
+}
+
+/* El aro coral va en una capa aparte para poder «dibujarlo» al cargar. */
+.hero-badge__ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--color-brand-coral);
+  border-radius: 50%;
+  -webkit-mask: conic-gradient(#000 var(--ring-angle), transparent 0);
+  mask: conic-gradient(#000 var(--ring-angle), transparent 0);
 }
 
 .hero-badge__ring strong {
@@ -1381,6 +1423,10 @@ main:focus {
 .faq__answer p {
   margin: 0;
   max-width: 44rem;
+}
+
+.faq__answer p + p {
+  margin-top: 0.75rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -1766,6 +1812,248 @@ mark.pending {
 }
 
 /* --------------------------------------------------------------------------
+   Animaciones y transiciones
+   Todo el movimiento va dentro de «prefers-reduced-motion: no-preference»: si
+   el dispositivo pide menos movimiento, la web se muestra completa y estática.
+   Las clases de estado (.reveal, .is-troweling, .is-smooth, .is-ready…) las
+   añade main.js, así que sin JavaScript no queda nada oculto.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Transición suave entre páginas (navegadores compatibles). */
+  @view-transition {
+    navigation: auto;
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(1.25rem);
+    }
+  }
+
+  @keyframes fade-down {
+    from {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+    }
+  }
+
+  @keyframes ring-draw {
+    from {
+      --ring-angle: 0deg;
+    }
+  }
+
+  @keyframes failsafe-hide {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  @keyframes failsafe-show {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Entrada escalonada del texto de cabecera. */
+  .js .hero__text > *,
+  .js .page-hero > * {
+    animation: rise-in 0.8s var(--ease-out) both;
+  }
+
+  .js .hero__text > :nth-child(2),
+  .js .page-hero > :nth-child(2) {
+    animation-delay: 0.08s;
+  }
+
+  .js .hero__text > :nth-child(3),
+  .js .page-hero > :nth-child(3) {
+    animation-delay: 0.16s;
+  }
+
+  .js .hero__text > :nth-child(n + 4),
+  .js .page-hero > :nth-child(n + 4) {
+    animation-delay: 0.24s;
+  }
+
+  /* Efecto «llana» de la foto principal: la foto aparece cubierta de yeso
+     rugoso y main.js lo alisa con una llana. Esta capa CSS es la misma
+     textura y tapa la foto desde el primer pintado; si el script no llega a
+     ejecutarse, se retira sola a los 4 s. */
+  .js .hero .media {
+    --plaster: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.045' numOctaves='5' stitchTiles='stitch'/%3E%3CfeDiffuseLighting lighting-color='%23f1ebe1' surfaceScale='3' diffuseConstant='1.05'%3E%3CfeDistantLight azimuth='225' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  }
+
+  .js .hero .media::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: var(--plaster) 0 0 / 240px 240px, #efe9df;
+    pointer-events: none;
+    animation: failsafe-hide 0.5s ease 4s forwards;
+  }
+
+  .js .hero .media.is-troweling::after,
+  .js .hero .media.is-smooth::after {
+    content: none;
+  }
+
+  .js .hero .media__note {
+    z-index: 2;
+  }
+
+  /* Mientras se alisa, la foto se ve «húmeda» y después recupera su color. */
+  .js .hero .media img {
+    transition: filter 1.2s ease;
+  }
+
+  .js .hero .media.is-troweling img {
+    filter: saturate(0.7) brightness(1.08);
+  }
+
+  /* Las insignias aparecen cuando la pared ya está lisa. */
+  .js .hero-badge {
+    transition:
+      opacity 0.5s ease,
+      transform 0.7s var(--ease-out);
+  }
+
+  .js .hero-badge--direct {
+    transition-delay: 0.12s;
+  }
+
+  .js .hero-badge--zone {
+    transition-delay: 0.24s;
+  }
+
+  .js .hero__visual:not(.is-ready) .hero-badge {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.94);
+    animation: failsafe-show 0.01s linear 6s forwards;
+  }
+
+  .js .hero__visual.is-ready .hero-badge__ring::before {
+    animation: ring-draw 1s cubic-bezier(0.6, 0, 0.2, 1) 0.2s both;
+  }
+
+  /* Aparición al hacer scroll (solo elementos que empiezan fuera de pantalla). */
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.75rem);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.7s ease var(--reveal-delay, 0s),
+      transform 0.9s var(--ease-out) var(--reveal-delay, 0s);
+  }
+
+  .media.reveal img {
+    transform: scale(1.08);
+  }
+
+  .media.reveal.is-visible img {
+    transform: none;
+    transition: transform 1.4s var(--ease-out) var(--reveal-delay, 0s);
+  }
+
+  /* Preguntas frecuentes: la respuesta entra suavemente al abrirse. */
+  .faq__item[open] .faq__answer {
+    animation: fade-down 0.4s var(--ease-out);
+  }
+
+  /* Y, donde el navegador lo permite, el bloque se despliega en altura. */
+  @supports (interpolate-size: allow-keywords) {
+    .faq__item {
+      interpolate-size: allow-keywords;
+    }
+
+    .faq__item::details-content {
+      block-size: 0;
+      overflow-y: clip;
+      transition:
+        block-size 0.35s var(--ease-out),
+        content-visibility 0.35s allow-discrete;
+    }
+
+    .faq__item[open]::details-content {
+      block-size: auto;
+    }
+  }
+
+  .site-header {
+    transition: box-shadow 0.3s ease;
+  }
+}
+
+/* Capas del efecto llana (las crea main.js y las retira al terminar). */
+.plaster-canvas {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.plaster-canvas.is-fading {
+  opacity: 0;
+}
+
+.trowel {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 12px 12px rgb(38 36 31 / 0.35));
+  will-change: transform;
+}
+
+.trowel svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Cabecera fija de escritorio: sombra suave al desplazarse. */
+@media (min-width: 60em) {
+  .site-header.is-scrolled {
+    box-shadow: 0 14px 30px -22px rgb(38 36 31 / 0.5);
+  }
+}
+
+/* Tarjetas con enlace: se elevan ligeramente al pasar el ratón. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:has(a),
+  .contact-card {
+    transition:
+      transform 0.35s var(--ease-out),
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  .card:has(a):hover,
+  .contact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .section--dark .card:has(a):hover {
+    box-shadow: none;
+    border-color: rgb(247 244 238 / 0.3);
+  }
+}
+
+/* --------------------------------------------------------------------------
    Preferencias de movimiento reducido
    -------------------------------------------------------------------------- */
 
@@ -1792,8 +2080,15 @@ mark.pending {
   .site-header,
   .mobile-cta,
   .cta-final,
-  .skip-link {
+  .skip-link,
+  .plaster-canvas,
+  .trowel {
     display: none !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   body {

@@ -390,12 +390,12 @@ collections:
             fields: &campos_servicio
               - {label: Identificador, name: id, widget: hidden}
               - {label: Nombre del servicio, name: titulo, widget: string}
-              - {label: Resumen, name: resumen, widget: text, hint: Una o dos frases.}
+              - {label: Resumen, name: resumen, widget: text, hint: "Una o dos frases. Puedes resaltar la ventaja principal en **negrita**."}
               - label: Descripción completa
                 name: descripcion
                 widget: markdown
                 modes: [rich_text]
-                buttons: [bold, italic, link]
+                buttons: [bold, italic, link, bulleted-list]
                 editor_components: []
                 sanitize_preview: true
           - label: Reformas y obra en general

@@ -1,12 +1,12 @@
 {
   "seo": {
     "titulo": "Yesista y Reformas en Jaén | {empresa}",
-    "descripcion": "Empresa de yeso y reformas en Jaén: yeso proyectado, alisado de paredes y reformas integrales con gremios coordinados en Jaén y Andalucía. Tel. {telefono}."
+    "descripcion": "Yesista y empresa de reformas en Jaén: paredes lisas listas para pintar, yeso proyectado y reformas integrales con un solo interlocutor. Tel. {telefono}."
   },
   "portada": {
     "antetitulo": "{empresa}",
     "titulo": "Yesista y reformas en *Jaén*",
-    "entradilla": "Empresa especializada en trabajos de yeso, fundada y dirigida por un yesista con {años} años de oficio. Con equipo propio y gremios de confianza, hacemos también reformas completas en Jaén capital, en toda la provincia y en el resto de Andalucía.",
+    "entradilla": "Paredes y techos **lisos y listos para pintar**, y reformas completas con un solo interlocutor. En **Jaén capital, la provincia y Andalucía**. Empresa familiar con **{años} años de oficio**.",
     "insignias": {
       "oficio": "Oficio",
       "interlocutor": "**Un único** interlocutor",
@@ -14,30 +14,31 @@
     }
   },
   "servicios": {
-    "antetitulo": "Servicios",
-    "titulo": "Trabajos de yeso en Jaén, con equipo propio de yesistas",
-    "entradilla": "El yeso es nuestra especialidad y la base de cualquier buen acabado. Paredes y techos bien planteados hoy son paredes que se pintan sin problemas mañana.",
+    "antetitulo": "Trabajos de yeso",
+    "titulo": "Trabajos de yeso en Jaén, con equipo propio",
+    "entradilla": "El yeso es nuestra especialidad y lo hace **nuestro propio equipo**. Paredes y techos rectos, lisos y listos para pintar.",
     "tarjetaReformas": {
       "titulo": "Reformas y obra en general",
-      "texto": "Reformas integrales, cocinas, baños y otros trabajos de obra, con todos los gremios coordinados por nosotros."
+      "texto": "Reformas integrales, cocinas y baños. **Coordinamos todos los gremios** y tú hablas solo con nosotros."
     },
     "enlace": "Ver todos los servicios en detalle"
   },
   "reformas": {
     "antetitulo": "Reformas integrales",
-    "titulo": "Reformas en Jaén con un único interlocutor",
-    "texto": "Además del yeso, en {empresa} nos ocupamos de reformas y obras en general. Coordinamos a profesionales con los que colaboramos habitualmente —albañilería, alicatado, fontanería, electricidad y el resto de oficios que requiera la obra— para que cada uno entre en su momento y la obra avance sin tiempos muertos.",
+    "titulo": "Reformas integrales en Jaén, con un solo responsable",
+    "texto": "¿Te preocupa tener que organizar a varios gremios, que la obra se alargue o no saber en qué punto está? **De eso nos encargamos nosotros.**\n\nCoordinamos a profesionales con los que trabajamos habitualmente —albañilería, alicatado, fontanería, electricidad— para que cada uno entre en su momento.",
     "lista": [
-      "Un único interlocutor durante toda la obra.",
-      "Oficios coordinados en el orden correcto.",
-      "Los acabados de yeso, a cargo de nuestro propio equipo."
+      "**Un solo interlocutor** durante toda la obra.",
+      "**Presupuesto claro** antes de empezar.",
+      "**Cada oficio en su orden**, sin esperas innecesarias.",
+      "**Acabados de yeso** con nuestro propio equipo."
     ],
     "enlace": "Cómo se organiza una reforma"
   },
   "zonas": {
     "antetitulo": "Zonas de servicio",
-    "titulo": "En Jaén capital, en la provincia y en Andalucía",
-    "texto": "Nuestra zona de trabajo habitual es Jaén capital y los pueblos de alrededor. También hacemos obras en el resto de la provincia de Jaén y, según el tipo de trabajo, en otras provincias andaluzas.",
+    "titulo": "Trabajamos en Jaén capital, la provincia y Andalucía",
+    "texto": "Nuestra zona habitual es **Jaén capital y los pueblos de alrededor**. También hacemos obras en el resto de la provincia y, según el trabajo, en otras provincias andaluzas.\n\nEstar cerca nos permite **visitar la obra y seguirla en persona**.",
     "localidades": [
       "Jaén capital",
       "Los Villares",
@@ -52,28 +53,28 @@
   "proceso": {
     "antetitulo": "Proceso de trabajo",
     "titulo": "De la primera llamada al último repaso",
-    "entradilla": "Un proceso sencillo, sin intermediarios, para que sepas en todo momento qué se va a hacer y cuándo."
+    "entradilla": "Cuatro pasos sencillos. Antes de empezar sabes **qué se va a hacer, cuánto cuesta y cuándo empezamos**."
   },
   "porque": {
     "antetitulo": "Por qué elegirnos",
     "titulo": "Por qué elegir {empresa}",
-    "entradilla": "Una empresa de Jaén especializada en yeso, con equipo propio y una forma de trabajar clara y directa.",
+    "entradilla": "Una empresa familiar de Jaén, especializada en yeso y con una forma de trabajar clara.",
     "tarjetas": [
       {
         "titulo": "{años} años de oficio",
-        "texto": "Detrás de la empresa están los {años} años de oficio de su fundador como yesista. Esa experiencia se nota en la preparación de las paredes, en los remates y en saber qué solución conviene a cada caso."
+        "texto": "La experiencia de nuestro fundador como yesista es la base de la empresa. Se nota en la preparación, en los remates y en elegir bien la solución."
       },
       {
-        "titulo": "Un único interlocutor",
-        "texto": "Desde la primera llamada hasta el final de la obra tienes un mismo contacto en la empresa. Sin centralitas ni intermediarios."
+        "titulo": "Empresa desde {fundacion}",
+        "texto": "Sociedad limitada con sede en Jaén y equipo propio para los trabajos de yeso. Sabes con quién tratas."
       },
       {
-        "titulo": "Coordinación de obra",
-        "texto": "En una reforma organizamos a cada oficio para que trabaje en orden. Tú no tienes que perseguir a nadie."
+        "titulo": "Un solo interlocutor",
+        "texto": "El mismo contacto de la primera llamada al último repaso. Sin centralitas ni intermediarios."
       },
       {
-        "titulo": "Cerca de tu obra",
-        "texto": "Trabajar en Jaén y su provincia nos permite visitar la obra, seguirla de cerca y resolver los imprevistos en persona."
+        "titulo": "Obra coordinada",
+        "texto": "Organizamos cada oficio en su orden. Tú no tienes que perseguir a nadie."
       }
     ]
   },

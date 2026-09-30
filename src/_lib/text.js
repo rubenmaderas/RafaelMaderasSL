@@ -79,6 +79,15 @@ export function renderMarkdownInline(value, site) {
   return source ? md.renderInline(source) : "";
 }
 
+/** Texto sin marcas de formato (para metadatos y datos estructurados). */
+export function plainText(value, site) {
+  return applyTokens(value, site)
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/(\*\*|__|\*|_)(\S(?:.*?\S)?)\1/g, "$2")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 const escapeHtml = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 

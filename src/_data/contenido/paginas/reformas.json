@@ -1,22 +1,23 @@
 {
   "seo": {
     "titulo": "Reformas integrales en Jaén con gremios coordinados | {empresa}",
-    "descripcion": "Empresa de reformas en Jaén: reformas integrales, cocinas y baños con un único interlocutor. Coordinamos albañilería, alicatado, fontanería y electricidad."
+    "descripcion": "Empresa de reformas en Jaén: reformas integrales, cocinas y baños con un solo interlocutor. Coordinamos los gremios y hacemos el yeso con equipo propio."
   },
   "cabecera": {
     "antetitulo": "Reformas",
     "titulo": "Reformas integrales en Jaén con coordinación de gremios",
-    "entradilla": "Una reforma reúne a muchos oficios. En {empresa} tienes un único interlocutor: organizamos la obra, coordinamos a los profesionales y nuestro propio equipo se encarga de los trabajos de yeso."
+    "entradilla": "Una reforma reúne a muchos oficios. **Con nosotros tratas con una sola empresa**: organizamos la obra, coordinamos cada gremio y hacemos el yeso con nuestro propio equipo."
   },
   "coordinacion": {
     "antetitulo": "Coordinación",
-    "titulo": "Qué significa que coordinemos tu reforma",
-    "texto": "En una reforma, lo que más retrasa la obra no suele ser el trabajo en sí, sino la espera entre un oficio y el siguiente. Cuando una sola empresa organiza a todos los gremios, cada uno sabe cuándo entra y qué se encontrará al llegar.\n\nTrabajamos con profesionales con los que colaboramos habitualmente y conocemos bien el orden que necesita una obra. Tú tienes un único teléfono al que llamar para cualquier duda.",
+    "titulo": "Tu reforma, coordinada de principio a fin",
+    "texto": "Lo que más retrasa una reforma no suele ser el trabajo, sino **la espera entre un oficio y el siguiente**. Y lo que más cansa es tener que organizarlo todo tú.\n\nCuando una sola empresa coordina a los gremios, cada uno sabe cuándo entra y qué se va a encontrar. Trabajamos con profesionales de confianza y conocemos el orden que necesita cada obra.",
     "lista": [
-      "Un único interlocutor desde el presupuesto hasta el final.",
-      "Oficios que entran en el orden correcto, sin esperas innecesarias.",
-      "El yeso, base de los acabados, lo hace nuestro propio equipo.",
-      "Menos llamadas, menos gestiones y menos imprevistos para ti."
+      "**Un solo interlocutor**, del presupuesto al último repaso.",
+      "**Presupuesto claro** antes de empezar.",
+      "**Oficios en el orden correcto**, sin esperas innecesarias.",
+      "**Si surge un imprevisto**, te lo explicamos antes de hacer nada.",
+      "**El yeso**, base de los acabados, con equipo propio."
     ]
   },
   "gremios": {
@@ -31,7 +32,7 @@
   "orden": {
     "antetitulo": "Orden de obra",
     "titulo": "El orden habitual de una reforma integral",
-    "entradilla": "Aunque cada obra tiene sus particularidades, una reforma completa suele seguir este orden. Respetarlo evita tener que romper lo que ya está terminado.",
+    "entradilla": "Cada obra tiene sus particularidades, pero una reforma completa suele seguir este orden. Respetarlo evita romper lo que ya está terminado.",
     "pasos": [
       "**Demoliciones** y retirada de lo que se va a sustituir.",
       "**Albañilería**: nuevos tabiques, cambios de distribución y recrecidos.",

@@ -99,6 +99,19 @@ La web habla como **empresa**: «nosotros» (hacemos, coordinamos, te llamamos) 
 
 Los **40 años** son de oficio del fundador, no de la empresa, que se constituyó en 2012 («Año de constitución»). La cifra se calcula al compilar a partir del año en que empezó en el oficio (1986), así que sube sola cada año cuando se vuelve a publicar la web. En los textos se escribe con el comodín `{años}`. Mantén esta distinción si se reescribe algún texto, y no añadas cifras de plantilla, obras u opiniones que no se puedan demostrar.
 
+### Estilo de redacción
+
+Los textos se reescribieron tomando lo mejor de webs de referencia del sector (reformas, yeso y placa de yeso). Si se añade o cambia un texto desde /admin, conviene mantener estas pautas:
+
+- **Primer párrafo con tres respuestas**: qué hacemos, dónde y por qué nosotros.
+- **Beneficio antes que técnica**: primero lo que nota el cliente en casa (paredes lisas, listas para pintar, menos días de obra) y después, si hace falta, el nombre técnico.
+- **Frases cortas y listas con viñetas.** En las descripciones de servicios, el botón de lista del editor crea las viñetas. Una línea que empiece por `- ` también funciona.
+- **Negrita con moderación**: una o dos ideas clave por bloque (`**texto**` o el botón **B**). Si todo va en negrita, nada destaca.
+- **Nombrar la preocupación y responder con hechos**: suciedad, imprevistos, organización de gremios… y cómo se trabaja para evitarlos. Sin superlativos ni promesas.
+- **No prometer lo que no esté confirmado**: garantías por escrito, presupuesto gratuito o cerrado, plazos de respuesta, precios. Si alguno es cierto, se puede añadir, y es de lo que más convence.
+
+En las preguntas frecuentes, las respuestas son texto sin formato: una línea en blanco separa párrafos. Así la respuesta visible y la de los datos estructurados coinciden siempre.
+
 ---
 
 ## Gestor de contenidos (/admin)
@@ -271,6 +284,22 @@ La carpeta que se publica es **`_site/`** (se genera con `npm run build`). Inclu
 
 La CSP se define en `eleventy.config.js`. Allí están `CSP_SOURCES` (directivas comunes), el shortcode `cspMeta` (política de cada página) y `cspHeader` (cabecera). El gestor **/admin** tiene su propia política en `src/admin/index.njk`, más permisiva porque Decap CMS la necesita (`'unsafe-eval'` y estilos en línea). No afecta a la web pública. Además, /admin se envía con `noindex` y está excluido en `robots.txt` y en el sitemap.
 
+### Animaciones
+
+Todo el movimiento es decorativo y opcional. Con «reducir movimiento» activado en el móvil o el ordenador (`prefers-reduced-motion`) no se reproduce nada, y sin JavaScript la web se ve completa. Los estilos están en la sección «Animaciones y transiciones» de `src/assets/css/main.css` y la lógica al final de `src/assets/js/main.js`.
+
+- **Efecto «llana» en la foto principal**: la foto aparece cubierta de yeso rugoso y una llana (hoja de acero y mango azul de la marca) la alisa en tres pasadas, en unos 2,5 s. Después aparecen las etiquetas y se dibuja el círculo de los años.
+  - Solo se reproduce al entrar en la web. Al volver a la portada desde otra página no se repite.
+  - No se reproduce si la pestaña está en segundo plano o la carga tarda más de 3 s.
+  - Si algo falla, la foto queda visible igualmente a los pocos segundos.
+  - La textura de yeso es un SVG generado, sin peso extra de descarga, en la variable `--plaster` de `.js .hero .media`. **Para desactivar el efecto**, borra esa línea: el script detecta que falta y muestra la foto directamente.
+- **Entrada del contenido**: el texto de cabecera aparece escalonado, y los bloques que están por debajo de la pantalla se revelan con un ligero desplazamiento al hacer scroll. Lo que ya está a la vista nunca se oculta.
+- **Transiciones entre páginas** (fundido suave) en navegadores compatibles (Chrome, Edge y Safari recientes). En el resto se navega como siempre.
+- **Desplazamiento suavizado con la rueda del ratón**, solo en ordenador. En móvil y tableta se mantiene el desplazamiento táctil nativo, que ya es fluido. Se detiene al usar el teclado o hacer clic, y respeta el zoom con Ctrl y las zonas con scroll propio.
+- **Microinteracciones**: sombra en la cabecera al desplazarse (escritorio), elevación de tarjetas con enlace al pasar el ratón y apertura suave de las preguntas frecuentes.
+
+Las animaciones usan solo `opacity` y `transform` (no desplazan el diseño, CLS 0). Las posiciones se obtienen con `IntersectionObserver` para no forzar cálculos de diseño.
+
 ---
 
 ## Cookies y consentimiento
@@ -301,7 +330,7 @@ Como alternativa, existen herramientas de analítica sin cookies que pueden evit
 - `sitemap.xml` (sin legales ni 404) y `robots.txt`. Las páginas legales llevan `noindex, follow`.
 - Una única página de zonas con contenido útil, sin páginas duplicadas por municipio (evita las «páginas puerta»).
 
-**Resultado de las pruebas locales** (Lighthouse 13 móvil, con `npm run preview`): 100 en rendimiento, accesibilidad, buenas prácticas y SEO en las páginas indexables, con el primer pintado (FCP) en unos 0,6 s y el LCP entre 1,1 y 1,4 s. Las legales puntúan menos en SEO porque son `noindex` a propósito.
+**Resultado de las pruebas locales** (Lighthouse 13, con `npm run preview`, incluido el efecto «llana»): 100 en rendimiento, accesibilidad, buenas prácticas y SEO en las páginas indexables, tanto en móvil como en escritorio. En móvil, el primer pintado (FCP) llega en unos 0,7-0,8 s y el LCP entre 1,1 y 1,3 s. Las legales puntúan menos en SEO porque son `noindex` a propósito.
 
 **Acciones después de publicar** (ninguna garantiza una posición concreta en Google; el posicionamiento local depende sobre todo de la relevancia, la proximidad y la reputación real):
 1. **Google Search Console**: verifica el dominio, envía `https://rafaelmaderas.es/sitemap.xml` y revisa la cobertura y los errores cada cierto tiempo.
@@ -330,6 +359,14 @@ Los textos se han redactado a partir de la información facilitada. Antes de pub
 - **Mensaje predefinido de WhatsApp**: «Hola, quiero pedir información sobre una obra o reforma.» («Datos de la empresa» → «Mensaje inicial de WhatsApp»).
 - **Zonas**: Jaén capital como zona habitual y los municipios listados en /admin → «Páginas» → «Zonas de servicio», que son una selección orientativa. También la atención en el resto de Andalucía «según el trabajo».
 - **Respuestas del FAQ** (/admin → «Preguntas frecuentes»), sobre todo las de plazos y secado.
+- **Compromisos de forma de trabajar** añadidos en la reescritura de textos. Son fieles al proceso descrito, pero confírmalos:
+  - «**Presupuesto claro** antes de empezar» (inicio y Reformas).
+  - «**Si surge un imprevisto**, te lo explicamos antes de hacer nada» (Reformas y FAQ).
+  - Limpieza: «protegemos los suelos y lo que no se puede mover, y al terminar retiramos los restos»; «te decimos qué conviene sacar de la estancia» (FAQ y consejos de Servicios).
+  - Grietas: «si una grieta pudiera tener origen estructural […] si lo vemos, te lo diremos» (Servicios).
+- **«Empresa familiar»** (inicio y «Quiénes somos»).
+- **Propiedades del yeso** en Servicios: material **incombustible** que **ayuda a regular la humedad**, y en el yeso proyectado «menos días de obra» y «espesor uniforme, sin empalmes». Son propiedades generales del material y de la técnica, sin cifras.
+- **No se afirma** a propósito: presupuesto gratuito, sin compromiso, cerrado o por escrito, garantía por escrito, plazo de respuesta ni precios. Si alguno es cierto, añadirlo refuerza mucho la confianza (por ejemplo, «Presupuesto por escrito y sin compromiso»).
 - **Privacidad**: que a otros profesionales solo se les pasan los datos imprescindibles de la obra. (Confirmado: el correo de Hotmail y el WhatsApp son los de la empresa.)
 - La foto «Jaén» es de **Baños de la Encina** (provincia de Jaén), no de la capital. El texto alternativo lo indica.
 
@@ -339,4 +376,4 @@ Servicios que se pueden añadir si se confirman: escayola, placa de yeso laminad
 
 ## Accesibilidad
 
-Enlace «Saltar al contenido», foco visible, navegación completa por teclado (el menú se cierra con Escape), contraste AA comprobado en toda la paleta, objetivos táctiles de al menos 44 px, textos alternativos descriptivos, `prefers-reduced-motion` respetado y la web funciona sin JavaScript (mejora progresiva). La barra fija de contacto en móvil se oculta mientras hay otros botones de contacto visibles.
+Enlace «Saltar al contenido», foco visible, navegación completa por teclado (el menú se cierra con Escape), contraste AA comprobado en toda la paleta, objetivos táctiles de al menos 44 px, textos alternativos descriptivos, `prefers-reduced-motion` respetado (sin ninguna animación) y la web funciona sin JavaScript (mejora progresiva). La barra fija de contacto en móvil se oculta mientras hay otros botones de contacto visibles.
