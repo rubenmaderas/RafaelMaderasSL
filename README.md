@@ -418,16 +418,21 @@ La cookie técnica de sesión de /admin (solo para quien edita la web) está exe
 7. Con el tiempo, añade contenido útil y real: obras terminadas (con permiso del cliente), explicaciones de trabajos concretos o dudas frecuentes nuevas.
 8. Opcional: para saber cuántas visitas y llamadas genera la web, activa **Google Analytics** siguiendo [Cómo activar Google Analytics](#cómo-activar-google-analytics).
 
-### Analizadores SEO (Seobility, SEMrush, Ahrefs…)
+### Analizadores SEO y de velocidad (Seobility, SEO Tester Online, PageSpeed…)
 
-Analiza siempre la dirección definitiva, **`https://rafaelmaderas.es/`**, cuando ya esté publicada. Si se analiza otra (la provisional `*.netlify.app`, una vista previa de Netlify o el servidor local), estos avisos son **esperables** y no indican un fallo de la web:
+Analiza siempre la dirección definitiva, **`https://rafaelmaderas.es/`**, cuando ya esté publicada. Antes de corregir nada, comprueba que el informe es de esta web: el título y la URL analizados deben ser los de la web (es fácil pegar por error la dirección del propio analizador).
+
+**No analices a través de ngrok** ni de otros túneles hacia el ordenador. La versión gratuita de ngrok enseña a navegadores y analizadores su propia página de aviso, en inglés, y añade `X-Robots-Tag: noindex, nofollow` a todo lo que sirve. El analizador mide esa página de aviso (unos 740 KB de fuentes y scripts de ngrok: primer pintado de más de 4 s en móvil) o cree que la web bloquea a Google. Para medir antes de tener el dominio, publica en Netlify y pasa [PageSpeed Insights](https://pagespeed.web.dev/) a la dirección `*.netlify.app`; en local, usa `npm run preview`.
+
+Si se analiza una dirección provisional (`*.netlify.app`, una vista previa de Netlify, ngrok o el servidor local), estos avisos son **esperables** y no indican un fallo de la web:
 
 | Aviso | Por qué sale en una dirección provisional | En `rafaelmaderas.es` |
 | --- | --- | --- |
-| «La página bloquea la indexación» | Netlify añade `X-Robots-Tag: noindex` a las vistas previas, y la canonical apunta a otro dominio | Las páginas llevan `index, follow` y `robots.txt` solo excluye `/admin/` |
+| «La página bloquea la indexación» | ngrok añade `X-Robots-Tag: noindex` a todo; Netlify, a las vistas previas; y la canonical apunta a otro dominio | Las páginas llevan `index, follow` y `robots.txt` solo excluye `/admin/` |
 | «El canonical apunta a otro dominio» | La canonical siempre apunta a `https://rafaelmaderas.es` (es lo correcto) | Coincide con la dirección |
 | «Sin redirección de www / a HTTPS» | Solo se puede comprobar en el dominio propio | Netlify fuerza HTTPS y `_redirects` lleva `www` y `*.netlify.app` al dominio (301) |
 | «No se usa compresión GZip» | `npm run dev` no comprime | Netlify comprime el HTML con Brotli o gzip |
+| Velocidad baja (FCP, LCP, Speed Index…) | Por ngrok se mide su página de aviso; `npm run dev` no comprime ni guarda en caché | Lighthouse da 100 en móvil con `npm run preview` (FCP 0,7–0,8 s; LCP 1,4 s) |
 
 Otros avisos habituales:
 - **Negritas**: ver la pauta de [Estilo de redacción](#estilo-de-redacción) (no más de una por cada 50 palabras).
@@ -435,6 +440,9 @@ Otros avisos habituales:
 - **Textos de enlace repetidos**: el menú y el pie usan textos distintos para la misma página (`navigation.js`). En las páginas interiores, «Inicio» sale en el menú y en las migas de pan: es normal y no perjudica.
 - **Pocos backlinks**: ver el punto 6 de la lista anterior.
 - «La cabecera X-Powered-By no se envía» es **correcto**: no dar pistas del servidor es una buena práctica de seguridad.
+- «Enlaces sin atributo `title`»: no se añade. No mejora el posicionamiento y, si repite el texto del enlace, los lectores de pantalla lo leen dos veces; los enlaces ya tienen texto descriptivo.
+- «Falta `twitter:site`»: solo tiene sentido con una cuenta real de X (Twitter). La empresa no tiene, y las tarjetas se ven bien sin ella.
+- «Faltan palabras del título en el H1 o en la URL»: el H1 y las URL están escritos para leerse con naturalidad («Trabajos de yeso y reformas en Jaén», `/reformas/`). Forzar palabras clave para subir esa nota sería relleno.
 
 ---
 
