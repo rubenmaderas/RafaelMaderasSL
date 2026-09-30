@@ -873,6 +873,11 @@ main:focus {
   aspect-ratio: 1 / 1;
 }
 
+/* Encuadre al recortar: «arriba» conserva caras y cabezas; «abajo», el motivo bajo. */
+.media--focus-top img {
+  object-position: center 20%;
+}
+
 /* Desplaza el encuadre hacia abajo cuando el motivo está en la parte baja de la foto. */
 .media--focus-low img {
   object-position: center 72%;
@@ -971,7 +976,6 @@ main:focus {
 
 .hero__visual {
   position: relative;
-  order: -1;
   width: min(100%, 24rem);
   margin-inline: auto;
   padding: 1.25rem 1.5rem 1.75rem;
@@ -1098,7 +1102,6 @@ main:focus {
   }
 
   .hero__visual {
-    order: 0;
     width: 100%;
     padding: 1.5rem 1.5rem 2rem 2rem;
   }
@@ -1901,6 +1904,13 @@ mark.pending {
   .js .hero .media.is-troweling::after,
   .js .hero .media.is-smooth::after {
     content: none;
+  }
+
+  /* En móvil la foto queda debajo del texto: el yeso espera tapándola hasta
+     que aparece en pantalla (el script retira las salvaguardas de tiempo). */
+  .js .hero__visual.is-pending .media::after,
+  .js .hero__visual.is-pending:not(.is-ready) .hero-badge {
+    animation: none;
   }
 
   .js .hero .media__note {

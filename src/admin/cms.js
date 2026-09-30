@@ -325,7 +325,9 @@
           return h(
             "figure",
             { key, className: "cms-photo" },
-            src ? h("img", { src, alt: photo.alt || "" }) : h("div", { className: "cms-photo__empty" }, "Sin foto"),
+            src
+              ? h("img", { src, alt: photo.alt || "", style: { objectPosition: { arriba: "center 20%", abajo: "center 72%" }[photo.encuadre] || "center" } })
+              : h("div", { className: "cms-photo__empty" }, "Sin foto"),
             h(
               "figcaption",
               null,

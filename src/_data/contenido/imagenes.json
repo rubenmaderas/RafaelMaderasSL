@@ -1,16 +1,9 @@
 {
   "hero_yeso": {
-    "foto": "hero-yeso.jpg",
-    "alt": "Manos de un operario cargando yeso en una llana junto a una pared interior lisa",
-    "ilustrativa": true,
-    "credito": {
-      "autor": "Sasun Bughdaryan",
-      "autorUrl": "https://unsplash.com/@sasun1990",
-      "fuente": "Unsplash",
-      "fuenteUrl": "https://unsplash.com/photos/hands-applying-plaster-to-a-wall-with-trowels-Re1O5byZ8bY",
-      "licencia": "Unsplash License",
-      "licenciaUrl": "https://unsplash.com/license"
-    }
+    "foto": "principal.jpg",
+    "alt": "Yesista de Rafael Maderas S.L. en plena obra, con la ropa y las manos manchadas de yeso y una regla de obra apoyada a su lado",
+    "ilustrativa": false,
+    "encuadre": "arriba"
   },
   "reforma_interior": {
     "foto": "reforma-interior.jpg",

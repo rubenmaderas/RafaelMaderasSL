@@ -466,7 +466,17 @@ collections:
                   config:
                     max_file_size: 25000000
                 pattern: ['\.(jpe?g|png|webp)$', "La foto debe estar en formato JPG, PNG o WebP."]
-                hint: Se recorta sola para encajar en su hueco; procura que lo importante quede en el centro.
+                hint: Se recorta sola para encajar en su hueco. Si se corta una cabeza o lo importante, cambia el «Encuadre».
+              - label: Encuadre
+                name: encuadre
+                widget: select
+                default: centro
+                required: false
+                options:
+                  - {label: "Centrado", value: centro}
+                  - {label: "Arriba (fotos de personas: conserva la cabeza)", value: arriba}
+                  - {label: "Abajo (lo importante está en la parte baja)", value: abajo}
+                hint: Qué parte de la foto se conserva cuando hay que recortarla para encajarla en su hueco.
               - label: Descripción de la foto (texto alternativo)
                 name: alt
                 widget: string

@@ -125,7 +125,7 @@ En **`https://rafaelmaderas.es/admin/`** hay un panel en español, protegido con
 | **Páginas** | Textos de Inicio, Servicios, Reformas, Zonas de servicio, Quiénes somos y Contacto, cada uno con su título y descripción para Google |
 | **Servicios** | Trabajos de yeso, tipos de reforma y gremios que se coordinan |
 | **Preguntas frecuentes** | Preguntas y respuestas (se actualizan a la vez en la web y en los datos para Google) |
-| **Fotos de la web** | Cada foto, su descripción (texto alternativo), si es ilustrativa y sus créditos |
+| **Fotos de la web** | Cada foto, su encuadre, su descripción (texto alternativo), si es ilustrativa y sus créditos |
 | **Textos comunes** | Proceso de trabajo, bloque final de contacto y textos del pie |
 | **Datos de la empresa** | Nombre, teléfono, correo, mensaje de WhatsApp, fundador, datos legales y redes sociales |
 
@@ -140,7 +140,8 @@ Trucos para escribir:
 **Cambiar una foto:** «Fotos de la web» → abre la foto → «Elige una imagen diferente» → «Subir nuevo» → elige la foto → «Confirmar selección». Después:
 1. Escribe en **Descripción** lo que se ve en la foto nueva.
 2. Si es un **trabajo real de la empresa**, desmarca **Imagen ilustrativa** (desaparecen la etiqueta y, cuando no quede ninguna, el aviso del pie) y deja los créditos vacíos.
-3. Pulsa **Publicar → Publicar ahora**.
+3. Si al recortarse se corta una cabeza o lo importante, cambia el **Encuadre** («Arriba» para fotos de personas, «Abajo» si el motivo está en la parte baja).
+4. Pulsa **Publicar → Publicar ahora**.
 
 Las fotos deben ser **JPG o PNG** (no HEIC: en el iPhone, Ajustes → Cámara → Formatos → «Más compatible», o compártelas por WhatsApp o correo primero). El gestor las reduce a 2000 px de ancho y **elimina los metadatos** (ubicación GPS, modelo del móvil) antes de subirlas. Al compilar se generan las versiones AVIF, WebP y JPEG de cada tamaño. Pide permiso al cliente y evita que se vean datos personales, matrículas o direcciones reconocibles.
 
@@ -210,11 +211,11 @@ Se ha decidido **no mostrar redes sociales**: Facebook, Instagram y Perfil de Em
 
 ### 4. Imágenes (/admin → «Fotos de la web»)
 
-Todas las fotos son **provisionales**, de Unsplash (licencia Unsplash, apta para uso comercial sin atribución obligatoria). Se muestran con la etiqueta «Imagen ilustrativa» y hay un aviso en el pie que indica que no son obras de la empresa. En el Aviso legal figuran los créditos.
+La **foto principal de la portada es real**: un yesista de la empresa en obra (`principal.jpg`, encuadre «Arriba»). No lleva etiqueta ni créditos. Las demás fotos son **provisionales**, de Unsplash (licencia Unsplash, apta para uso comercial sin atribución obligatoria). Se muestran con la etiqueta «Imagen ilustrativa» y hay un aviso en el pie que indica que no son obras de la empresa. En el Aviso legal figuran los créditos.
 
-| Foto en el gestor (clave) | Archivo | Se usa en | Autor (Unsplash) |
+| Foto en el gestor (clave) | Archivo | Se usa en | Autor |
 | --- | --- | --- | --- |
-| Portada: foto principal (`hero_yeso`) | hero-yeso.jpg | Inicio (portada) | Sasun Bughdaryan |
+| Portada: foto principal (`hero_yeso`) | principal.jpg | Inicio (portada, con el efecto «llana») | Foto propia de la empresa |
 | Reformas (`reforma_interior`) | reforma-interior.jpg | Inicio (reformas) y Reformas (cabecera) | immo RENOVATION |
 | Albañilería (`albanileria`) | albanileria.jpg | Servicios (reformas) y Reformas (gremios) | Solømen |
 | Alicatado (`alicatado`) | alicatado.jpg | Reformas (gremios) | charlesdeluvio |
@@ -222,9 +223,9 @@ Todas las fotos son **provisionales**, de Unsplash (licencia Unsplash, apta para
 | Herramientas (`herramientas`) | herramientas.jpg | Quiénes somos | Annie Spratt |
 | Jaén (`jaen`) | jaen.jpg | Inicio (zonas) y Zonas de servicio | Sergio Guardiola Herrador (Baños de la Encina, Jaén) |
 
-**Cómo sustituir una imagen:** desde el gestor, como se explica en [Gestor de contenidos](#gestor-de-contenidos-admin). Sin gestor: copia la foto (JPG o PNG, de 1600 px de ancho o más) en `src/assets/img/originals/`, cambia `foto` y `alt` en `src/_data/contenido/imagenes.json`, pon `"ilustrativa": false` si es un trabajo real y ejecuta `npm run build`.
+**Cómo sustituir una imagen:** desde el gestor, como se explica en [Gestor de contenidos](#gestor-de-contenidos-admin). Sin gestor: copia la foto (JPG o PNG, de 1600 px de ancho o más) en `src/assets/img/originals/`, cambia `foto` y `alt` en `src/_data/contenido/imagenes.json`, pon `"ilustrativa": false` si es un trabajo real (y `"encuadre": "arriba"` o `"abajo"` si hace falta) y ejecuta `npm run build`.
 
-Consejos para las fotos reales: pide permiso al cliente, no muestres datos personales ni direcciones reconocibles, y prioriza el antes y el después de paredes, techos y reformas. La foto de portada («Portada: foto principal») se recorta cuadrada en móvil y vertical (4:5) en tableta y escritorio. Elige una con el motivo centrado y deja libres las esquinas, donde van las tarjetas de «Oficio» y «Un único interlocutor».
+Consejos para las fotos reales: pide permiso al cliente, no muestres datos personales ni direcciones reconocibles, y prioriza el antes y el después de paredes, techos y reformas. La foto de portada («Portada: foto principal») se recorta cuadrada en móvil y vertical (4:5) en tableta y escritorio; en móvil aparece debajo del título y de los botones de contacto. Si es de una persona, usa el encuadre «Arriba», y deja libres las esquinas, donde van las tarjetas de «Oficio» y «Un único interlocutor».
 
 La imagen para redes sociales (`src/assets/img/og/og-rafael-maderas.jpg`) es tipográfica. Se regenera en local con `npm run og` a partir de «Datos de la empresa» (no se actualiza sola al editar en /admin). También puedes sustituirla por una foto real de 1200×630 px.
 
@@ -290,6 +291,7 @@ Todo el movimiento es decorativo y opcional. Con «reducir movimiento» activado
 
 - **Efecto «llana» en la foto principal**: la foto aparece cubierta de yeso rugoso y una llana (hoja de acero y mango azul de la marca) la alisa en tres pasadas, en unos 2,5 s. Después aparecen las etiquetas y se dibuja el círculo de los años.
   - Solo se reproduce al entrar en la web. Al volver a la portada desde otra página no se repite.
+  - Empieza cuando al menos la mitad de la foto está en pantalla. En móviles pequeños, donde la foto queda debajo de los botones, el yeso la espera tapada y se alisa al bajar hasta ella.
   - No se reproduce si la pestaña está en segundo plano o la carga tarda más de 3 s.
   - Si algo falla, la foto queda visible igualmente a los pocos segundos.
   - La textura de yeso es un SVG generado, sin peso extra de descarga, en la variable `--plaster` de `.js .hero .media`. **Para desactivar el efecto**, borra esa línea: el script detecta que falta y muestra la foto directamente.
@@ -369,6 +371,7 @@ Los textos se han redactado a partir de la información facilitada. Antes de pub
 - **No se afirma** a propósito: presupuesto gratuito, sin compromiso, cerrado o por escrito, garantía por escrito, plazo de respuesta ni precios. Si alguno es cierto, añadirlo refuerza mucho la confianza (por ejemplo, «Presupuesto por escrito y sin compromiso»).
 - **Privacidad**: que a otros profesionales solo se les pasan los datos imprescindibles de la obra. (Confirmado: el correo de Hotmail y el WhatsApp son los de la empresa.)
 - La foto «Jaén» es de **Baños de la Encina** (provincia de Jaén), no de la capital. El texto alternativo lo indica.
+- **Foto principal**: que la persona que aparece está de acuerdo en salir en la web. Su texto alternativo dice «Yesista de Rafael Maderas S.L. en plena obra…», sin nombre. Si se quiere, puede decir quién es (por ejemplo, el fundador), en /admin → «Fotos de la web».
 
 Servicios que se pueden añadir si se confirman: escayola, placa de yeso laminado, falsos techos, molduras, aislamiento, pintura como servicio propio. El objeto social inscrito incluye además **enfoscados, revestimientos exteriores e interiores y decoración** en yeso y escayola, a mano o proyectado; anúncialos solo si se hacen hoy en día.
 

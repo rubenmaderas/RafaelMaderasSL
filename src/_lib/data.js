@@ -6,7 +6,7 @@ import path from "node:path";
 import { readContent } from "./content.js";
 import { applyTokens, slugify } from "./text.js";
 
-/** Catálogo de imágenes: { clave: { foto, file, alt, ilustrativa, credito } }. */
+/** Catálogo de imágenes: { clave: { foto, file, alt, ilustrativa, encuadre, credito } }. */
 export function getImages() {
   const data = readContent("imagenes");
   return Object.fromEntries(
@@ -19,6 +19,8 @@ export function getImages() {
           file: path.basename(String(entry.foto || "")),
           alt: String(entry.alt || "").trim(),
           ilustrativa: Boolean(entry.ilustrativa),
+          // "arriba" | "abajo" | "" (centrado): parte de la foto que se conserva al recortarla.
+          encuadre: ["arriba", "abajo"].includes(entry.encuadre) ? entry.encuadre : "",
           // Los créditos solo se publican para imágenes de banco (ilustrativas).
           credito: entry.ilustrativa && credit.autor ? credit : null,
         },

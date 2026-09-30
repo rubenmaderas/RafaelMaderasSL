@@ -85,8 +85,9 @@
   /* Efecto «llana» en la foto principal ------------------------------------
      La foto empieza cubierta de yeso rugoso (capa CSS) y una llana lo alisa
      en tres pasadas hasta descubrirla. Solo se reproduce al entrar en la web
-     (no al volver a la portada desde otra página) y nunca bloquea el
-     contenido: cualquier fallo deja la foto visible. */
+     (no al volver a la portada desde otra página), cuando al menos la mitad
+     de la foto está en pantalla (en móvil, al bajar hasta ella), y nunca
+     bloquea el contenido: cualquier fallo deja la foto visible. */
   const heroMedia = document.querySelector(".hero .media");
 
   if (heroMedia) {
@@ -94,7 +95,10 @@
     const smooth = () => {
       heroMedia.classList.remove("is-troweling");
       heroMedia.classList.add("is-smooth");
-      if (visual) visual.classList.add("is-ready");
+      if (visual) {
+        visual.classList.remove("is-pending");
+        visual.classList.add("is-ready");
+      }
     };
     const nav = performance.getEntriesByType ? performance.getEntriesByType("navigation")[0] : null;
     const fromInside = document.referrer.indexOf(location.origin + "/") === 0 && !(nav && nav.type === "reload");
@@ -103,22 +107,35 @@
       smooth();
     } else {
       /* El observador aporta posición y tamaño sin forzar el cálculo del diseño. */
-      const probe = new IntersectionObserver((entries) => {
-        probe.disconnect();
-        const entry = entries[entries.length - 1];
-        const texture = getComputedStyle(heroMedia)
-          .getPropertyValue("--plaster")
-          .trim()
-          .match(/^url\(["']?(.+?)["']?\)$/);
-        const skip =
-          !texture ||
-          !entry.isIntersecting ||
-          document.visibilityState !== "visible" ||
-          performance.now() > 3000;
+      let textureSrc = null;
+      const probe = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[entries.length - 1];
+          const inView = entry.intersectionRatio >= 0.5;
 
-        if (skip) smooth();
-        else trowel(heroMedia, texture[1], entry.boundingClientRect, smooth);
-      });
+          if (!textureSrc) {
+            const texture = getComputedStyle(heroMedia)
+              .getPropertyValue("--plaster")
+              .trim()
+              .match(/^url\(["']?(.+?)["']?\)$/);
+            /* Si ya está a la vista pero la carga ha sido lenta, no se hace esperar. */
+            if (!texture || (inView && performance.now() > 3000)) {
+              probe.disconnect();
+              smooth();
+              return;
+            }
+            textureSrc = texture[1];
+            if (!inView && visual) visual.classList.add("is-pending");
+          }
+
+          if (!inView) return;
+          probe.disconnect();
+          if (visual) visual.classList.remove("is-pending");
+          if (document.visibilityState !== "visible") smooth();
+          else trowel(heroMedia, textureSrc, entry.boundingClientRect, smooth);
+        },
+        { threshold: [0, 0.5] }
+      );
       probe.observe(heroMedia);
     }
   }

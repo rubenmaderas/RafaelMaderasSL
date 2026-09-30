@@ -237,7 +237,8 @@ export default function (eleventyConfig) {
     if (options.imgClass) attributes.class = options.imgClass;
 
     const picture = Image.generateHTML(metadata, attributes);
-    const figureClass = ["media", options.class].filter(Boolean).join(" ");
+    const focus = { arriba: "media--focus-top", abajo: "media--focus-low" }[entry.encuadre];
+    const figureClass = ["media", options.class, focus].filter(Boolean).join(" ");
     const note = entry.ilustrativa
       ? `<figcaption class="media__note">Imagen ilustrativa</figcaption>`
       : "";
