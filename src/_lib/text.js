@@ -79,6 +79,18 @@ export function renderMarkdownInline(value, site) {
   return source ? md.renderInline(source) : "";
 }
 
+/**
+ * Markdown en línea en el que la negrita se pinta como <span class="…"> en vez de <strong>.
+ * Para etiquetas visuales (insignias de la portada, nombre de cada fase de obra): se ven igual,
+ * pero no cuentan como énfasis del texto. Así las negritas de verdad (<strong>) se reservan
+ * para las ideas clave y no se diluyen.
+ */
+export function renderMarkdownInlineLabel(value, className, site) {
+  return renderMarkdownInline(value, site)
+    .replace(/<strong>/g, `<span class="${escapeHtml(className)}">`)
+    .replace(/<\/strong>/g, "</span>");
+}
+
 /** Texto sin marcas de formato (para metadatos y datos estructurados). */
 export function plainText(value, site) {
   return applyTokens(value, site)

@@ -120,8 +120,8 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Igual que en Netlify/Cloudflare: _headers no se publica como archivo.
-  const found = urlPath === "/_headers" ? null : resolveFile(urlPath);
+  // Igual que en Netlify/Cloudflare: _headers y _redirects no se publican como archivos.
+  const found = ["/_headers", "/_redirects"].includes(urlPath) ? null : resolveFile(urlPath);
   if (found?.redirect) {
     res.writeHead(301, { Location: found.redirect }).end();
   } else if (found?.file) {

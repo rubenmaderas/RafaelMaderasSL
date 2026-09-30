@@ -56,8 +56,9 @@ src/
       comun.json            Textos compartidos: marca, proceso de trabajo, bloque de contacto, pie
     site.js · images.js · services.js · faq.js · hasIllustrativeImages.js
                           Adaptadores: pasan el contenido a las plantillas (no hace falta tocarlos)
-    navigation.js         Menú principal
+    navigation.js         Menú principal y enlaces del pie
     structuredData.js     Datos estructurados JSON-LD (GeneralContractor, etc.)
+    domainRedirects.js    Redirecciones 301 de dominio (www, *.netlify.app) para Netlify
   _lib/
     site.js               Dominio, ajustes técnicos (cookies y analítica) y datos derivados (enlaces, años de oficio…)
     content.js · data.js · text.js   Lectura y validación del contenido, comodines y formato
@@ -89,7 +90,7 @@ src/
   politica-de-cookies.njk                         → /politica-de-cookies/
   404.njk                 Página de error         → /404.html
   robots.njk · sitemap.njk                        → /robots.txt · /sitemap.xml
-  headers.njk · htaccess.njk                      → /_headers · /.htaccess
+  headers.njk · redirects.njk · htaccess.njk      → /_headers · /_redirects · /.htaccess
 ```
 
 Los textos de las seis páginas principales, su título y su descripción para Google están en `src/_data/contenido/` y se cambian desde **/admin**. Las plantillas `.njk` solo contienen la maquetación. Los textos legales, el menú, las etiquetas de los botones y la página 404 siguen en código.
@@ -118,7 +119,7 @@ Al añadir o cambiar textos desde /admin, conviene mantener estas pautas:
 - **Precio: explicar de qué depende**, sin cifras, y pedir fotos para orientar.
 - **Llamadas a la acción de poco esfuerzo**: «Mándanos unas fotos por WhatsApp», con lo que conviene enviar y lo que pasa después.
 - **Frases cortas y listas**: una idea por párrafo, con la palabra clave al principio de cada viñeta. En los textos largos, el botón de lista del editor crea las viñetas (una línea que empiece por `- ` también funciona).
-- **Negrita con moderación**: una o dos ideas clave por bloque (`**texto**` o el botón **B**). Si todo va en negrita, nada destaca.
+- **Negrita con moderación**: una o dos ideas clave por bloque (`**texto**` o el botón **B**). Si todo va en negrita, nada destaca. Resalta el beneficio, no el término técnico que se explica en la misma frase (maestras, guardavivos) ni lo que ya dice el título de encima. Como referencia, **no más de una negrita por cada 50 palabras** de la página: los analizadores SEO avisan si hay más. En las insignias de la portada y en el «Orden de obra» de Reformas, la negrita se muestra como etiqueta y no cuenta.
 - **Las palabras de quien busca**: «quitar el gotelé», «yesista» o «yesero», «licencia para reformar». Las preguntas frecuentes responden a lo que más se busca: precio, gotelé, secado, proyectado o a mano, grietas y licencias.
 - **No prometer lo que no esté confirmado**: garantías por escrito, presupuesto gratuito o cerrado, plazos de respuesta o precios. Si alguno es cierto, se puede añadir, y es de lo que más convence.
 
@@ -191,7 +192,7 @@ Las fotos deben ser **JPG o PNG** (no HEIC: en el iPhone, Ajustes → Cámara �
 
 ### Puesta en marcha (una sola vez)
 
-1. **Sube el proyecto a GitHub** en un repositorio privado, con la rama `main`.
+1. **Sube el proyecto a GitHub** en un repositorio privado, con la rama `main`. Si el repositorio es público o se llama `usuario.github.io`, GitHub intenta publicarlo además con **GitHub Pages** (Jekyll), que no sabe compilar esta web: falla en cada cambio y te envía un correo. Hazlo privado o, en *Settings → Pages*, despublícalo (*Unpublish site*). La web se publica en Netlify.
 2. En **Netlify**: *Add new site → Import an existing project* → elige el repositorio. `netlify.toml` ya indica el comando (`npm run build`) y la carpeta (`_site`).
 3. En la pestaña **Identity** del proyecto de Netlify, pulsa **Enable Identity**. Está incluido en el plan gratuito.
    - En la configuración de Identity (*Registration preferences*), marca **Invite only**. Es importante: así nadie puede registrarse por su cuenta.
@@ -297,14 +298,15 @@ El teléfono se define una sola vez (/admin → «Datos de la empresa» → «Te
 
 ## Despliegue
 
-La carpeta que se publica es **`_site/`** (se genera con `npm run build`). Incluye `404.html`, `robots.txt`, `sitemap.xml` y dos archivos de configuración de servidor: `_headers` (Netlify y Cloudflare Pages) y `.htaccess` (Apache).
+La carpeta que se publica es **`_site/`** (se genera con `npm run build`). Incluye `404.html`, `robots.txt`, `sitemap.xml` y tres archivos de configuración de servidor: `_headers` (Netlify y Cloudflare Pages), `_redirects` (Netlify) y `.htaccess` (Apache).
 
 ### Netlify (alojamiento elegido)
 1. Conecta el repositorio. `netlify.toml` ya define el comando (`npm run build`), la carpeta (`_site`) y la versión de Node. No hace falta `SITE_URL`: el dominio ya está en `src/_lib/site.js`. Para activar el gestor /admin, sigue [Puesta en marcha](#puesta-en-marcha-una-sola-vez).
-2. En *Domain management*, añade `rafaelmaderas.es` como **dominio principal** y `www.rafaelmaderas.es` como alias (Netlify redirige el `www` al principal).
+2. En *Domain management*, añade `rafaelmaderas.es` como **dominio principal** (*primary domain*) y `www.rafaelmaderas.es` como alias (Netlify redirige el `www` al principal).
 3. En el registrador del `.es`, lo más sencillo es cambiar los servidores DNS por los de **Netlify DNS**, que indica el propio panel. Así el dominio sin `www` también se sirve desde su CDN.
 4. Netlify emite el certificado HTTPS (Let's Encrypt) automáticamente. Actívalo y marca *Force HTTPS* si aparece la opción.
-5. Comprueba después que `https://rafaelmaderas.es/robots.txt` y `https://rafaelmaderas.es/sitemap.xml` cargan, y que la dirección `*.netlify.app` lleva la etiqueta canonical hacia `rafaelmaderas.es`.
+5. Con el dominio ya como principal y el HTTPS activo, **vuelve a publicar** (*Deploys → Trigger deploy → Deploy site*). En esa compilación se genera `_redirects` con redirecciones 301, en un solo salto, de `www.rafaelmaderas.es` y de la dirección `*.netlify.app` a `https://rafaelmaderas.es` (ver `src/_data/domainRedirects.js`). Mientras el dominio principal de Netlify no sea `rafaelmaderas.es`, el archivo sale sin reglas y el registro de la compilación lo avisa: así nunca se redirige a un dominio que aún no funciona.
+6. Comprueba después que `https://rafaelmaderas.es/robots.txt` y `https://rafaelmaderas.es/sitemap.xml` cargan, y que `http://rafaelmaderas.es/`, `https://www.rafaelmaderas.es/` y la dirección `*.netlify.app` redirigen con un 301 a `https://rafaelmaderas.es/`. En PowerShell: `curl.exe -sI https://www.rafaelmaderas.es/` (busca `301` y `location: https://rafaelmaderas.es/`) y `curl.exe -sI -H "Accept-Encoding: br, gzip" https://rafaelmaderas.es/` (busca `content-encoding: br`).
 
 ### Cloudflare Pages
 1. Conecta el repositorio. Comando de compilación: `npm run build`. Directorio de salida: `_site`.
@@ -412,8 +414,27 @@ La cookie técnica de sesión de /admin (solo para quien edita la web) está exe
 3. **Fotos reales** de trabajos (antes y después) en la web y en el Perfil de Empresa, sustituyendo las imágenes de stock.
 4. **Reseñas reales**: pídeselas a clientes satisfechos, sin incentivos, y contéstalas. No publiques reseñas en la web que no se puedan verificar.
 5. Opcional: Bing Places / Bing Webmaster Tools, y alta en directorios locales serios con los mismos datos de nombre, dirección y teléfono.
-6. Con el tiempo, añade contenido útil y real: obras terminadas (con permiso del cliente), explicaciones de trabajos concretos o dudas frecuentes nuevas.
-7. Opcional: para saber cuántas visitas y llamadas genera la web, activa **Google Analytics** siguiendo [Cómo activar Google Analytics](#cómo-activar-google-analytics).
+6. **Enlaces desde otras webs** (*backlinks*): no se arreglan con código. Llegan del Perfil de Empresa de Google, de directorios serios (por ejemplo, Páginas Amarillas o plataformas de reformas), de proveedores, fabricantes y almacenes con los que se trabaja, de asociaciones del sector o de comercio de Jaén, de colaboradores y de la prensa local. Pocos y de webs reales y cercanas valen más que muchos. **No compres enlaces** ni uses granjas de enlaces: Google lo penaliza.
+7. Con el tiempo, añade contenido útil y real: obras terminadas (con permiso del cliente), explicaciones de trabajos concretos o dudas frecuentes nuevas.
+8. Opcional: para saber cuántas visitas y llamadas genera la web, activa **Google Analytics** siguiendo [Cómo activar Google Analytics](#cómo-activar-google-analytics).
+
+### Analizadores SEO (Seobility, SEMrush, Ahrefs…)
+
+Analiza siempre la dirección definitiva, **`https://rafaelmaderas.es/`**, cuando ya esté publicada. Si se analiza otra (la provisional `*.netlify.app`, una vista previa de Netlify o el servidor local), estos avisos son **esperables** y no indican un fallo de la web:
+
+| Aviso | Por qué sale en una dirección provisional | En `rafaelmaderas.es` |
+| --- | --- | --- |
+| «La página bloquea la indexación» | Netlify añade `X-Robots-Tag: noindex` a las vistas previas, y la canonical apunta a otro dominio | Las páginas llevan `index, follow` y `robots.txt` solo excluye `/admin/` |
+| «El canonical apunta a otro dominio» | La canonical siempre apunta a `https://rafaelmaderas.es` (es lo correcto) | Coincide con la dirección |
+| «Sin redirección de www / a HTTPS» | Solo se puede comprobar en el dominio propio | Netlify fuerza HTTPS y `_redirects` lleva `www` y `*.netlify.app` al dominio (301) |
+| «No se usa compresión GZip» | `npm run dev` no comprime | Netlify comprime el HTML con Brotli o gzip |
+
+Otros avisos habituales:
+- **Negritas**: ver la pauta de [Estilo de redacción](#estilo-de-redacción) (no más de una por cada 50 palabras).
+- **Encabezados repetidos**: cada título de una misma página debe ser distinto, también los del pie («Contacto», «La web», «Legal»). Por eso el primer paso del proceso se llama «Primer contacto».
+- **Textos de enlace repetidos**: el menú y el pie usan textos distintos para la misma página (`navigation.js`). En las páginas interiores, «Inicio» sale en el menú y en las migas de pan: es normal y no perjudica.
+- **Pocos backlinks**: ver el punto 6 de la lista anterior.
+- «La cabecera X-Powered-By no se envía» es **correcto**: no dar pistas del servidor es una buena práctica de seguridad.
 
 ---
 

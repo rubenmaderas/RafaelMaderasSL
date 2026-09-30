@@ -53,7 +53,8 @@ collections:
     label: Páginas
     label_singular: Página
     description: >-
-      Textos de cada página de la web. Para resaltar en negrita escribe **así**.
+      Textos de cada página de la web. Para resaltar en negrita escribe **así**, con
+      moderación: una o dos ideas clave por bloque (si hay demasiadas, nada destaca).
       Puedes usar comodines, que se sustituyen solos por los datos de la empresa:
       {empresa}, {telefono}, {correo}, {años}, {fundacion}, {fundador}, {cargo},
       {oficio}, {razon_social} y {cif}. Si cambia un dato, se actualiza en toda la web.

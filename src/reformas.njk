@@ -88,7 +88,7 @@ faqGroup: reformas
       {%- if c.orden.pasos.length %}
       <ol class="steps">
         {%- for paso in c.orden.pasos %}
-        <li>{{ paso | mdi | safe }}</li>
+        <li>{{ paso | mdiLabel("steps__label") | safe }}</li>
         {%- endfor %}
       </ol>
       {%- endif %}

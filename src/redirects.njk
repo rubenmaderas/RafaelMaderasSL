@@ -1,0 +1,12 @@
+---
+permalink: /_redirects
+eleventyExcludeFromCollections: true
+---
+# Redirecciones para Netlify (generado automáticamente desde src/redirects.njk).
+# Llevan con un 301, en un solo salto, las otras direcciones de la web (con o sin www,
+# *.netlify.app) a la canónica: {{ site.url }}
+# Solo se rellenan al publicar en Netlify con el dominio propio como principal; hasta
+# entonces este archivo no tiene reglas. La lógica está en src/_data/domainRedirects.js.
+{%- for rule in domainRedirects %}
+{{ rule.from }}  {{ rule.to }}  301!
+{%- endfor %}

@@ -26,15 +26,15 @@ faqGroup: inicio
       <ul class="hero__badges">
         <li class="hero-badge hero-badge--years">
           <span class="hero-badge__label">{{ c.portada.insignias.oficio | t }}</span>
-          <span class="hero-badge__ring"><strong>{{ site.founder.yearsExperience }}</strong> años</span>
+          <span class="hero-badge__ring"><span class="hero-badge__number">{{ site.founder.yearsExperience }}</span> años</span>
         </li>
         <li class="hero-badge hero-badge--direct">
           <span class="hero-badge__icon">{{ icon("phone", 18) }}</span>
-          <span>{{ c.portada.insignias.interlocutor | mdi | safe }}</span>
+          <span>{{ c.portada.insignias.interlocutor | mdiLabel("hero-badge__em") | safe }}</span>
         </li>
         <li class="hero-badge hero-badge--zone">
           <span class="hero-badge__icon">{{ icon("pin", 18) }}</span>
-          <span>{{ c.portada.insignias.zona | mdi | safe }}</span>
+          <span>{{ c.portada.insignias.zona | mdiLabel("hero-badge__em") | safe }}</span>
         </li>
       </ul>
     </div>

@@ -11,6 +11,7 @@ import {
   renderHighlight,
   renderMarkdown,
   renderMarkdownInline,
+  renderMarkdownInlineLabel,
   tokenValues,
 } from "./src/_lib/text.js";
 
@@ -145,12 +146,15 @@ export default function (eleventyConfig) {
    * - t:         texto plano con comodines ({empresa}, {telefono}, {años}…).
    * - md:        Markdown en bloque (párrafos, listas). Usar con "| safe".
    * - mdi:       Markdown en línea, para textos dentro de <p>, <li>… Usar con "| safe".
+   * - mdiLabel("clase"): como mdi, pero la **negrita** sale como <span class="clase">, para
+   *              etiquetas visuales que no son énfasis del texto. Usar con "| safe".
    * - highlight: título con una palabra entre *asteriscos* resaltada. Usar con "| safe".
    * El HTML escrito en los textos se muestra como texto: no puede romper la página.
    */
   eleventyConfig.addFilter("t", (value) => applyTokens(value).trim());
   eleventyConfig.addFilter("md", (value) => renderMarkdown(value));
   eleventyConfig.addFilter("mdi", (value) => renderMarkdownInline(value));
+  eleventyConfig.addFilter("mdiLabel", (value, className) => renderMarkdownInlineLabel(value, className));
   eleventyConfig.addFilter("highlight", (value) => renderHighlight(value));
 
   // JSON seguro para incrustar en <script type="application/ld+json">.

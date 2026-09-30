@@ -1032,7 +1032,8 @@ main:focus {
   color: var(--color-ink-soft);
 }
 
-.hero-badge strong {
+.hero-badge__em {
+  font-weight: 700;
   color: var(--color-ink);
 }
 
@@ -1080,11 +1081,12 @@ main:focus {
   mask: conic-gradient(#000 var(--ring-angle), transparent 0);
 }
 
-.hero-badge__ring strong {
+.hero-badge__number {
   display: block;
   font-size: 1.45rem;
   font-weight: 800;
   letter-spacing: -0.03em;
+  color: var(--color-ink);
 }
 
 .hero-badge--direct {
@@ -1322,6 +1324,12 @@ main:focus {
   color: var(--color-ink);
   font-size: 0.9rem;
   font-weight: 700;
+}
+
+/* Nombre de cada fase («**Demoliciones**…»): se ve en negrita, pero es una etiqueta, no énfasis. */
+.steps__label {
+  font-weight: 700;
+  color: var(--color-ink);
 }
 
 /* --------------------------------------------------------------------------

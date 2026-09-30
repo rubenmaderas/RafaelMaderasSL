@@ -19,10 +19,10 @@ ErrorDocument 404 /404.html
   AddType image/svg+xml .svg
 </IfModule>
 
-# Archivo de cabeceras de Netlify/Cloudflare: no es necesario en Apache.
-<Files "_headers">
+# Archivos de configuración de Netlify/Cloudflare (_headers, _redirects): no se usan en Apache.
+<FilesMatch "^_(headers|redirects)$">
   Require all denied
-</Files>
+</FilesMatch>
 
 <IfModule mod_rewrite.c>
   RewriteEngine On

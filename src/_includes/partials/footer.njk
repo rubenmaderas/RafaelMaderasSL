@@ -23,7 +23,7 @@
       <h2 class="site-footer__title">La web</h2>
       <ul class="site-footer__list">
         {%- for item in navigation %}
-        <li><a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        <li><a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.footerLabel or item.label }}</a></li>
         {%- endfor %}
       </ul>
     </nav>
