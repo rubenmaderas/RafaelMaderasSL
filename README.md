@@ -269,7 +269,7 @@ La **foto principal de la portada es real**: un yesista de la empresa en obra (`
 
 **Cómo sustituir una imagen:** desde el gestor, como se explica en [Gestor de contenidos](#gestor-de-contenidos-admin). Sin gestor: copia la foto (JPG o PNG, de 1600 px de ancho o más) en `src/assets/img/originals/`, cambia `foto` y `alt` en `src/_data/contenido/imagenes.json`, pon `"ilustrativa": false` si es un trabajo real (y `"encuadre": "arriba"` o `"abajo"` si hace falta) y ejecuta `npm run build`.
 
-Consejos para las fotos reales: pide permiso al cliente, no muestres datos personales ni direcciones reconocibles, y prioriza el antes y el después de paredes, techos y reformas. La foto de portada («Portada: foto principal») se recorta cuadrada en móvil y vertical (4:5) en tableta y escritorio; en móvil aparece debajo del título y de los botones de contacto. Si es de una persona, usa el encuadre «Arriba», y deja libres las esquinas, donde van las tarjetas de «Oficio» y «Un único interlocutor».
+Consejos para las fotos reales: pide permiso al cliente, no muestres datos personales ni direcciones reconocibles, y prioriza el antes y el después de paredes, techos y reformas. La foto de portada («Portada: foto principal») se recorta cuadrada en móvil y vertical (4:5) en tableta y escritorio; en móvil aparece debajo del título y de los botones de contacto. Si es de una persona, usa el encuadre «Arriba», y deja libres las esquinas, donde van las tarjetas de «Experiencia» y «Un único interlocutor».
 
 La imagen para redes sociales (`src/assets/img/og/og-rafael-maderas.jpg`) es tipográfica. Se regenera en local con `npm run og` a partir de «Datos de la empresa» (no se actualiza sola al editar en /admin). También puedes sustituirla por una foto real de 1200×630 px.
 
