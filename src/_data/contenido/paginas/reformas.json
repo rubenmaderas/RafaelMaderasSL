@@ -32,19 +32,21 @@
   "orden": {
     "antetitulo": "Orden de obra",
     "titulo": "El orden habitual de una reforma integral",
-    "entradilla": "Cada obra tiene sus particularidades, pero una reforma completa suele seguir este orden. Respetarlo evita romper lo que ya está terminado.",
+    "entradilla": "Cada obra tiene sus particularidades y algunos trabajos se solapan, pero una reforma completa suele seguir este orden. Respetarlo evita romper lo que ya está terminado.",
     "pasos": [
       "**Demoliciones** y retirada de lo que se va a sustituir.",
-      "**Albañilería**: nuevos tabiques, cambios de distribución y recrecidos.",
-      "**Instalaciones**: fontanería y electricidad, con sus rozas.",
-      "**Yeso**: cierre de rozas, guarnecido y enlucido de paredes y techos.",
-      "**Alicatado** de cocinas y baños.",
-      "**Remates y acabados**, incluida la pintura cuando la obra lo requiere."
+      "**Albañilería**: nuevos tabiques, cambios de distribución y premarcos de puertas.",
+      "**Instalaciones**: tuberías de agua, desagües y canalizaciones eléctricas. Las tuberías se prueban a la vista, antes de taparlas.",
+      "**Recrecido del suelo** sobre las instalaciones, si la obra lo lleva, respetando su tiempo de secado.",
+      "**Yeso** en paredes y techos, con el cierre de rozas. Si hay **falsos techos**, se montan en esta fase.",
+      "**Alicatado y solado**. En las duchas, antes se impermeabiliza.",
+      "**Carpintería y pintura**: puertas, rodapiés, suelo laminado o de madera si lo lleva, y pintura.",
+      "**Montaje final**: sanitarios, grifería, mecanismos y muebles de cocina. Después, limpieza y repaso."
     ]
   },
   "permisos": {
     "titulo": "¿Necesito licencia para reformar mi casa en Jaén?",
-    "texto": "Depende de la obra. En Andalucía, muchas reformas de viviendas existentes se tramitan con una **declaración responsable** en el ayuntamiento, que permite empezar desde el día en que se presenta con la documentación necesaria.\n\nSi la obra toca la estructura, puede exigir un proyecto técnico, y en edificios protegidos puede hacer falta una autorización previa. Cada ayuntamiento concreta los requisitos; en Jaén capital, el área de Urbanismo. Si la obra afecta a elementos comunes del edificio, necesitarás también el permiso de la comunidad."
+    "texto": "Depende de la obra. En Andalucía, muchas reformas de viviendas existentes se tramitan con una **declaración responsable** en el ayuntamiento. Permite empezar el mismo día en que se presenta, si va con toda la documentación y con las autorizaciones previas que hagan falta.\n\n- **Si la obra afecta a la estructura o a la fachada**, hace falta un técnico y, según el alcance, un proyecto.\n- **En el casco histórico** o en edificios protegidos puede hacer falta antes una autorización de Patrimonio.\n- **El contenedor de escombros** en la calle necesita su propio permiso, que conviene pedir con tiempo.\n- **En un piso**, avisa antes al presidente o al administrador de la comunidad. Si la obra toca elementos comunes, como la fachada o la estructura, hace falta un acuerdo de la junta de propietarios.\n\nEn Jaén capital se tramita en la **Gerencia Municipal de Urbanismo**."
   },
   "proceso": {
     "antetitulo": "Proceso de trabajo",

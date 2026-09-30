@@ -121,6 +121,34 @@ Al añadir o cambiar textos desde /admin, conviene mantener estas pautas:
 - **Las palabras de quien busca**: «quitar el gotelé», «yesista» o «yesero», «licencia para reformar». Las preguntas frecuentes responden a lo que más se busca: precio, gotelé, secado, proyectado o a mano, grietas y licencias.
 - **No prometer lo que no esté confirmado**: garantías por escrito, presupuesto gratuito o cerrado, plazos de respuesta o precios. Si alguno es cierto, se puede añadir, y es de lo que más convence.
 
+### Rigor técnico
+
+En 2026 se revisaron todos los textos de obra como lo haría un contratista, contrastándolos con fuentes técnicas y legales:
+- el *Manual de ejecución de revestimientos con yeso* de ATEDY (2023);
+- el CTE DB-HS, el REBT y el generador de precios de CYPE;
+- la ley andaluza LISTA, la Ley de Propiedad Horizontal y las ordenanzas del Ayuntamiento de Jaén.
+
+Al editar textos de obra, conviene respetar estas pautas:
+
+- **El espesor del yeso no es igual en toda la pared**: varía para absorber los desniveles del soporte, normalmente entre 1 y 2 cm. Lo que el proyectado deja uniforme es la mezcla, la superficie plana y la ausencia de empalmes. No vuelvas a escribir «el mismo espesor en toda la pared».
+- **Guarnecido y enlucido** es el sistema tradicional en dos capas, pero no el único correcto: el proyectado puede quedar terminado en una sola capa.
+- **El yeso es solo para interiores** y no para zonas con humedad permanente. Sobre hormigón liso o pintura necesita antes un puente de unión.
+- **Gotelé**: el de temple se rasca tras humedecerlo; el de pintura plástica se rebaja y se cubre, sobre una imprimación de agarre.
+- **Secado**: ningún plazo fijo; como referencia, al menos dos semanas, y una imprimación selladora antes de la pintura plástica. El color claro indica que está seco, pero no lo prueba: eso se comprueba con un medidor.
+- **Orden de una reforma**:
+  1. demoliciones;
+  2. tabiques y premarcos;
+  3. instalaciones, probadas a la vista;
+  4. recrecido del suelo;
+  5. yeso y falsos techos;
+  6. alicatado y solado;
+  7. carpintería y pintura;
+  8. montaje final.
+
+  El recrecido nunca va antes de las tuberías que pasan por el suelo.
+- **Electricidad y gas**: solo los ejecuta una empresa instaladora habilitada. No escribas que la empresa «emite el boletín» salvo que esté habilitada como instaladora.
+- **Licencias**: no digas «sin licencia» ni «sin papeles». La declaración responsable también es un trámite municipal, con su impuesto (ICIO) y su tasa.
+
 En las preguntas frecuentes, las respuestas son texto sin formato: una línea en blanco separa párrafos. Así la respuesta visible y la de los datos estructurados coinciden siempre. Cada pregunta tiene un campo **Página** que decide dónde se muestra:
 - **Inicio**: las dudas generales.
 - **Servicios**: las del yeso.
@@ -369,7 +397,9 @@ Los textos se han redactado a partir de la información facilitada. Antes de pub
 - **40 años de oficio del fundador** como yesista (confirmado por la empresa en 2026). Se calcula con el año de inicio en el oficio (1986, en «Datos de la empresa» → «Fundador») y el año de compilación. Aparece en el inicio, en «Quiénes somos», en los datos estructurados y en la imagen para redes sociales. Esa imagen se genera en tu ordenador: ejecuta `npm run og` una vez al año (o al cambiar datos) y publica el resultado. No se genera en Netlify porque el servidor no tiene las mismas fuentes. Si el año de inicio exacto es otro, cámbialo en el gestor.
 - **Rafael Maderas, «fundador y gerente»** («Datos de la empresa» → «Fundador»), en «Quiénes somos» y en los datos estructurados. Según el BORME, es el administrador único desde la constitución. Si prefieres otro cargo o su nombre completo, cámbialo en el gestor.
 - **Servicios de yeso** anunciados (el yeso proyectado coincide con el «Proyectador de yeso» de la furgoneta): yeso proyectado, guarnecido y enlucido, alisado de paredes y gotelé, regularización de paredes antiguas y reparación de grietas, desconchones y rozas (/admin → «Servicios»). *No se anuncian* escayola ni placa de yeso laminado (pladur). Añádelos solo si se hacen.
-- **Gremios coordinados**: albañilería, alicatado, fontanería, electricidad y «otros oficios». También se menciona la pintura como parte de los remates de una reforma integral (/admin → «Páginas» → «Reformas»).
+- **Gremios coordinados** (/admin → «Servicios» → «Oficios que coordinamos»):
+  - Albañilería, alicatado y solado, fontanería, electricidad y «otros oficios», con la carpintería y la pintura como ejemplos.
+  - En Electricidad se dice que la instalación la hace **una empresa instaladora habilitada, que emite el certificado (boletín) cuando la normativa lo exige**. Es obligatorio por el REBT: confirma que el electricista con el que trabajáis lo está.
 - **«Equipo propio» / «equipo propio de yesistas»**: que los trabajos de yeso los hace personal de la empresa (inicio, Servicios, Reformas, «Quiénes somos», FAQ). Además, que para el resto de oficios se **coordina** a profesionales con los que se colabora habitualmente.
 - **«Un único interlocutor»**: que el cliente tiene un mismo contacto en la empresa desde la primera llamada hasta el final de la obra (inicio, Reformas, «Quiénes somos»). El proceso de trabajo dice además que se visita la obra cuando hace falta y que se revisa el resultado con el cliente al terminar.
 - **Disponibilidad y trato**: si el equipo está en obra, se devuelve la llamada o se contesta el WhatsApp lo antes posible. Además, «te respondemos nosotros, sin centralitas» y «hablas directamente con nosotros, sin intermediarios» (inicio y Contacto).
@@ -377,20 +407,37 @@ Los textos se han redactado a partir de la información facilitada. Antes de pub
 - **Zonas**: Jaén capital como zona habitual («del casco antiguo al Bulevar») y los municipios listados en /admin → «Páginas» → «Zonas de servicio», que son una selección orientativa. También la atención en el resto de Andalucía «según el trabajo». Los ejemplos de viviendas (casas antiguas del casco histórico, pisos de los años 70, 80 y 90 con gotelé) son generales.
 - **Respuestas del FAQ** (/admin → «Preguntas frecuentes»), sobre todo:
   - «Sí» a los **trabajos pequeños** («Si no es algo que hagamos, también te lo diremos»).
-  - **Gotelé**: el de temple se rasca después de humedecerlo y el de pintura plástica se cubre con yeso.
-  - **Secado**: sin plazos fijos y «al terminar te decimos cuándo puedes pintar».
+  - **Gotelé**: la prueba del trapo húmedo para distinguir temple de pintura plástica. El de temple se rasca tras humedecerlo; el de pintura plástica se rebaja y se cubre con yeso o pasta de alisar, sobre una imprimación de agarre.
+  - **Secado**: sin plazos fijos, «como referencia, al menos dos semanas», imprimación selladora antes de la pintura plástica y «al terminar te decimos cuándo puedes pintar».
+  - **Duración de una reforma**: fases con tiempos de espera, como el secado del recrecido o del yeso.
   - **Vivir en casa**: «trabajamos por estancias».
   - **Oficios**: el yeso, con equipo propio; el resto, profesionales a los que se coordina.
-- **Licencias** (Reformas, «¿Necesito licencia para reformar mi casa en Jaén?»): es un texto general basado en la ley andaluza LISTA (Ley 7/2021, art. 138). Muchas obras en viviendas existentes se tramitan con **declaración responsable**, que permite empezar desde que se presenta con la documentación. Confírmalo con el área de Urbanismo del Ayuntamiento de Jaén o con quien os tramite las licencias. No se dice que la empresa gestione los permisos; si lo hace, añadirlo es un buen argumento.
+- **Licencias** (Reformas, «¿Necesito licencia para reformar mi casa en Jaén?»): es un texto general, contrastado con estas fuentes:
+  - la ley andaluza LISTA (Ley 7/2021, art. 138): la declaración responsable permite empezar el día en que se presenta, con la documentación y las autorizaciones previas;
+  - la Ley de Propiedad Horizontal (art. 7.1): hay que avisar a la comunidad antes de las obras, y hace falta acuerdo de la junta para los elementos comunes;
+  - la sede electrónica del Ayuntamiento de Jaén: el trámite 12303 se presenta en la **Gerencia Municipal de Urbanismo**, y el contenedor en la vía pública necesita su propia autorización. El casco histórico es Conjunto Histórico, con autorizaciones de Patrimonio en algunos casos.
+
+  Confírmalo con la Gerencia o con quien os tramite las licencias. No se dice que la empresa gestione los permisos ni el contenedor; si lo hace, añadirlo es un buen argumento.
 - **Compromisos de forma de trabajar**. Son fieles al proceso descrito, pero confírmalos:
   - «**Presupuesto claro** antes de empezar» / «tienes el presupuesto antes de empezar» (inicio, proceso, Reformas y Contacto).
   - «**Si surge un imprevisto**, te lo enseñamos y decides tú antes de seguir» (inicio, Reformas y FAQ).
   - Limpieza: «protegemos suelos y muebles» y «al terminar recogemos / retiramos los restos» (proceso, «Quiénes somos», FAQ y consejos de Servicios).
   - Fotos: «mándanos unas fotos por WhatsApp y te decimos cómo lo haríamos» (portada) y «te orientamos con lo que nos cuentes y las fotos» (Contacto).
-  - Preparación: «hace falta agua y luz en la obra» (consejos de Servicios) y «saneamos lo que está suelto y enderezamos las paredes con maestras» (Servicios).
+  - Preparación: «hace falta agua y luz en la obra» y «mientras aplicamos el yeso, mejor sin corrientes de aire» (consejos de Servicios).
+  - Oficio (Servicios), prácticas habituales de un buen yesista que hay que confirmar:
+    - «picamos lo que está suelto y las enderezamos con un guarnecido sobre maestras»;
+    - «en las esquinas salientes colocamos guardavivos»;
+    - «donde se juntan materiales distintos colocamos malla de fibra de vidrio»;
+    - «si la pared está muy desplomada, te explicamos antes cómo corregirla».
+  - Reformas: el orden de obra dice que las tuberías se prueban a la vista antes de taparlas y que la ducha se impermeabiliza antes de alicatar (también en «Cocinas y baños»). Además, si hay que quitar una pared, primero se comprueba si es de carga.
   - Grietas: «si una grieta pudiera tener origen estructural […] si lo vemos, te lo diremos» (Servicios y FAQ).
 - **«Empresa familiar»** (inicio y «Quiénes somos») y que el fundador **creó la empresa en 2012** (inicio).
-- **Propiedades del yeso** en Servicios: material **incombustible** que **ayuda a regular la humedad**. En el yeso proyectado, «menos días de obra» y «el mismo espesor en toda la pared». Son propiedades generales del material y de la técnica, sin cifras.
+- **Propiedades del yeso** en Servicios: material **incombustible (Euroclase A1)** que **ayuda a regular la humedad** (absorbe la humedad que sobra en el ambiente y la devuelve cuando el aire está seco), según el manual de ATEDY. Del yeso proyectado se dice:
+  - «menos días de obra»;
+  - «sin empalmes» (cada pared de una sola vez, sin empalmes entre amasadas) y «acabado homogéneo»;
+  - un grosor de «normalmente entre 1 y 2 cm».
+
+  El guarnecido lleva «de 1 a 2 cm» y el yeso «admite unos 2 cm por capa». Son datos generales de la técnica.
 - **«Sin compromiso»**: aparece en la portada, en el bloque final de contacto y en Contacto («Pedir presupuesto no te compromete a nada»). Pedir presupuesto nunca obliga a contratar, pero confirma que estáis cómodos con la expresión.
 - **No se afirma** a propósito: presupuesto gratuito, cerrado o por escrito, garantía por escrito, plazo de respuesta, horario ni precios. Si alguno es cierto, añadirlo refuerza mucho la confianza. Por ejemplo:
   - «Presupuesto por escrito»;
@@ -401,6 +448,16 @@ Los textos se han redactado a partir de la información facilitada. Antes de pub
 - **Foto principal**: que la persona que aparece está de acuerdo en salir en la web. Su texto alternativo dice «Yesista de Rafael Maderas S.L. en plena obra…», sin nombre. Si se quiere, puede decir quién es (por ejemplo, el fundador), en /admin → «Fotos de la web».
 
 Servicios que se pueden añadir si se confirman: escayola, placa de yeso laminado, falsos techos, molduras, aislamiento, pintura como servicio propio. El objeto social inscrito incluye además **enfoscados, revestimientos exteriores e interiores y decoración** en yeso y escayola, a mano o proyectado; anúncialos solo si se hacen hoy en día.
+
+Otros datos útiles para el cliente, si se confirman:
+- **Contenedor y escombros**: «nos encargamos del contenedor, con su permiso municipal, y de llevar los escombros a un gestor autorizado».
+- **Permisos**: «te ayudamos a preparar la declaración responsable».
+- **IVA del 10 %** en reformas de vivienda (Ley del IVA, art. 91.Uno.2.10º). Se aplica si se cumplen tres condiciones:
+  - el cliente es un particular y la vivienda es para su uso;
+  - la vivienda se construyó o rehabilitó hace más de dos años;
+  - los materiales que aporta la empresa no superan el 40 % de la base imponible.
+
+  Desde el 1 de diciembre de 2026 (Real Decreto-ley 26/2026, pendiente de convalidación) se exige además pagar por tarjeta, transferencia, cheque nominativo o ingreso en cuenta. Confírmalo con la asesoría antes de publicarlo.
 
 ---
 

@@ -1,13 +1,13 @@
 {
   "hero_yeso": {
     "foto": "principal.jpg",
-    "alt": "Yesista de Rafael Maderas S.L. en plena obra, con la ropa y las manos manchadas de yeso y una regla de obra apoyada a su lado",
+    "alt": "Yesista de Rafael Maderas S.L. en plena obra, con la ropa y los guantes manchados de yeso y una regla de madera apoyada a su lado",
     "ilustrativa": false,
     "encuadre": "arriba"
   },
   "reforma_interior": {
     "foto": "reforma-interior.jpg",
-    "alt": "Cocina en plena reforma con los muebles protegidos con plástico y una escalera de obra",
+    "alt": "Cocina en plena reforma con los muebles cubiertos con plástico, protecciones de cartón y una escalera de tijera",
     "ilustrativa": true,
     "credito": {
       "autor": "immo RENOVATION",
@@ -20,7 +20,7 @@
   },
   "albanileria": {
     "foto": "albanileria.jpg",
-    "alt": "Manos colocando mortero con una paleta sobre un muro de bloques",
+    "alt": "Albañil extendiendo mortero con la paleta sobre un muro de bloques de hormigón",
     "ilustrativa": true,
     "credito": {
       "autor": "Solømen",
@@ -33,7 +33,7 @@
   },
   "alicatado": {
     "foto": "alicatado.jpg",
-    "alt": "Mano colocando un azulejo blanco sobre adhesivo peinado en una pared",
+    "alt": "Mano colocando un azulejo blanco sobre cemento cola peinado, con crucetas para marcar la junta",
     "ilustrativa": true,
     "credito": {
       "autor": "charlesdeluvio",
@@ -59,7 +59,7 @@
   },
   "herramientas": {
     "foto": "herramientas.jpg",
-    "alt": "Llanas, paletas y otras herramientas de albañil dentro de un cubo y una carretilla",
+    "alt": "Paletas y otras herramientas de albañil dentro de un cubo y en una carretilla",
     "ilustrativa": true,
     "credito": {
       "autor": "Annie Spratt",
