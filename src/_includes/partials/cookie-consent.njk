@@ -1,38 +1,26 @@
 {#-
-  Panel de consentimiento de cookies.
-  Solo se incluye si site.cookieConsent.enabled es true (ver README).
-  Los tres botones principales tienen el mismo peso visual, como exige la
-  Guía sobre el uso de las cookies de la AEPD.
+  Aviso de cookies (primera capa). Solo se incluye si site.cookieConsent.enabled, es
+  decir, si hay ID de Google Analytics en /admin (ver README → «Cookies y consentimiento»).
+  Sigue la Guía sobre el uso de las cookies de la AEPD (actualizada en mayo de 2024):
+  - Aparece antes de instalar ninguna cookie no técnica y sigue visible hasta que se elige.
+  - Identifica a la empresa, la finalidad y el proveedor, dice cómo cambiar la elección y
+    enlaza con la política de cookies (segunda capa).
+  - «Rechazar» y «Aceptar» están en la misma capa, con el mismo diseño, tamaño y color.
+  - Con una sola finalidad (analítica) no hay panel de configuración, como recomienda la
+    AEPD. Si se añade otra finalidad (publicidad…), habrá que incluir uno.
+  Va al principio de <body> para que el teclado y los lectores de pantalla lo encuentren
+  primero, aunque se vea fijo en la parte inferior. data-nosnippet evita que Google use
+  este texto en los resultados de búsqueda.
 -#}
-<section class="consent" role="dialog" aria-modal="false" aria-labelledby="consent-titulo" data-consent data-storage-key="{{ site.cookieConsent.storageKey }}" hidden>
-  <h2 id="consent-titulo">Cookies en esta web</h2>
-  <p>
-    Usamos cookies técnicas necesarias para que la web funcione y, solo si nos das permiso, cookies de
-    {% for c in site.cookieConsent.categories %}{{ c.label | lower }}{% if not loop.last %}{% if loop.revindex == 2 %} y {% else %}, {% endif %}{% endif %}{% endfor %}.
-    Puedes aceptarlas, rechazarlas o elegir cuáles permites, y cambiar de opinión cuando quieras desde el enlace «Configurar cookies» del pie de página.
-    Más información en la <a href="/politica-de-cookies/">Política de cookies</a>.
-  </p>
-  <form data-consent-form>
-    <fieldset class="consent__options" data-consent-options hidden>
-      <legend class="visually-hidden">Categorías de cookies</legend>
-      <label class="consent__option">
-        <input type="checkbox" checked disabled>
-        <span><strong>Técnicas (siempre activas)</strong><span>Necesarias para el funcionamiento básico de la web y para recordar tu elección sobre cookies.</span></span>
-      </label>
-      {%- for c in site.cookieConsent.categories %}
-      <label class="consent__option">
-        <input type="checkbox" name="{{ c.id }}" data-consent-category="{{ c.id }}">
-        <span><strong>{{ c.label }}</strong><span>{{ c.description }}</span></span>
-      </label>
-      {%- endfor %}
-    </fieldset>
-    <div class="consent__actions">
-      <button type="button" class="btn btn--outline btn--sm" data-consent-reject>Rechazar</button>
-      <button type="button" class="btn btn--outline btn--sm" data-consent-configure aria-expanded="false">Configurar</button>
-      <button type="button" class="btn btn--outline btn--sm" data-consent-accept>Aceptar</button>
-    </div>
-    <p class="consent__save" data-consent-save-wrap hidden>
-      <button type="submit" class="btn btn--primary btn--sm">Guardar mi selección</button>
-    </p>
-  </form>
+<section class="consent" aria-labelledby="consent-titulo" data-consent-panel data-nosnippet data-storage-key="{{ site.cookieConsent.storageKey }}" data-version="{{ site.cookieConsent.version }}" data-max-age-days="{{ site.cookieConsent.maxAgeDays }}" data-categories="{{ site.cookieConsent.categories | join(' ', 'id') }}"{% for c in site.cookieConsent.categories %} data-purge-{{ c.id }}="{{ c.purge | join(' ') }}"{% endfor %}>
+  <h2 class="consent__title" id="consent-titulo">Cookies de analítica</h2>
+  <p>En {{ site.name }} queremos usar, con tu permiso, cookies de <strong>Google Analytics</strong> (un servicio de Google) para saber cuántas personas visitan la web, qué páginas consultan y cuántas nos contactan, y así mejorarla. <strong>No las usamos para publicidad.</strong></p>
+  <p>Puedes cambiar tu elección cuando quieras en «Configurar cookies», al pie de la página. Más información en la <a href="/politica-de-cookies/">política de cookies</a>.</p>
+  <p class="consent__current" data-consent-current hidden></p>
+  <div class="consent__actions">
+    <button type="button" class="btn btn--primary btn--sm" data-consent-choice="reject">Rechazar</button>
+    <button type="button" class="btn btn--primary btn--sm" data-consent-choice="accept">Aceptar</button>
+  </div>
+  <p class="consent__close" data-consent-close-wrap hidden><button type="button" class="link-button" data-consent-close>Cerrar sin cambiar nada</button></p>
 </section>
+<p class="visually-hidden" role="status" data-consent-status></p>

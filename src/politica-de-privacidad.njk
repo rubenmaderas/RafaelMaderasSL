@@ -17,7 +17,11 @@ breadcrumb: "Política de privacidad"
 </ul>
 
 <h2>2. Qué datos se tratan</h2>
+{%- if not site.cookieConsent.enabled %}
 <p>Esta web <strong>no tiene formularios</strong>, no permite registrarse y no usa herramientas de analítica ni de publicidad. Solo se tratan los datos que tú facilitas al contactar por teléfono, WhatsApp o correo electrónico:</p>
+{%- else %}
+<p>Esta web <strong>no tiene formularios</strong>, no permite registrarse y no usa herramientas de publicidad. Se tratan los datos que tú facilitas al contactar por teléfono, WhatsApp o correo electrónico:</p>
+{%- endif %}
 <ul>
   <li>Datos de contacto: nombre, número de teléfono y dirección de correo electrónico.</li>
   <li>Datos de la obra: localidad o dirección, descripción del trabajo y fotografías o medidas que decidas enviar.</li>
@@ -25,6 +29,9 @@ breadcrumb: "Política de privacidad"
 </ul>
 <p>Te pedimos que no incluyas en tus mensajes o fotografías datos que no sean necesarios, en especial datos de otras personas.</p>
 <p>Además, el proveedor de alojamiento puede registrar datos técnicos de la navegación (como la dirección IP, la fecha y la página solicitada) con fines de seguridad y funcionamiento del servidor.</p>
+{%- if site.cookieConsent.enabled %}
+<p><strong>Solo si aceptas las cookies de analítica</strong>, Google Analytics recoge datos estadísticos de tu visita: páginas consultadas, tipo de dispositivo y navegador, ciudad o región aproximada y clics en los botones de contacto, asociados a un identificador aleatorio guardado en una cookie. Se explica en detalle en la <a href="/politica-de-cookies/">política de cookies</a>.</p>
+{%- endif %}
 
 <h2>3. Finalidades y base jurídica</h2>
 <div class="table-scroll">
@@ -50,6 +57,12 @@ breadcrumb: "Política de privacidad"
         <td>Mantener la seguridad y el funcionamiento técnico de la web.</td>
         <td>Interés legítimo en proteger la web y el servidor (art. 6.1.f RGPD).</td>
       </tr>
+      {%- if site.cookieConsent.enabled %}
+      <tr>
+        <td>Medir de forma estadística el uso de la web con Google Analytics, para mejorarla.</td>
+        <td>Tu consentimiento (art. 6.1.a RGPD y art. 22.2 LSSI-CE), que puedes retirar cuando quieras en «Configurar cookies».</td>
+      </tr>
+      {%- endif %}
     </tbody>
   </table>
 </div>
@@ -57,6 +70,9 @@ breadcrumb: "Política de privacidad"
 
 <h2>4. Plazo de conservación</h2>
 <p>Los datos de las consultas que no terminan en un encargo se conservan solo el tiempo necesario para atenderlas y después se eliminan. Los datos de clientes se conservan mientras dura la relación y, después, durante los plazos que exige la ley (por ejemplo, la normativa mercantil y tributaria).</p>
+{%- if site.cookieConsent.enabled %}
+<p>Los datos de analítica se conservan en Google Analytics un máximo de 14 meses desde tu última visita; después solo quedan estadísticas agregadas. Tu elección sobre las cookies se recuerda 12 meses.</p>
+{%- endif %}
 
 <h2>5. Destinatarios y proveedores</h2>
 <p>Tus datos no se ceden a terceros, salvo obligación legal. Para prestar el servicio intervienen algunos proveedores, que tratan los datos únicamente según sus condiciones y con las garantías del RGPD:</p>
@@ -64,6 +80,9 @@ breadcrumb: "Política de privacidad"
   <li><strong>Alojamiento web:</strong> {{ site.legal.hosting | legalValue | safe }}</li>
   <li><strong>Correo electrónico:</strong> Microsoft (servicio de correo Outlook/Hotmail), si contactas por correo.</li>
   <li><strong>WhatsApp:</strong> si eliges contactar por WhatsApp, el servicio lo presta WhatsApp Ireland Limited (grupo Meta), que trata los datos según sus propias condiciones y política de privacidad.</li>
+  {%- if site.cookieConsent.enabled %}
+  <li><strong>Analítica web:</strong> Google Ireland Limited (Google Analytics), como encargado del tratamiento, solo si aceptas las cookies de analítica.</li>
+  {%- endif %}
 </ul>
 <p>Si trabajamos con otros profesionales en tu obra (por ejemplo, electricistas o fontaneros), solo se les facilitan los datos imprescindibles para realizar su parte del trabajo, como la dirección de la obra.</p>
 
@@ -72,6 +91,9 @@ breadcrumb: "Política de privacidad"
 
 <h2>7. Tus derechos</h2>
 <p>Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad. Para ello, escribe a la dirección indicada en el apartado 1 indicando el derecho que quieres ejercer. Podemos pedirte que acredites tu identidad si hay dudas razonables sobre ella.</p>
+{%- if site.cookieConsent.enabled %}
+<p>Si aceptaste las cookies de analítica, puedes <strong>retirar tu consentimiento</strong> en cualquier momento desde «Configurar cookies», al pie de cada página. La retirada no afecta a la licitud del tratamiento anterior.</p>
+{%- endif %}
 <p>Si consideras que no se han atendido correctamente tus derechos, puedes presentar una reclamación ante la <a href="https://www.aepd.es/" rel="noopener">Agencia Española de Protección de Datos</a>.</p>
 
 <h2>8. Seguridad</h2>

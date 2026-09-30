@@ -5,7 +5,7 @@ import Image from "@11ty/eleventy-img";
 import * as esbuild from "esbuild";
 import { clearContentCache } from "./src/_lib/content.js";
 import { getImages } from "./src/_lib/data.js";
-import { COOKIE_CONSENT, PENDING_MARK, SITE_URL } from "./src/_lib/site.js";
+import { getSite, PENDING_MARK, SITE_URL } from "./src/_lib/site.js";
 import {
   applyTokens,
   renderHighlight,
@@ -18,15 +18,18 @@ import {
 const JS_SOURCES = {
   "/assets/js/main.js": "src/assets/js/main.js",
   "/assets/js/consent.js": "src/assets/js/consent.js",
+  "/assets/js/analytics.js": "src/assets/js/analytics.js",
   "/admin/cms.js": "src/admin/cms.js",
 };
 
 // CSS: se minifica y se incrusta en cada página (<style>) para no bloquear el renderizado.
-// Los estilos del aviso de cookies solo se añaden si está activado en src/_lib/site.js.
-const CSS_SOURCES = [
-  "src/assets/css/main.css",
-  ...(COOKIE_CONSENT.enabled ? ["src/assets/css/consent.css"] : []),
-];
+// Los estilos del aviso de cookies solo se añaden si el aviso está activo (src/_lib/site.js).
+function cssSources() {
+  return [
+    "src/assets/css/main.css",
+    ...(getSite().cookieConsent.enabled ? ["src/assets/css/consent.css"] : []),
+  ];
+}
 
 // La fuente no se versiona para que la URL del <link rel="preload"> coincida con la del CSS.
 // Si se cambia la fuente, renombra el archivo de destino.
@@ -46,9 +49,10 @@ function fileHash(file) {
 // CSS minificado (se recalcula solo si cambia algún archivo fuente).
 let cssCache = { key: "", promise: null };
 function getInlineCss() {
-  const key = CSS_SOURCES.map((file) => `${file}:${fs.statSync(file).mtimeMs}`).join("|");
+  const sources = cssSources();
+  const key = sources.map((file) => `${file}:${fs.statSync(file).mtimeMs}`).join("|");
   if (cssCache.key !== key) {
-    const source = CSS_SOURCES.map((file) => fs.readFileSync(file, "utf8")).join("\n");
+    const source = sources.map((file) => fs.readFileSync(file, "utf8")).join("\n");
     const promise = esbuild
       .transform(source, { loader: "css", minify: true })
       .then(({ code }) => {
@@ -59,6 +63,36 @@ function getInlineCss() {
   }
   return cssCache.promise;
 }
+
+/*
+ * Único script en línea, que se ejecuta antes de pintar la página (su hash va en la CSP):
+ * - marca que hay JavaScript, para evitar saltos de maquetación en el menú móvil;
+ * - con el aviso de cookies activo, lo muestra desde el primer pintado si el visitante
+ *   aún no ha decidido (o su decisión caducó o cambiaron las finalidades), sin esperar a
+ *   consent.js y sin que parpadee a quien ya eligió. consent.js hace la comprobación completa.
+ */
+function inlineScript() {
+  const { enabled, storageKey, version, maxAgeDays } = getSite().cookieConsent;
+  if (!enabled) return "document.documentElement.classList.add('js')";
+  return (
+    "(function(d){d.classList.add('js');" +
+    `try{var s=JSON.parse(localStorage.getItem(${JSON.stringify(storageKey)}));` +
+    `if(s&&s.version===${JSON.stringify(version)}&&Date.now()-s.timestamp<${maxAgeDays * 864e5})return}catch(e){}` +
+    "d.classList.add('consent-pending')})(document.documentElement)"
+  );
+}
+
+/*
+ * Google Analytics 4 sin funciones publicitarias: dominios que indica Google para la CSP
+ * (https://developers.google.com/tag-platform/security/guides/csp). Solo se añaden si hay
+ * ID de medición, y aun así el script de Google no se descarga hasta que el visitante acepta.
+ */
+const GA_CSP = {
+  script: ["https://www.googletagmanager.com"],
+  img: ["https://www.googletagmanager.com", "https://*.google-analytics.com"],
+  connect: ["https://www.googletagmanager.com", "https://*.google-analytics.com", "https://*.google.com"],
+};
+const NO_EXTRA_CSP = { script: [], img: [], connect: [] };
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
@@ -140,11 +174,8 @@ export default function (eleventyConfig) {
   // Fecha de cada página = última modificación de su archivo fuente (lastmod del sitemap).
   eleventyConfig.addGlobalData("date", "Last Modified");
 
-  // Único script en línea: marca que JS está disponible antes de pintar (evita saltos
-  // de maquetación en el menú móvil). Su hash va en la CSP de cada página.
-  const inlineScript = "document.documentElement.classList.add('js')";
-  const inlineScriptHash = cspHash(inlineScript);
-  eleventyConfig.addGlobalData("inlineScript", { code: inlineScript, hash: inlineScriptHash });
+  // Script en línea (ver inlineScript() más arriba): {% inlineScript %}
+  eleventyConfig.addShortcode("inlineScript", () => `<script>${inlineScript()}</script>`);
 
   // Hoja de estilos minificada e incrustada: {% inlineCss %}
   eleventyConfig.addAsyncShortcode("inlineCss", async () => {
@@ -161,24 +192,22 @@ export default function (eleventyConfig) {
    *   la web, para _headers (Netlify/Cloudflare) y .htaccess (Apache). Es deliberadamente
    *   corta porque también se aplica a /admin/, que define su propia política en <meta>
    *   (el gestor de contenidos necesita permisos distintos; ver src/admin/index.njk).
-   * Si se añaden servicios de terceros (analítica, mapas, vídeos…), amplía CSP_SOURCES.
+   * Si se añaden otros servicios de terceros (mapas, vídeos…), amplía la política igual
+   * que GA_CSP. Los dominios de Google Analytics se añaden solos cuando está activado.
    */
-  const CSP_SOURCES = [
-    "img-src 'self' data:",
-    "font-src 'self'",
-    "connect-src 'self'",
-    "object-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-  ];
-
   eleventyConfig.addAsyncShortcode("cspMeta", async () => {
     const { hash: inlineCssHash } = await getInlineCss();
+    const extra = getSite().analytics.gaId ? GA_CSP : NO_EXTRA_CSP;
     const policy = [
       "default-src 'self'",
-      `script-src 'self' '${inlineScriptHash}'`,
+      ["script-src 'self'", `'${cspHash(inlineScript())}'`, ...extra.script].join(" "),
       `style-src 'self' '${inlineCssHash}'`,
-      ...CSP_SOURCES,
+      ["img-src 'self' data:", ...extra.img].join(" "),
+      "font-src 'self'",
+      ["connect-src 'self'", ...extra.connect].join(" "),
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
     ].join("; ");
     return `<meta http-equiv="Content-Security-Policy" content="${policy}">`;
   });

@@ -651,3 +651,19 @@ collections:
             fields:
               - {label: Nombre, name: nombre, widget: string}
               - {label: "Dirección (https://…)", name: url, widget: string, required: false, pattern: ['^(https://\S+)?$', "Escribe la dirección completa, empezando por https://"]}
+          - label: Analítica web (Google Analytics)
+            name: analitica
+            widget: object
+            collapsed: true
+            hint: >-
+              Opcional. Vacío, la web no usa cookies y no muestra ningún aviso. Con un ID, aparece el
+              aviso de cookies y Google Analytics solo se carga si el visitante pulsa «Aceptar».
+              Lee antes el README (apartado «Cookies y consentimiento») y cambia la fecha de
+              «Datos legales → Fecha de última actualización», porque los textos legales cambian solos.
+            fields:
+              - label: ID de medición de Google Analytics 4
+                name: googleAnalytics
+                widget: string
+                required: false
+                pattern: ['^([Gg]-[A-Za-z0-9]{4,20})?$', "Pega el ID de medición tal cual aparece en Google Analytics: empieza por G- (por ejemplo, G-AB12CD34EF)."]
+                hint: "Está en Google Analytics → Administrar → Flujos de datos → tu web → «ID de medición». Borra el ID para desactivar la analítica y el aviso."

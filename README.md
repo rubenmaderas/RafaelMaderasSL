@@ -2,7 +2,7 @@
 
 Web estática para **Rafael Maderas S.L.**: trabajos de yeso (actividad principal) y reformas con gremios coordinados en Jaén capital, la provincia de Jaén y el resto de Andalucía.
 
-Está hecha con [Eleventy 3](https://www.11ty.dev/), que genera HTML estático sin frameworks en el navegador. Las imágenes se optimizan al compilar (AVIF, WebP y JPEG con `srcset` y dimensiones declaradas), la tipografía (Manrope) se sirve desde el propio dominio y no se carga **ningún servicio de terceros**: ni analítica, ni píxeles, ni fuentes externas.
+Está hecha con [Eleventy 3](https://www.11ty.dev/), que genera HTML estático sin frameworks en el navegador. Las imágenes se optimizan al compilar (AVIF, WebP y JPEG con `srcset` y dimensiones declaradas), la tipografía (Manrope) se sirve desde el propio dominio y no se carga **ningún servicio de terceros**: ni píxeles, ni fuentes externas. La única excepción es opcional: **Google Analytics**, que se activa desde el gestor y solo se carga si el visitante lo acepta en el aviso de cookies (ver [Cookies y consentimiento](#cookies-y-consentimiento)).
 
 Los textos, las fotos y los datos de la empresa se editan **sin tocar código** desde el gestor de contenidos en **`/admin`** (usuario y contraseña). Ver [Gestor de contenidos](#gestor-de-contenidos-admin).
 
@@ -59,7 +59,7 @@ src/
     navigation.js         Menú principal
     structuredData.js     Datos estructurados JSON-LD (GeneralContractor, etc.)
   _lib/
-    site.js               Dominio, ajustes técnicos (cookies) y datos derivados (enlaces, años de oficio…)
+    site.js               Dominio, ajustes técnicos (cookies y analítica) y datos derivados (enlaces, años de oficio…)
     content.js · data.js · text.js   Lectura y validación del contenido, comodines y formato
   admin/
     index.njk             Página del gestor (/admin/), con su propia CSP
@@ -71,9 +71,10 @@ src/
     macros/icons.njk      Iconos SVG en línea
   assets/
     css/main.css          Estilos (paleta y tipografía en variables al principio)
-    css/consent.css       Estilos del aviso de cookies (solo si está activado)
+    css/consent.css       Estilos del aviso de cookies (solo si Google Analytics está activado)
     js/main.js            Menú móvil y barra de contacto móvil
-    js/consent.js         Gestor de consentimiento de cookies (desactivado)
+    js/consent.js         Aviso de cookies y consentimiento (solo si Google Analytics está activado)
+    js/analytics.js       Google Analytics 4 (solo se ejecuta si el visitante acepta las cookies)
     img/originals/        ★ Fotos originales (se optimizan al compilar; el gestor sube aquí las nuevas)
     img/og/               Imagen para redes sociales (1200×630)
     favicon.svg · apple-touch-icon.png
@@ -239,7 +240,7 @@ Están **todos completos** y se guardan en `src/_data/contenido/empresa.json`. L
 | Última actualización (`ultimaActualizacion`) | 30 de septiembre de 2026 | Las tres páginas legales |
 
 - **Redes sociales:** se ha decidido no publicar ninguna. El aviso legal solo muestra el apartado de perfiles si alguna red tiene URL.
-- **Cookies:** la política de cookies indica que la web no instala ninguna para los visitantes. Netlify no añade cookies a un sitio estático como este; compruébalo tras publicar en DevTools → Application → Cookies. La única excepción es el acceso a **/admin**: Netlify Identity guarda una cookie técnica de sesión (`nf_jwt`) y la sesión en el almacenamiento local, solo a quien inicia sesión. Ya figura en la política. Si se activan otras funciones de Netlify que usen cookies (pruebas A/B…), hay que añadirlas a `src/politica-de-cookies.njk`.
+- **Cookies:** mientras no se active Google Analytics, la política de cookies indica que la web no instala ninguna para los visitantes. Netlify no añade cookies a un sitio estático como este; compruébalo tras publicar en DevTools → Application → Cookies. La única excepción es el acceso a **/admin**: Netlify Identity guarda una cookie técnica de sesión (`nf_jwt`) y la sesión en el almacenamiento local, solo a quien inicia sesión. Ya figura en la política. Si se activa Google Analytics, las políticas de cookies y de privacidad se completan solas (ver [Cookies y consentimiento](#cookies-y-consentimiento)). Si se activan otras funciones de Netlify que usen cookies (pruebas A/B…), hay que añadirlas a `src/politica-de-cookies.njk`.
 - **Aviso «Texto provisional»:** ya no aparece porque no queda ningún `PENDIENTE`. Vuelve a salir solo si se vacía algún dato legal.
 
 Aun así, **pide a una gestoría o asesoría que revise los textos** y actualiza la fecha de «Última actualización» cada vez que cambien. Son una base de trabajo, no asesoramiento jurídico.
@@ -319,14 +320,14 @@ La carpeta que se publica es **`_site/`** (se genera con `npm run build`). Inclu
 ### Rendimiento, seguridad y caché
 - **CSS:** se minifica al compilar y se incrusta en cada página (`<style>`). Así no hay ninguna petición que bloquee el primer pintado. Edita siempre `src/assets/css/main.css`; el resultado minificado se genera solo.
 - **JavaScript:** se publica minificado, con `defer` y `?v=hash` para invalidar la caché cuando cambia.
-- **Content-Security-Policy estricta** (solo recursos propios), en dos partes:
+- **Content-Security-Policy estricta** (solo recursos propios y, si se activa Google Analytics, sus dominios), en dos partes:
   - Cada página lleva en `<meta http-equiv="Content-Security-Policy">` la política completa, con los hashes de su script y su CSS en línea. Viaja con el propio HTML, así que nunca queda desfasada aunque se suba la web sin el `.htaccess` actualizado.
   - `_headers` y `.htaccess` envían la parte que no cambia, más lo que un `<meta>` no admite (`frame-ancestors`, protección contra *clickjacking*).
 - **Otras cabeceras:** `nosniff`, `X-Frame-Options`, `Referrer-Policy` y `Permissions-Policy`.
 - **Caché:** los recursos de `/assets/` (JS versionado, imágenes con hash en el nombre y fuente) se cachean un año; el HTML se revalida siempre.
 - **Compresión:** la aplican automáticamente Netlify y Cloudflare, y en Apache el bloque `mod_deflate` de `.htaccess`.
 
-La CSP se define en `eleventy.config.js`. Allí están `CSP_SOURCES` (directivas comunes), el shortcode `cspMeta` (política de cada página) y `cspHeader` (cabecera). El gestor **/admin** tiene su propia política en `src/admin/index.njk`, más permisiva porque Decap CMS la necesita (`'unsafe-eval'` y estilos en línea). No afecta a la web pública. Además, /admin se envía con `noindex` y está excluido en `robots.txt` y en el sitemap.
+La CSP se define en `eleventy.config.js`. Allí están el shortcode `cspMeta` (política de cada página), `GA_CSP` (dominios de Google Analytics, que solo se añaden si hay ID de medición) y `cspHeader` (cabecera). El gestor **/admin** tiene su propia política en `src/admin/index.njk`, más permisiva porque Decap CMS la necesita (`'unsafe-eval'` y estilos en línea). No afecta a la web pública. Además, /admin se envía con `noindex` y está excluido en `robots.txt` y en el sitemap.
 
 ### Animaciones
 
@@ -349,19 +350,47 @@ Las animaciones usan solo `opacity` y `transform` (no desplazan el diseño, CLS 
 
 ## Cookies y consentimiento
 
-Ahora mismo la web **no usa cookies ni almacenamiento propio** para los visitantes y no conecta con terceros. Por eso **no se muestra ningún banner**: sería engañoso pedir consentimiento para algo que no existe. (La única cookie es la técnica de sesión de /admin, solo para quien edita la web; está exenta de consentimiento y figura en la política de cookies.)
+La web está preparada para usar **Google Analytics 4** con un aviso de cookies según la [Guía sobre el uso de las cookies de la AEPD](https://www.aepd.es/guias/guia-cookies.pdf) (edición de mayo de 2024). Se activa o se desactiva desde el gestor, sin tocar código:
 
-Hay un gestor de consentimiento **preparado pero desactivado**: `src/assets/js/consent.js` y `src/_includes/partials/cookie-consent.njk`. Tiene tres botones al mismo nivel (Rechazar / Configurar / Aceptar), categorías desmarcadas por defecto, consentimiento revocable desde «Configurar cookies» en el pie y en la política de cookies, y caducidad de 12 meses. Si en el futuro se añade analítica o publicidad:
+| ID de Google Analytics en /admin | Qué ocurre |
+|---|---|
+| Vacío (así está ahora) | La web **no usa cookies ni conecta con terceros** para los visitantes, así que **no se muestra ningún aviso**: sería engañoso pedir consentimiento para algo que no existe. Las políticas lo explican así. |
+| `G-…` | Aparece el aviso de cookies y Google Analytics **solo se carga si el visitante pulsa «Aceptar»**. Las políticas de cookies y de privacidad añaden solas la información de Google Analytics, y la CSP, sus dominios. |
 
-1. En `src/_lib/site.js`, pon `COOKIE_CONSENT.enabled: true` y ajusta las categorías. Los estilos del aviso (`consent.css`) y su script se incluyen automáticamente, y el hash del CSS en la CSP se actualiza solo.
-2. Inserta los scripts de terceros **bloqueados** hasta que haya consentimiento:
-   ```html
-   <script type="text/plain" data-consent="analytics" data-src="https://proveedor.example/script.js"></script>
-   ```
-3. Amplía la CSP en `eleventy.config.js` con los dominios del proveedor: `connect-src` e `img-src` en `CSP_SOURCES`, y `script-src` en el shortcode `cspMeta`. Si el proveedor necesita código en línea, añade su hash o muévelo a un archivo `.js` propio.
-4. Actualiza `src/politica-de-cookies.njk` con cada cookie (nombre, titular, finalidad y duración) y la política de privacidad si hay nuevos destinatarios.
+La cookie técnica de sesión de /admin (solo para quien edita la web) está exenta de consentimiento y figura en la política de cookies en los dos casos.
 
-Como alternativa, existen herramientas de analítica sin cookies que pueden evitar el banner. Consúltalo antes con quien revise los textos legales.
+### Cómo funciona el aviso
+- **Qué dice:** quién usa las cookies, para qué (analítica, no publicidad), que son de un tercero (Google), cómo cambiar de opinión y el enlace a la política de cookies.
+- **«Rechazar» y «Aceptar» son iguales** y están juntos. No hay casillas marcadas de antemano, y seguir navegando no cuenta como aceptar. No bloquea la web: se puede navegar sin elegir, y entonces no se instala nada.
+- **Sin panel de configuración:** con una sola finalidad, basta con aceptar o rechazar. Si algún día se añade otra (publicidad, vídeos, mapas…), habrá que añadir un panel por categorías y nuevos textos.
+- **Nada antes de aceptar:** sin elección, o tras rechazar, el script de Google ni siquiera se descarga. Se usa el modo de consentimiento de Google «básico», con los permisos publicitarios siempre denegados, Google Signals y la personalización de anuncios desactivados, y cookies de 1 año en lugar de 2.
+- **Retirar el consentimiento es igual de fácil:** botón «Configurar cookies» en el pie de todas las páginas y en la política de cookies. Al retirarlo se borran las cookies de Google Analytics y la página se recarga sin él.
+- **La elección se recuerda 12 meses** en el almacenamiento local del navegador (`rm-consent`, técnico y exento). Pasado ese plazo, o si cambian las finalidades o el proveedor, se vuelve a preguntar automáticamente: la versión se calcula sola en `src/_lib/site.js`.
+- **Accesible y ligero:** se maneja con teclado y anuncia la elección a los lectores de pantalla. En móvil oculta la barra de contacto mientras está abierto. Aparece desde el primer pintado, sin parpadeos para quien ya eligió, y mantiene Lighthouse en 100.
+- **Clics de contacto:** con la analítica aceptada, se registran como eventos `clic_telefono`, `clic_whatsapp` y `clic_correo`, con el parámetro `ubicacion` (`cabecera`, `barra_movil`, `pie` o `contenido`). No se envía el número, el correo ni el mensaje.
+
+### Cómo activar Google Analytics
+1. En [analytics.google.com](https://analytics.google.com/), crea una cuenta y una propiedad de Google Analytics 4 (zona horaria de España, moneda euro) y un **flujo de datos web** para `https://rafaelmaderas.es`. Copia el **ID de medición** (`G-…`).
+2. Antes de activarlo, en **Administrar**:
+   - **Retención de datos:** 14 meses (es lo que indican las políticas).
+   - **Google Signals:** desactivado.
+   - **Configuración de uso compartido de datos** (en la cuenta): desactiva «Productos y servicios de Google». Así Google trata los datos solo como encargado del tratamiento, como dicen las políticas.
+   - Acepta las condiciones de tratamiento de datos si Analytics te lo pide.
+3. En **/admin → Datos de la empresa → Analítica web**, pega el ID. En la misma pantalla, cambia **Datos legales → Fecha de última actualización**, porque los textos legales cambian. Publica.
+4. Cuando Netlify termine de publicar, compruébalo en una ventana de incógnito (DevTools → pestañas Network y Application → Cookies):
+   - Antes de elegir y tras «Rechazar»: ninguna petición a `googletagmanager.com` ni a `google-analytics.com`, y ninguna cookie `_ga`.
+   - Tras «Aceptar»: aparecen las cookies `_ga` y `_ga_…`, y tu visita en Analytics → Informes → Tiempo real.
+5. En Analytics → Administrar → Eventos, marca `clic_telefono`, `clic_whatsapp` y `clic_correo` como **eventos clave**: son los contactos que genera la web. Opcional: registra `ubicacion` como dimensión personalizada (ámbito «Evento») para saber desde qué botón llaman.
+6. Opcional: vincula Search Console con Analytics (Administrar → Vinculaciones de productos).
+7. Pide a la gestoría o asesoría que revise los textos legales con Google Analytics ya activado.
+
+**Para desactivarlo**, borra el ID en el gestor y actualiza la fecha de los textos legales: desaparecen el aviso, los scripts, los dominios de Google en la CSP y la información de Google Analytics de las políticas. Las cookies `_ga` que ya tuvieran algunos visitantes dejan de usarse y caducan solas.
+
+### A tener en cuenta
+- **Prueba del consentimiento:** la elección (con su fecha y versión) se guarda solo en el navegador del visitante; una web estática no tiene servidor ni base de datos donde registrarla. Es lo habitual en webs pequeñas. Para un registro centralizado haría falta una plataforma de gestión del consentimiento (CMP).
+- **Transferencias a EE. UU.:** Google LLC está adherida al Marco de Privacidad de Datos UE-EE. UU. El Tribunal General de la UE lo avaló en septiembre de 2025 (asunto T-553/23), pero hay un recurso pendiente ante el Tribunal de Justicia (C-703/25 P). Si se anulara, habría que revisar las políticas.
+- **Alternativa:** existen herramientas de analítica sin cookies que pueden evitar el aviso. Consúltalo antes con quien revise los textos legales.
+- **Dónde está el código:** aviso en `src/_includes/partials/cookie-consent.njk`, lógica en `src/assets/js/consent.js`, estilos en `src/assets/css/consent.css`, Google Analytics en `src/assets/js/analytics.js`, cookies, duraciones y versión en `src/_lib/site.js`, y textos en `src/politica-de-cookies.njk` y `src/politica-de-privacidad.njk`.
 
 ---
 
@@ -384,6 +413,7 @@ Como alternativa, existen herramientas de analítica sin cookies que pueden evit
 4. **Reseñas reales**: pídeselas a clientes satisfechos, sin incentivos, y contéstalas. No publiques reseñas en la web que no se puedan verificar.
 5. Opcional: Bing Places / Bing Webmaster Tools, y alta en directorios locales serios con los mismos datos de nombre, dirección y teléfono.
 6. Con el tiempo, añade contenido útil y real: obras terminadas (con permiso del cliente), explicaciones de trabajos concretos o dudas frecuentes nuevas.
+7. Opcional: para saber cuántas visitas y llamadas genera la web, activa **Google Analytics** siguiendo [Cómo activar Google Analytics](#cómo-activar-google-analytics).
 
 ---
 

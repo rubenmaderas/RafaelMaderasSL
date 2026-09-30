@@ -30,5 +30,8 @@
     { "nombre": "Facebook", "url": "" },
     { "nombre": "Instagram", "url": "" },
     { "nombre": "Perfil de Empresa de Google", "url": "" }
-  ]
+  ],
+  "analitica": {
+    "googleAnalytics": ""
+  }
 }

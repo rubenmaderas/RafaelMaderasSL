@@ -1666,6 +1666,56 @@ main:focus {
   overflow-x: auto;
 }
 
+/* Tabla que en móvil se muestra como una ficha por fila (tabla de cookies). Los role="…"
+   del HTML conservan la semántica de tabla para los lectores de pantalla aunque cambie
+   el display; la etiqueta visible sale de data-label y no se lee dos veces. */
+@media (max-width: 39.99em) {
+  .table-stack,
+  .table-stack tbody,
+  .table-stack tr,
+  .table-stack td {
+    display: block;
+  }
+
+  .table-stack thead tr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .table-stack tr {
+    margin-bottom: var(--space-s);
+    border: 1px solid var(--color-sand-300);
+    border-radius: var(--radius-s);
+    overflow: hidden;
+  }
+
+  .prose .table-stack td {
+    border: 0;
+    border-top: 1px solid var(--color-sand-100);
+  }
+
+  .prose .table-stack td:first-child {
+    border-top: 0;
+    background: var(--color-sand-50);
+  }
+
+  .table-stack td[data-label]::before {
+    content: attr(data-label);
+    content: attr(data-label) / "";
+    display: block;
+    margin-bottom: 0.15rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+}
+
 .notice {
   margin-bottom: var(--space-l);
   padding: var(--space-s) var(--space-m);
@@ -1851,8 +1901,8 @@ mark.pending {
   }
 }
 
-/* Los estilos del aviso de cookies están en consent.css y solo se incluyen si
-   COOKIE_CONSENT.enabled = true en src/_lib/site.js. */
+/* Los estilos del aviso de cookies están en consent.css y solo se incluyen si el
+   aviso está activo (hay ID de Google Analytics en /admin → «Datos de la empresa»). */
 
 /* --------------------------------------------------------------------------
    Página 404

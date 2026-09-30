@@ -14,7 +14,7 @@
   <meta charset="utf-8">
   {% cspMeta %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>{{ inlineScript.code | safe }}</script>
+  {% inlineScript %}
   <title>{{ pageTitle }}</title>
   <meta name="description" content="{{ pageDescription }}">
   {%- set isErrorPage = page.url == "/404.html" %}
@@ -58,8 +58,15 @@
   {%- if site.cookieConsent.enabled %}
   <script src="{{ '/assets/js/consent.js' | asset }}" defer></script>
   {%- endif %}
+  {%- if site.analytics.gaId %}
+  {#- Bloqueado (type="text/plain") hasta que el visitante acepta la analítica: lo activa consent.js. #}
+  <script type="text/plain" data-consent="analytics" data-src="{{ '/assets/js/analytics.js' | asset }}" data-ga-id="{{ site.analytics.gaId }}" data-cookie-expires="{{ site.analytics.cookieExpires }}"></script>
+  {%- endif %}
 </head>
 <body class="{{ bodyClass }}">
+  {%- if site.cookieConsent.enabled %}
+  {% include "partials/cookie-consent.njk" %}
+  {%- endif %}
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   {% include "partials/header.njk" %}
@@ -77,9 +84,5 @@
 
   {% include "partials/footer.njk" %}
   {% include "partials/mobile-cta.njk" %}
-
-  {%- if site.cookieConsent.enabled %}
-  {% include "partials/cookie-consent.njk" %}
-  {%- endif %}
 </body>
 </html>

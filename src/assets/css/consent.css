@@ -1,83 +1,123 @@
 /* --------------------------------------------------------------------------
-   Consentimiento de cookies
-   Solo se incluye en la web si COOKIE_CONSENT.enabled = true en src/_lib/site.js.
+   Aviso de cookies
+   Solo se incluye si el aviso está activo: hay ID de Google Analytics en
+   /admin → «Datos de la empresa» (ver README → «Cookies y consentimiento»).
+   Estados, en <html>:
+   - .consent-pending: el visitante aún no ha elegido (lo pone el script en línea
+     antes de pintar, para que el aviso salga desde el primer momento).
+   - .consent-open: abierto desde «Configurar cookies».
+   Sin JavaScript no se muestra: Google Analytics no puede cargarse sin él.
    -------------------------------------------------------------------------- */
 
 .consent {
-  position: fixed;
-  left: 0.75rem;
-  right: 0.75rem;
-  bottom: calc(var(--mobile-cta-height) + 0.75rem + env(safe-area-inset-bottom));
-  z-index: 50;
-  max-width: 34rem;
-  padding: var(--space-m);
-  background: var(--color-surface);
-  border: 1px solid var(--color-sand-300);
-  border-radius: var(--radius-m);
-  box-shadow: var(--shadow-soft);
-}
-
-.consent[hidden] {
   display: none;
 }
 
-.consent h2 {
+.consent-pending .consent,
+.consent-open .consent {
+  display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  max-height: 85vh;
+  max-height: 85dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--space-m) var(--gutter) calc(var(--space-m) + env(safe-area-inset-bottom));
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-sand-300);
+  box-shadow: 0 -10px 30px -14px rgb(38 36 31 / 0.4);
+}
+
+/* Con el menú móvil abierto, el aviso se aparta para no taparlo; vuelve al cerrarlo. */
+.consent-pending:has(.site-nav.is-open) .consent {
+  display: none;
+}
+
+/* La barra de Llamar/WhatsApp se esconde mientras el aviso ocupa la parte inferior. */
+.consent-pending .mobile-cta,
+.consent-open .mobile-cta {
+  transform: translateY(110%);
+  visibility: hidden;
+}
+
+/* Sin JavaScript no hay analítica ni aviso: el botón «Configurar cookies» no haría nada. */
+:root:not(.js) [data-consent-open] {
+  display: none;
+}
+
+.consent__title {
+  margin: 0 0 0.35rem;
   font-size: var(--step-1);
 }
 
+/* Recibe el foco al abrir el aviso desde «Configurar cookies»; no es interactivo. */
+.consent__title:focus {
+  outline: none;
+}
+
 .consent p {
+  max-width: 60ch;
+  margin: 0 0 0.5rem;
   font-size: 0.95rem;
+  line-height: 1.5;
   color: var(--color-ink-soft);
+}
+
+.consent p strong {
+  color: var(--color-ink);
+}
+
+.consent .consent__current {
+  color: var(--color-ink);
+  font-weight: 700;
 }
 
 .consent__actions {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-}
-
-.consent__actions .btn {
-  padding-inline: 0.5rem;
-  font-size: 0.925rem;
-}
-
-.consent__options {
-  margin: var(--space-s) 0;
-  padding: 0;
-  border: 0;
-}
-
-.consent__option {
-  display: flex;
+  grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
-  align-items: flex-start;
-  padding: 0.6rem 0;
-  border-top: 1px solid var(--color-sand-100);
+  margin-top: 0.85rem;
 }
 
-.consent__option input {
-  flex-shrink: 0;
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-top: 0.2rem;
-  accent-color: var(--color-accent);
-}
-
-.consent__option > span > span {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--color-ink-soft);
-}
-
-.consent__save {
+.consent .consent__close {
   margin: 0.75rem 0 0;
+  text-align: center;
+}
+
+.consent__close .link-button {
+  min-height: 2.75rem;
+  padding-inline: 0.5rem;
 }
 
 @media (min-width: 48em) {
-  .consent {
+  .consent-pending .consent,
+  .consent-open .consent {
     left: auto;
     right: 1.5rem;
     bottom: 1.5rem;
+    width: min(27rem, calc(100vw - 3rem));
+    padding: var(--space-m);
+    border: 1px solid var(--color-sand-300);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Solo al abrirlo desde «Configurar cookies»: en la primera visita aparece sin
+     animación para no retrasar el primer pintado. */
+  .consent-open:not(.consent-pending) .consent {
+    animation: consent-in 0.25s ease-out;
+  }
+
+  @keyframes consent-in {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
   }
 }
 

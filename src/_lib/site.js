@@ -7,6 +7,7 @@
  * (enlaces tel: y wa.me, años de oficio, textos legales…) y se definen los
  * ajustes técnicos que no deben tocarse desde el gestor.
  */
+import crypto from "node:crypto";
 import { readContent } from "./content.js";
 
 export const PENDING_MARK = "PENDIENTE DE SUSTITUIR ANTES DE PUBLICAR";
@@ -18,25 +19,53 @@ export const DOMAIN = "rafaelmaderas.es";
 // Se puede sobrescribir con la variable de entorno SITE_URL al compilar.
 export const SITE_URL = (process.env.SITE_URL || `https://${DOMAIN}`).replace(/\/+$/, "");
 
-// Consentimiento de cookies. Mantener "enabled: false" mientras la web no use
-// cookies ni tecnologías de seguimiento no técnicas (situación actual).
-// Consulta el README antes de activarlo.
-export const COOKIE_CONSENT = {
-  enabled: false,
-  storageKey: "rm-consent-v1",
-  categories: [
-    {
-      id: "analytics",
-      label: "Analítica",
-      description: "Permiten saber cuántas personas visitan la web y qué páginas consultan.",
-    },
-    {
-      id: "marketing",
-      label: "Publicidad",
-      description: "Permiten medir campañas publicitarias y mostrar anuncios relacionados.",
-    },
-  ],
-};
+/*
+ * COOKIES Y CONSENTIMIENTO (ver README → «Cookies y consentimiento»)
+ * El aviso de cookies solo existe si la web usa algo que necesita consentimiento.
+ * Hoy eso solo ocurre con Google Analytics 4, que se activa escribiendo su ID de
+ * medición en /admin → «Datos de la empresa» → «Analítica web». Sin ID, la web no
+ * instala cookies y no muestra ningún aviso (pedir permiso para nada sería engañoso).
+ */
+export const CONSENT_STORAGE_KEY = "rm-consent";
+// La elección del visitante (aceptar o rechazar) se recuerda 12 meses; después se
+// vuelve a preguntar. La AEPD considera buena práctica no superar los 24 meses.
+export const CONSENT_MAX_AGE_DAYS = 365;
+// Duración de las cookies de Google Analytics (en su valor por defecto serían 2 años).
+export const ANALYTICS_COOKIE_DAYS = 365;
+
+const GA_ID_PATTERN = /^G-[A-Z0-9]{4,20}$/;
+
+function analyticsCategory(gaId) {
+  return {
+    id: "analytics",
+    label: "Analítica",
+    service: "Google Analytics",
+    provider: "Google Ireland Limited",
+    purpose:
+      "Saber cuántas personas visitan la web, qué páginas consultan, desde qué tipo de dispositivo y zona aproximada, y cuántas pulsan los botones de llamar, WhatsApp o correo.",
+    cookies: [
+      {
+        name: "_ga",
+        purpose: "Distingue un navegador de otro mediante un número aleatorio, para contar visitantes únicos. No contiene tu nombre ni tus datos de contacto.",
+        duration: "1 año desde la última visita",
+      },
+      {
+        name: `_ga_${gaId.slice(2)}`,
+        purpose: "Guarda el estado de la visita (sesión) para medir cuántas páginas se ven y cuánto dura.",
+        duration: "1 año desde la última visita",
+      },
+    ],
+    // Cookies que se borran si el visitante rechaza o retira el consentimiento.
+    purge: ["_ga", "_ga_*"],
+  };
+}
+
+// Versión del consentimiento: cambia sola si cambian las finalidades o los
+// proveedores, y entonces se vuelve a preguntar a todos los visitantes.
+function consentVersion(categories) {
+  const signature = JSON.stringify(categories.map((c) => [c.id, c.service, c.provider, c.purpose]));
+  return crypto.createHash("sha256").update(signature).digest("hex").slice(0, 8);
+}
 
 function fail(message) {
   throw new Error(`[empresa.json] ${message}. Corrígelo en /admin → «Datos de la empresa».`);
@@ -89,6 +118,12 @@ export function buildSite() {
   const brand = brandMatch ? { name: brandMatch[1], suffix: brandMatch[2] } : { name, suffix: "" };
 
   const tagline = text(data.eslogan);
+
+  const gaId = text((data.analitica || {}).googleAnalytics).toUpperCase();
+  if (gaId && !GA_ID_PATTERN.test(gaId)) {
+    fail(`El ID de Google Analytics «${gaId}» no es válido: debe empezar por G- (por ejemplo, G-AB12CD34EF)`);
+  }
+  const consentCategories = gaId ? [analyticsCategory(gaId)] : [];
 
   return {
     name,
@@ -165,7 +200,20 @@ export function buildSite() {
       lastUpdated: text(legal.ultimaActualizacion),
     },
 
-    cookieConsent: COOKIE_CONSENT,
+    // Aviso de cookies: solo se activa si hay alguna categoría que necesite consentimiento.
+    cookieConsent: {
+      enabled: consentCategories.length > 0,
+      storageKey: CONSENT_STORAGE_KEY,
+      maxAgeDays: CONSENT_MAX_AGE_DAYS,
+      version: consentVersion(consentCategories),
+      categories: consentCategories,
+    },
+
+    // Google Analytics 4 (vacío = sin analítica). Solo se carga tras aceptar las cookies.
+    analytics: {
+      gaId,
+      cookieExpires: ANALYTICS_COOKIE_DAYS * 24 * 60 * 60,
+    },
 
     seo: {
       ogImage: "/assets/img/og/og-rafael-maderas.jpg",
