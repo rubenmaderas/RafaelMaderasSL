@@ -1,0 +1,9 @@
+{#- Pasos del proceso de trabajo: contenido/comun.json (/admin → «Textos comunes»). -#}
+<ol class="process">
+  {%- for step in contenido.comun.proceso %}
+  <li class="process__step">
+    <h3>{{ step.titulo | t }}</h3>
+    {{ step.texto | md | safe }}
+  </li>
+  {%- endfor %}
+</ol>

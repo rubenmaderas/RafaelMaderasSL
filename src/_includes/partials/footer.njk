@@ -1,0 +1,59 @@
+{%- from "macros/icons.njk" import icon -%}
+<footer class="site-footer" data-site-footer>
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <p class="brand brand--footer">
+        <span class="brand__name">{{ site.brand.name }}{% if site.brand.suffix %} <span class="brand__suffix">{{ site.brand.suffix }}</span>{% endif %}</span>
+        <span class="brand__tagline">{{ contenido.comun.marca.lema | t }}</span>
+      </p>
+      {{ contenido.comun.pie.texto | md | safe }}
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">Contacto</h2>
+      <ul class="site-footer__list site-footer__list--icons">
+        <li><a href="{{ site.phone.href }}">{{ icon("phone", 18) }}<span>{{ site.phone.displayIntl }}</span></a></li>
+        <li><a href="{{ site.whatsapp.href }}" target="_blank" rel="noopener">{{ icon("whatsapp", 18) }}<span>WhatsApp</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span></a></li>
+        <li><a href="{{ site.email.href }}">{{ icon("mail", 18) }}<span>{{ site.email.address }}</span></a></li>
+        <li><span class="site-footer__area">{{ icon("pin", 18) }}<span>{{ contenido.comun.pie.zona | t }}</span></span></li>
+      </ul>
+    </div>
+
+    <nav aria-label="Pie de página">
+      <h2 class="site-footer__title">La web</h2>
+      <ul class="site-footer__list">
+        {%- for item in navigation %}
+        <li><a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+
+    <nav aria-label="Información legal">
+      <h2 class="site-footer__title">Legal</h2>
+      <ul class="site-footer__list">
+        <li><a href="/aviso-legal/"{% if page.url == "/aviso-legal/" %} aria-current="page"{% endif %}>Aviso legal</a></li>
+        <li><a href="/politica-de-privacidad/"{% if page.url == "/politica-de-privacidad/" %} aria-current="page"{% endif %}>Política de privacidad</a></li>
+        <li><a href="/politica-de-cookies/"{% if page.url == "/politica-de-cookies/" %} aria-current="page"{% endif %}>Política de cookies</a></li>
+        {%- if site.cookieConsent.enabled %}
+        <li><button class="link-button" type="button" data-consent-open>Configurar cookies</button></li>
+        {%- endif %}
+      </ul>
+      {%- set activeSocial = site.social | selectattr("url") %}
+      {%- if activeSocial.length %}
+      <h2 class="site-footer__title site-footer__title--spaced">Síguenos</h2>
+      <ul class="site-footer__list">
+        {%- for s in activeSocial %}
+        <li><a href="{{ s.url }}" rel="noopener me" target="_blank">{{ s.name }}<span class="visually-hidden"> (se abre en una nueva pestaña)</span></a></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+    </nav>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p>© {{ buildYear }} {{ site.legalName }} · CIF {{ site.taxId }} · Todos los derechos reservados.</p>
+    {%- if hasIllustrativeImages %}
+    <p>Las fotografías marcadas como «Imagen ilustrativa» proceden de bancos de imágenes y no corresponden a obras realizadas por la empresa.</p>
+    {%- endif %}
+  </div>
+</footer>

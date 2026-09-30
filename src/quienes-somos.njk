@@ -1,0 +1,63 @@
+---
+layout: layouts/base.njk
+permalink: /quienes-somos/
+pageKey: quienes-somos
+breadcrumb: "Quiénes somos"
+---
+{#- Textos: contenido/paginas/quienes-somos.json (/admin → Páginas → Quiénes somos). -#}
+{%- from "macros/icons.njk" import icon -%}
+{%- set c = contenido.paginas["quienes-somos"] -%}
+<header class="page-hero container">
+  <div class="split">
+    <div>
+      <p class="eyebrow">{{ c.cabecera.antetitulo | t }}</p>
+      <h1>{{ c.cabecera.titulo | t }}</h1>
+      <p class="lead">{{ c.cabecera.entradilla | mdi | safe }}</p>
+    </div>
+    {% image "herramientas", "(min-width: 72em) 34rem, (min-width: 48em) 45vw, calc(100vw - 3rem)", { eager: true, class: "media--landscape" } %}
+  </div>
+</header>
+
+<section class="section section--surface" aria-labelledby="titulo-historia">
+  <div class="container split split--top">
+    <div>
+      <h2 id="titulo-historia">{{ c.historia.titulo | t }}</h2>
+      {{ c.historia.texto | md | safe }}
+    </div>
+    <div>
+      <h2 id="titulo-equipo">{{ c.equipo.titulo | t }}</h2>
+      {{ c.equipo.texto | md | safe }}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="titulo-forma">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ c.forma.antetitulo | t }}</p>
+      <h2 id="titulo-forma">{{ c.forma.titulo | t }}</h2>
+    </div>
+    <div class="grid grid--4">
+      {%- for card in c.forma.tarjetas %}
+      <article class="card card--accent-top">
+        <h3>{{ card.titulo | t }}</h3>
+        {{ card.texto | md | safe }}
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--surface" aria-labelledby="titulo-datos">
+  <div class="container">
+    <h2 id="titulo-datos">{{ c.datos.titulo | t }}</h2>
+    <dl class="contact-data">
+      {%- for fila in c.datos.filas %}
+      <div><dt>{{ fila.etiqueta | t }}</dt><dd>{{ fila.valor | mdi | safe }}</dd></div>
+      {%- endfor %}
+    </dl>
+    {%- if c.datos.nota %}
+    <p class="small">{{ c.datos.nota | mdi | safe }}</p>
+    {%- endif %}
+  </div>
+</section>

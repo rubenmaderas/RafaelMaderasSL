@@ -1,0 +1,32 @@
+{
+  "marca": {
+    "lema": "Yeso y reformas · Jaén"
+  },
+  "proceso": [
+    {
+      "titulo": "Contacto",
+      "texto": "Llamas, escribes por WhatsApp o envías un correo contando qué necesitas y dónde está la obra. Si puedes, añade unas fotos."
+    },
+    {
+      "titulo": "Valoración",
+      "texto": "Estudiamos el trabajo, visitamos la obra cuando hace falta y te explicamos la solución que proponemos, con su presupuesto."
+    },
+    {
+      "titulo": "Ejecución",
+      "texto": "Nuestro equipo realiza los trabajos de yeso y, si es una reforma, coordinamos a cada oficio para que entre en el momento adecuado."
+    },
+    {
+      "titulo": "Seguimiento",
+      "texto": "Durante la obra sabes en qué punto está. Al terminar, revisamos contigo el resultado y resolvemos cualquier duda."
+    }
+  ],
+  "cta": {
+    "antetitulo": "Hablemos de tu obra",
+    "titulo": "¿Tienes una obra o una reforma en mente?",
+    "texto": "Cuéntanos qué necesitas y dónde está la obra. Si puedes, envíanos unas fotos por WhatsApp: con eso ya podemos orientarte sobre cómo plantear el trabajo."
+  },
+  "pie": {
+    "texto": "Empresa de yeso y reformas en Jaén, con equipo propio para los trabajos de yeso y gremios coordinados para el resto de la obra. Trabajamos en Jaén capital, la provincia de Jaén y el resto de Andalucía.",
+    "zona": "Jaén y Andalucía"
+  }
+}

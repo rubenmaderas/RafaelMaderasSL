@@ -1,0 +1,68 @@
+{
+  "seo": {
+    "titulo": "Zonas de servicio: Jaén, provincia y Andalucía | {empresa}",
+    "descripcion": "Trabajos de yeso y reformas en Jaén capital, pueblos cercanos como Martos, Mancha Real o Torredelcampo, el resto de la provincia de Jaén y Andalucía."
+  },
+  "cabecera": {
+    "antetitulo": "Zonas de servicio",
+    "titulo": "Zonas de servicio: Jaén capital, provincia de Jaén y Andalucía",
+    "entradilla": "En {empresa} trabajamos principalmente en Jaén capital y en los municipios de la provincia. Para obras en otras provincias andaluzas, estudiamos cada caso según el trabajo y la disponibilidad."
+  },
+  "capital": {
+    "antetitulo": "Zona principal",
+    "titulo": "Yesista y reformas en Jaén capital",
+    "texto": "Es la zona de trabajo habitual: pisos y casas en cualquier barrio de la ciudad, desde el casco antiguo hasta las zonas de expansión más recientes.\n\nCada tipo de vivienda pide un enfoque distinto. En las casas antiguas del centro es habitual encontrar paredes irregulares o con varias capas de reparaciones, que conviene regularizar antes del acabado. En pisos de las últimas décadas del siglo XX lo más frecuente es alisar el gotelé para modernizar la vivienda. Y en obra nueva o en reformas integrales, el yeso proyectado permite revestir muchos metros con un acabado uniforme."
+  },
+  "cercanias": {
+    "antetitulo": "Cerca de Jaén",
+    "titulo": "Área metropolitana y pueblos cercanos",
+    "texto": "Municipios del entorno de Jaén capital, a poca distancia de la ciudad. Por su cercanía, en estos municipios nos resulta sencillo visitar la obra, hacer la valoración y seguir los trabajos de cerca.",
+    "localidades": [
+      "Los Villares",
+      "La Guardia de Jaén",
+      "Mancha Real",
+      "Torredelcampo",
+      "Jamilena",
+      "Torredonjimeno",
+      "Martos",
+      "Mengíbar",
+      "Villatorres",
+      "Fuerte del Rey",
+      "Pegalajar"
+    ]
+  },
+  "provincia": {
+    "antetitulo": "Provincia",
+    "titulo": "Resto de la provincia de Jaén",
+    "texto": "Obras en otros municipios de la provincia, planificando los desplazamientos según el tipo de trabajo. Contar con fotos y medidas desde el primer contacto ayuda a preparar mejor la visita.",
+    "localidades": [
+      "Linares",
+      "Úbeda",
+      "Baeza",
+      "Andújar",
+      "Alcalá la Real",
+      "Bailén",
+      "La Carolina",
+      "Jódar",
+      "Villacarrillo"
+    ]
+  },
+  "andalucia": {
+    "antetitulo": "Andalucía",
+    "titulo": "Resto de Andalucía",
+    "texto": "Para obras en otras provincias andaluzas estudiamos cada caso según el volumen del trabajo, los plazos y la disponibilidad. Cuéntanos la localidad, el tipo de obra y los plazos que manejas, y te diremos con franqueza si podemos atenderla.",
+    "localidades": [
+      "Granada",
+      "Córdoba",
+      "Málaga",
+      "Sevilla",
+      "Almería",
+      "Cádiz",
+      "Huelva"
+    ]
+  },
+  "otraLocalidad": {
+    "titulo": "¿Tu localidad no aparece en la lista?",
+    "texto": "La lista recoge solo algunas localidades: no es cerrada. Si tu obra está en otro municipio de Jaén o de Andalucía, llámanos o escríbenos igualmente y te diremos si podemos hacernos cargo."
+  }
+}

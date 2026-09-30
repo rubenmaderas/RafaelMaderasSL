@@ -1,0 +1,342 @@
+# Web de Rafael Maderas S.L. · Yesista y reformas en Jaén
+
+Web estática para **Rafael Maderas S.L.**: trabajos de yeso (actividad principal) y reformas con gremios coordinados en Jaén capital, la provincia de Jaén y el resto de Andalucía.
+
+Está hecha con [Eleventy 3](https://www.11ty.dev/), que genera HTML estático sin frameworks en el navegador. Las imágenes se optimizan al compilar (AVIF, WebP y JPEG con `srcset` y dimensiones declaradas), la tipografía (Manrope) se sirve desde el propio dominio y no se carga **ningún servicio de terceros**: ni analítica, ni píxeles, ni fuentes externas.
+
+Los textos, las fotos y los datos de la empresa se editan **sin tocar código** desde el gestor de contenidos en **`/admin`** (usuario y contraseña). Ver [Gestor de contenidos](#gestor-de-contenidos-admin).
+
+> ⚠️ **Antes de publicar**, revisa las afirmaciones de la sección [Afirmaciones que hay que validar](#afirmaciones-que-hay-que-validar) y pide a una gestoría o asesoría que revise los textos legales. Si algún dato legal vuelve a quedar como `PENDIENTE DE SUSTITUIR ANTES DE PUBLICAR`, la página legal afectada mostrará automáticamente un aviso de «Texto provisional».
+
+---
+
+## Requisitos
+
+- Node.js 22 o superior (probado con Node 24).
+- En Windows PowerShell, usa `npm.cmd` en lugar de `npm` si la política de ejecución bloquea los scripts.
+
+## Uso
+
+```bash
+npm install          # instala las dependencias (solo la primera vez)
+npm run dev          # servidor local con recarga automática: http://localhost:8080
+npm run build        # genera la web lista para publicar en _site/
+npm run preview      # compila y sirve _site/ como en producción: http://localhost:8090
+npm run clean        # borra _site/
+npm run og           # regenera la imagen para redes sociales y el icono de iOS
+npx decap-server     # (en otra terminal) permite usar /admin en local, sin Netlify
+```
+
+> **Para medir con Lighthouse usa `npm run preview`, no `npm run dev`.** El servidor de desarrollo no comprime, no envía cabeceras de caché e inyecta un script de recarga automática, así que Lighthouse avisaría de problemas que en producción no existen. `preview` aplica las mismas cabeceras (`_headers`) y la compresión que tendrá la web publicada. Mantén la pestaña en primer plano mientras se analiza; si no, Chrome no pinta la página y Lighthouse da el error `NO_FCP`.
+
+El dominio definitivo (`https://rafaelmaderas.es`) ya está en `src/_lib/site.js` (constante `DOMAIN`) y se usa en canonical, sitemap, Open Graph y datos estructurados. Solo si cambiara, compila con la variable `SITE_URL` o edita esa constante (y `site_url` en `src/admin/config.yml`):
+
+```bash
+# macOS / Linux
+SITE_URL=https://otrodominio.es npm run build
+# Windows PowerShell
+$env:SITE_URL="https://otrodominio.es"; npm.cmd run build
+```
+
+## Estructura
+
+```
+eleventy.config.js        Configuración: imágenes, CSS/JS minificados, filtros, CSP, copia de recursos
+netlify.toml              Despliegue en Netlify
+scripts/generate-og.js    Genera la imagen Open Graph y el icono de iOS
+scripts/preview.js        Servidor local que imita producción (npm run preview)
+src/
+  _data/
+    contenido/            ★ CONTENIDO EDITABLE (lo modifica el gestor /admin)
+      empresa.json          Nombre, teléfono, correo, WhatsApp, fundador, datos legales, redes
+      paginas/*.json        Textos y SEO de Inicio, Servicios, Reformas, Zonas, Quiénes somos, Contacto
+      servicios.json        Trabajos de yeso, tipos de reforma y gremios
+      preguntas.json        Preguntas frecuentes (HTML visible + JSON-LD FAQPage)
+      imagenes.json         Fotos de la web (archivo, texto alternativo, créditos)
+      comun.json            Textos compartidos: marca, proceso de trabajo, bloque de contacto, pie
+    site.js · images.js · services.js · faq.js · hasIllustrativeImages.js
+                          Adaptadores: pasan el contenido a las plantillas (no hace falta tocarlos)
+    navigation.js         Menú principal
+    structuredData.js     Datos estructurados JSON-LD (GeneralContractor, etc.)
+  _lib/
+    site.js               Dominio, ajustes técnicos (cookies) y datos derivados (enlaces, años de oficio…)
+    content.js · data.js · text.js   Lectura y validación del contenido, comodines y formato
+  admin/
+    index.njk             Página del gestor (/admin/), con su propia CSP
+    config.yml            ★ Qué se puede editar en el gestor, con etiquetas y ayudas en español
+    cms.js                Vistas previas del gestor (y vista de Google)
+  _includes/
+    layouts/              Plantilla base y plantilla de páginas legales
+    partials/             Cabecera, pie, CTA, barra móvil, FAQ, proceso, cookies…
+    macros/icons.njk      Iconos SVG en línea
+  assets/
+    css/main.css          Estilos (paleta y tipografía en variables al principio)
+    css/consent.css       Estilos del aviso de cookies (solo si está activado)
+    js/main.js            Menú móvil y barra de contacto móvil
+    js/consent.js         Gestor de consentimiento de cookies (desactivado)
+    img/originals/        ★ Fotos originales (se optimizan al compilar; el gestor sube aquí las nuevas)
+    img/og/               Imagen para redes sociales (1200×630)
+    favicon.svg · apple-touch-icon.png
+  index.njk               Inicio                  → /
+  servicios.njk           Servicios               → /servicios/
+  reformas.njk            Reformas                → /reformas/
+  zonas-de-servicio.njk   Zonas de servicio       → /zonas-de-servicio/
+  quienes-somos.njk       Quiénes somos           → /quienes-somos/
+  contacto.njk            Contacto                → /contacto/
+  aviso-legal.njk         Aviso legal             → /aviso-legal/
+  politica-de-privacidad.njk                      → /politica-de-privacidad/
+  politica-de-cookies.njk                         → /politica-de-cookies/
+  404.njk                 Página de error         → /404.html
+  robots.njk · sitemap.njk                        → /robots.txt · /sitemap.xml
+  headers.njk · htaccess.njk                      → /_headers · /.htaccess
+```
+
+Los textos de las seis páginas principales, su título y su descripción para Google están en `src/_data/contenido/` y se cambian desde **/admin**. Las plantillas `.njk` solo contienen la maquetación. Los textos legales, el menú, las etiquetas de los botones y la página 404 siguen en código.
+
+### Tono de los textos
+
+La web habla como **empresa**: «nosotros» (hacemos, coordinamos, te llamamos) y trata al cliente de **tú**. Es lo habitual en las webs de empresas de reformas y de yeso que se analizaron. Rafael aparece por su nombre solo en «Quiénes somos», como **fundador y gerente** (en /admin → «Datos de la empresa» → «Fundador»). En el resto de la web se habla de «su fundador» para explicar los 40 años de oficio.
+
+Los **40 años** son de oficio del fundador, no de la empresa, que se constituyó en 2012 («Año de constitución»). La cifra se calcula al compilar a partir del año en que empezó en el oficio (1986), así que sube sola cada año cuando se vuelve a publicar la web. En los textos se escribe con el comodín `{años}`. Mantén esta distinción si se reescribe algún texto, y no añadas cifras de plantilla, obras u opiniones que no se puedan demostrar.
+
+---
+
+## Gestor de contenidos (/admin)
+
+En **`https://rafaelmaderas.es/admin/`** hay un panel en español, protegido con **correo y contraseña**, para cambiar la web sin tocar código. Está hecho con [Decap CMS](https://decapcms.org/) (código abierto, alojado en la propia web) y con **Netlify Identity** para el acceso. No hay base de datos: cada vez que alguien pulsa «Publicar», el gestor guarda el cambio en el repositorio de GitHub y Netlify vuelve a construir y publicar la web en uno o dos minutos. Así queda un historial de todos los cambios, y cualquiera se puede deshacer.
+
+### Qué se puede editar
+
+| Sección del gestor | Qué contiene |
+| --- | --- |
+| **Páginas** | Textos de Inicio, Servicios, Reformas, Zonas de servicio, Quiénes somos y Contacto, cada uno con su título y descripción para Google |
+| **Servicios** | Trabajos de yeso, tipos de reforma y gremios que se coordinan |
+| **Preguntas frecuentes** | Preguntas y respuestas (se actualizan a la vez en la web y en los datos para Google) |
+| **Fotos de la web** | Cada foto, su descripción (texto alternativo), si es ilustrativa y sus créditos |
+| **Textos comunes** | Proceso de trabajo, bloque final de contacto y textos del pie |
+| **Datos de la empresa** | Nombre, teléfono, correo, mensaje de WhatsApp, fundador, datos legales y redes sociales |
+
+A la derecha de cada formulario hay una **vista previa** con el aspecto de la web y, en las páginas, una simulación del resultado en Google con el recuento de caracteres. En el móvil la vista previa se oculta para dejar sitio al formulario; se puede editar desde el móvil, aunque en una tableta o un ordenador es más cómodo.
+
+Trucos para escribir:
+- **Comodines**: `{empresa}`, `{telefono}`, `{correo}`, `{años}`, `{fundacion}`, `{fundador}`, `{cargo}`, `{oficio}`, `{razon_social}` y `{cif}` se sustituyen solos por los datos de «Datos de la empresa». Si cambia el teléfono, cambia en toda la web.
+- **Palabra resaltada en color** en los títulos: escríbela entre asteriscos, por ejemplo `Yesista y reformas en *Jaén*`.
+- **Negrita** en los textos largos: botón **B** del editor (o `**así**`).
+- Los campos tienen ayudas y validaciones (longitud del título para Google, formato de teléfono, CIF, etc.). Si algo no es válido, el gestor no deja publicar y señala el campo.
+
+**Cambiar una foto:** «Fotos de la web» → abre la foto → «Elige una imagen diferente» → «Subir nuevo» → elige la foto → «Confirmar selección». Después:
+1. Escribe en **Descripción** lo que se ve en la foto nueva.
+2. Si es un **trabajo real de la empresa**, desmarca **Imagen ilustrativa** (desaparecen la etiqueta y, cuando no quede ninguna, el aviso del pie) y deja los créditos vacíos.
+3. Pulsa **Publicar → Publicar ahora**.
+
+Las fotos deben ser **JPG o PNG** (no HEIC: en el iPhone, Ajustes → Cámara → Formatos → «Más compatible», o compártelas por WhatsApp o correo primero). El gestor las reduce a 2000 px de ancho y **elimina los metadatos** (ubicación GPS, modelo del móvil) antes de subirlas. Al compilar se generan las versiones AVIF, WebP y JPEG de cada tamaño. Pide permiso al cliente y evita que se vean datos personales, matrículas o direcciones reconocibles.
+
+### Puesta en marcha (una sola vez)
+
+1. **Sube el proyecto a GitHub** en un repositorio privado, con la rama `main`.
+2. En **Netlify**: *Add new site → Import an existing project* → elige el repositorio. `netlify.toml` ya indica el comando (`npm run build`) y la carpeta (`_site`).
+3. En la pestaña **Identity** del proyecto de Netlify, pulsa **Enable Identity**. Está incluido en el plan gratuito.
+   - En la configuración de Identity (*Registration preferences*), marca **Invite only**. Es importante: así nadie puede registrarse por su cuenta.
+   - No hace falta activar proveedores externos (Google, GitHub…). Basta con correo y contraseña.
+4. En **Identity → Services → Git Gateway**, pulsa **Enable Git Gateway**. Permite que el gestor guarde los cambios en GitHub sin que los editores tengan cuenta de GitHub. Si ya está conectado el dominio propio, comprueba antes que el HTTPS funciona (lo pide Netlify).
+5. En **Identity → Invite users**, invita a los correos de las personas que vayan a editar la web. Cada una recibe un correo; al pulsar el enlace llega a la web, que la lleva sola a `/admin/` para **elegir su contraseña**. A partir de ahí entra en `/admin/` con su correo y contraseña. La recuperación de contraseña funciona igual.
+6. Conecta el dominio (ver [Despliegue](#despliegue)).
+
+Nota: Netlify marca **Git Gateway** como función en fase *beta*, aunque lleva años en uso con este mismo tipo de gestor. Si algún día dejara de estar disponible, el gestor se puede conectar directamente a GitHub (`backend: github` en `config.yml`; los editores entrarían con una cuenta de GitHub) sin cambiar el contenido.
+
+### Si un cambio no aparece en la web
+
+- Espera 1–2 minutos y recarga la página.
+- En Netlify → **Deploys**, mira si la última publicación ha fallado (en rojo). El registro indica el motivo, por ejemplo una foto dañada o un dato no válido en `empresa.json` (el mensaje dice qué corregir en /admin).
+- Para deshacer un cambio: en Netlify → Deploys, abre una publicación anterior y pulsa **Publish deploy**. Después corrige el texto en /admin. También se puede revertir el cambio en GitHub.
+
+### Editar en local (para desarrollo)
+
+Con `npm run dev` en una terminal y `npx decap-server` en otra, abre `http://localhost:8080/admin/`. Los cambios se guardan directamente en los archivos del proyecto, sin contraseña y sin publicar nada.
+
+### Límites del gestor
+
+- **Textos legales** (aviso legal, privacidad, cookies), menú, etiquetas de los botones y la página 404: se cambian en código. Los datos que contienen (razón social, CIF, domicilio, correo, alojamiento, fecha) sí salen de «Datos de la empresa».
+- **Imagen para redes sociales** (`og-rafael-maderas.jpg`): incluye el nombre, el teléfono y los años de oficio, y se genera en local con `npm run og`. Si cambian esos datos, regenérala y súbela.
+- Las **secciones de las páginas** son fijas: se cambian los textos, las listas y las fotos, pero no se pueden añadir secciones nuevas sin programar. Por ahora el gestor tampoco permite borrar entradas completas.
+- Decap CMS está fijado en la versión 3.16.3. Si se actualiza, comprueba el gestor en el móvil (los ajustes de pantalla estrecha de `src/admin/index.njk` dependen de sus clases CSS).
+
+---
+
+## Qué hay que sustituir antes de publicar
+
+### 1. Datos legales (/admin → «Datos de la empresa» → «Datos legales»)
+
+Están **todos completos** y se guardan en `src/_data/contenido/empresa.json`. Los datos registrales proceden del **BORME n.º 19 de 27/01/2012** (Registro Mercantil de Jaén, anuncio 42487, constitución de la sociedad); la empresa ha confirmado que la sociedad sigue activa. Si cambia algún dato (domicilio, administración…), actualízalo desde el gestor:
+
+| Campo | Valor actual | Dónde aparece |
+| --- | --- | --- |
+| Razón social (`razonSocial`) | Rafael Maderas Sociedad Limitada | Aviso legal, JSON-LD (`legalName`) |
+| CIF (`cif`) | B23691108 | Aviso legal, pie, privacidad, JSON-LD (`taxID`) |
+| Domicilio social (`domicilio`) | Calle Perú, 2 A, 23002 Jaén (Jaén) | Aviso legal, privacidad, JSON-LD |
+| Registro Mercantil (`registroMercantil`) | Registro Mercantil de Jaén, tomo 498, folio 51, sección 8.ª, hoja J-19041, inscripción 1.ª | Aviso legal |
+| Dominio (constante `DOMAIN` en `src/_lib/site.js`, en código) | rafaelmaderas.es | Aviso legal, canonical, sitemap, Open Graph |
+| Responsable del tratamiento | Se compone con la razón social, el CIF y el domicilio | Política de privacidad |
+| Contacto para ejercer derechos | Correo electrónico o correo postal al domicilio social | Política de privacidad |
+| Alojamiento (`hosting`) | Netlify, Inc. (EE. UU., adherida al Marco de Privacidad de Datos UE-EE. UU.) | Política de privacidad |
+| Última actualización (`ultimaActualizacion`) | 30 de septiembre de 2026 | Las tres páginas legales |
+
+- **Redes sociales:** se ha decidido no publicar ninguna. El aviso legal solo muestra el apartado de perfiles si alguna red tiene URL.
+- **Cookies:** la política de cookies indica que la web no instala ninguna para los visitantes. Netlify no añade cookies a un sitio estático como este; compruébalo tras publicar en DevTools → Application → Cookies. La única excepción es el acceso a **/admin**: Netlify Identity guarda una cookie técnica de sesión (`nf_jwt`) y la sesión en el almacenamiento local, solo a quien inicia sesión. Ya figura en la política. Si se activan otras funciones de Netlify que usen cookies (pruebas A/B…), hay que añadirlas a `src/politica-de-cookies.njk`.
+- **Aviso «Texto provisional»:** ya no aparece porque no queda ningún `PENDIENTE`. Vuelve a salir solo si se vacía algún dato legal.
+
+Aun así, **pide a una gestoría o asesoría que revise los textos** y actualiza la fecha de «Última actualización» cada vez que cambien. Son una base de trabajo, no asesoramiento jurídico.
+
+### 2. Dominio: `rafaelmaderas.es`
+
+Está configurado como URL canónica (sin `www`) en `src/_lib/site.js` y en `src/admin/config.yml` (`site_url`). Antes de publicar hay que **registrarlo** (a 30/09/2026 no existe en el DNS) en un registrador acreditado para `.es` y conectarlo a Netlify (ver [Despliegue](#despliegue)).
+
+### 3. Redes sociales (/admin → «Datos de la empresa» → «Redes sociales»)
+
+Se ha decidido **no mostrar redes sociales**: Facebook, Instagram y Perfil de Empresa de Google están sin URL. Si en el futuro se pone una URL real, aparecerá en el pie y en el aviso legal, y se añadirá a `sameAs` en los datos estructurados.
+
+### 4. Imágenes (/admin → «Fotos de la web»)
+
+Todas las fotos son **provisionales**, de Unsplash (licencia Unsplash, apta para uso comercial sin atribución obligatoria). Se muestran con la etiqueta «Imagen ilustrativa» y hay un aviso en el pie que indica que no son obras de la empresa. En el Aviso legal figuran los créditos.
+
+| Foto en el gestor (clave) | Archivo | Se usa en | Autor (Unsplash) |
+| --- | --- | --- | --- |
+| Portada: foto principal (`hero_yeso`) | hero-yeso.jpg | Inicio (portada) | Sasun Bughdaryan |
+| Reformas (`reforma_interior`) | reforma-interior.jpg | Inicio (reformas) y Reformas (cabecera) | immo RENOVATION |
+| Albañilería (`albanileria`) | albanileria.jpg | Servicios (reformas) y Reformas (gremios) | Solømen |
+| Alicatado (`alicatado`) | alicatado.jpg | Reformas (gremios) | charlesdeluvio |
+| Acabado interior (`acabado_interior`) | acabado-interior.jpg | Servicios (trabajos de yeso) | Clay Banks |
+| Herramientas (`herramientas`) | herramientas.jpg | Quiénes somos | Annie Spratt |
+| Jaén (`jaen`) | jaen.jpg | Inicio (zonas) y Zonas de servicio | Sergio Guardiola Herrador (Baños de la Encina, Jaén) |
+
+**Cómo sustituir una imagen:** desde el gestor, como se explica en [Gestor de contenidos](#gestor-de-contenidos-admin). Sin gestor: copia la foto (JPG o PNG, de 1600 px de ancho o más) en `src/assets/img/originals/`, cambia `foto` y `alt` en `src/_data/contenido/imagenes.json`, pon `"ilustrativa": false` si es un trabajo real y ejecuta `npm run build`.
+
+Consejos para las fotos reales: pide permiso al cliente, no muestres datos personales ni direcciones reconocibles, y prioriza el antes y el después de paredes, techos y reformas. La foto de portada («Portada: foto principal») se recorta cuadrada en móvil y vertical (4:5) en tableta y escritorio. Elige una con el motivo centrado y deja libres las esquinas, donde van las tarjetas de «Oficio» y «Un único interlocutor».
+
+La imagen para redes sociales (`src/assets/img/og/og-rafael-maderas.jpg`) es tipográfica. Se regenera en local con `npm run og` a partir de «Datos de la empresa» (no se actualiza sola al editar en /admin). También puedes sustituirla por una foto real de 1200×630 px.
+
+### 5. Logotipo y colores de marca
+
+El azul y el coral de la web salen de la rotulación de la furgoneta de la empresa. Son valores **aproximados**, tomados de una foto:
+
+| Variable (`main.css`) | Valor | Uso |
+| --- | --- | --- |
+| `--color-accent` | `#1f4f9c` | Enlaces, botón de WhatsApp, detalles (contraste AA sobre fondos claros) |
+| `--color-accent-strong` | `#173d7a` | Estado *hover* del acento |
+| `--color-accent-on-dark` | `#f5a598` | Títulos pequeños sobre fondo oscuro |
+| `--color-brand-coral` | `#f08070` | Solo decorativo (franja bajo la cabecera). No usar para texto sobre fondo claro: no tiene contraste suficiente. |
+
+La cabecera usa, de momento, la marca tipográfica «Rafael Maderas S.L.». No se ha recreado el logotipo de la furgoneta a partir de la foto, porque quedaría de baja calidad.
+
+**Pide al rotulista el logotipo original en vectorial (SVG, PDF o AI) y los colores exactos (Pantone o CMYK).** Con eso:
+1. Ajusta los colores en las variables del principio de `src/assets/css/main.css` y en `scripts/generate-og.js`. Comprueba que el texto sigue teniendo contraste AA (4,5:1).
+2. Guarda el logotipo como `src/assets/img/logo.svg` y sustituye el texto de la marca en `src/_includes/partials/header.njk` (bloque `.brand`) por `<img src="/assets/img/logo.svg" alt="Rafael Maderas S.L." width="…" height="…">`, con sus dimensiones reales.
+3. Añade la URL del logotipo como `logo` en el JSON-LD (`src/_data/structuredData.js`, objeto `GeneralContractor`). Si has cambiado los colores, ejecuta `npm run og`.
+
+El teléfono se define una sola vez (/admin → «Datos de la empresa» → «Teléfono y WhatsApp»). Desde ahí se generan todos los enlaces, textos, FAQ y datos estructurados.
+
+---
+
+## Despliegue
+
+La carpeta que se publica es **`_site/`** (se genera con `npm run build`). Incluye `404.html`, `robots.txt`, `sitemap.xml` y dos archivos de configuración de servidor: `_headers` (Netlify y Cloudflare Pages) y `.htaccess` (Apache).
+
+### Netlify (alojamiento elegido)
+1. Conecta el repositorio. `netlify.toml` ya define el comando (`npm run build`), la carpeta (`_site`) y la versión de Node. No hace falta `SITE_URL`: el dominio ya está en `src/_lib/site.js`. Para activar el gestor /admin, sigue [Puesta en marcha](#puesta-en-marcha-una-sola-vez).
+2. En *Domain management*, añade `rafaelmaderas.es` como **dominio principal** y `www.rafaelmaderas.es` como alias (Netlify redirige el `www` al principal).
+3. En el registrador del `.es`, lo más sencillo es cambiar los servidores DNS por los de **Netlify DNS**, que indica el propio panel. Así el dominio sin `www` también se sirve desde su CDN.
+4. Netlify emite el certificado HTTPS (Let's Encrypt) automáticamente. Actívalo y marca *Force HTTPS* si aparece la opción.
+5. Comprueba después que `https://rafaelmaderas.es/robots.txt` y `https://rafaelmaderas.es/sitemap.xml` cargan, y que la dirección `*.netlify.app` lleva la etiqueta canonical hacia `rafaelmaderas.es`.
+
+### Cloudflare Pages
+1. Conecta el repositorio. Comando de compilación: `npm run build`. Directorio de salida: `_site`.
+2. Variable de entorno: `NODE_VERSION = 22` (el dominio ya está en `src/_lib/site.js`).
+3. Cloudflare Pages lee automáticamente `_headers` y `404.html`. El gestor /admin **no funciona** aquí (necesita Netlify Identity); habría que cambiarlo a `backend: github`.
+
+### Hosting tradicional con Apache (FTP)
+1. En tu ordenador: `npm run build`.
+2. Sube **todo el contenido** de `_site/`, incluido el archivo oculto `.htaccess`, a la carpeta pública (`public_html`, `www`, `htdocs`…).
+3. Con el certificado SSL activo, descomenta en `src/htaccess.njk` las reglas de redirección a HTTPS, la unificación con o sin `www` y la cabecera HSTS. Después vuelve a compilar y subir.
+4. El gestor /admin no funciona en Apache (necesita Netlify). Conviene no subir la carpeta `admin/`.
+
+### Rendimiento, seguridad y caché
+- **CSS:** se minifica al compilar y se incrusta en cada página (`<style>`). Así no hay ninguna petición que bloquee el primer pintado. Edita siempre `src/assets/css/main.css`; el resultado minificado se genera solo.
+- **JavaScript:** se publica minificado, con `defer` y `?v=hash` para invalidar la caché cuando cambia.
+- **Content-Security-Policy estricta** (solo recursos propios), en dos partes:
+  - Cada página lleva en `<meta http-equiv="Content-Security-Policy">` la política completa, con los hashes de su script y su CSS en línea. Viaja con el propio HTML, así que nunca queda desfasada aunque se suba la web sin el `.htaccess` actualizado.
+  - `_headers` y `.htaccess` envían la parte que no cambia, más lo que un `<meta>` no admite (`frame-ancestors`, protección contra *clickjacking*).
+- **Otras cabeceras:** `nosniff`, `X-Frame-Options`, `Referrer-Policy` y `Permissions-Policy`.
+- **Caché:** los recursos de `/assets/` (JS versionado, imágenes con hash en el nombre y fuente) se cachean un año; el HTML se revalida siempre.
+- **Compresión:** la aplican automáticamente Netlify y Cloudflare, y en Apache el bloque `mod_deflate` de `.htaccess`.
+
+La CSP se define en `eleventy.config.js`. Allí están `CSP_SOURCES` (directivas comunes), el shortcode `cspMeta` (política de cada página) y `cspHeader` (cabecera). El gestor **/admin** tiene su propia política en `src/admin/index.njk`, más permisiva porque Decap CMS la necesita (`'unsafe-eval'` y estilos en línea). No afecta a la web pública. Además, /admin se envía con `noindex` y está excluido en `robots.txt` y en el sitemap.
+
+---
+
+## Cookies y consentimiento
+
+Ahora mismo la web **no usa cookies ni almacenamiento propio** para los visitantes y no conecta con terceros. Por eso **no se muestra ningún banner**: sería engañoso pedir consentimiento para algo que no existe. (La única cookie es la técnica de sesión de /admin, solo para quien edita la web; está exenta de consentimiento y figura en la política de cookies.)
+
+Hay un gestor de consentimiento **preparado pero desactivado**: `src/assets/js/consent.js` y `src/_includes/partials/cookie-consent.njk`. Tiene tres botones al mismo nivel (Rechazar / Configurar / Aceptar), categorías desmarcadas por defecto, consentimiento revocable desde «Configurar cookies» en el pie y en la política de cookies, y caducidad de 12 meses. Si en el futuro se añade analítica o publicidad:
+
+1. En `src/_lib/site.js`, pon `COOKIE_CONSENT.enabled: true` y ajusta las categorías. Los estilos del aviso (`consent.css`) y su script se incluyen automáticamente, y el hash del CSS en la CSP se actualiza solo.
+2. Inserta los scripts de terceros **bloqueados** hasta que haya consentimiento:
+   ```html
+   <script type="text/plain" data-consent="analytics" data-src="https://proveedor.example/script.js"></script>
+   ```
+3. Amplía la CSP en `eleventy.config.js` con los dominios del proveedor: `connect-src` e `img-src` en `CSP_SOURCES`, y `script-src` en el shortcode `cspMeta`. Si el proveedor necesita código en línea, añade su hash o muévelo a un archivo `.js` propio.
+4. Actualiza `src/politica-de-cookies.njk` con cada cookie (nombre, titular, finalidad y duración) y la política de privacidad si hay nuevos destinatarios.
+
+Como alternativa, existen herramientas de analítica sin cookies que pueden evitar el banner. Consúltalo antes con quien revise los textos legales.
+
+---
+
+## SEO: qué incluye y qué hacer después de publicar
+
+**Incluye:**
+- `title`, meta description y canonical únicos en cada página. Título principal: «Yesista y Reformas en Jaén | Rafael Maderas S.L.».
+- URLs legibles en español, un único H1 por página y encabezados jerárquicos.
+- Open Graph y Twitter Card con imagen propia.
+- JSON-LD: `GeneralContractor` (nombre, teléfono, email, área de servicio, catálogo de servicios, `sameAs` solo con redes reales), `WebSite`, `WebPage`, `BreadcrumbList` y `FAQPage` en la portada. El FAQ se genera desde `preguntas.json` (/admin → «Preguntas frecuentes»), igual que el HTML visible, así que siempre coinciden. Google solo muestra resultados enriquecidos de FAQ para sitios muy concretos, pero el marcado es correcto y no perjudica.
+- `sitemap.xml` (sin legales ni 404) y `robots.txt`. Las páginas legales llevan `noindex, follow`.
+- Una única página de zonas con contenido útil, sin páginas duplicadas por municipio (evita las «páginas puerta»).
+
+**Resultado de las pruebas locales** (Lighthouse 13 móvil, con `npm run preview`): 100 en rendimiento, accesibilidad, buenas prácticas y SEO en las páginas indexables, con el primer pintado (FCP) en unos 0,6 s y el LCP entre 1,1 y 1,4 s. Las legales puntúan menos en SEO porque son `noindex` a propósito.
+
+**Acciones después de publicar** (ninguna garantiza una posición concreta en Google; el posicionamiento local depende sobre todo de la relevancia, la proximidad y la reputación real):
+1. **Google Search Console**: verifica el dominio, envía `https://rafaelmaderas.es/sitemap.xml` y revisa la cobertura y los errores cada cierto tiempo.
+2. **Perfil de Empresa de Google**: créalo o reclámalo. Categoría principal: yesista (o la más cercana disponible), con reformas como categoría secundaria. Configúralo como empresa de área de servicio (Jaén y alrededores), sin mostrar el domicilio si no se atiende allí al público. Usa **exactamente** el mismo nombre, teléfono y web que en la web y enlaza el perfil en /admin → «Datos de la empresa» → «Redes sociales».
+3. **Fotos reales** de trabajos (antes y después) en la web y en el Perfil de Empresa, sustituyendo las imágenes de stock.
+4. **Reseñas reales**: pídeselas a clientes satisfechos, sin incentivos, y contéstalas. No publiques reseñas en la web que no se puedan verificar.
+5. Opcional: Bing Places / Bing Webmaster Tools, y alta en directorios locales serios con los mismos datos de nombre, dirección y teléfono.
+6. Con el tiempo, añade contenido útil y real: obras terminadas (con permiso del cliente), explicaciones de trabajos concretos o dudas frecuentes nuevas.
+
+---
+
+## Afirmaciones que hay que validar
+
+Los textos se han redactado a partir de la información facilitada. Antes de publicar, confirma que todo es exacto:
+
+- **Datos registrales, CIF y domicilio social** (ver la tabla de datos legales). La empresa ha confirmado que la sociedad está activa.
+- **Domicilio en la web**: Calle Perú, 2 A figura en el aviso legal, la política de privacidad y los datos estructurados, pero no en el pie ni en la página de contacto. Si se prefiere no mostrarlo en los datos estructurados, quita `streetAddress` y `postalCode` en `structuredData.js` (el aviso legal sí debe incluirlo).
+- **«Sociedad limitada inscrita en el Registro Mercantil de Jaén», año de constitución 2012**, en «Quiénes somos» (la inscripción es del 18/01/2012 según el BORME) y en los datos estructurados (`foundingDate`).
+- **40 años de oficio del fundador** como yesista (confirmado por la empresa en 2026). Se calcula con el año de inicio en el oficio (1986, en «Datos de la empresa» → «Fundador») y el año de compilación. Aparece en el inicio, en «Quiénes somos», en los datos estructurados y en la imagen para redes sociales. Esa imagen se genera en tu ordenador: ejecuta `npm run og` una vez al año (o al cambiar datos) y publica el resultado. No se genera en Netlify porque el servidor no tiene las mismas fuentes. Si el año de inicio exacto es otro, cámbialo en el gestor.
+- **Rafael Maderas, «fundador y gerente»** («Datos de la empresa» → «Fundador»), en «Quiénes somos» y en los datos estructurados. Según el BORME, es el administrador único desde la constitución. Si prefieres otro cargo o su nombre completo, cámbialo en el gestor.
+- **Servicios de yeso** anunciados (el yeso proyectado coincide con el «Proyectador de yeso» de la furgoneta): yeso proyectado, guarnecido y enlucido, alisado de paredes y gotelé, regularización de paredes antiguas y reparación de grietas, desconchones y rozas (/admin → «Servicios»). *No se anuncian* escayola ni placa de yeso laminado (pladur). Añádelos solo si se hacen.
+- **Gremios coordinados**: albañilería, alicatado, fontanería, electricidad y «otros oficios». También se menciona la pintura como parte de los remates de una reforma integral (/admin → «Páginas» → «Reformas»).
+- **«Equipo propio» / «equipo propio de yesistas»**: que los trabajos de yeso los hace personal de la empresa (inicio, Servicios, Reformas, «Quiénes somos», FAQ). Además, que para el resto de oficios se **coordina** a profesionales con los que se colabora habitualmente.
+- **«Un único interlocutor»**: que el cliente tiene un mismo contacto en la empresa desde la primera llamada hasta el final de la obra (inicio, Reformas, «Quiénes somos»). El proceso de trabajo dice además que se visita la obra cuando hace falta y que se revisa el resultado con el cliente al terminar.
+- **Disponibilidad**: si el equipo está en obra, se devuelve la llamada o se contesta el WhatsApp lo antes posible.
+- **Mensaje predefinido de WhatsApp**: «Hola, quiero pedir información sobre una obra o reforma.» («Datos de la empresa» → «Mensaje inicial de WhatsApp»).
+- **Zonas**: Jaén capital como zona habitual y los municipios listados en /admin → «Páginas» → «Zonas de servicio», que son una selección orientativa. También la atención en el resto de Andalucía «según el trabajo».
+- **Respuestas del FAQ** (/admin → «Preguntas frecuentes»), sobre todo las de plazos y secado.
+- **Privacidad**: que a otros profesionales solo se les pasan los datos imprescindibles de la obra. (Confirmado: el correo de Hotmail y el WhatsApp son los de la empresa.)
+- La foto «Jaén» es de **Baños de la Encina** (provincia de Jaén), no de la capital. El texto alternativo lo indica.
+
+Servicios que se pueden añadir si se confirman: escayola, placa de yeso laminado, falsos techos, molduras, aislamiento, pintura como servicio propio. El objeto social inscrito incluye además **enfoscados, revestimientos exteriores e interiores y decoración** en yeso y escayola, a mano o proyectado; anúncialos solo si se hacen hoy en día.
+
+---
+
+## Accesibilidad
+
+Enlace «Saltar al contenido», foco visible, navegación completa por teclado (el menú se cierra con Escape), contraste AA comprobado en toda la paleta, objetivos táctiles de al menos 44 px, textos alternativos descriptivos, `prefers-reduced-motion` respetado y la web funciona sin JavaScript (mejora progresiva). La barra fija de contacto en móvil se oculta mientras hay otros botones de contacto visibles.

@@ -1,0 +1,92 @@
+{
+  "yeso": [
+    {
+      "id": "yeso-proyectado",
+      "titulo": "Yeso proyectado",
+      "resumen": "Aplicación de yeso con máquina en paredes y techos, ideal para obra nueva y reformas con muchos metros.",
+      "descripcion": "El yeso proyectado se aplica con máquina, lo que permite cubrir grandes superficies con rapidez y un espesor homogéneo. Después se reglea y se alisa para dejar paredes y techos planos.\n\nEs la opción habitual en viviendas de obra nueva, ampliaciones y reformas en las que hay que revestir estancias completas."
+    },
+    {
+      "id": "guarnecido-enlucido",
+      "titulo": "Guarnecido y enlucido de paredes y techos",
+      "resumen": "La capa base que regulariza la pared y la capa fina de acabado que la deja lisa y lista para pintar.",
+      "descripcion": "El guarnecido es la capa de yeso que corrige irregularidades y da cuerpo al revestimiento. El enlucido es la capa final, más fina, que proporciona una superficie lisa y uniforme.\n\nSe aplica tanto en paredes como en techos, en ladrillo, bloque u otros soportes preparados, y es la base de un buen acabado de pintura."
+    },
+    {
+      "id": "alisado-paredes",
+      "titulo": "Alisado de paredes y gotelé",
+      "resumen": "Paredes con gotelé, rugosas o con imperfecciones convertidas en superficies lisas y actuales.",
+      "descripcion": "Alisar las paredes es una de las formas más eficaces de modernizar una vivienda. Se puede trabajar sobre paredes con gotelé, texturas antiguas o superficies con marcas y defectos.\n\nAntes de empezar se revisa el estado del soporte y de la pintura existente para elegir el método adecuado y conseguir un acabado duradero."
+    },
+    {
+      "id": "regularizacion",
+      "titulo": "Regularización de paredes antiguas",
+      "resumen": "Paredes desplomadas u onduladas, habituales en casas antiguas, corregidas para quedar planas.",
+      "descripcion": "En viviendas antiguas es frecuente encontrar paredes fuera de plomo, ondulaciones o parches de reparaciones anteriores. Con maestras y un guarnecido bien planteado se corrigen para que las paredes queden rectas.\n\nUna pared plana facilita después la colocación de muebles de cocina, rodapiés, puertas o revestimientos."
+    },
+    {
+      "id": "reparaciones",
+      "titulo": "Reparación de grietas, desconchones y rozas",
+      "resumen": "Fisuras, desconchones y rozas de instalaciones reparados e igualados con el resto de la pared.",
+      "descripcion": "Tras cambiar instalaciones eléctricas o de fontanería quedan rozas que hay que cerrar. También son habituales las fisuras superficiales, los desconchones por humedad ya resuelta o los golpes.\n\nSe reparan e igualan con el resto de la superficie para que no se noten al pintar. Si una grieta pudiera tener origen estructural, lo recomendable es que la revise antes un técnico."
+    }
+  ],
+  "reformas": [
+    {
+      "id": "reforma-integral",
+      "titulo": "Reformas integrales de vivienda",
+      "resumen": "Renovación completa de pisos y casas, organizando todos los oficios en el orden correcto.",
+      "descripcion": "Una reforma integral implica demoliciones, redistribución, instalaciones nuevas, revestimientos y acabados. Organizamos la obra y coordinamos a los profesionales de cada oficio para que trabajen en el orden adecuado."
+    },
+    {
+      "id": "cocinas-banos",
+      "titulo": "Reformas de cocinas y baños",
+      "resumen": "Albañilería, fontanería, electricidad, alicatado y yeso coordinados en una sola obra.",
+      "descripcion": "Cocinas y baños concentran casi todos los oficios en pocos metros: fontanería, electricidad, albañilería, alicatado y yeso. Coordinar todos los trabajos desde la empresa evita tiempos muertos entre gremios."
+    },
+    {
+      "id": "reformas-parciales",
+      "titulo": "Reformas parciales y obras en general",
+      "resumen": "Cambios de distribución, tabiques, actualización de estancias y otros trabajos de obra.",
+      "descripcion": "No todas las obras son integrales. También hacemos reformas de una o varias estancias, cambios de distribución, nuevos tabiques y otros trabajos de construcción."
+    }
+  ],
+  "gremios": [
+    {
+      "id": "albanileria",
+      "titulo": "Albañilería",
+      "texto": "Demoliciones, tabiques, recrecidos, rozas y ayudas a instalaciones.",
+      "destacado": false
+    },
+    {
+      "id": "alicatado",
+      "titulo": "Alicatado",
+      "texto": "Colocación de azulejos y revestimientos cerámicos en cocinas, baños y otras estancias.",
+      "destacado": false
+    },
+    {
+      "id": "fontaneria",
+      "titulo": "Fontanería",
+      "texto": "Nuevas tomas de agua y desagües, cambio de tuberías y montaje de sanitarios.",
+      "destacado": false
+    },
+    {
+      "id": "electricidad",
+      "titulo": "Electricidad",
+      "texto": "Renovación de instalaciones, nuevos puntos de luz y enchufes.",
+      "destacado": false
+    },
+    {
+      "id": "yeso",
+      "titulo": "Yeso",
+      "texto": "Nuestra especialidad, con equipo propio: revestimientos, alisados y acabados listos para pintar.",
+      "destacado": true
+    },
+    {
+      "id": "otros",
+      "titulo": "Otros oficios",
+      "texto": "Cualquier otro trabajo que requiera la obra, con profesionales de confianza.",
+      "destacado": false
+    }
+  ]
+}

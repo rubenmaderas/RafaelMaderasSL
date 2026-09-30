@@ -1,0 +1,26 @@
+---
+permalink: /_headers
+eleventyExcludeFromCollections: true
+---
+# Cabeceras HTTP para Netlify y Cloudflare Pages (generado automáticamente desde src/headers.njk).
+# La CSP completa (con los hashes del script y del CSS en línea) va en un <meta> dentro de
+# cada página; aquí solo se añaden las directivas comunes a toda la web, incluido el gestor
+# de contenidos (/admin/), que define su propia política. Ambas se definen en
+# eleventy.config.js. Si añades servicios de terceros, amplíala allí.
+
+/*
+  Content-Security-Policy: {{ cspHeader | safe }}
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Strict-Transport-Security: max-age=31536000
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Gestor de contenidos: siempre la última versión y fuera de los buscadores.
+/admin/*
+  Cache-Control: no-cache
+  X-Robots-Tag: noindex, nofollow

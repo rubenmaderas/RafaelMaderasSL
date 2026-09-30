@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+permalink: /404.html
+title: "Página no encontrada | Rafael Maderas S.L."
+description: "La página que buscas no existe o ha cambiado de dirección. Vuelve al inicio o contacta con Rafael Maderas S.L."
+noindex: true
+eleventyExcludeFromCollections: true
+---
+{%- from "macros/icons.njk" import icon -%}
+<section class="not-found container">
+  <p class="eyebrow">Error 404</p>
+  <h1>Esta página no existe</h1>
+  <p class="lead">Puede que la dirección haya cambiado o que el enlace no sea correcto. Estas páginas te pueden ayudar:</p>
+  <ul class="check-list">
+    {%- for item in navigation %}
+    <li>{{ icon("arrow", 18) }}<a href="{{ item.url }}">{{ item.label }}</a></li>
+    {%- endfor %}
+  </ul>
+</section>

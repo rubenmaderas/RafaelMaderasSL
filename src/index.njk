@@ -1,0 +1,139 @@
+---
+layout: layouts/base.njk
+permalink: /
+pageKey: inicio
+faqSchema: true
+---
+{#- Textos: src/_data/contenido/paginas/inicio.json (/admin → Páginas → Inicio). -#}
+{%- from "macros/icons.njk" import icon -%}
+{%- set c = contenido.paginas.inicio -%}
+<section class="hero" aria-labelledby="titulo-principal">
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <p class="eyebrow">{{ c.portada.antetitulo | t }}</p>
+      <h1 id="titulo-principal">{{ c.portada.titulo | highlight | safe }}</h1>
+      <p class="hero__subtitle">{{ c.portada.entradilla | mdi | safe }}</p>
+      <div class="btn-group hero__actions" data-hides-mobile-cta>
+        <a class="btn btn--primary" href="{{ site.phone.href }}">{{ icon("phone") }}<span>Llamar ahora</span></a>
+        <a class="btn btn--accent" href="{{ site.whatsapp.href }}" target="_blank" rel="noopener">{{ icon("whatsapp") }}<span>Escribir por WhatsApp</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span></a>
+      </div>
+    </div>
+    <div class="hero__visual">
+      {% image "hero_yeso", "(min-width: 72em) 30rem, (min-width: 48em) 40vw, 22rem", { eager: true } %}
+      <ul class="hero__badges">
+        <li class="hero-badge hero-badge--years">
+          <span class="hero-badge__label">{{ c.portada.insignias.oficio | t }}</span>
+          <span class="hero-badge__ring"><strong>{{ site.founder.yearsExperience }}</strong> años</span>
+        </li>
+        <li class="hero-badge hero-badge--direct">
+          <span class="hero-badge__icon">{{ icon("phone", 18) }}</span>
+          <span>{{ c.portada.insignias.interlocutor | mdi | safe }}</span>
+        </li>
+        <li class="hero-badge hero-badge--zone">
+          <span class="hero-badge__icon">{{ icon("pin", 18) }}</span>
+          <span>{{ c.portada.insignias.zona | mdi | safe }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section--surface" aria-labelledby="titulo-servicios">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ c.servicios.antetitulo | t }}</p>
+      <h2 id="titulo-servicios">{{ c.servicios.titulo | t }}</h2>
+      <p>{{ c.servicios.entradilla | mdi | safe }}</p>
+    </div>
+    <div class="grid grid--3">
+      {%- for service in services.yeso %}
+      <article class="card card--accent-top">
+        <h3>{{ service.titulo | t }}</h3>
+        <p>{{ service.resumen | mdi | safe }}</p>
+      </article>
+      {%- endfor %}
+      <article class="card">
+        <h3>{{ c.servicios.tarjetaReformas.titulo | t }}</h3>
+        {{ c.servicios.tarjetaReformas.texto | md | safe }}
+      </article>
+    </div>
+    <p class="card__more"><a class="link-arrow" href="/servicios/">{{ c.servicios.enlace | t }} {{ icon("arrow", 18) }}</a></p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="titulo-reformas">
+  <div class="container split">
+    {% image "reforma_interior", "(min-width: 72em) 34rem, (min-width: 48em) 45vw, calc(100vw - 3rem)", { class: "media--landscape" } %}
+    <div>
+      <p class="eyebrow">{{ c.reformas.antetitulo | t }}</p>
+      <h2 id="titulo-reformas">{{ c.reformas.titulo | t }}</h2>
+      {{ c.reformas.texto | md | safe }}
+      {%- if c.reformas.lista.length %}
+      <ul class="check-list">
+        {%- for item in c.reformas.lista %}
+        <li>{{ icon("check", 18) }}<span>{{ item | mdi | safe }}</span></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      <a class="link-arrow" href="/reformas/">{{ c.reformas.enlace | t }} {{ icon("arrow", 18) }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sand" aria-labelledby="titulo-zonas">
+  <div class="container split split--reverse">
+    {% image "jaen", "(min-width: 72em) 34rem, (min-width: 48em) 45vw, calc(100vw - 3rem)", { class: "media--landscape" } %}
+    <div>
+      <p class="eyebrow">{{ c.zonas.antetitulo | t }}</p>
+      <h2 id="titulo-zonas">{{ c.zonas.titulo | t }}</h2>
+      {{ c.zonas.texto | md | safe }}
+      {%- if c.zonas.localidades.length %}
+      <ul class="tag-list" aria-label="Algunas localidades cercanas a Jaén">
+        {%- for localidad in c.zonas.localidades %}
+        <li>{{ localidad | t }}</li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      <p class="card__more"><a class="link-arrow" href="/zonas-de-servicio/">{{ c.zonas.enlace | t }} {{ icon("arrow", 18) }}</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="titulo-proceso">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ c.proceso.antetitulo | t }}</p>
+      <h2 id="titulo-proceso">{{ c.proceso.titulo | t }}</h2>
+      <p>{{ c.proceso.entradilla | mdi | safe }}</p>
+    </div>
+    {% include "partials/process.njk" %}
+  </div>
+</section>
+
+<section class="section section--dark" aria-labelledby="titulo-por-que">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow eyebrow--light">{{ c.porque.antetitulo | t }}</p>
+      <h2 id="titulo-por-que">{{ c.porque.titulo | t }}</h2>
+      <p>{{ c.porque.entradilla | mdi | safe }}</p>
+    </div>
+    <div class="grid grid--4">
+      {%- for card in c.porque.tarjetas %}
+      <article class="card">
+        <h3>{{ card.titulo | t }}</h3>
+        {{ card.texto | md | safe }}
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="preguntas-frecuentes" aria-labelledby="titulo-faq">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <p class="eyebrow">{{ c.preguntas.antetitulo | t }}</p>
+      <h2 id="titulo-faq">{{ c.preguntas.titulo | t }}</h2>
+    </div>
+    {% include "partials/faq.njk" %}
+  </div>
+</section>

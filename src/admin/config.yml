@@ -1,0 +1,599 @@
+# Gestor de contenidos de Rafael Maderas S.L. (Decap CMS) — https://decapcms.org/docs/
+# ---------------------------------------------------------------------------------
+# Define qué se puede editar en /admin/ y cómo. Cada colección apunta a un archivo
+# JSON de src/_data/contenido/. Al pulsar «Publicar», el gestor guarda el cambio en
+# el repositorio (Git Gateway) y Netlify reconstruye la web en uno o dos minutos.
+#
+# Si añades un campo nuevo aquí, úsalo también en la plantilla correspondiente
+# (src/*.njk o src/_includes/). Los textos admiten comodines como {empresa} o
+# {telefono}: ver src/_lib/text.js.
+
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: "Gestor: crea {{collection}} «{{slug}}»"
+    update: "Gestor: actualiza {{collection}} «{{slug}}»"
+    delete: "Gestor: elimina {{collection}} «{{slug}}»"
+    uploadMedia: "Gestor: sube {{path}}"
+    deleteMedia: "Gestor: elimina {{path}}"
+
+# En local (npx decap-server + npm run dev) se edita sin iniciar sesión.
+local_backend: true
+
+locale: es
+site_url: https://rafaelmaderas.es
+display_url: https://rafaelmaderas.es
+logo:
+  src: /favicon.svg
+publish_mode: simple
+
+# Fotos subidas desde el gestor: se guardan junto a las demás y se optimizan en el
+# navegador antes de subirlas (JPG, 2000 px de ancho, sin datos de ubicación).
+# En el contenido solo se guarda el nombre del archivo (public_folder vacío): la web
+# publica versiones optimizadas y el gestor lee los originales del repositorio.
+media_folder: src/assets/img/originals
+public_folder: ""
+media_processing:
+  enabled: true
+  format:
+    enabled: true
+    default: jpeg
+  quality: 82
+  strip_metadata: true
+  width: 2000
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  # -------------------------------------------------------------------------------
+  - name: paginas
+    label: Páginas
+    label_singular: Página
+    description: >-
+      Textos de cada página de la web. Para resaltar en negrita escribe **así**.
+      Puedes usar comodines, que se sustituyen solos por los datos de la empresa:
+      {empresa}, {telefono}, {correo}, {años}, {fundacion}, {fundador}, {cargo},
+      {oficio}, {razon_social} y {cif}. Si cambia un dato, se actualiza en toda la web.
+    delete: false
+    files:
+      - name: inicio
+        label: Inicio (portada)
+        file: src/_data/contenido/paginas/inicio.json
+        fields:
+          - &seo
+            label: Google y redes sociales
+            name: seo
+            widget: object
+            collapsed: true
+            hint: Cómo aparece esta página en Google y al compartirla. En la vista previa verás el resultado con los datos reales y el número de caracteres.
+            fields:
+              - label: Título
+                name: titulo
+                widget: string
+                pattern: ['^.{10,80}$', "Escribe entre 10 y 80 caracteres."]
+                hint: Distinto en cada página. Google suele mostrar unos 60 caracteres.
+              - label: Descripción
+                name: descripcion
+                widget: text
+                pattern: ['^.{50,160}$', "Escribe entre 50 y 160 caracteres, en un solo párrafo."]
+                hint: Resumen de la página, de 120 a 160 caracteres, con la actividad y la zona.
+          - label: Primera pantalla
+            name: portada
+            widget: object
+            fields:
+              - &antetitulo {label: Antetítulo, name: antetitulo, widget: string, hint: Texto corto que aparece sobre el título.}
+              - label: Título principal (H1)
+                name: titulo
+                widget: string
+                hint: "El título más importante para Google. La palabra entre asteriscos se resalta en color: `Yesista y reformas en *Jaén*`."
+              - &entradilla {label: Entradilla, name: entradilla, widget: text, hint: Uno o dos párrafos cortos bajo el título.}
+              - label: Distintivos junto a la foto
+                name: insignias
+                widget: object
+                collapsed: true
+                fields:
+                  - {label: Rótulo de los años de oficio, name: oficio, widget: string, hint: "El número de años se calcula solo cada año a partir de «Datos de la empresa → Fundador → Año de inicio en el oficio»."}
+                  - {label: Distintivo del interlocutor, name: interlocutor, widget: string, hint: "Admite negrita: `**Un único** interlocutor`."}
+                  - {label: Distintivo de la zona, name: zona, widget: string, hint: "Admite negrita: `**Jaén** y Andalucía`."}
+          - label: Bloque de servicios
+            name: servicios
+            widget: object
+            collapsed: true
+            hint: Las tarjetas de los trabajos de yeso se editan en «Servicios».
+            fields:
+              - *antetitulo
+              - &titulo {label: Título, name: titulo, widget: string}
+              - *entradilla
+              - label: Tarjeta de reformas
+                name: tarjetaReformas
+                widget: object
+                fields:
+                  - *titulo
+                  - &texto_corto {label: Texto, name: texto, widget: text}
+              - &enlace {label: Texto del enlace, name: enlace, widget: string, hint: El destino del enlace es fijo.}
+          - label: Bloque de reformas
+            name: reformas
+            widget: object
+            collapsed: true
+            fields:
+              - *antetitulo
+              - *titulo
+              - &texto_largo
+                label: Texto
+                name: texto
+                widget: markdown
+                modes: [rich_text]
+                buttons: [bold, italic, link]
+                editor_components: []
+                sanitize_preview: true
+              - &lista
+                label: Lista de ventajas
+                name: lista
+                widget: list
+                field: {label: Elemento, name: elemento, widget: string}
+              - *enlace
+          - label: Bloque de zonas
+            name: zonas
+            widget: object
+            collapsed: true
+            fields:
+              - *antetitulo
+              - *titulo
+              - *texto_largo
+              - &localidades
+                label: Localidades
+                name: localidades
+                widget: list
+                field: {label: Localidad, name: localidad, widget: string}
+                hint: Se muestran como etiquetas. Menciona solo localidades en las que trabajéis de verdad.
+              - *enlace
+          - label: Bloque del proceso de trabajo
+            name: proceso
+            widget: object
+            collapsed: true
+            hint: Los pasos se editan en «Textos comunes → Proceso de trabajo».
+            fields: [*antetitulo, *titulo, *entradilla]
+          - label: Bloque «Por qué elegirnos»
+            name: porque
+            widget: object
+            collapsed: true
+            fields:
+              - *antetitulo
+              - *titulo
+              - *entradilla
+              - &tarjetas
+                label: Tarjetas
+                name: tarjetas
+                widget: list
+                collapsed: true
+                summary: "{{fields.titulo}}"
+                fields: [*titulo, *texto_corto]
+          - label: Bloque de preguntas frecuentes
+            name: preguntas
+            widget: object
+            collapsed: true
+            hint: Las preguntas y respuestas se editan en «Preguntas frecuentes».
+            fields: [*antetitulo, *titulo]
+
+      - name: servicios
+        label: Servicios
+        file: src/_data/contenido/paginas/servicios.json
+        fields:
+          - *seo
+          - &cabecera
+            label: Cabecera de la página
+            name: cabecera
+            widget: object
+            fields:
+              - *antetitulo
+              - {label: Título principal (H1), name: titulo, widget: string, hint: El título más importante de la página para Google.}
+              - *entradilla
+          - label: Bloque de trabajos de yeso
+            name: yeso
+            widget: object
+            collapsed: true
+            hint: Los trabajos se editan en «Servicios».
+            fields: [*antetitulo, *titulo, *entradilla]
+          - label: Bloque de reformas y obra
+            name: obra
+            widget: object
+            collapsed: true
+            hint: Los tipos de reforma se editan en «Servicios».
+            fields: [*antetitulo, *titulo, *entradilla, *enlace]
+          - label: Bloque de consejos
+            name: consejos
+            widget: object
+            collapsed: true
+            fields: [*antetitulo, *titulo, *entradilla, *tarjetas]
+
+      - name: reformas
+        label: Reformas
+        file: src/_data/contenido/paginas/reformas.json
+        fields:
+          - *seo
+          - *cabecera
+          - label: Bloque de coordinación
+            name: coordinacion
+            widget: object
+            collapsed: true
+            fields: [*antetitulo, *titulo, *texto_largo, *lista]
+          - label: Bloque de oficios
+            name: gremios
+            widget: object
+            collapsed: true
+            hint: Los oficios se editan en «Servicios → Oficios que coordinamos».
+            fields: [*antetitulo, *titulo, *entradilla]
+          - label: Bloque de tipos de reforma
+            name: tipos
+            widget: object
+            collapsed: true
+            hint: Los tipos de reforma se editan en «Servicios».
+            fields: [*antetitulo, *titulo]
+          - label: Bloque del orden de obra
+            name: orden
+            widget: object
+            collapsed: true
+            fields:
+              - *antetitulo
+              - *titulo
+              - *entradilla
+              - label: Pasos (en orden)
+                name: pasos
+                widget: list
+                field: {label: Paso, name: paso, widget: string}
+                hint: "Para destacar el nombre del paso, escríbelo en negrita: `**Demoliciones** y retirada…`."
+          - label: Bloque de permisos
+            name: permisos
+            widget: object
+            collapsed: true
+            fields: [*titulo, *texto_largo]
+          - label: Bloque del proceso de trabajo
+            name: proceso
+            widget: object
+            collapsed: true
+            hint: Los pasos se editan en «Textos comunes → Proceso de trabajo».
+            fields: [*antetitulo, *titulo]
+
+      - name: zonas
+        label: Zonas de servicio
+        file: src/_data/contenido/paginas/zonas.json
+        fields:
+          - *seo
+          - *cabecera
+          - label: Jaén capital
+            name: capital
+            widget: object
+            collapsed: true
+            fields: [*antetitulo, *titulo, *texto_largo]
+          - label: Área metropolitana y pueblos cercanos
+            name: cercanias
+            widget: object
+            collapsed: true
+            fields: &campos_zona [*antetitulo, *titulo, *texto_largo, *localidades]
+          - label: Resto de la provincia de Jaén
+            name: provincia
+            widget: object
+            collapsed: true
+            fields: *campos_zona
+          - label: Resto de Andalucía
+            name: andalucia
+            widget: object
+            collapsed: true
+            fields: *campos_zona
+          - label: Aviso «¿Tu localidad no aparece?»
+            name: otraLocalidad
+            widget: object
+            collapsed: true
+            fields: [*titulo, *texto_largo]
+
+      - name: quienes-somos
+        label: Quiénes somos
+        file: src/_data/contenido/paginas/quienes-somos.json
+        fields:
+          - *seo
+          - *cabecera
+          - label: Nuestra historia
+            name: historia
+            widget: object
+            collapsed: true
+            fields: [*titulo, *texto_largo]
+          - label: Nuestro equipo
+            name: equipo
+            widget: object
+            collapsed: true
+            fields: [*titulo, *texto_largo]
+          - label: Cómo trabajamos
+            name: forma
+            widget: object
+            collapsed: true
+            fields: [*antetitulo, *titulo, *tarjetas]
+          - label: La empresa en datos
+            name: datos
+            widget: object
+            collapsed: true
+            fields:
+              - *titulo
+              - label: Filas
+                name: filas
+                widget: list
+                collapsed: true
+                summary: "{{fields.etiqueta}}: {{fields.valor}}"
+                hint: Usa comodines como {razon_social}, {cif} o {fundacion} para que los datos coincidan siempre con los legales.
+                fields:
+                  - {label: Dato, name: etiqueta, widget: string}
+                  - {label: Valor, name: valor, widget: string}
+              - &nota {label: Nota, name: nota, widget: string, hint: "Admite enlaces: `[aviso legal](/aviso-legal/)`."}
+
+      - name: contacto
+        label: Contacto
+        file: src/_data/contenido/paginas/contacto.json
+        fields:
+          - *seo
+          - *cabecera
+          - label: Tarjetas de contacto
+            name: medios
+            widget: object
+            collapsed: true
+            hint: El número y el correo se toman de «Datos de la empresa».
+            fields:
+              - {label: Teléfono, name: telefono, widget: object, fields: [*titulo, *texto_corto]}
+              - {label: WhatsApp, name: whatsapp, widget: object, fields: [*titulo, *texto_corto]}
+              - {label: Correo electrónico, name: correo, widget: object, fields: [*titulo, *texto_corto]}
+          - label: Qué contar en el primer mensaje
+            name: mensaje
+            widget: object
+            collapsed: true
+            fields:
+              - *titulo
+              - *entradilla
+              - {label: Lista, name: lista, widget: list, field: {label: Elemento, name: elemento, widget: string}}
+          - label: Si no contestamos al momento
+            name: disponibilidad
+            widget: object
+            collapsed: true
+            fields: [*titulo, *texto_largo]
+          - label: Dónde trabajamos
+            name: zona
+            widget: object
+            collapsed: true
+            fields: [*titulo, *texto_largo]
+          - label: Datos de contacto
+            name: datos
+            widget: object
+            collapsed: true
+            fields:
+              - *titulo
+              - {label: Zona de trabajo, name: zona, widget: string}
+              - *nota
+
+  # -------------------------------------------------------------------------------
+  - name: servicios
+    label: Servicios
+    description: >-
+      Los trabajos que ofrecemos. Aparecen en la portada, en Servicios y en Reformas,
+      y también en los datos que se envían a Google. Anuncia solo trabajos que hagáis.
+    delete: false
+    files:
+      - name: trabajos
+        label: Servicios y oficios
+        file: src/_data/contenido/servicios.json
+        fields:
+          - label: Trabajos de yeso
+            name: yeso
+            widget: list
+            collapsed: true
+            summary: "{{fields.titulo}}"
+            hint: Aparecen en la portada (nombre y resumen) y en Servicios (nombre y descripción).
+            fields: &campos_servicio
+              - {label: Identificador, name: id, widget: hidden}
+              - {label: Nombre del servicio, name: titulo, widget: string}
+              - {label: Resumen, name: resumen, widget: text, hint: Una o dos frases.}
+              - label: Descripción completa
+                name: descripcion
+                widget: markdown
+                modes: [rich_text]
+                buttons: [bold, italic, link]
+                editor_components: []
+                sanitize_preview: true
+          - label: Reformas y obra en general
+            name: reformas
+            widget: list
+            collapsed: true
+            summary: "{{fields.titulo}}"
+            hint: Aparecen en Servicios y en Reformas.
+            fields: *campos_servicio
+          - label: Oficios que coordinamos
+            name: gremios
+            widget: list
+            collapsed: true
+            summary: "{{fields.titulo}}"
+            hint: Aparecen en Reformas.
+            fields:
+              - {label: Identificador, name: id, widget: hidden}
+              - *titulo
+              - *texto_corto
+              - {label: Destacar, name: destacado, widget: boolean, default: false, required: false, hint: "Resalta la tarjeta. Se usa para el yeso, el oficio propio de la empresa."}
+
+  # -------------------------------------------------------------------------------
+  - name: preguntas
+    label: Preguntas frecuentes
+    description: >-
+      Aparecen en la portada y se envían a Google exactamente como se ven.
+      Responde solo con información real y comprobable.
+    delete: false
+    files:
+      - name: preguntas
+        label: Preguntas frecuentes
+        file: src/_data/contenido/preguntas.json
+        fields:
+          - label: Preguntas
+            name: preguntas
+            widget: list
+            collapsed: true
+            summary: "{{fields.pregunta}}"
+            fields:
+              - {label: Pregunta, name: pregunta, widget: string}
+              - {label: Respuesta, name: respuesta, widget: text, hint: "Texto sin formato. Separa los párrafos con una línea en blanco. Puedes usar {telefono} y {correo}."}
+
+  # -------------------------------------------------------------------------------
+  - name: fotos
+    label: Fotos de la web
+    description: >-
+      Cada foto ocupa un hueco fijo de la web. Para cambiarla, sube una nueva (JPG o PNG;
+      las fotos HEIC del iPhone hay que exportarlas antes como JPG), escribe qué se ve en
+      ella y desmarca «Imagen ilustrativa» si es una obra real de la empresa. Usa solo
+      fotos propias o con licencia, y pide permiso antes de mostrar a personas o viviendas
+      reconocibles.
+    delete: false
+    files:
+      - name: fotos
+        label: Fotos de la web
+        file: src/_data/contenido/imagenes.json
+        fields:
+          - label: "Portada: foto principal"
+            name: hero_yeso
+            widget: object
+            collapsed: true
+            fields: &campos_foto
+              - label: Foto
+                name: foto
+                widget: image
+                choose_url: false
+                media_library:
+                  config:
+                    max_file_size: 25000000
+                pattern: ['\.(jpe?g|png|webp)$', "La foto debe estar en formato JPG, PNG o WebP."]
+                hint: Se recorta sola para encajar en su hueco; procura que lo importante quede en el centro.
+              - label: Descripción de la foto (texto alternativo)
+                name: alt
+                widget: string
+                hint: Qué se ve en la foto, en una frase. La usan los lectores de pantalla y Google. Cámbiala siempre que cambies la foto.
+              - label: Imagen ilustrativa
+                name: ilustrativa
+                widget: boolean
+                default: true
+                required: false
+                hint: Marcada, la foto lleva la etiqueta «Imagen ilustrativa» porque no es una obra de la empresa. Desmárcala si la foto es de un trabajo vuestro.
+              - label: Créditos (solo imágenes ilustrativas)
+                name: credito
+                widget: object
+                collapsed: true
+                required: false
+                hint: Autor y licencia de la foto de banco de imágenes; aparecen en el aviso legal. Si la foto es vuestra, no hace falta rellenarlos.
+                fields:
+                  - {label: Autor, name: autor, widget: string, required: false}
+                  - {label: Web del autor, name: autorUrl, widget: string, required: false}
+                  - {label: Fuente, name: fuente, widget: string, required: false}
+                  - {label: Enlace a la foto en la fuente, name: fuenteUrl, widget: string, required: false}
+                  - {label: Licencia, name: licencia, widget: string, required: false}
+                  - {label: Enlace a la licencia, name: licenciaUrl, widget: string, required: false}
+          - {label: "Reformas: portada y cabecera de Reformas", name: reforma_interior, widget: object, collapsed: true, fields: *campos_foto}
+          - {label: "Albañilería: Servicios y Reformas", name: albanileria, widget: object, collapsed: true, fields: *campos_foto}
+          - {label: "Alicatado: Reformas", name: alicatado, widget: object, collapsed: true, fields: *campos_foto}
+          - {label: "Acabado interior: Servicios", name: acabado_interior, widget: object, collapsed: true, fields: *campos_foto}
+          - {label: "Herramientas: Quiénes somos", name: herramientas, widget: object, collapsed: true, fields: *campos_foto}
+          - {label: "Jaén: portada y cabecera de Zonas de servicio", name: jaen, widget: object, collapsed: true, fields: *campos_foto}
+
+  # -------------------------------------------------------------------------------
+  - name: comun
+    label: Textos comunes
+    description: Textos que se repiten en varias páginas.
+    delete: false
+    files:
+      - name: comun
+        label: Textos comunes
+        file: src/_data/contenido/comun.json
+        fields:
+          - label: Cabecera
+            name: marca
+            widget: object
+            fields:
+              - {label: Lema bajo el nombre de la empresa, name: lema, widget: string}
+          - label: Proceso de trabajo
+            name: proceso
+            widget: list
+            collapsed: true
+            summary: "{{fields.titulo}}"
+            hint: Aparece en la portada y en Reformas, numerado en este orden.
+            fields: [*titulo, *texto_corto]
+          - label: Bloque final de contacto
+            name: cta
+            widget: object
+            collapsed: true
+            hint: Aparece al final de casi todas las páginas, con los botones de llamada y WhatsApp.
+            fields: [*antetitulo, *titulo, *texto_corto]
+          - label: Pie de página
+            name: pie
+            widget: object
+            collapsed: true
+            fields:
+              - *texto_corto
+              - {label: Zona de trabajo, name: zona, widget: string}
+
+  # -------------------------------------------------------------------------------
+  - name: empresa
+    label: Datos de la empresa
+    description: >-
+      Datos que se usan en toda la web: botones de llamada y WhatsApp, pie de página,
+      textos legales y datos para Google. Revísalos con cuidado antes de publicar.
+    delete: false
+    files:
+      - name: empresa
+        label: Datos de la empresa
+        file: src/_data/contenido/empresa.json
+        fields:
+          - {label: Nombre comercial, name: nombre, widget: string, hint: "Aparece en la cabecera, en los títulos y en el comodín {empresa}."}
+          - {label: Nombre corto, name: nombreCorto, widget: string}
+          - {label: Eslogan, name: eslogan, widget: string}
+          - label: Teléfono y WhatsApp
+            name: telefono
+            widget: string
+            pattern: ['^[6789][0-9]{8}$', "Escribe las 9 cifras seguidas, sin espacios ni +34 (por ejemplo, 600123456)."]
+            hint: El mismo número se usa para llamar y para WhatsApp. Compruébalo dos veces.
+          - label: Correo electrónico
+            name: email
+            widget: string
+            pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', "Escribe un correo electrónico válido."]
+          - {label: Mensaje inicial de WhatsApp, name: mensajeWhatsapp, widget: string, hint: Texto que aparece ya escrito al abrir WhatsApp desde la web.}
+          - {label: Año de constitución de la sociedad, name: anoConstitucion, widget: number, value_type: int, min: 1950, max: 2100}
+          - label: Fundador
+            name: fundador
+            widget: object
+            collapsed: true
+            fields:
+              - {label: Nombre, name: nombre, widget: string}
+              - {label: Cargo, name: cargo, widget: string, hint: "En minúscula, por ejemplo: fundador y gerente."}
+              - {label: Oficio, name: oficio, widget: string}
+              - {label: Año de inicio en el oficio, name: inicioOficio, widget: number, value_type: int, min: 1950, max: 2100, hint: "Los años de experiencia ({años}) se calculan solos a partir de este año."}
+          - {label: Descripción para Google, name: descripcion, widget: text, hint: Descripción de la empresa en los datos estructurados que lee Google. No se muestra en la página.}
+          - label: Datos legales
+            name: legal
+            widget: object
+            collapsed: true
+            hint: Aparecen en el aviso legal y en la política de privacidad. Deben coincidir con los del Registro Mercantil.
+            fields:
+              - {label: Razón social, name: razonSocial, widget: string}
+              - {label: CIF, name: cif, widget: string, pattern: ['^[A-Z][0-9]{7}[0-9A-J]$', "Escribe el CIF en mayúsculas y sin espacios ni guiones."]}
+              - label: Domicilio social
+                name: domicilio
+                widget: object
+                fields:
+                  - {label: Calle y número, name: calle, widget: string}
+                  - {label: Código postal, name: codigoPostal, widget: string, pattern: ['^[0-9]{5}$', "Escribe las 5 cifras del código postal."]}
+                  - {label: Localidad, name: localidad, widget: string}
+                  - {label: Provincia, name: provincia, widget: string}
+              - {label: Inscripción en el Registro Mercantil, name: registroMercantil, widget: text}
+              - {label: Proveedor de alojamiento web, name: hosting, widget: text}
+              - {label: Fecha de última actualización de los textos legales, name: ultimaActualizacion, widget: string, hint: "Por ejemplo: 30 de septiembre de 2026. Cámbiala cuando modifiques datos legales."}
+          - label: Redes sociales
+            name: redes
+            widget: list
+            collapsed: true
+            summary: "{{fields.nombre}}"
+            hint: Deja la dirección vacía para no mostrar la red. Solo se enlazan las que tengan dirección.
+            fields:
+              - {label: Nombre, name: nombre, widget: string}
+              - {label: "Dirección (https://…)", name: url, widget: string, required: false, pattern: ['^(https://\S+)?$', "Escribe la dirección completa, empezando por https://"]}

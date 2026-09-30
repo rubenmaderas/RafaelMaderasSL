@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+noindex: true
+---
+<header class="page-hero container">
+  <p class="eyebrow">Información legal</p>
+  <h1>{{ heading }}</h1>
+  <p class="lead">Última actualización: {{ site.legal.lastUpdated }}</p>
+</header>
+
+<section class="section section--tight-top section--surface">
+  <div class="container prose">
+    {%- if content.indexOf(site.legal.pendingMark) != -1 %}
+    <div class="notice" role="note">
+      <p><strong>Texto provisional.</strong> Este documento contiene datos marcados como <mark class="pending">{{ site.legal.pendingMark }}</mark> que deben completarse con información real. Antes de publicar la web conviene que lo revise un profesional (gestoría o asesoría legal) para adaptarlo a la situación concreta de la empresa.</p>
+    </div>
+    {%- endif %}
+    {{ content | safe }}
+  </div>
+</section>

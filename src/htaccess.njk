@@ -1,0 +1,62 @@
+---
+permalink: /.htaccess
+eleventyExcludeFromCollections: true
+---
+# Configuración para hosting Apache (generado automáticamente desde src/htaccess.njk).
+# Sube el contenido de la carpeta _site/ (incluido este archivo oculto) a la raíz pública.
+# La CSP se define en eleventy.config.js (en <meta> dentro de cada página y aquí).
+# El gestor de contenidos (/admin/) necesita Netlify (Identity + Git Gateway): en Apache
+# solo se publica la web; conviene no subir la carpeta admin/.
+
+Options -Indexes
+AddDefaultCharset utf-8
+ErrorDocument 404 /404.html
+
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddType image/svg+xml .svg
+</IfModule>
+
+# Archivo de cabeceras de Netlify/Cloudflare: no es necesario en Apache.
+<Files "_headers">
+  Require all denied
+</Files>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1) Forzar HTTPS. Descomentar cuando el certificado SSL esté activo.
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2) Unificar dominio: redirigir "www." a la versión sin "www".
+  #    Ajustar si el dominio definitivo (site.url) usa "www".
+  # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  # RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Directivas comunes; la política completa con hashes va en un <meta> dentro de cada página.
+  Header always set Content-Security-Policy "{{ cspHeader | safe }}"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  # Activar solo cuando toda la web funcione por HTTPS:
+  # Header always set Strict-Transport-Security "max-age=31536000"
+
+  # Recursos versionados (JS con ?v=hash, imágenes con hash en el nombre, fuente).
+  <If "%{REQUEST_URI} =~ m#^/assets/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript text/javascript application/ld+json image/svg+xml
+</IfModule>

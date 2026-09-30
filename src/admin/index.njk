@@ -1,0 +1,47 @@
+---
+permalink: /admin/index.html
+eleventyExcludeFromCollections: true
+---
+{#-
+  Gestor de contenidos (Decap CMS) en /admin/. Acceso con usuario y contraseña
+  mediante Netlify Identity (solo por invitación). Configuración: src/admin/config.yml.
+  Vistas previas y ajustes: src/admin/cms.js.
+
+  CSP propia: el gestor necesita 'unsafe-eval' (valida la configuración con AJV) y
+  estilos en línea (CSS-in-JS). La web pública mantiene su política estricta.
+-#}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' blob: https://www.netlifystatus.com http://localhost:8081; frame-src 'self' blob:; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>Gestor de contenidos | {{ site.name }}</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url">
+  <script src="/admin/netlify-identity.js"></script>
+  {#- Ajustes para móvil: Decap está pensado para escritorio (ancho mínimo de 800 px).
+      En pantallas estrechas se oculta la vista previa y la barra superior se adapta.
+      Si una actualización de Decap cambia estos nombres de clase, solo se pierde el ajuste. #}
+  <style>
+    @media (max-width: 799px) {
+      [class*="-EditorContainer"] { min-width: 0 !important; }
+      [class*="-ToolbarContainer"] { min-width: 0 !important; }
+      [class*="-ToolbarSectionBackLink"] { flex: 1 1 auto !important; min-width: 0 !important; padding: 0 0.75rem !important; }
+      [class*="-ToolbarSectionBackLink"] > div:last-child { min-width: 0; overflow: hidden; }
+      [class*="-BackCollection"] { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      [class*="-ToolbarSectionMain"] { flex: 0 0 auto !important; padding: 0 0.5rem !important; }
+      [class*="-ToolbarSubSectionLast"], [class*="-ToolbarSectionMeta"], [class*="-ViewControls"] { display: none !important; }
+      [class*="-StyledSplitPane"] > div:first-child { width: 100% !important; flex: 1 1 auto !important; }
+      [class*="-StyledSplitPane"] > div:not(:first-child), [class*="-StyledSplitPane"] > span { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <noscript>El gestor de contenidos necesita JavaScript activado.</noscript>
+  <script type="application/json" id="cms-tokens">{% cmsTokens %}</script>
+  <script src="/admin/decap-cms.js"></script>
+  <script src="{{ '/admin/cms.js' | asset }}"></script>
+</body>
+</html>

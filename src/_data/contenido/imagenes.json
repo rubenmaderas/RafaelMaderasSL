@@ -1,0 +1,93 @@
+{
+  "hero_yeso": {
+    "foto": "hero-yeso.jpg",
+    "alt": "Manos de un operario cargando yeso en una llana junto a una pared interior lisa",
+    "ilustrativa": true,
+    "credito": {
+      "autor": "Sasun Bughdaryan",
+      "autorUrl": "https://unsplash.com/@sasun1990",
+      "fuente": "Unsplash",
+      "fuenteUrl": "https://unsplash.com/photos/hands-applying-plaster-to-a-wall-with-trowels-Re1O5byZ8bY",
+      "licencia": "Unsplash License",
+      "licenciaUrl": "https://unsplash.com/license"
+    }
+  },
+  "reforma_interior": {
+    "foto": "reforma-interior.jpg",
+    "alt": "Cocina en plena reforma con los muebles protegidos con plástico y una escalera de obra",
+    "ilustrativa": true,
+    "credito": {
+      "autor": "immo RENOVATION",
+      "autorUrl": "https://unsplash.com/@immorenovation",
+      "fuente": "Unsplash",
+      "fuenteUrl": "https://unsplash.com/photos/kitchen-renovation-with-white-cabinets-UqNEbyRQ660",
+      "licencia": "Unsplash License",
+      "licenciaUrl": "https://unsplash.com/license"
+    }
+  },
+  "albanileria": {
+    "foto": "albanileria.jpg",
+    "alt": "Manos colocando mortero con una paleta sobre un muro de bloques",
+    "ilustrativa": true,
+    "credito": {
+      "autor": "Solømen",
+      "autorUrl": "https://unsplash.com/@solomen",
+      "fuente": "Unsplash",
+      "fuenteUrl": "https://unsplash.com/photos/a-person-is-putting-cement-on-a-brick-wall-i6V6diaf71A",
+      "licencia": "Unsplash License",
+      "licenciaUrl": "https://unsplash.com/license"
+    }
+  },
+  "alicatado": {
+    "foto": "alicatado.jpg",
+    "alt": "Mano colocando un azulejo blanco sobre adhesivo peinado en una pared",
+    "ilustrativa": true,
+    "credito": {
+      "autor": "charlesdeluvio",
+      "autorUrl": "https://unsplash.com/@charlesdeluvio",
+      "fuente": "Unsplash",
+      "fuenteUrl": "https://unsplash.com/photos/person-holding-white-tile-LyQi9DS7AEg",
+      "licencia": "Unsplash License",
+      "licenciaUrl": "https://unsplash.com/license"
+    }
+  },
+  "acabado_interior": {
+    "foto": "acabado-interior.jpg",
+    "alt": "Salón luminoso con paredes blancas lisas, grandes ventanas y mobiliario en tonos neutros",
+    "ilustrativa": true,
+    "credito": {
+      "autor": "Clay Banks",
+      "autorUrl": "https://unsplash.com/@claybanks",
+      "fuente": "Unsplash",
+      "fuenteUrl": "https://unsplash.com/photos/a-living-room-filled-with-furniture-and-a-fire-place-qdavoiFWGQc",
+      "licencia": "Unsplash License",
+      "licenciaUrl": "https://unsplash.com/license"
+    }
+  },
+  "herramientas": {
+    "foto": "herramientas.jpg",
+    "alt": "Llanas, paletas y otras herramientas de albañil dentro de un cubo y una carretilla",
+    "ilustrativa": true,
+    "credito": {
+      "autor": "Annie Spratt",
+      "autorUrl": "https://unsplash.com/@anniespratt",
+      "fuente": "Unsplash",
+      "fuenteUrl": "https://unsplash.com/photos/assortment-of-construction-tools-on-a-building-site-MlXFL3VBOhQ",
+      "licencia": "Unsplash License",
+      "licenciaUrl": "https://unsplash.com/license"
+    }
+  },
+  "jaen": {
+    "foto": "jaen.jpg",
+    "alt": "Vista aérea de Baños de la Encina, en la provincia de Jaén, con su iglesia, casas blancas y olivares al fondo",
+    "ilustrativa": true,
+    "credito": {
+      "autor": "Sergio Guardiola Herrador",
+      "autorUrl": "https://unsplash.com/@guardiola86",
+      "fuente": "Unsplash",
+      "fuenteUrl": "https://unsplash.com/photos/an-aerial-view-of-a-city-with-a-clock-tower-YLKVjDGRunc",
+      "licencia": "Unsplash License",
+      "licenciaUrl": "https://unsplash.com/license"
+    }
+  }
+}

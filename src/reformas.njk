@@ -1,0 +1,110 @@
+---
+layout: layouts/base.njk
+permalink: /reformas/
+pageKey: reformas
+breadcrumb: "Reformas"
+---
+{#- Textos: contenido/paginas/reformas.json y contenido/servicios.json (/admin). -#}
+{%- from "macros/icons.njk" import icon -%}
+{%- set c = contenido.paginas.reformas -%}
+<header class="page-hero container">
+  <div class="split">
+    <div>
+      <p class="eyebrow">{{ c.cabecera.antetitulo | t }}</p>
+      <h1>{{ c.cabecera.titulo | t }}</h1>
+      <p class="lead">{{ c.cabecera.entradilla | mdi | safe }}</p>
+      <div class="btn-group" data-hides-mobile-cta>
+        <a class="btn btn--primary" href="{{ site.phone.href }}">{{ icon("phone") }}<span>Llamar ahora</span></a>
+        <a class="btn btn--accent" href="{{ site.whatsapp.href }}" target="_blank" rel="noopener">{{ icon("whatsapp") }}<span>Escribir por WhatsApp</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span></a>
+      </div>
+    </div>
+    {% image "reforma_interior", "(min-width: 72em) 34rem, (min-width: 48em) 45vw, calc(100vw - 3rem)", { eager: true, class: "media--landscape" } %}
+  </div>
+</header>
+
+<section class="section section--surface" aria-labelledby="titulo-coordinacion">
+  <div class="container split split--wide-text">
+    <div>
+      <p class="eyebrow">{{ c.coordinacion.antetitulo | t }}</p>
+      <h2 id="titulo-coordinacion">{{ c.coordinacion.titulo | t }}</h2>
+      {{ c.coordinacion.texto | md | safe }}
+    </div>
+    {%- if c.coordinacion.lista.length %}
+    <ul class="check-list">
+      {%- for item in c.coordinacion.lista %}
+      <li>{{ icon("check", 18) }}<span>{{ item | mdi | safe }}</span></li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="titulo-gremios">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ c.gremios.antetitulo | t }}</p>
+      <h2 id="titulo-gremios">{{ c.gremios.titulo | t }}</h2>
+      <p>{{ c.gremios.entradilla | mdi | safe }}</p>
+    </div>
+    <div class="grid grid--3">
+      {%- for gremio in services.gremios %}
+      <article class="card{% if gremio.destacado %} card--accent-top{% endif %}">
+        <h3>{{ gremio.titulo | t }}</h3>
+        {{ gremio.texto | md | safe }}
+      </article>
+      {%- endfor %}
+    </div>
+    <div class="grid grid--2 gallery">
+      {% image "albanileria", "(min-width: 72em) 34rem, (min-width: 40em) 45vw, calc(100vw - 3rem)", { class: "media--landscape" } %}
+      {% image "alicatado", "(min-width: 72em) 34rem, (min-width: 40em) 45vw, calc(100vw - 3rem)", { class: "media--landscape media--focus-low" } %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--sand" aria-labelledby="titulo-tipos">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ c.tipos.antetitulo | t }}</p>
+      <h2 id="titulo-tipos">{{ c.tipos.titulo | t }}</h2>
+    </div>
+    <div class="grid grid--3">
+      {%- for service in services.reformas %}
+      <article class="card card--accent-top">
+        <h3>{{ service.titulo | t }}</h3>
+        {{ service.descripcion | md | safe }}
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="titulo-orden">
+  <div class="container split split--wide-text split--top">
+    <div>
+      <p class="eyebrow">{{ c.orden.antetitulo | t }}</p>
+      <h2 id="titulo-orden">{{ c.orden.titulo | t }}</h2>
+      <p>{{ c.orden.entradilla | mdi | safe }}</p>
+      {%- if c.orden.pasos.length %}
+      <ol class="steps">
+        {%- for paso in c.orden.pasos %}
+        <li>{{ paso | mdi | safe }}</li>
+        {%- endfor %}
+      </ol>
+      {%- endif %}
+    </div>
+    <aside class="card" aria-labelledby="titulo-licencias">
+      <h3 id="titulo-licencias">{{ c.permisos.titulo | t }}</h3>
+      {{ c.permisos.texto | md | safe }}
+    </aside>
+  </div>
+</section>
+
+<section class="section section--surface" aria-labelledby="titulo-proceso">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ c.proceso.antetitulo | t }}</p>
+      <h2 id="titulo-proceso">{{ c.proceso.titulo | t }}</h2>
+    </div>
+    {% include "partials/process.njk" %}
+  </div>
+</section>

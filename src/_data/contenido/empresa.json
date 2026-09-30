@@ -1,0 +1,34 @@
+{
+  "nombre": "Rafael Maderas S.L.",
+  "nombreCorto": "Rafael Maderas",
+  "eslogan": "Yesista y reformas en Jaén",
+  "telefono": "630505489",
+  "email": "rafaelmaderas@hotmail.es",
+  "mensajeWhatsapp": "Hola, quiero pedir información sobre una obra o reforma.",
+  "anoConstitucion": 2012,
+  "fundador": {
+    "nombre": "Rafael Maderas",
+    "cargo": "fundador y gerente",
+    "oficio": "yesista",
+    "inicioOficio": 1986
+  },
+  "descripcion": "Empresa de trabajos de yeso y reformas en Jaén, fundada y dirigida por un yesista con {años} años de oficio. Yeso con equipo propio y reformas integrales con coordinación de gremios en Jaén capital, provincia de Jaén y resto de Andalucía.",
+  "legal": {
+    "razonSocial": "Rafael Maderas Sociedad Limitada",
+    "cif": "B23691108",
+    "domicilio": {
+      "calle": "Calle Perú, 2 A",
+      "codigoPostal": "23002",
+      "localidad": "Jaén",
+      "provincia": "Jaén"
+    },
+    "registroMercantil": "Inscrita en el Registro Mercantil de Jaén, tomo 498, folio 51, sección 8.ª, hoja J-19041, inscripción 1.ª",
+    "hosting": "Netlify, Inc. (101 2nd Street, San Francisco, CA 94105, Estados Unidos), adherida al Marco de Privacidad de Datos UE-EE. UU.",
+    "ultimaActualizacion": "30 de septiembre de 2026"
+  },
+  "redes": [
+    { "nombre": "Facebook", "url": "" },
+    { "nombre": "Instagram", "url": "" },
+    { "nombre": "Perfil de Empresa de Google", "url": "" }
+  ]
+}

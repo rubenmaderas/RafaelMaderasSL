@@ -1,0 +1,69 @@
+---
+layout: layouts/legal.njk
+permalink: /aviso-legal/
+title: "Aviso legal | Rafael Maderas S.L."
+description: "Aviso legal de la web de Rafael Maderas S.L.: datos identificativos del titular, condiciones de uso, propiedad intelectual y responsabilidad."
+heading: "Aviso legal"
+breadcrumb: "Aviso legal"
+---
+<h2>1. Datos identificativos del titular</h2>
+<p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los datos del titular de esta web:</p>
+<ul>
+  <li><strong>Denominación social:</strong> {{ site.registeredName }} ({{ site.legalName }})</li>
+  <li><strong>CIF:</strong> {{ site.legal.cif | legalValue | safe }}</li>
+  <li><strong>Domicilio social:</strong> {{ site.legal.domicilio | legalValue | safe }}</li>
+  <li><strong>Datos registrales:</strong> {{ site.legal.registroMercantil | legalValue | safe }}</li>
+  <li><strong>Teléfono:</strong> <a href="{{ site.phone.href }}">{{ site.phone.displayIntl }}</a></li>
+  <li><strong>Correo electrónico:</strong> <a href="{{ site.email.href }}">{{ site.email.address }}</a></li>
+  <li><strong>Dominio de la web:</strong> {{ site.legal.dominio | legalValue | safe }}</li>
+</ul>
+
+<h2>2. Objeto de la web</h2>
+<p>Esta web ofrece información sobre los servicios de {{ site.legalName }}: trabajos de yeso, reformas y construcción en general en Jaén, su provincia y el resto de Andalucía. También facilita los medios de contacto con la empresa: teléfono, WhatsApp y correo electrónico.</p>
+<p>La web no permite contratar servicios ni realizar compras en línea, y no incluye formularios de recogida de datos.</p>
+
+<h2>3. Condiciones de uso</h2>
+<p>El acceso a la web es libre y gratuito, y supone la aceptación de este aviso legal. La persona usuaria se compromete a hacer un uso adecuado de los contenidos, conforme a la ley, a la buena fe y al orden público, y a no emplearlos para actividades ilícitas o que puedan dañar a {{ site.legalName }} o a terceros.</p>
+<p>La información de la web tiene carácter orientativo. Las condiciones concretas de cada trabajo (alcance, plazos e importe) se acuerdan de forma individual con cada cliente.</p>
+
+<h2>4. Propiedad intelectual e industrial</h2>
+<p>Los textos, el diseño y el código de esta web pertenecen a {{ site.legalName }} o se usan con autorización de sus titulares. No se permite su reproducción, distribución o transformación con fines comerciales sin autorización previa.</p>
+{%- if hasIllustrativeImages %}
+<p>Algunas fotografías son imágenes de bancos de imágenes, utilizadas con licencia libre para uso comercial. Se identifican con la etiqueta «Imagen ilustrativa» y <strong>no corresponden a trabajos realizados por la empresa</strong>. Autoría:</p>
+<div class="table-scroll">
+  <table>
+    <caption class="visually-hidden">Créditos de las imágenes ilustrativas</caption>
+    <thead>
+      <tr><th scope="col">Imagen</th><th scope="col">Autor</th><th scope="col">Fuente y licencia</th></tr>
+    </thead>
+    <tbody>
+      {%- for key, img in images %}
+      {%- if img.credito %}
+      {%- set cr = img.credito %}
+      <tr>
+        <td>{{ img.alt }}</td>
+        <td>{% if cr.autorUrl %}<a href="{{ cr.autorUrl }}" rel="noopener">{{ cr.autor }}</a>{% else %}{{ cr.autor }}{% endif %}</td>
+        <td>{% if cr.fuenteUrl %}<a href="{{ cr.fuenteUrl }}" rel="noopener">{{ cr.fuente }}</a>{% else %}{{ cr.fuente }}{% endif %}{% if cr.licencia %} · {% if cr.licenciaUrl %}<a href="{{ cr.licenciaUrl }}" rel="noopener">{{ cr.licencia }}</a>{% else %}{{ cr.licencia }}{% endif %}{% endif %}</td>
+      </tr>
+      {%- endif %}
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+{%- endif %}
+
+<h2>5. Responsabilidad</h2>
+<p>{{ site.legalName }} procura que la información publicada sea correcta y esté actualizada, pero no garantiza la ausencia de errores ni la disponibilidad continua de la web. No se hace responsable de los daños derivados de interrupciones técnicas, virus o fallos ajenos a su control.</p>
+
+<h2>6. Enlaces a servicios de terceros</h2>
+<p>La web enlaza con servicios de terceros, como WhatsApp, para facilitar el contacto. Al usarlos, se aplican sus propias condiciones y políticas de privacidad, sobre las que {{ site.legalName }} no tiene control.</p>
+{%- set activeSocial = site.social | selectattr("url") %}
+{%- if activeSocial.length %}
+<p><strong>Perfiles en redes sociales:</strong> {% for s in activeSocial %}<a href="{{ s.url }}" rel="noopener">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>
+{%- endif %}
+
+<h2>7. Protección de datos y cookies</h2>
+<p>El tratamiento de datos personales se explica en la <a href="/politica-de-privacidad/">política de privacidad</a>, y el uso de cookies, en la <a href="/politica-de-cookies/">política de cookies</a>.</p>
+
+<h2>8. Legislación aplicable y jurisdicción</h2>
+<p>Este aviso legal se rige por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales que correspondan conforme a la ley. Si la persona usuaria es consumidora, serán competentes los de su domicilio.</p>

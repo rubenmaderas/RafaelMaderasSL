@@ -1,0 +1,49 @@
+{
+  "seo": {
+    "titulo": "Contacto: teléfono y WhatsApp {telefono} | {empresa}",
+    "descripcion": "Contacta con {empresa}, yesista y reformas en Jaén: llama o escribe por WhatsApp al {telefono}, o envía un correo a {correo}."
+  },
+  "cabecera": {
+    "antetitulo": "Contacto",
+    "titulo": "Contacto: llama, escribe por WhatsApp o envía un correo",
+    "entradilla": "Cuéntanos qué necesitas: un trabajo de yeso, una reforma o una obra. Elige el medio que te resulte más cómodo."
+  },
+  "medios": {
+    "telefono": {
+      "titulo": "Teléfono",
+      "texto": "La forma más rápida de hablar con nosotros."
+    },
+    "whatsapp": {
+      "titulo": "WhatsApp",
+      "texto": "Ideal para enviar fotos y medidas de la obra."
+    },
+    "correo": {
+      "titulo": "Correo electrónico",
+      "texto": "Para consultas detalladas o documentación."
+    }
+  },
+  "mensaje": {
+    "titulo": "Qué contar en tu primer mensaje",
+    "entradilla": "Con estos datos podemos hacernos una idea de la obra desde el principio y preparar mejor la valoración:",
+    "lista": [
+      "Localidad donde está la obra.",
+      "Tipo de trabajo: yeso, alisado de gotelé, reforma de baño o cocina, reforma integral…",
+      "Medidas aproximadas o número de estancias.",
+      "Fotos del estado actual, si puedes enviarlas por WhatsApp o correo.",
+      "Plazos o fechas que tengas en mente."
+    ]
+  },
+  "disponibilidad": {
+    "titulo": "Si no contestamos al momento",
+    "texto": "Normalmente estamos trabajando a pie de obra. Si no podemos atender la llamada en ese momento, te la devolveremos o responderemos a tu WhatsApp lo antes posible."
+  },
+  "zona": {
+    "titulo": "Dónde trabajamos",
+    "texto": "En Jaén capital y los municipios de la provincia de Jaén, y en el resto de Andalucía según el trabajo. [Consulta las zonas de servicio](/zonas-de-servicio/)."
+  },
+  "datos": {
+    "titulo": "Datos de contacto",
+    "zona": "Jaén capital, provincia de Jaén y Andalucía",
+    "nota": "Cuando contactas por teléfono, WhatsApp o correo, tus datos se usan solo para atender tu consulta y, en su caso, preparar el presupuesto. Más información en la [política de privacidad](/politica-de-privacidad/)."
+  }
+}

@@ -1,0 +1,28 @@
+{%- from "macros/icons.njk" import icon -%}
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>
+      <span class="brand__name">{{ site.brand.name }}{% if site.brand.suffix %} <span class="brand__suffix">{{ site.brand.suffix }}</span>{% endif %}</span>
+      <span class="brand__tagline">{{ contenido.comun.marca.lema | t }}</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" data-nav-toggle>
+      <span class="nav-toggle__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="visually-hidden">Menú</span>
+    </button>
+
+    <nav class="site-nav" id="menu-principal" aria-label="Principal" data-nav>
+      <ul class="site-nav__list">
+        {%- for item in navigation %}
+        <li><a class="site-nav__link" href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {%- endfor %}
+      </ul>
+      <a class="btn btn--primary btn--sm site-nav__cta" href="{{ site.phone.href }}">
+        {{ icon("phone", 18) }}<span>{{ site.phone.display }}</span>
+      </a>
+      <a class="btn btn--accent btn--sm site-nav__cta site-nav__cta--mobile" href="{{ site.whatsapp.href }}" target="_blank" rel="noopener">
+        {{ icon("whatsapp", 18) }}<span>WhatsApp</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+      </a>
+    </nav>
+  </div>
+</header>

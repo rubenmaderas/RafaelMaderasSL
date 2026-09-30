@@ -1,0 +1,8 @@
+# Despliegue en Netlify. La URL canónica (https://rafaelmaderas.es) está en src/_lib/site.js;
+# solo hace falta definir SITE_URL en Site configuration → Environment variables si cambia el dominio.
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "22"

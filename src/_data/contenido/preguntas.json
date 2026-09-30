@@ -1,0 +1,32 @@
+{
+  "preguntas": [
+    {
+      "pregunta": "¿Qué trabajos de yeso realizáis?",
+      "respuesta": "Nuestro propio equipo realiza yeso proyectado, guarnecido y enlucido de paredes y techos, alisado de paredes con gotelé o irregulares, regularización de paredes antiguas y reparación de grietas, desconchones y rozas. El objetivo es siempre dejar las superficies listas para pintar."
+    },
+    {
+      "pregunta": "¿Hacéis reformas integrales o solo trabajos de yeso?",
+      "respuesta": "Las dos cosas. El yeso es nuestra especialidad, pero también nos ocupamos de reformas y obras en general. Para la albañilería, el alicatado, la fontanería, la electricidad y el resto de oficios que necesite la obra, coordinamos a profesionales con los que colaboramos habitualmente, de forma que tú tienes un único interlocutor."
+    },
+    {
+      "pregunta": "¿En qué zonas trabajáis?",
+      "respuesta": "En Jaén capital y en municipios de toda la provincia de Jaén. También atendemos obras en el resto de Andalucía; en ese caso, indícanos la localidad y el tipo de trabajo para estudiar la disponibilidad y la planificación."
+    },
+    {
+      "pregunta": "¿Cómo puedo pedir presupuesto?",
+      "respuesta": "Llámanos al {telefono}, escríbenos por WhatsApp al mismo número o envía un correo a {correo} explicando qué necesitas y dónde está la obra. Con esa información te indicaremos los siguientes pasos y, si hace falta, acordaremos contigo una visita para ver el trabajo."
+    },
+    {
+      "pregunta": "¿Qué información conviene enviar al contactar?",
+      "respuesta": "Ayuda mucho saber la localidad, el tipo de trabajo (por ejemplo, alisar paredes, proyectar yeso o reformar un baño), los metros aproximados, el estado actual de las paredes y cuándo te gustaría empezar. Si puedes, añade unas fotos por WhatsApp o por correo."
+    },
+    {
+      "pregunta": "¿Cuánto tiempo lleva un trabajo de yeso?",
+      "respuesta": "Depende de los metros, del estado de las paredes y de si la vivienda está habitada. También influye el secado: el yeso necesita ventilación y un tiempo de secado antes de pintar, que varía con la temperatura y la humedad. Una vez vista la obra, te daremos una estimación de plazos."
+    },
+    {
+      "pregunta": "Si llamo y no contestáis, ¿qué hago?",
+      "respuesta": "Es normal que estemos trabajando en obra. Puedes dejar un mensaje o escribirnos por WhatsApp contando brevemente lo que necesitas: te devolveremos la llamada o te responderemos lo antes posible."
+    }
+  ]
+}

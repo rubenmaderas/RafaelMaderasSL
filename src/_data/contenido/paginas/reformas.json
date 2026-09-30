@@ -1,0 +1,52 @@
+{
+  "seo": {
+    "titulo": "Reformas integrales en Jaén con gremios coordinados | {empresa}",
+    "descripcion": "Empresa de reformas en Jaén: reformas integrales, cocinas y baños con un único interlocutor. Coordinamos albañilería, alicatado, fontanería y electricidad."
+  },
+  "cabecera": {
+    "antetitulo": "Reformas",
+    "titulo": "Reformas integrales en Jaén con coordinación de gremios",
+    "entradilla": "Una reforma reúne a muchos oficios. En {empresa} tienes un único interlocutor: organizamos la obra, coordinamos a los profesionales y nuestro propio equipo se encarga de los trabajos de yeso."
+  },
+  "coordinacion": {
+    "antetitulo": "Coordinación",
+    "titulo": "Qué significa que coordinemos tu reforma",
+    "texto": "En una reforma, lo que más retrasa la obra no suele ser el trabajo en sí, sino la espera entre un oficio y el siguiente. Cuando una sola empresa organiza a todos los gremios, cada uno sabe cuándo entra y qué se encontrará al llegar.\n\nTrabajamos con profesionales con los que colaboramos habitualmente y conocemos bien el orden que necesita una obra. Tú tienes un único teléfono al que llamar para cualquier duda.",
+    "lista": [
+      "Un único interlocutor desde el presupuesto hasta el final.",
+      "Oficios que entran en el orden correcto, sin esperas innecesarias.",
+      "El yeso, base de los acabados, lo hace nuestro propio equipo.",
+      "Menos llamadas, menos gestiones y menos imprevistos para ti."
+    ]
+  },
+  "gremios": {
+    "antetitulo": "Gremios",
+    "titulo": "Oficios que coordinamos en una reforma",
+    "entradilla": "Cada obra es distinta. Estos son los oficios más habituales; si tu reforma necesita alguno más, también lo organizamos."
+  },
+  "tipos": {
+    "antetitulo": "Tipos de reforma",
+    "titulo": "Reformas de vivienda, cocinas, baños y obra en general"
+  },
+  "orden": {
+    "antetitulo": "Orden de obra",
+    "titulo": "El orden habitual de una reforma integral",
+    "entradilla": "Aunque cada obra tiene sus particularidades, una reforma completa suele seguir este orden. Respetarlo evita tener que romper lo que ya está terminado.",
+    "pasos": [
+      "**Demoliciones** y retirada de lo que se va a sustituir.",
+      "**Albañilería**: nuevos tabiques, cambios de distribución y recrecidos.",
+      "**Instalaciones**: fontanería y electricidad, con sus rozas.",
+      "**Yeso**: cierre de rozas, guarnecido y enlucido de paredes y techos.",
+      "**Alicatado** de cocinas y baños.",
+      "**Remates y acabados**, incluida la pintura cuando la obra lo requiere."
+    ]
+  },
+  "permisos": {
+    "titulo": "Antes de empezar: permisos municipales",
+    "texto": "Según el alcance de la obra, el ayuntamiento puede exigir una licencia de obras o una declaración responsable. Conviene consultarlo en tu ayuntamiento antes de empezar, sobre todo si la reforma afecta a la distribución, a la fachada o a elementos comunes del edificio."
+  },
+  "proceso": {
+    "antetitulo": "Proceso de trabajo",
+    "titulo": "Cómo trabajamos una reforma, paso a paso"
+  }
+}

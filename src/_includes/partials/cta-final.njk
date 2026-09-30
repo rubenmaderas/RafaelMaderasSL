@@ -1,0 +1,22 @@
+{%- from "macros/icons.njk" import icon -%}
+{%- set cta = contenido.comun.cta -%}
+<section class="cta-final" id="contacto-rapido" aria-labelledby="cta-final-titulo" data-cta-final>
+  <div class="container cta-final__inner">
+    <div class="cta-final__text">
+      <p class="eyebrow eyebrow--light">{{ cta.antetitulo | t }}</p>
+      <h2 id="cta-final-titulo">{{ cta.titulo | t }}</h2>
+      {{ cta.texto | md | safe }}
+    </div>
+    <div class="cta-final__actions">
+      <a class="btn btn--light" href="{{ site.phone.href }}">
+        {{ icon("phone") }}<span>Llamar al {{ site.phone.display }}</span>
+      </a>
+      <a class="btn btn--accent" href="{{ site.whatsapp.href }}" target="_blank" rel="noopener">
+        {{ icon("whatsapp") }}<span>Escribir por WhatsApp</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+      </a>
+      <a class="btn btn--ghost-light" href="{{ site.email.href }}">
+        {{ icon("mail") }}<span>{{ site.email.address }}</span>
+      </a>
+    </div>
+  </div>
+</section>
