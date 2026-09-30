@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 permalink: /
 pageKey: inicio
-faqSchema: true
+faqGroup: inicio
 ---
 {#- Textos: src/_data/contenido/paginas/inicio.json (/admin → Páginas → Inicio). -#}
 {%- from "macros/icons.njk" import icon -%}
@@ -17,6 +17,9 @@ faqSchema: true
         <a class="btn btn--primary" href="{{ site.phone.href }}">{{ icon("phone") }}<span>Llamar ahora</span></a>
         <a class="btn btn--accent" href="{{ site.whatsapp.href }}" target="_blank" rel="noopener">{{ icon("whatsapp") }}<span>Escribir por WhatsApp</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span></a>
       </div>
+      {%- if c.portada.nota %}
+      <p class="hero__note">{{ c.portada.nota | mdi | safe }}</p>
+      {%- endif %}
     </div>
     <div class="hero__visual">
       {% image "hero_yeso", "(min-width: 72em) 30rem, (min-width: 48em) 40vw, 22rem", { eager: true } %}
@@ -120,6 +123,9 @@ faqSchema: true
     <div class="grid grid--4">
       {%- for card in c.porque.tarjetas %}
       <article class="card">
+        {%- if card.duda %}
+        <p class="card__doubt">{{ card.duda | t }}</p>
+        {%- endif %}
         <h3>{{ card.titulo | t }}</h3>
         {{ card.texto | md | safe }}
       </article>
@@ -128,6 +134,7 @@ faqSchema: true
   </div>
 </section>
 
+{%- if faq[faqGroup].length %}
 <section class="section" id="preguntas-frecuentes" aria-labelledby="titulo-faq">
   <div class="container">
     <div class="section-head section-head--center">
@@ -137,3 +144,4 @@ faqSchema: true
     {% include "partials/faq.njk" %}
   </div>
 </section>
+{%- endif %}

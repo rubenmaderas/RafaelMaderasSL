@@ -1,40 +1,94 @@
 {
   "preguntas": [
     {
-      "pregunta": "¿Qué trabajos de yeso realizáis?",
-      "respuesta": "Todos los hace nuestro propio equipo: yeso proyectado, guarnecido y enlucido de paredes y techos, alisado de gotelé, regularización de paredes antiguas y reparación de grietas, desconchones y rozas.\n\nEl objetivo es siempre el mismo: dejar las superficies lisas y listas para pintar."
+      "pregunta": "¿Qué trabajos hacéis?",
+      "respuesta": "Trabajos de yeso con nuestro propio equipo: yeso proyectado, guarnecido y enlucido, alisado de gotelé, regularización de paredes antiguas y reparación de grietas y rozas.\n\nTambién hacemos reformas integrales, de cocinas y baños y obras en general. Para la albañilería, el alicatado, la fontanería o la electricidad coordinamos a profesionales de confianza, y tú tratas solo con nosotros.",
+      "pagina": "inicio"
     },
     {
-      "pregunta": "¿Hacéis reformas integrales o solo trabajos de yeso?",
-      "respuesta": "Las dos cosas. El yeso es nuestra especialidad, pero también hacemos reformas y obras en general.\n\nPara la albañilería, el alicatado, la fontanería o la electricidad coordinamos a profesionales con los que trabajamos habitualmente. Tú tienes un único interlocutor."
+      "pregunta": "¿Cuánto cuesta un trabajo de yeso o una reforma?",
+      "respuesta": "Depende de cada obra. Lo que más influye es el número de metros de pared y techo, el estado de las superficies, la técnica (a mano o proyectado) y si la vivienda está vacía o amueblada. En una reforma, también los oficios que intervienen y los materiales que elijas.\n\nCon unas fotos te podemos orientar, y antes de empezar tienes el presupuesto.",
+      "pagina": "inicio"
+    },
+    {
+      "pregunta": "¿Os encargáis de trabajos pequeños?",
+      "respuesta": "Sí. Hacemos desde la reparación de una pared o el alisado de una habitación hasta viviendas completas.\n\nCuéntanos qué necesitas. Si no es algo que hagamos, también te lo diremos.",
+      "pagina": "inicio"
     },
     {
       "pregunta": "¿En qué zonas trabajáis?",
-      "respuesta": "En Jaén capital y en municipios de toda la provincia de Jaén.\n\nTambién atendemos obras en el resto de Andalucía: cuéntanos la localidad y el tipo de trabajo y te diremos si podemos hacernos cargo."
+      "respuesta": "En Jaén capital y en municipios de toda la provincia de Jaén.\n\nTambién atendemos obras en el resto de Andalucía según el trabajo: cuéntanos la localidad y el tipo de obra y te diremos si podemos hacernos cargo.",
+      "pagina": "inicio"
     },
     {
-      "pregunta": "¿Cómo puedo pedir presupuesto?",
-      "respuesta": "Llámanos al {telefono}, escríbenos por WhatsApp al mismo número o envía un correo a {correo}. Cuéntanos qué necesitas y dónde está la obra.\n\nCon esa información te indicamos los siguientes pasos y, si hace falta, acordamos una visita para ver el trabajo."
+      "pregunta": "¿Cómo pido presupuesto?",
+      "respuesta": "Llámanos al {telefono}, escríbenos por WhatsApp al mismo número o envía un correo a {correo}. Cuéntanos qué necesitas y dónde está la obra.\n\nCon esa información te orientamos y, si hace falta, quedamos para ver el trabajo. Pedir presupuesto no te compromete a nada.",
+      "pagina": "inicio"
     },
     {
-      "pregunta": "¿Qué información conviene enviar al contactar?",
-      "respuesta": "La localidad, el tipo de trabajo (alisar paredes, proyectar yeso, reformar un baño…), los metros aproximados y cuándo te gustaría empezar.\n\nSi puedes, añade unas fotos del estado actual por WhatsApp o por correo."
-    },
-    {
-      "pregunta": "¿Cuánto tiempo lleva un trabajo de yeso?",
-      "respuesta": "Depende de los metros, del estado de las paredes y de si la vivienda está habitada. También influye el secado: el yeso necesita ventilación y tiempo antes de pintar, según la temperatura y la humedad.\n\nCuando veamos la obra, te daremos una estimación de plazos antes de empezar."
+      "pregunta": "¿Qué fotos y datos os envío?",
+      "respuesta": "La localidad, el tipo de trabajo, las medidas aproximadas o el número de estancias y cuándo te gustaría empezar.\n\nEn cuanto a las fotos, mejor con luz de día: una general de cada estancia y otra de cerca de la zona a tratar, como una grieta o el gotelé.",
+      "pagina": "inicio"
     },
     {
       "pregunta": "¿Se ensucia mucho la casa?",
-      "respuesta": "Trabajar con yeso siempre mancha algo; no te vamos a decir lo contrario.\n\nPor eso protegemos los suelos y lo que no se puede mover, y al terminar retiramos los restos. Antes de empezar te decimos qué conviene sacar de la estancia."
-    },
-    {
-      "pregunta": "¿Qué pasa si aparece un imprevisto durante la obra?",
-      "respuesta": "En las reformas, sobre todo en casas antiguas, a veces aparece algo que no se veía: una pared en peor estado o una instalación que hay que cambiar.\n\nSi ocurre, te lo explicamos y lo decidimos contigo antes de hacer nada."
+      "respuesta": "Trabajar con yeso siempre mancha algo; no te vamos a decir lo contrario.\n\nPor eso protegemos los suelos y lo que no se puede mover, y al terminar retiramos los restos. Antes de empezar te decimos qué conviene sacar de la estancia.",
+      "pagina": "inicio"
     },
     {
       "pregunta": "Si llamo y no contestáis, ¿qué hago?",
-      "respuesta": "Es normal que estemos trabajando en obra. Déjanos un mensaje o escríbenos por WhatsApp contando brevemente lo que necesitas.\n\nTe devolveremos la llamada o te responderemos lo antes posible."
+      "respuesta": "Es normal que estemos trabajando en obra. Déjanos un mensaje o escríbenos por WhatsApp contando brevemente lo que necesitas.\n\nTe devolveremos la llamada o te responderemos lo antes posible.",
+      "pagina": "inicio"
+    },
+    {
+      "pregunta": "¿Por qué no dais un precio por metro cuadrado sin ver la pared?",
+      "respuesta": "Porque el precio depende sobre todo del estado de la pared. No cuesta lo mismo enlucir una pared nueva y recta que enderezar una antigua o tapar un gotelé de pintura plástica.\n\nAdemás, los metros que cuentan son los de pared y techo, no los de la vivienda. Con unas fotos te orientamos, y viendo la pared te damos un precio ajustado a ella.",
+      "pagina": "servicios"
+    },
+    {
+      "pregunta": "¿Qué es mejor, yeso proyectado o a mano?",
+      "respuesta": "Depende del trabajo, y hacemos las dos cosas. El proyectado es más rápido en viviendas completas, obra nueva y superficies grandes, y deja el mismo espesor en toda la pared.\n\nPara reparaciones, una sola pared o zonas pequeñas suele compensar más hacerlo a mano. Al ver la obra te recomendamos la opción que mejor encaja.",
+      "pagina": "servicios"
+    },
+    {
+      "pregunta": "¿Se puede quitar cualquier gotelé o hay que taparlo?",
+      "respuesta": "Depende de la pintura. El gotelé al temple suele poder rascarse después de humedecerlo. El de pintura plástica es muy difícil de quitar, así que normalmente se cubre con una capa de yeso.\n\nEn los dos casos la pared queda lisa y lista para pintar. Antes de empezar la revisamos, porque bajo el gotelé a veces hay fisuras o desperfectos que conviene reparar.",
+      "pagina": "servicios"
+    },
+    {
+      "pregunta": "¿Cuánto tarda en secar el yeso y cuándo se puede pintar?",
+      "respuesta": "No hay un plazo fijo: depende del espesor, de la ventilación y de la época del año. En Jaén, con el calor del verano seca antes que en invierno.\n\nEl yeso está seco cuando tiene un color claro y uniforme, sin manchas oscuras. Si se pinta antes, la pintura puede mancharse o despegarse. Al terminar te decimos cuándo puedes pintar.",
+      "pagina": "servicios"
+    },
+    {
+      "pregunta": "¿Cuándo es peligrosa una grieta en la pared?",
+      "respuesta": "Una fisura fina que no cambia suele ser superficial y se repara al preparar la pared. Conviene que la revise un técnico (un arquitecto o un aparejador) si es ancha, si crece con el tiempo, si va en diagonal o en escalera o si atraviesa la pared.\n\nEn esos casos hay que resolver primero la causa; taparla solo la esconde. Si al ver la pared nos parece que es el caso, te lo diremos antes de hacer nada.",
+      "pagina": "servicios"
+    },
+    {
+      "pregunta": "¿Puedo seguir en casa mientras hacéis el yeso?",
+      "respuesta": "Normalmente sí. Trabajamos por estancias, así que puedes seguir usando el resto de la casa; la habitación en obra tiene que estar vacía.\n\nEn trabajos grandes, como proyectar yeso en toda la vivienda, puede ser más cómodo no estar esos días. Te lo diremos al ver la obra.",
+      "pagina": "servicios"
+    },
+    {
+      "pregunta": "¿Cuánto dura una reforma integral?",
+      "respuesta": "Depende del tamaño de la vivienda, de su estado y de los oficios que intervengan, así que no damos plazos sin ver la obra.\n\nAntes de empezar te explicamos el orden de los trabajos y una estimación de plazos. Durante la obra sabes en qué punto está.",
+      "pagina": "reformas"
+    },
+    {
+      "pregunta": "¿Se puede vivir en casa durante una reforma integral?",
+      "respuesta": "No suele ser recomendable: hay días sin agua, sin luz o sin cocina, además del polvo y el ruido.\n\nEn reformas parciales sí se puede, organizando la obra por zonas. Al preparar el presupuesto vemos contigo cómo hacerlo.",
+      "pagina": "reformas"
+    },
+    {
+      "pregunta": "¿Qué pasa si aparece un imprevisto durante la obra?",
+      "respuesta": "En las reformas, sobre todo en casas antiguas, a veces aparece algo que no se veía: una pared en peor estado o una instalación que hay que cambiar.\n\nSi ocurre, te lo enseñamos y te explicamos las opciones. Si cambia el presupuesto, decides tú antes de seguir.",
+      "pagina": "reformas"
+    },
+    {
+      "pregunta": "¿Todos los oficios son de vuestra empresa?",
+      "respuesta": "El yeso lo hace nuestro propio equipo. Para la albañilería, el alicatado, la fontanería, la electricidad y el resto de oficios trabajamos con profesionales de confianza a los que coordinamos nosotros.\n\nTú tratas con una sola empresa, que organiza a todos y te mantiene informado.",
+      "pagina": "reformas"
     }
   ]
 }

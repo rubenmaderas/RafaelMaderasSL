@@ -16,7 +16,7 @@
       "**Un solo interlocutor**, del presupuesto al último repaso.",
       "**Presupuesto claro** antes de empezar.",
       "**Oficios en el orden correcto**, sin esperas innecesarias.",
-      "**Si surge un imprevisto**, te lo explicamos antes de hacer nada.",
+      "**Si surge un imprevisto**, te lo explicamos y decides tú antes de seguir.",
       "**El yeso**, base de los acabados, con equipo propio."
     ]
   },
@@ -43,11 +43,15 @@
     ]
   },
   "permisos": {
-    "titulo": "Antes de empezar: permisos municipales",
-    "texto": "Según el alcance de la obra, el ayuntamiento puede exigir una licencia de obras o una declaración responsable. Conviene consultarlo en tu ayuntamiento antes de empezar, sobre todo si la reforma afecta a la distribución, a la fachada o a elementos comunes del edificio."
+    "titulo": "¿Necesito licencia para reformar mi casa en Jaén?",
+    "texto": "Depende de la obra. En Andalucía, muchas reformas de viviendas existentes se tramitan con una **declaración responsable** en el ayuntamiento, que permite empezar desde el día en que se presenta con la documentación necesaria.\n\nSi la obra toca la estructura, puede exigir un proyecto técnico, y en edificios protegidos puede hacer falta una autorización previa. Cada ayuntamiento concreta los requisitos; en Jaén capital, el área de Urbanismo. Si la obra afecta a elementos comunes del edificio, necesitarás también el permiso de la comunidad."
   },
   "proceso": {
     "antetitulo": "Proceso de trabajo",
     "titulo": "Cómo trabajamos una reforma, paso a paso"
+  },
+  "preguntas": {
+    "antetitulo": "Preguntas sobre reformas",
+    "titulo": "Dudas habituales antes de una reforma"
   }
 }

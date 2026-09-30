@@ -748,6 +748,11 @@ main:focus {
   align-items: start;
 }
 
+/* Segundo bloque con título dentro de una misma columna (p. ej., en Contacto). */
+.split > div > :not(.eyebrow) + h2 {
+  margin-top: var(--space-l);
+}
+
 @media (min-width: 48em) {
   .split {
     grid-template-columns: 1fr 1fr;
@@ -818,20 +823,24 @@ main:focus {
 }
 
 /* Listas y negritas escritas en los textos editables (markdown). */
-:is(.service, .zone-block, .card, .split) ul:not([class]) {
+:is(.service, .zone-block, .card, .split) :is(ul, ol):not([class]) {
   margin: 0 0 1rem;
   padding-left: 1.2rem;
 }
 
-:is(.service, .zone-block, .card, .split) ul:not([class]) li + li {
+:is(.service, .zone-block, .card, .split) :is(ul, ol):not([class]) li + li {
   margin-top: 0.4rem;
 }
 
-:is(.service, .zone-block, .card, .split) ul:not([class]) li::marker {
+:is(.service, .zone-block, .card, .split) :is(ul, ol):not([class]) li::marker {
   color: var(--color-accent);
 }
 
-:is(.hero__subtitle, .lead, .section-head, .service, .zone-block, .split, .card, .process__step) strong {
+.split ol:not([class]) li::marker {
+  font-weight: 700;
+}
+
+:is(.hero__subtitle, .hero__note, .lead, .section-head, .service, .zone-block, .split, .card, .process__step) strong {
   color: var(--color-ink);
 }
 
@@ -974,6 +983,15 @@ main:focus {
   margin: var(--space-m) auto 0;
 }
 
+/* Nota breve bajo los botones («Sin compromiso…»): resuelve la última duda antes de pulsar. */
+.hero__note {
+  max-width: 22rem;
+  margin: var(--space-s) auto 0;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--color-ink-soft);
+}
+
 .hero__visual {
   position: relative;
   width: min(100%, 24rem);
@@ -1101,6 +1119,11 @@ main:focus {
     margin-inline: 0;
   }
 
+  .hero__note {
+    max-width: 34rem;
+    margin-inline: 0;
+  }
+
   .hero__visual {
     width: 100%;
     padding: 1.5rem 1.5rem 2rem 2rem;
@@ -1208,6 +1231,19 @@ main:focus {
 
 .section--dark .card p {
   color: var(--color-on-dark-soft);
+}
+
+/* Duda del cliente, con sus palabras, encima del título de la tarjeta. */
+.card .card__doubt {
+  margin-bottom: 0.4rem;
+  font-size: var(--step--1);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-accent);
+}
+
+.section--dark .card .card__doubt {
+  color: var(--color-accent-on-dark);
 }
 
 /* Bloques de servicio detallados */

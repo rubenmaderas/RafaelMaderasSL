@@ -1,17 +1,17 @@
 {
   "seo": {
     "titulo": "Servicios de yeso y reformas en Jaén | {empresa}",
-    "descripcion": "Yesista en Jaén con equipo propio: yeso proyectado, enlucidos, alisado de gotelé y reparación de grietas. También reformas integrales coordinadas."
+    "descripcion": "Yesista en Jaén con equipo propio: yeso proyectado, enlucidos, quitar el gotelé y reparar grietas. También reformas integrales coordinadas."
   },
   "cabecera": {
     "antetitulo": "Servicios",
     "titulo": "Servicios de yeso y reformas en Jaén",
-    "entradilla": "**Trabajos de yeso con equipo propio** y reformas completas con un solo interlocutor, en Jaén capital, la provincia y Andalucía."
+    "entradilla": "Paredes lisas, rectas y listas para pintar, hechas por **nuestro propio equipo de yesistas**. Y si tu obra necesita más oficios, **los coordinamos nosotros**."
   },
   "yeso": {
     "antetitulo": "Nuestra especialidad",
     "titulo": "Trabajos de yeso: paredes lisas y listas para pintar",
-    "entradilla": "Lo hace **nuestro propio equipo**, a mano o con máquina. Además, el yeso es un material **incombustible** que ayuda a **regular la humedad** de la vivienda."
+    "entradilla": "A mano o a máquina, según lo que pida cada pared. Además, el yeso es un material **incombustible** que ayuda a **regular la humedad** de la casa."
   },
   "obra": {
     "antetitulo": "Reformas y obra",
@@ -21,21 +21,25 @@
   },
   "consejos": {
     "antetitulo": "Antes de empezar",
-    "titulo": "Consejos para preparar un trabajo de yeso",
+    "titulo": "Cómo preparar la casa para un trabajo de yeso",
     "entradilla": "Tres detalles que ayudan a que el trabajo salga mejor y a que la casa sufra lo menos posible.",
     "tarjetas": [
       {
-        "titulo": "Despeja o protege la zona",
-        "texto": "Retira muebles, cuadros y objetos de las paredes que vamos a trabajar. Lo que no se pueda mover, lo cubrimos bien."
+        "titulo": "Despeja las paredes",
+        "texto": "Retira muebles, cuadros y objetos de la estancia en la que vamos a trabajar. Lo que no se pueda mover, lo protegemos nosotros."
       },
       {
-        "titulo": "Piensa antes en las instalaciones",
-        "texto": "Si vas a cambiar enchufes, luces o tuberías, hazlo antes del yeso. Así cerramos las rozas en el mismo trabajo."
+        "titulo": "Instalaciones, primero",
+        "texto": "Si vas a cambiar enchufes, luces o tuberías, hazlo antes del yeso. Así cerramos las rozas en el mismo trabajo y no hay que volver a picar."
       },
       {
-        "titulo": "Deja tiempo para el secado",
-        "texto": "El yeso debe secar bien antes de pintar. Ventilar ayuda; el tiempo exacto depende de la época del año y del espesor."
+        "titulo": "Agua, luz y ventilación",
+        "texto": "Para trabajar hace falta agua y luz en la obra; si aún no hay, avísanos al pedir presupuesto. Después, ventila a diario para que el yeso seque bien antes de pintar."
       }
     ]
+  },
+  "preguntas": {
+    "antetitulo": "Preguntas sobre el yeso",
+    "titulo": "Lo que más nos preguntan sobre trabajos de yeso"
   }
 }

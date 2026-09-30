@@ -90,6 +90,7 @@ collections:
                 widget: string
                 hint: "El título más importante para Google. La palabra entre asteriscos se resalta en color: `Yesista y reformas en *Jaén*`."
               - &entradilla {label: Entradilla, name: entradilla, widget: text, hint: Uno o dos párrafos cortos bajo el título.}
+              - {label: Nota bajo los botones, name: nota, widget: string, required: false, hint: "Frase corta bajo «Llamar ahora» y «WhatsApp» que resuelve la última duda antes de contactar. Admite negrita: `**Sin compromiso.** Mándanos unas fotos…`. Déjala vacía para no mostrarla."}
               - label: Distintivos junto a la foto
                 name: insignias
                 widget: object
@@ -164,18 +165,21 @@ collections:
               - *antetitulo
               - *titulo
               - *entradilla
-              - &tarjetas
-                label: Tarjetas
+              - label: Tarjetas
                 name: tarjetas
                 widget: list
                 collapsed: true
                 summary: "{{fields.titulo}}"
-                fields: [*titulo, *texto_corto]
+                hint: Cada tarjeta responde a una duda habitual de quien busca una empresa de obras.
+                fields:
+                  - {label: Duda del cliente, name: duda, widget: string, required: false, hint: "Opcional. La pregunta que se hace el cliente, con sus palabras y entre comillas: «¿Sabrán hacerlo bien?». Aparece encima del título."}
+                  - *titulo
+                  - *texto_corto
           - label: Bloque de preguntas frecuentes
             name: preguntas
             widget: object
             collapsed: true
-            hint: Las preguntas y respuestas se editan en «Preguntas frecuentes».
+            hint: "Las preguntas y respuestas se editan en «Preguntas frecuentes» (las asignadas a «Inicio»)."
             fields: [*antetitulo, *titulo]
 
       - name: servicios
@@ -207,7 +211,23 @@ collections:
             name: consejos
             widget: object
             collapsed: true
-            fields: [*antetitulo, *titulo, *entradilla, *tarjetas]
+            fields:
+              - *antetitulo
+              - *titulo
+              - *entradilla
+              - &tarjetas
+                label: Tarjetas
+                name: tarjetas
+                widget: list
+                collapsed: true
+                summary: "{{fields.titulo}}"
+                fields: [*titulo, *texto_corto]
+          - label: Bloque de preguntas frecuentes
+            name: preguntas
+            widget: object
+            collapsed: true
+            hint: "Aparece al final de la página. Las preguntas se editan en «Preguntas frecuentes» (las asignadas a «Servicios»)."
+            fields: [*antetitulo, *titulo]
 
       - name: reformas
         label: Reformas
@@ -255,6 +275,12 @@ collections:
             widget: object
             collapsed: true
             hint: Los pasos se editan en «Textos comunes → Proceso de trabajo».
+            fields: [*antetitulo, *titulo]
+          - label: Bloque de preguntas frecuentes
+            name: preguntas
+            widget: object
+            collapsed: true
+            hint: "Aparece al final de la página. Las preguntas se editan en «Preguntas frecuentes» (las asignadas a «Reformas»)."
             fields: [*antetitulo, *titulo]
 
       - name: zonas
@@ -350,11 +376,20 @@ collections:
               - *titulo
               - *entradilla
               - {label: Lista, name: lista, widget: list, field: {label: Elemento, name: elemento, widget: string}}
-          - label: Si no contestamos al momento
+          - label: Qué pasa después de escribirnos
             name: disponibilidad
             widget: object
             collapsed: true
-            fields: [*titulo, *texto_largo]
+            fields:
+              - *titulo
+              - label: Texto
+                name: texto
+                widget: markdown
+                modes: [rich_text]
+                buttons: [bold, italic, link, numbered-list, bulleted-list]
+                editor_components: []
+                sanitize_preview: true
+                hint: Explica los pasos que siguen al primer mensaje. Quien sabe qué va a pasar se anima más a escribir.
           - label: Dónde trabajamos
             name: zona
             widget: object
@@ -421,8 +456,9 @@ collections:
   - name: preguntas
     label: Preguntas frecuentes
     description: >-
-      Aparecen en la portada y se envían a Google exactamente como se ven.
-      Responde solo con información real y comprobable.
+      Cada pregunta aparece en la página que elijas (portada, Servicios o Reformas)
+      y se envía a Google exactamente como se ve. Responde primero a lo que se
+      pregunta, con frases cortas, y solo con información real y comprobable.
     delete: false
     files:
       - name: preguntas
@@ -433,10 +469,18 @@ collections:
             name: preguntas
             widget: list
             collapsed: true
-            summary: "{{fields.pregunta}}"
+            summary: "{{fields.pregunta}} · {{fields.pagina}}"
             fields:
-              - {label: Pregunta, name: pregunta, widget: string}
+              - {label: Pregunta, name: pregunta, widget: string, hint: "Escríbela como la haría un cliente: «¿Cuánto tarda en secar el yeso?»."}
               - {label: Respuesta, name: respuesta, widget: text, hint: "Texto sin formato. Separa los párrafos con una línea en blanco. Puedes usar {telefono} y {correo}."}
+              - label: Página donde aparece
+                name: pagina
+                widget: select
+                default: inicio
+                options:
+                  - {label: Inicio (portada), value: inicio}
+                  - {label: Servicios (trabajos de yeso), value: servicios}
+                  - {label: Reformas, value: reformas}
 
   # -------------------------------------------------------------------------------
   - name: fotos

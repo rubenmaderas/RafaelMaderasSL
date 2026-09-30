@@ -51,7 +51,7 @@ src/
       empresa.json          Nombre, teléfono, correo, WhatsApp, fundador, datos legales, redes
       paginas/*.json        Textos y SEO de Inicio, Servicios, Reformas, Zonas, Quiénes somos, Contacto
       servicios.json        Trabajos de yeso, tipos de reforma y gremios
-      preguntas.json        Preguntas frecuentes (HTML visible + JSON-LD FAQPage)
+      preguntas.json        Preguntas frecuentes por página (HTML visible + JSON-LD FAQPage)
       imagenes.json         Fotos de la web (archivo, texto alternativo, créditos)
       comun.json            Textos compartidos: marca, proceso de trabajo, bloque de contacto, pie
     site.js · images.js · services.js · faq.js · hasIllustrativeImages.js
@@ -95,22 +95,36 @@ Los textos de las seis páginas principales, su título y su descripción para G
 
 ### Tono de los textos
 
-La web habla como **empresa**: «nosotros» (hacemos, coordinamos, te llamamos) y trata al cliente de **tú**. Es lo habitual en las webs de empresas de reformas y de yeso que se analizaron. Rafael aparece por su nombre solo en «Quiénes somos», como **fundador y gerente** (en /admin → «Datos de la empresa» → «Fundador»). En el resto de la web se habla de «su fundador» para explicar los 40 años de oficio.
+La web habla como **empresa**: «nosotros» (hacemos, coordinamos, te llamamos) y trata al cliente de **tú**. Es lo habitual en las webs de empresas de reformas y de yeso que se analizaron. Rafael aparece por su nombre solo en «Quiénes somos», como **fundador y gerente** (en /admin → «Datos de la empresa» → «Fundador»). En el resto de la web se habla de «nuestro fundador» para explicar los 40 años de oficio.
 
 Los **40 años** son de oficio del fundador, no de la empresa, que se constituyó en 2012 («Año de constitución»). La cifra se calcula al compilar a partir del año en que empezó en el oficio (1986), así que sube sola cada año cuando se vuelve a publicar la web. En los textos se escribe con el comodín `{años}`. Mantén esta distinción si se reescribe algún texto, y no añadas cifras de plantilla, obras u opiniones que no se puedan demostrar.
 
 ### Estilo de redacción
 
-Los textos se reescribieron tomando lo mejor de webs de referencia del sector (reformas, yeso y placa de yeso). Si se añade o cambia un texto desde /admin, conviene mantener estas pautas:
+Los textos se han reescrito dos veces. La segunda, a partir de un análisis de unas 50 webs de servicios:
+- empresas de reformas y yeso de España (Adiós Gotelé, Adrisan, Irureform, Reformas Dodo, Reformeo, Honra2…);
+- oficios cercanos (HUMIX, Todo Humedad, Te Lo Pinto, Gracias Paco);
+- yesistas del Reino Unido y EE. UU. (AJS Plastering, Beams, Boston Plastering);
+- guías de redacción web (Nielsen Norman Group, GOV.UK, CXL);
+- las búsquedas que sugiere Google en España.
+
+Al añadir o cambiar textos desde /admin, conviene mantener estas pautas:
 
 - **Primer párrafo con tres respuestas**: qué hacemos, dónde y por qué nosotros.
-- **Beneficio antes que técnica**: primero lo que nota el cliente en casa (paredes lisas, listas para pintar, menos días de obra) y después, si hace falta, el nombre técnico.
-- **Frases cortas y listas con viñetas.** En las descripciones de servicios, el botón de lista del editor crea las viñetas. Una línea que empiece por `- ` también funciona.
+- **Beneficio antes que técnica**: primero lo que nota el cliente en casa (paredes lisas, listas para pintar) y después, si hace falta, el nombre técnico, explicado una sola vez.
+- **Las dudas del cliente, con sus palabras**: «¿Y si al final cuesta más?», «¿Tendré que organizar yo a los gremios?». Cada duda lleva una respuesta concreta, no adjetivos.
+- **Contar también lo incómodo**: el yeso mancha, una grieta puede necesitar un técnico, una humedad hay que resolverla antes de tapar. Da más confianza que prometer que todo saldrá perfecto.
+- **Precio: explicar de qué depende**, sin cifras, y pedir fotos para orientar.
+- **Llamadas a la acción de poco esfuerzo**: «Mándanos unas fotos por WhatsApp», con lo que conviene enviar y lo que pasa después.
+- **Frases cortas y listas**: una idea por párrafo, con la palabra clave al principio de cada viñeta. En los textos largos, el botón de lista del editor crea las viñetas (una línea que empiece por `- ` también funciona).
 - **Negrita con moderación**: una o dos ideas clave por bloque (`**texto**` o el botón **B**). Si todo va en negrita, nada destaca.
-- **Nombrar la preocupación y responder con hechos**: suciedad, imprevistos, organización de gremios… y cómo se trabaja para evitarlos. Sin superlativos ni promesas.
-- **No prometer lo que no esté confirmado**: garantías por escrito, presupuesto gratuito o cerrado, plazos de respuesta, precios. Si alguno es cierto, se puede añadir, y es de lo que más convence.
+- **Las palabras de quien busca**: «quitar el gotelé», «yesista» o «yesero», «licencia para reformar». Las preguntas frecuentes responden a lo que más se busca: precio, gotelé, secado, proyectado o a mano, grietas y licencias.
+- **No prometer lo que no esté confirmado**: garantías por escrito, presupuesto gratuito o cerrado, plazos de respuesta o precios. Si alguno es cierto, se puede añadir, y es de lo que más convence.
 
-En las preguntas frecuentes, las respuestas son texto sin formato: una línea en blanco separa párrafos. Así la respuesta visible y la de los datos estructurados coinciden siempre.
+En las preguntas frecuentes, las respuestas son texto sin formato: una línea en blanco separa párrafos. Así la respuesta visible y la de los datos estructurados coinciden siempre. Cada pregunta tiene un campo **Página** que decide dónde se muestra:
+- **Inicio**: las dudas generales.
+- **Servicios**: las del yeso.
+- **Reformas**: las de obras.
 
 ---
 
@@ -124,7 +138,7 @@ En **`https://rafaelmaderas.es/admin/`** hay un panel en español, protegido con
 | --- | --- |
 | **Páginas** | Textos de Inicio, Servicios, Reformas, Zonas de servicio, Quiénes somos y Contacto, cada uno con su título y descripción para Google |
 | **Servicios** | Trabajos de yeso, tipos de reforma y gremios que se coordinan |
-| **Preguntas frecuentes** | Preguntas y respuestas (se actualizan a la vez en la web y en los datos para Google) |
+| **Preguntas frecuentes** | Preguntas y respuestas de Inicio, Servicios y Reformas; cada pregunta elige su página y se actualiza a la vez en la web y en los datos para Google |
 | **Fotos de la web** | Cada foto, su encuadre, su descripción (texto alternativo), si es ilustrativa y sus créditos |
 | **Textos comunes** | Proceso de trabajo, bloque final de contacto y textos del pie |
 | **Datos de la empresa** | Nombre, teléfono, correo, mensaje de WhatsApp, fundador, datos legales y redes sociales |
@@ -135,6 +149,7 @@ Trucos para escribir:
 - **Comodines**: `{empresa}`, `{telefono}`, `{correo}`, `{años}`, `{fundacion}`, `{fundador}`, `{cargo}`, `{oficio}`, `{razon_social}` y `{cif}` se sustituyen solos por los datos de «Datos de la empresa». Si cambia el teléfono, cambia en toda la web.
 - **Palabra resaltada en color** en los títulos: escríbela entre asteriscos, por ejemplo `Yesista y reformas en *Jaén*`.
 - **Negrita** en los textos largos: botón **B** del editor (o `**así**`).
+- En la portada, la **nota bajo los botones** («Sin compromiso…») es opcional, y cada tarjeta de «Por qué elegirnos» puede llevar una **duda del cliente** que aparece encima del título. Si se dejan vacías, no se muestran.
 - Los campos tienen ayudas y validaciones (longitud del título para Google, formato de teléfono, CIF, etc.). Si algo no es válido, el gestor no deja publicar y señala el campo.
 
 **Cambiar una foto:** «Fotos de la web» → abre la foto → «Elige una imagen diferente» → «Subir nuevo» → elige la foto → «Confirmar selección». Después:
@@ -328,11 +343,11 @@ Como alternativa, existen herramientas de analítica sin cookies que pueden evit
 - `title`, meta description y canonical únicos en cada página. Título principal: «Yesista y Reformas en Jaén | Rafael Maderas S.L.».
 - URLs legibles en español, un único H1 por página y encabezados jerárquicos.
 - Open Graph y Twitter Card con imagen propia.
-- JSON-LD: `GeneralContractor` (nombre, teléfono, email, área de servicio, catálogo de servicios, `sameAs` solo con redes reales), `WebSite`, `WebPage`, `BreadcrumbList` y `FAQPage` en la portada. El FAQ se genera desde `preguntas.json` (/admin → «Preguntas frecuentes»), igual que el HTML visible, así que siempre coinciden. Google solo muestra resultados enriquecidos de FAQ para sitios muy concretos, pero el marcado es correcto y no perjudica.
+- JSON-LD: `GeneralContractor` (nombre, teléfono, email, área de servicio, catálogo de servicios, `sameAs` solo con redes reales), `WebSite`, `WebPage`, `BreadcrumbList` y `FAQPage` en la portada, Servicios y Reformas, cada una con sus propias preguntas. El FAQ se genera desde `preguntas.json` (/admin → «Preguntas frecuentes»), igual que el HTML visible, así que siempre coinciden. Google solo muestra resultados enriquecidos de FAQ para sitios muy concretos, pero el marcado es correcto y no perjudica.
 - `sitemap.xml` (sin legales ni 404) y `robots.txt`. Las páginas legales llevan `noindex, follow`.
 - Una única página de zonas con contenido útil, sin páginas duplicadas por municipio (evita las «páginas puerta»).
 
-**Resultado de las pruebas locales** (Lighthouse 13, con `npm run preview`, incluido el efecto «llana»): 100 en rendimiento, accesibilidad, buenas prácticas y SEO en las páginas indexables, tanto en móvil como en escritorio. En móvil, el primer pintado (FCP) llega en unos 0,7-0,8 s y el LCP entre 1,1 y 1,3 s. Las legales puntúan menos en SEO porque son `noindex` a propósito.
+**Resultado de las pruebas locales** (Lighthouse 13, con `npm run preview`, incluido el efecto «llana»): 100 en rendimiento, accesibilidad, buenas prácticas y SEO en las páginas indexables, tanto en móvil como en escritorio. En móvil, el primer pintado (FCP) llega en unos 0,8 s y el LCP entre 1,1 y 1,4 s. Las legales puntúan menos en SEO porque son `noindex` a propósito.
 
 **Acciones después de publicar** (ninguna garantiza una posición concreta en Google; el posicionamiento local depende sobre todo de la relevancia, la proximidad y la reputación real):
 1. **Google Search Console**: verifica el dominio, envía `https://rafaelmaderas.es/sitemap.xml` y revisa la cobertura y los errores cada cierto tiempo.
@@ -357,18 +372,30 @@ Los textos se han redactado a partir de la información facilitada. Antes de pub
 - **Gremios coordinados**: albañilería, alicatado, fontanería, electricidad y «otros oficios». También se menciona la pintura como parte de los remates de una reforma integral (/admin → «Páginas» → «Reformas»).
 - **«Equipo propio» / «equipo propio de yesistas»**: que los trabajos de yeso los hace personal de la empresa (inicio, Servicios, Reformas, «Quiénes somos», FAQ). Además, que para el resto de oficios se **coordina** a profesionales con los que se colabora habitualmente.
 - **«Un único interlocutor»**: que el cliente tiene un mismo contacto en la empresa desde la primera llamada hasta el final de la obra (inicio, Reformas, «Quiénes somos»). El proceso de trabajo dice además que se visita la obra cuando hace falta y que se revisa el resultado con el cliente al terminar.
-- **Disponibilidad**: si el equipo está en obra, se devuelve la llamada o se contesta el WhatsApp lo antes posible.
-- **Mensaje predefinido de WhatsApp**: «Hola, quiero pedir información sobre una obra o reforma.» («Datos de la empresa» → «Mensaje inicial de WhatsApp»).
-- **Zonas**: Jaén capital como zona habitual y los municipios listados en /admin → «Páginas» → «Zonas de servicio», que son una selección orientativa. También la atención en el resto de Andalucía «según el trabajo».
-- **Respuestas del FAQ** (/admin → «Preguntas frecuentes»), sobre todo las de plazos y secado.
-- **Compromisos de forma de trabajar** añadidos en la reescritura de textos. Son fieles al proceso descrito, pero confírmalos:
-  - «**Presupuesto claro** antes de empezar» (inicio y Reformas).
-  - «**Si surge un imprevisto**, te lo explicamos antes de hacer nada» (Reformas y FAQ).
-  - Limpieza: «protegemos los suelos y lo que no se puede mover, y al terminar retiramos los restos»; «te decimos qué conviene sacar de la estancia» (FAQ y consejos de Servicios).
-  - Grietas: «si una grieta pudiera tener origen estructural […] si lo vemos, te lo diremos» (Servicios).
-- **«Empresa familiar»** (inicio y «Quiénes somos»).
-- **Propiedades del yeso** en Servicios: material **incombustible** que **ayuda a regular la humedad**, y en el yeso proyectado «menos días de obra» y «espesor uniforme, sin empalmes». Son propiedades generales del material y de la técnica, sin cifras.
-- **No se afirma** a propósito: presupuesto gratuito, sin compromiso, cerrado o por escrito, garantía por escrito, plazo de respuesta ni precios. Si alguno es cierto, añadirlo refuerza mucho la confianza (por ejemplo, «Presupuesto por escrito y sin compromiso»).
+- **Disponibilidad y trato**: si el equipo está en obra, se devuelve la llamada o se contesta el WhatsApp lo antes posible. Además, «te respondemos nosotros, sin centralitas» y «hablas directamente con nosotros, sin intermediarios» (inicio y Contacto).
+- **Mensaje predefinido de WhatsApp**: «Hola, os escribo desde la web. Quiero consultaros una obra o reforma.» («Datos de la empresa» → «Mensaje inicial de WhatsApp»).
+- **Zonas**: Jaén capital como zona habitual («del casco antiguo al Bulevar») y los municipios listados en /admin → «Páginas» → «Zonas de servicio», que son una selección orientativa. También la atención en el resto de Andalucía «según el trabajo». Los ejemplos de viviendas (casas antiguas del casco histórico, pisos de los años 70, 80 y 90 con gotelé) son generales.
+- **Respuestas del FAQ** (/admin → «Preguntas frecuentes»), sobre todo:
+  - «Sí» a los **trabajos pequeños** («Si no es algo que hagamos, también te lo diremos»).
+  - **Gotelé**: el de temple se rasca después de humedecerlo y el de pintura plástica se cubre con yeso.
+  - **Secado**: sin plazos fijos y «al terminar te decimos cuándo puedes pintar».
+  - **Vivir en casa**: «trabajamos por estancias».
+  - **Oficios**: el yeso, con equipo propio; el resto, profesionales a los que se coordina.
+- **Licencias** (Reformas, «¿Necesito licencia para reformar mi casa en Jaén?»): es un texto general basado en la ley andaluza LISTA (Ley 7/2021, art. 138). Muchas obras en viviendas existentes se tramitan con **declaración responsable**, que permite empezar desde que se presenta con la documentación. Confírmalo con el área de Urbanismo del Ayuntamiento de Jaén o con quien os tramite las licencias. No se dice que la empresa gestione los permisos; si lo hace, añadirlo es un buen argumento.
+- **Compromisos de forma de trabajar**. Son fieles al proceso descrito, pero confírmalos:
+  - «**Presupuesto claro** antes de empezar» / «tienes el presupuesto antes de empezar» (inicio, proceso, Reformas y Contacto).
+  - «**Si surge un imprevisto**, te lo enseñamos y decides tú antes de seguir» (inicio, Reformas y FAQ).
+  - Limpieza: «protegemos suelos y muebles» y «al terminar recogemos / retiramos los restos» (proceso, «Quiénes somos», FAQ y consejos de Servicios).
+  - Fotos: «mándanos unas fotos por WhatsApp y te decimos cómo lo haríamos» (portada) y «te orientamos con lo que nos cuentes y las fotos» (Contacto).
+  - Preparación: «hace falta agua y luz en la obra» (consejos de Servicios) y «saneamos lo que está suelto y enderezamos las paredes con maestras» (Servicios).
+  - Grietas: «si una grieta pudiera tener origen estructural […] si lo vemos, te lo diremos» (Servicios y FAQ).
+- **«Empresa familiar»** (inicio y «Quiénes somos») y que el fundador **creó la empresa en 2012** (inicio).
+- **Propiedades del yeso** en Servicios: material **incombustible** que **ayuda a regular la humedad**. En el yeso proyectado, «menos días de obra» y «el mismo espesor en toda la pared». Son propiedades generales del material y de la técnica, sin cifras.
+- **«Sin compromiso»**: aparece en la portada, en el bloque final de contacto y en Contacto («Pedir presupuesto no te compromete a nada»). Pedir presupuesto nunca obliga a contratar, pero confirma que estáis cómodos con la expresión.
+- **No se afirma** a propósito: presupuesto gratuito, cerrado o por escrito, garantía por escrito, plazo de respuesta, horario ni precios. Si alguno es cierto, añadirlo refuerza mucho la confianza. Por ejemplo:
+  - «Presupuesto por escrito»;
+  - «Te respondemos en el día»;
+  - el horario de llamadas junto al teléfono.
 - **Privacidad**: que a otros profesionales solo se les pasan los datos imprescindibles de la obra. (Confirmado: el correo de Hotmail y el WhatsApp son los de la empresa.)
 - La foto «Jaén» es de **Baños de la Encina** (provincia de Jaén), no de la capital. El texto alternativo lo indica.
 - **Foto principal**: que la persona que aparece está de acuerdo en salir en la web. Su texto alternativo dice «Yesista de Rafael Maderas S.L. en plena obra…», sin nombre. Si se quiere, puede decir quién es (por ejemplo, el fundador), en /admin → «Fotos de la web».

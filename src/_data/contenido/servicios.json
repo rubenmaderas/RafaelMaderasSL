@@ -3,32 +3,32 @@
     {
       "id": "yeso-proyectado",
       "titulo": "Yeso proyectado",
-      "resumen": "**Más rápido** en viviendas completas y superficies grandes, con el mismo espesor en toda la pared.",
-      "descripcion": "Aplicamos el yeso con máquina y después lo regleamos y alisamos. Es la forma más rápida de revestir estancias completas.\n\n**Qué notas en casa:**\n\n- **Menos días de obra** en superficies grandes.\n- **Espesor uniforme** en toda la pared, sin empalmes.\n- **Paredes y techos planos**, listos para pintar.\n\n**Ideal para:** obra nueva, ampliaciones y reformas integrales."
+      "resumen": "**Viviendas completas en menos días**, con el mismo espesor en toda la pared.",
+      "descripcion": "Aplicamos el yeso con máquina y después lo regleamos y alisamos. Es la forma más rápida de revestir estancias completas.\n\n**Qué notas en casa:**\n\n- **Menos días de obra** en superficies grandes.\n- **Espesor uniforme** en toda la pared, sin empalmes.\n- **Paredes y techos planos**, listos para pintar.\n\n**Ideal para:** obra nueva, ampliaciones y reformas integrales. Para una reparación o una sola pared suele compensar más hacerlo a mano."
     },
     {
       "id": "guarnecido-enlucido",
       "titulo": "Guarnecido y enlucido de paredes y techos",
-      "resumen": "La capa que endereza la pared y la capa fina que la deja **lisa y lista para pintar**.",
-      "descripcion": "Son las dos capas de un revestimiento de yeso bien hecho:\n\n- **Guarnecido:** la capa base. Corrige irregularidades y da cuerpo a la pared.\n- **Enlucido:** la capa fina final. Deja una superficie **lisa y uniforme**.\n\n**Qué notas en casa:** la pintura queda mejor, sin marcas ni sombras.\n\nLo aplicamos en paredes y techos de ladrillo, bloque y otros soportes preparados."
+      "resumen": "**Paredes rectas y lisas**: una capa que endereza y otra fina que deja el acabado listo para pintar.",
+      "descripcion": "Son las dos capas de un revestimiento de yeso bien hecho:\n\n- **Guarnecido:** la capa base, más gruesa. Corrige irregularidades y da cuerpo a la pared.\n- **Enlucido:** la capa fina final, de pocos milímetros. Deja una superficie **lisa y uniforme**.\n\n**Qué notas en casa:** la pintura queda mejor, sin marcas ni sombras.\n\nLo aplicamos en paredes y techos de ladrillo, bloque y otros soportes preparados."
     },
     {
       "id": "alisado-paredes",
       "titulo": "Alisado de paredes y gotelé",
-      "resumen": "Cubrimos el gotelé y las texturas antiguas para dejar paredes **lisas y actuales**.",
-      "descripcion": "Alisar las paredes es de las formas **más eficaces de modernizar una vivienda** sin tocar la distribución.\n\n- Paredes con **gotelé** o texturas antiguas.\n- Superficies con marcas, parches o defectos.\n- Resultado: paredes **lisas y actuales**, listas para pintar.\n\nAntes de empezar revisamos la pared y la pintura que tiene. Así elegimos el método adecuado y el acabado dura."
+      "resumen": "**Paredes sin gotelé**, lisas y actuales, sin tocar la distribución de la casa.",
+      "descripcion": "Quitar el gotelé es de las formas **más eficaces de modernizar una vivienda** sin obras de distribución.\n\n- Paredes con **gotelé** o texturas antiguas.\n- Superficies con marcas, parches o defectos.\n- Resultado: paredes **lisas y actuales**, listas para pintar.\n\nAntes de empezar revisamos la pared y su pintura para elegir el método: rascar el gotelé o cubrirlo con una capa de yeso."
     },
     {
       "id": "regularizacion",
       "titulo": "Regularización de paredes antiguas",
-      "resumen": "Paredes torcidas u onduladas, típicas de casas antiguas, **rectas otra vez**.",
-      "descripcion": "En casas antiguas es habitual encontrar paredes **fuera de plomo**, onduladas o llenas de parches. Las enderezamos con maestras y un guarnecido bien planteado.\n\n**Qué notas en casa:**\n\n- Muebles de cocina, puertas y rodapiés que **encajan sin huecos**.\n- Esquinas rectas y paredes planas a la vista.\n- Una base firme para pintar o revestir."
+      "resumen": "**Paredes antiguas rectas otra vez**, sin ondulaciones ni parches.",
+      "descripcion": "En casas antiguas es habitual encontrar paredes **fuera de plomo**, onduladas o llenas de parches. Saneamos lo que está suelto y las enderezamos con maestras y un guarnecido bien planteado.\n\n**Qué notas en casa:**\n\n- Muebles de cocina, puertas y rodapiés que **encajan sin huecos**.\n- Esquinas rectas y paredes planas a la vista.\n- Una base firme para pintar o revestir.\n\n**Si hay humedad**, primero hay que resolver su origen. Taparla con yeso solo la esconde un tiempo."
     },
     {
       "id": "reparaciones",
       "titulo": "Reparación de grietas, desconchones y rozas",
-      "resumen": "Grietas, desconchones y rozas reparados e igualados **para que no se noten al pintar**.",
-      "descripcion": "Tras cambiar la instalación eléctrica o la fontanería quedan **rozas** que hay que cerrar. También son habituales las fisuras, los golpes y los desconchones por una humedad ya resuelta.\n\n- Cerramos rozas y huecos de instalaciones.\n- Reparamos fisuras superficiales y desconchones.\n- Igualamos la zona para que **no se note al pintar**.\n\n**Con franqueza:** si una grieta pudiera tener origen estructural, lo recomendable es que antes la revise un técnico. Si lo vemos, te lo diremos."
+      "resumen": "**Grietas, desconchones y rozas** reparados e igualados para que no se noten al pintar.",
+      "descripcion": "Tras cambiar la instalación eléctrica o la fontanería quedan **rozas** que hay que cerrar. También son habituales las fisuras, los golpes y los desconchones por una humedad ya resuelta.\n\n- Cerramos rozas y huecos de instalaciones.\n- Reparamos fisuras superficiales y desconchones.\n- Igualamos la zona para que **no se note al pintar**.\n\n**Con franqueza:** si una grieta pudiera tener origen estructural, antes de taparla conviene que la revise un técnico. Si lo vemos, te lo diremos."
     }
   ],
   "reformas": [
@@ -36,7 +36,7 @@
       "id": "reforma-integral",
       "titulo": "Reformas integrales de vivienda",
       "resumen": "Renovación completa de pisos y casas, con **un solo interlocutor** y cada oficio en su orden.",
-      "descripcion": "Renovamos pisos y casas completos: demoliciones, distribución, instalaciones, revestimientos y acabados.\n\n- **Un solo interlocutor** para toda la obra.\n- **Cada oficio en su orden**, sin esperas innecesarias.\n- **Acabados de yeso** con nuestro propio equipo."
+      "descripcion": "Renovamos pisos y casas completos: demoliciones, distribución, instalaciones, revestimientos y acabados.\n\n- **Un solo interlocutor** para toda la obra.\n- **Presupuesto claro** antes de empezar.\n- **Cada oficio en su orden**, sin esperas innecesarias.\n- **Acabados de yeso** con nuestro propio equipo."
     },
     {
       "id": "cocinas-banos",

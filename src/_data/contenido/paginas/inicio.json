@@ -1,12 +1,13 @@
 {
   "seo": {
     "titulo": "Yesista y Reformas en Jaén | {empresa}",
-    "descripcion": "Yesista y empresa de reformas en Jaén: paredes lisas listas para pintar, yeso proyectado y reformas integrales con un solo interlocutor. Tel. {telefono}."
+    "descripcion": "Yesista y empresa de reformas en Jaén, con {años} años de oficio: paredes lisas listas para pintar y reformas integrales con un solo interlocutor."
   },
   "portada": {
     "antetitulo": "{empresa}",
     "titulo": "Yesista y reformas en *Jaén*",
-    "entradilla": "Paredes y techos **lisos y listos para pintar**, y reformas completas con un solo interlocutor. En **Jaén capital, la provincia y Andalucía**. Empresa familiar con **{años} años de oficio**.",
+    "entradilla": "Paredes y techos **lisos, listos para pintar**, y reformas completas con un solo interlocutor. Empresa familiar con **{años} años de oficio** en Jaén capital, la provincia y Andalucía.",
+    "nota": "**Sin compromiso.** Mándanos unas fotos por WhatsApp y te decimos cómo lo haríamos.",
     "insignias": {
       "oficio": "Oficio",
       "interlocutor": "**Un único** interlocutor",
@@ -16,7 +17,7 @@
   "servicios": {
     "antetitulo": "Trabajos de yeso",
     "titulo": "Trabajos de yeso en Jaén, con equipo propio",
-    "entradilla": "El yeso es nuestra especialidad y lo hace **nuestro propio equipo**. Paredes y techos rectos, lisos y listos para pintar.",
+    "entradilla": "El yeso es nuestra especialidad y lo hace **nuestro propio equipo**, a mano o a máquina. Paredes y techos rectos, lisos y listos para pintar.",
     "tarjetaReformas": {
       "titulo": "Reformas y obra en general",
       "texto": "Reformas integrales, cocinas y baños. **Coordinamos todos los gremios** y tú hablas solo con nosotros."
@@ -25,20 +26,20 @@
   },
   "reformas": {
     "antetitulo": "Reformas integrales",
-    "titulo": "Reformas integrales en Jaén, con un solo responsable",
-    "texto": "¿Te preocupa tener que organizar a varios gremios, que la obra se alargue o no saber en qué punto está? **De eso nos encargamos nosotros.**\n\nCoordinamos a profesionales con los que trabajamos habitualmente —albañilería, alicatado, fontanería, electricidad— para que cada uno entre en su momento.",
+    "titulo": "Reformas integrales en Jaén, sin organizar tú a los gremios",
+    "texto": "Una reforma preocupa por tres cosas: **cuánto costará, cuánto durará y quién la organiza**. Te lo explicamos antes de empezar y coordinamos la obra de principio a fin.\n\nTrabajamos con profesionales de confianza —albañilería, alicatado, fontanería, electricidad— y cada uno entra en su momento. El yeso lo hace nuestro propio equipo.",
     "lista": [
       "**Un solo interlocutor** durante toda la obra.",
       "**Presupuesto claro** antes de empezar.",
       "**Cada oficio en su orden**, sin esperas innecesarias.",
-      "**Acabados de yeso** con nuestro propio equipo."
+      "**Si surge un imprevisto**, decides tú antes de seguir."
     ],
     "enlace": "Cómo se organiza una reforma"
   },
   "zonas": {
     "antetitulo": "Zonas de servicio",
     "titulo": "Trabajamos en Jaén capital, la provincia y Andalucía",
-    "texto": "Nuestra zona habitual es **Jaén capital y los pueblos de alrededor**. También hacemos obras en el resto de la provincia y, según el trabajo, en otras provincias andaluzas.\n\nEstar cerca nos permite **visitar la obra y seguirla en persona**.",
+    "texto": "Nuestra zona habitual es **Jaén capital y los pueblos de alrededor**. También hacemos obras en el resto de la provincia y, según el trabajo, en otras provincias andaluzas.\n\nEstar cerca nos permite **ver la obra en persona** y seguirla de cerca.",
     "localidades": [
       "Jaén capital",
       "Los Villares",
@@ -58,23 +59,27 @@
   "porque": {
     "antetitulo": "Por qué elegirnos",
     "titulo": "Por qué elegir {empresa}",
-    "entradilla": "Una empresa familiar de Jaén, especializada en yeso y con una forma de trabajar clara.",
+    "entradilla": "Antes de llamar a una empresa de obras, casi todo el mundo se hace las mismas preguntas. Estas son nuestras respuestas.",
     "tarjetas": [
       {
+        "duda": "«¿Sabrán hacerlo bien?»",
         "titulo": "{años} años de oficio",
-        "texto": "La experiencia de nuestro fundador como yesista es la base de la empresa. Se nota en la preparación, en los remates y en elegir bien la solución."
+        "texto": "Nuestro fundador lleva {años} años como {oficio} y creó la empresa en {fundacion}. Esa experiencia se nota en la preparación, en los remates y en elegir bien la solución."
       },
       {
-        "titulo": "Empresa desde {fundacion}",
-        "texto": "Sociedad limitada con sede en Jaén y equipo propio para los trabajos de yeso. Sabes con quién tratas."
+        "duda": "«¿Con quién hablo si surge algo?»",
+        "titulo": "Trato directo",
+        "texto": "Hablas directamente con nosotros, de la primera llamada al último repaso. Sin centralitas ni intermediarios."
       },
       {
-        "titulo": "Un solo interlocutor",
-        "texto": "El mismo contacto de la primera llamada al último repaso. Sin centralitas ni intermediarios."
-      },
-      {
+        "duda": "«¿Tendré que organizar yo a los gremios?»",
         "titulo": "Obra coordinada",
-        "texto": "Organizamos cada oficio en su orden. Tú no tienes que perseguir a nadie."
+        "texto": "No. Coordinamos albañilería, fontanería, electricidad y alicatado en el orden correcto. El yeso lo hace nuestro propio equipo."
+      },
+      {
+        "duda": "«¿Y si al final cuesta más?»",
+        "titulo": "Presupuesto antes de empezar",
+        "texto": "Sabes lo que cuesta antes de empezar. Si aparece algo que no se veía, te lo enseñamos y decides tú antes de seguir."
       }
     ]
   },

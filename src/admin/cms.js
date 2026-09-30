@@ -145,7 +145,13 @@
               "div",
               { key, className: "grid grid--2" },
               list(value).map((card, i) =>
-                h("article", { key: i, className: "card" }, h(`h${Math.min(level + 1, 4)}`, null, text(card.titulo)), html("div", block(card.texto)))
+                h(
+                  "article",
+                  { key: i, className: "card" },
+                  card.duda ? h("p", { className: "card__doubt" }, text(card.duda)) : null,
+                  h(`h${Math.min(level + 1, 4)}`, null, text(card.titulo)),
+                  html("div", block(card.texto))
+                )
               )
             )
           );
@@ -241,29 +247,43 @@
       )
     );
 
-  /* Preguntas frecuentes ----------------------------------------------------- */
-  const FaqPreview = (data) =>
-    h(
+  /* Preguntas frecuentes (agrupadas por la página donde aparecen) ------------ */
+  const FAQ_PAGES = [
+    ["inicio", "la portada"],
+    ["servicios", "Servicios"],
+    ["reformas", "Reformas"],
+  ];
+
+  const FaqPreview = (data) => {
+    const items = list(data.preguntas);
+    const pageOf = (item) => (FAQ_PAGES.some(([key]) => key === item.pagina) ? item.pagina : "inicio");
+    return h(
       "div",
       { className: "cms-preview" },
-      h(
-        "section",
-        { className: "section" },
-        h(
-          "div",
-          { className: "container stack" },
-          h("h2", null, "Preguntas frecuentes"),
-          list(data.preguntas).map((item, i) =>
-            h(
-              "div",
-              { key: i, className: "card" },
-              h("h3", null, text(item.pregunta)),
-              plainParagraphs(item.respuesta).map((paragraph, j) => h("p", { key: j }, paragraph))
-            )
+      FAQ_PAGES.map(([key, label], index) => {
+        const group = items.filter((item) => pageOf(item) === key);
+        return h(
+          "section",
+          { key, className: `section${index % 2 ? " section--surface" : ""}` },
+          h(
+            "div",
+            { className: "container stack" },
+            h("h2", null, `Preguntas en ${label} (${group.length})`),
+            group.length
+              ? group.map((item, i) =>
+                  h(
+                    "div",
+                    { key: i, className: "card" },
+                    h("h3", null, text(item.pregunta)),
+                    plainParagraphs(item.respuesta).map((paragraph, j) => h("p", { key: j }, paragraph))
+                  )
+                )
+              : h("p", { className: "small" }, "Ninguna pregunta asignada: esta página no muestra la sección de preguntas.")
           )
-        )
-      )
+        );
+      })
     );
+  };
 
   /* Textos comunes ----------------------------------------------------------- */
   const CommonPreview = (data) => {

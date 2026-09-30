@@ -1,6 +1,6 @@
-{#- Preguntas frecuentes: mismo contenido que el JSON-LD FAQPage (contenido/preguntas.json). -#}
+{#- Preguntas frecuentes de la página (faqGroup en el front matter): mismo contenido que su JSON-LD FAQPage. -#}
 <div class="faq">
-  {%- for item in faq %}
+  {%- for item in faq[faqGroup] %}
   <details class="faq__item"{% if loop.first %} open{% endif %}>
     <summary class="faq__question">{{ item.question }}</summary>
     <div class="faq__answer">

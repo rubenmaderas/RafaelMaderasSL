@@ -5,25 +5,25 @@
   "proceso": [
     {
       "titulo": "Contacto",
-      "texto": "Llámanos o escríbenos por WhatsApp. Cuéntanos **qué necesitas y dónde está la obra**. Si puedes, envía unas fotos."
+      "texto": "Llámanos o escríbenos por WhatsApp. Cuéntanos **qué necesitas y dónde está la obra**; con unas fotos, mejor."
     },
     {
       "titulo": "Valoración",
-      "texto": "Vemos la obra si hace falta y te explicamos la solución. Tienes el **presupuesto antes de empezar**."
+      "texto": "Revisamos el estado real de las paredes, en persona si hace falta, y te explicamos la solución. Tienes el **presupuesto antes de empezar**."
     },
     {
       "titulo": "Ejecución",
-      "texto": "Nuestro equipo hace el yeso. Si es una reforma, **coordinamos cada oficio** para que entre en su momento."
+      "texto": "**Protegemos suelos y muebles** y nuestro equipo hace el yeso. En una reforma, cada oficio entra en su momento."
     },
     {
       "titulo": "Seguimiento",
-      "texto": "Sabes **en qué punto está la obra**. Al terminar, revisamos el resultado contigo."
+      "texto": "Sabes **en qué punto está la obra**. Al terminar, recogemos y revisamos el resultado contigo."
     }
   ],
   "cta": {
     "antetitulo": "Hablemos de tu obra",
-    "titulo": "¿Tienes una obra o una reforma en mente?",
-    "texto": "Cuéntanos qué necesitas y dónde está la obra. **Con unas fotos por WhatsApp** ya podemos orientarte sobre cómo plantear el trabajo."
+    "titulo": "¿Paredes que arreglar o una reforma pendiente?",
+    "texto": "Mándanos unas fotos por WhatsApp y dinos dónde está la obra. **Te orientamos sin compromiso** y, si hace falta, quedamos para verla."
   },
   "pie": {
     "texto": "Empresa de yeso y reformas en Jaén, con equipo propio para los trabajos de yeso y gremios coordinados para el resto de la obra. Trabajamos en Jaén capital, la provincia de Jaén y el resto de Andalucía.",

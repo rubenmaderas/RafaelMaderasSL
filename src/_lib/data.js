@@ -51,20 +51,25 @@ export function getServices() {
   };
 }
 
+/** Páginas que muestran preguntas frecuentes (campo "pagina" de cada pregunta). */
+export const FAQ_PAGES = ["inicio", "servicios", "reformas"];
+
 /**
  * Preguntas frecuentes en texto plano, con los comodines ya sustituidos. El mismo
  * texto se usa en el HTML visible y en el JSON-LD FAQPage (coinciden siempre).
+ * Con `pagina` devuelve solo las de esa página; sin página asignada van a la portada.
  */
-export function getFaq() {
+export function getFaq(pagina) {
   const data = readContent("preguntas");
   return (data.preguntas || [])
     .map((item) => {
       const answer = applyTokens(item.respuesta).trim();
       return {
+        page: FAQ_PAGES.includes(item.pagina) ? item.pagina : "inicio",
         question: applyTokens(item.pregunta).trim(),
         answer,
         paragraphs: answer.split(/\n\s*\n/).map((p) => p.replace(/\s+/g, " ").trim()).filter(Boolean),
       };
     })
-    .filter((item) => item.question && item.answer);
+    .filter((item) => item.question && item.answer && (!pagina || item.page === pagina));
 }

@@ -10,7 +10,7 @@
   },
   "historia": {
     "titulo": "Nuestra historia",
-    "texto": "La empresa se constituyó en {fundacion}, pero el oficio viene de mucho antes: nuestro fundador lleva **{años} años trabajando como {oficio}**.\n\nEn tanto tiempo se aprende a resolver casi cualquier pared:\n\n- La pared antigua que no está a plomo.\n- El gotelé que hay que alisar.\n- La roza que tiene que desaparecer bajo la pintura.\n\nEsa experiencia es la base de la empresa. La aplicamos igual en una habitación que en una vivienda completa."
+    "texto": "La empresa se constituyó en {fundacion}, pero el oficio viene de mucho antes: nuestro fundador lleva **{años} años trabajando como {oficio}** (o yesero, como también se dice).\n\nEn tanto tiempo se aprende a resolver casi cualquier pared:\n\n- La pared antigua que no está a plomo.\n- El gotelé que hay que quitar.\n- La roza que tiene que desaparecer bajo la pintura.\n\nEsa experiencia es la base de la empresa. La aplicamos igual en una habitación que en una vivienda completa."
   },
   "equipo": {
     "titulo": "Nuestro equipo",
@@ -21,8 +21,8 @@
     "titulo": "Cómo trabajamos",
     "tarjetas": [
       {
-        "titulo": "Un solo interlocutor",
-        "texto": "Un mismo contacto en la empresa de la primera llamada al final de la obra."
+        "titulo": "Casa protegida y recogida",
+        "texto": "Protegemos suelos y muebles, y al terminar retiramos los restos. Trabajar en casa de alguien exige cuidado."
       },
       {
         "titulo": "Explicaciones claras",

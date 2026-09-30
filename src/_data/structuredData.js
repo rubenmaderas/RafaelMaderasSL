@@ -66,9 +66,10 @@ function business(site, abs, businessId) {
 
 export default {
   /**
-   * @param {{url: string, title: string, description: string, breadcrumb?: string, includeFaq?: boolean}} page
+   * @param {{url: string, title: string, description: string, breadcrumb?: string, faqGroup?: string}} page
+   *   faqGroup: página de preguntas frecuentes ("inicio", "servicios"…) que se muestra en esta URL.
    */
-  forPage({ url, title, description, breadcrumb, includeFaq }) {
+  forPage({ url, title, description, breadcrumb, faqGroup }) {
     const site = getSite();
     const abs = (path) => new URL(path, site.url + "/").href;
     const businessId = abs("/#empresa");
@@ -113,11 +114,12 @@ export default {
       });
     }
 
-    if (includeFaq) {
+    const faqItems = faqGroup ? getFaq(faqGroup) : [];
+    if (faqItems.length) {
       graph.push({
         "@type": "FAQPage",
         "@id": `${pageUrl}#preguntas-frecuentes`,
-        mainEntity: getFaq().map((item) => ({
+        mainEntity: faqItems.map((item) => ({
           "@type": "Question",
           name: item.question,
           acceptedAnswer: { "@type": "Answer", text: item.paragraphs.join(" ") },

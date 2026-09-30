@@ -3,6 +3,7 @@ layout: layouts/base.njk
 permalink: /reformas/
 pageKey: reformas
 breadcrumb: "Reformas"
+faqGroup: reformas
 ---
 {#- Textos: contenido/paginas/reformas.json y contenido/servicios.json (/admin). -#}
 {%- from "macros/icons.njk" import icon -%}
@@ -108,3 +109,15 @@ breadcrumb: "Reformas"
     {% include "partials/process.njk" %}
   </div>
 </section>
+
+{%- if faq[faqGroup].length %}
+<section class="section" id="preguntas-frecuentes" aria-labelledby="titulo-faq">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <p class="eyebrow">{{ c.preguntas.antetitulo | t }}</p>
+      <h2 id="titulo-faq">{{ c.preguntas.titulo | t }}</h2>
+    </div>
+    {% include "partials/faq.njk" %}
+  </div>
+</section>
+{%- endif %}

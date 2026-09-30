@@ -11,15 +11,15 @@
   "medios": {
     "telefono": {
       "titulo": "Teléfono",
-      "texto": "La forma más rápida de hablar con nosotros."
+      "texto": "La forma más rápida de hablar con nosotros. Si estamos en obra y no lo cogemos, te devolvemos la llamada."
     },
     "whatsapp": {
       "titulo": "WhatsApp",
-      "texto": "Ideal para enviarnos **fotos y medidas** de la obra."
+      "texto": "**Lo más cómodo:** mándanos fotos y medidas y te decimos cómo lo vemos."
     },
     "correo": {
       "titulo": "Correo electrónico",
-      "texto": "Para consultas detalladas o documentación."
+      "texto": "Para enviar planos, mediciones o documentación."
     }
   },
   "mensaje": {
@@ -27,15 +27,15 @@
     "entradilla": "Con estos datos podemos hacernos una idea de la obra desde el principio y preparar mejor la valoración:",
     "lista": [
       "Localidad donde está la obra.",
-      "Tipo de trabajo: yeso, alisado de gotelé, reforma de baño o cocina, reforma integral…",
+      "Tipo de trabajo: yeso, quitar gotelé, reforma de baño o cocina, reforma integral…",
       "Medidas aproximadas o número de estancias.",
-      "Fotos del estado actual, si puedes enviarlas por WhatsApp o correo.",
+      "Fotos: una general de cada estancia y otra de cerca de la zona a tratar.",
       "Plazos o fechas que tengas en mente."
     ]
   },
   "disponibilidad": {
-    "titulo": "Si no contestamos al momento",
-    "texto": "Normalmente estamos trabajando a pie de obra. Si no podemos atender la llamada en ese momento, te la devolveremos o responderemos a tu WhatsApp lo antes posible."
+    "titulo": "Qué pasa después de escribirnos",
+    "texto": "1. **Te respondemos nosotros**, sin centralitas. Si estamos en obra, en cuanto podamos.\n2. **Te orientamos** con lo que nos cuentes y las fotos.\n3. **Si hace falta, vemos la obra** y te damos el presupuesto antes de empezar.\n\nPedir presupuesto no te compromete a nada."
   },
   "zona": {
     "titulo": "Dónde trabajamos",
