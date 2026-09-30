@@ -91,12 +91,17 @@ export function plainText(value, site) {
 const escapeHtml = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-/** Título con una palabra destacada entre asteriscos: «Yesista y reformas en *Jaén*». */
+/**
+ * Título con una palabra destacada entre asteriscos: «Trabajos de yeso y reformas en *Jaén*».
+ * Las palabras de una letra (y, o, a, e, u) se unen a la siguiente con un espacio duro para
+ * que no queden colgando al final de una línea.
+ */
 export function renderHighlight(value, site) {
-  return escapeHtml(applyTokens(value, site).trim()).replace(
-    /\*([^*]+)\*/g,
-    '<span class="highlight">$1</span>'
-  );
+  return escapeHtml(applyTokens(value, site).trim())
+    .replace(/\s+/g, (space, offset, whole) =>
+      /(?:^|\s)[aeouy]$/i.test(whole.slice(0, offset)) ? "&nbsp;" : space
+    )
+    .replace(/\*([^*]+)\*/g, '<span class="highlight">$1</span>');
 }
 
 export function slugify(value) {

@@ -1,4 +1,4 @@
-# Web de Rafael Maderas S.L. · Yesista y reformas en Jaén
+# Web de Rafael Maderas S.L. · Trabajos de yeso y reformas en Jaén
 
 Web estática para **Rafael Maderas S.L.**: trabajos de yeso (actividad principal) y reformas con gremios coordinados en Jaén capital, la provincia de Jaén y el resto de Andalucía.
 
@@ -147,7 +147,7 @@ A la derecha de cada formulario hay una **vista previa** con el aspecto de la we
 
 Trucos para escribir:
 - **Comodines**: `{empresa}`, `{telefono}`, `{correo}`, `{años}`, `{fundacion}`, `{fundador}`, `{cargo}`, `{oficio}`, `{razon_social}` y `{cif}` se sustituyen solos por los datos de «Datos de la empresa». Si cambia el teléfono, cambia en toda la web.
-- **Palabra resaltada en color** en los títulos: escríbela entre asteriscos, por ejemplo `Yesista y reformas en *Jaén*`.
+- **Palabra resaltada en color** en los títulos: escríbela entre asteriscos, por ejemplo `Trabajos de yeso y reformas en *Jaén*`. En el título de portada, las palabras de una letra («y», «o», «a») se unen solas a la siguiente para que nunca queden sueltas al final de una línea, y en tableta el tamaño se ajusta al ancho de la columna.
 - **Negrita** en los textos largos: botón **B** del editor (o `**así**`).
 - En la portada, la **nota bajo los botones** («Sin compromiso…») es opcional, y cada tarjeta de «Por qué elegirnos» puede llevar una **duda del cliente** que aparece encima del título. Si se dejan vacías, no se muestran.
 - Los campos tienen ayudas y validaciones (longitud del título para Google, formato de teléfono, CIF, etc.). Si algo no es válido, el gestor no deja publicar y señala el campo.

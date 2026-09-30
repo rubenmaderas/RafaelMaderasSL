@@ -69,7 +69,9 @@
       .join("");
 
   const highlight = (value) =>
-    escapeHtml(applyTokens(value).trim()).replace(/\*([^*]+)\*/g, '<span class="highlight">$1</span>');
+    escapeHtml(applyTokens(value).trim())
+      .replace(/\s+/g, (space, offset, whole) => (/(?:^|\s)[aeouy]$/i.test(whole.slice(0, offset)) ? "&nbsp;" : space))
+      .replace(/\*([^*]+)\*/g, '<span class="highlight">$1</span>');
 
   const plainParagraphs = (value) =>
     applyTokens(value)

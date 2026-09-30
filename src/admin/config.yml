@@ -88,7 +88,7 @@ collections:
               - label: Título principal (H1)
                 name: titulo
                 widget: string
-                hint: "El título más importante para Google. La palabra entre asteriscos se resalta en color: `Yesista y reformas en *Jaén*`."
+                hint: "El título más importante para Google. La palabra entre asteriscos se resalta en color: `Trabajos de yeso y reformas en *Jaén*`."
               - &entradilla {label: Entradilla, name: entradilla, widget: text, hint: Uno o dos párrafos cortos bajo el título.}
               - {label: Nota bajo los botones, name: nota, widget: string, required: false, hint: "Frase corta bajo «Llamar ahora» y «WhatsApp» que resuelve la última duda antes de contactar. Admite negrita: `**Sin compromiso.** Mándanos unas fotos…`. Déjala vacía para no mostrarla."}
               - label: Distintivos junto a la foto

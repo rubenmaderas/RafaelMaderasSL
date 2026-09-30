@@ -2,7 +2,7 @@
   "name": "rafael-maderas-web",
   "version": "1.0.0",
   "private": true,
-  "description": "Web de Rafael Maderas S.L.: yesista y reformas en Jaén y Andalucía.",
+  "description": "Web de Rafael Maderas S.L.: trabajos de yeso y reformas en Jaén y Andalucía.",
   "type": "module",
   "scripts": {
     "dev": "eleventy --serve",

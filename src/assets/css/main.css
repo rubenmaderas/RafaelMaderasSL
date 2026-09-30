@@ -1112,6 +1112,18 @@ main:focus {
     margin-inline: 0;
   }
 
+  /* En tablet la columna de texto es estrecha: el título se ajusta a su ancho para quedarse
+     en dos líneas naturales («Trabajos de yeso / y reformas en Jaén») en vez de partirse en tres. */
+  @supports (container-type: inline-size) {
+    .hero__text {
+      container-type: inline-size;
+    }
+
+    .hero h1 {
+      font-size: min(var(--step-4), 11.25cqi);
+    }
+  }
+
   .hero__actions {
     flex-direction: row;
     align-items: center;
