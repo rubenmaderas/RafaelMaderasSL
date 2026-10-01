@@ -2,7 +2,7 @@
 
 Web estática para **Rafael Maderas S.L.**: trabajos de yeso (actividad principal) y reformas con gremios coordinados en Jaén capital, la provincia de Jaén y el resto de Andalucía.
 
-Está hecha con [Eleventy 3](https://www.11ty.dev/), que genera HTML estático sin frameworks en el navegador. Las imágenes se optimizan al compilar (AVIF, WebP y JPEG con `srcset` y dimensiones declaradas), la tipografía (Manrope) se sirve desde el propio dominio y no se carga **ningún servicio de terceros**: ni píxeles, ni fuentes externas. La única excepción es opcional: **Google Analytics**, que se activa desde el gestor y solo se carga si el visitante lo acepta en el aviso de cookies (ver [Cookies y consentimiento](#cookies-y-consentimiento)). 
+Está hecha con [Eleventy 3](https://www.11ty.dev/), que genera HTML estático sin frameworks en el navegador. Las imágenes se optimizan al compilar (AVIF, WebP y JPEG con `srcset` y dimensiones declaradas), la tipografía (Manrope) se sirve desde el propio dominio y no se carga **ningún servicio de terceros**: ni píxeles, ni fuentes externas. La única excepción es opcional: **Google Analytics**, que se activa desde el gestor y solo se carga si el visitante lo acepta en el aviso de cookies (ver [Cookies y consentimiento](#cookies-y-consentimiento)).
 
 Los textos, las fotos y los datos de la empresa se editan **sin tocar código** desde el gestor de contenidos en **`/admin`** (usuario y contraseña). Ver [Gestor de contenidos](#gestor-de-contenidos-admin).
 
