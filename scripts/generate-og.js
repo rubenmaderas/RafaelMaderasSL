@@ -1,6 +1,7 @@
 /**
- * Genera la imagen para redes sociales (Open Graph, 1200×630) y el icono
- * para iOS (apple-touch-icon, 180×180) a partir de SVG tipográficos.
+ * Genera la imagen para redes sociales (Open Graph, 1200×630), el icono
+ * para iOS (apple-touch-icon, 180×180) y el favicon.ico (16/32/48 px,
+ * que es donde lo busca Google por defecto) a partir de SVG tipográficos.
  *
  * Uso: npm run og
  *
@@ -50,10 +51,36 @@ const iconSvg = `
 
 const ogOut = path.join(root, "src/assets/img/og/og-rafael-maderas.jpg");
 const iconOut = path.join(root, "src/assets/apple-touch-icon.png");
+const icoOut = path.join(root, "src/assets/favicon.ico");
 fs.mkdirSync(path.dirname(ogOut), { recursive: true });
 
 await sharp(Buffer.from(ogSvg)).jpeg({ quality: 86, mozjpeg: true }).toFile(ogOut);
 await sharp(Buffer.from(iconSvg)).png({ compressionLevel: 9 }).toFile(iconOut);
 
+// ICO con PNG incrustados (formato estándar de Windows Vista en adelante).
+// Google Search busca el icono en /favicon.ico si no encuentra ninguno declarado.
+const icoSizes = [16, 32, 48];
+const icoPngs = await Promise.all(
+  icoSizes.map((s) => sharp(Buffer.from(iconSvg)).resize(s, s).png({ compressionLevel: 9 }).toBuffer()),
+);
+const dir = Buffer.alloc(6);
+dir.writeUInt16LE(0, 0); // reservado
+dir.writeUInt16LE(1, 2); // tipo: icono
+dir.writeUInt16LE(icoPngs.length, 4);
+let offset = 6 + 16 * icoPngs.length;
+const entries = icoPngs.map((png, i) => {
+  const e = Buffer.alloc(16);
+  e[0] = icoSizes[i]; // ancho
+  e[1] = icoSizes[i]; // alto
+  e[4] = 1; // planos
+  e.writeUInt16LE(32, 6); // bits por píxel
+  e.writeUInt32LE(png.length, 8);
+  e.writeUInt32LE(offset, 12);
+  offset += png.length;
+  return e;
+});
+fs.writeFileSync(icoOut, Buffer.concat([dir, ...entries, ...icoPngs]));
+
 console.log(`Imagen Open Graph: ${path.relative(root, ogOut)}`);
 console.log(`Icono iOS:         ${path.relative(root, iconOut)}`);
+console.log(`Favicon ICO:       ${path.relative(root, icoOut)}`);

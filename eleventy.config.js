@@ -105,6 +105,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     "src/assets/img/og": "assets/img/og",
     "src/assets/favicon.svg": "favicon.svg",
+    "src/assets/favicon.ico": "favicon.ico",
     "src/assets/apple-touch-icon.png": "apple-touch-icon.png",
     [FONT_SOURCE]: "assets/fonts/manrope-latin-wght.woff2",
     // Gestor de contenidos (Decap CMS) autoalojado en /admin/, sin CDN de terceros.
