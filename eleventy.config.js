@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import Image from "@11ty/eleventy-img";
 import * as esbuild from "esbuild";
+import sitemap from "@quasibit/eleventy-plugin-sitemap";
 import { clearContentCache } from "./src/_lib/content.js";
 import { getImages } from "./src/_lib/data.js";
 import { getSite, PENDING_MARK, SITE_URL } from "./src/_lib/site.js";
@@ -96,6 +97,11 @@ const GA_CSP = {
 const NO_EXTRA_CSP = { script: [], img: [], connect: [] };
 
 export default function (eleventyConfig) {
+  eleventyConfig.addPlugin(sitemap, {
+    sitemap: {
+      hostname: SITE_URL,
+    },
+  });
   eleventyConfig.addPassthroughCopy({
     "src/assets/img/og": "assets/img/og",
     "src/assets/favicon.svg": "favicon.svg",
