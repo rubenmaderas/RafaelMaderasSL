@@ -419,7 +419,7 @@ La cookie técnica de sesión de /admin (solo para quien edita la web) está exe
 7. Con el tiempo, añade contenido útil y real: obras terminadas (con permiso del cliente), explicaciones de trabajos concretos o dudas frecuentes nuevas.
 8. Opcional: para saber cuántas visitas y llamadas genera la web, activa **Google Analytics** siguiendo [Cómo activar Google Analytics](#cómo-activar-google-analytics).
 
-### Analizadores SEO y de velocidad (Seobility, SEO Tester Online, PageSpeed…)
+### Analizadores SEO y de velocidad (Seobility, SEOquake, SEO Tester Online, PageSpeed…)
 
 Analiza siempre la dirección definitiva, **`https://rafaelmaderas.es/`**, cuando ya esté publicada. Antes de corregir nada, comprueba que el informe es de esta web: el título y la URL analizados deben ser los de la web (es fácil pegar por error la dirección del propio analizador).
 
@@ -447,7 +447,12 @@ Otros avisos habituales:
 - «La cabecera X-Powered-By no se envía» es **correcto**: no dar pistas del servidor es una buena práctica de seguridad.
 - «Enlaces sin atributo `title`»: no se añade. No mejora el posicionamiento y, si repite el texto del enlace, los lectores de pantalla lo leen dos veces; los enlaces ya tienen texto descriptivo.
 - «Falta `twitter:site`»: solo tiene sentido con una cuenta real de X (Twitter). La empresa no tiene, y las tarjetas se ven bien sin ella.
-- «Faltan palabras del título en el H1 o en la URL»: el H1 y las URL están escritos para leerse con naturalidad («Trabajos de yeso y reformas en Jaén», `/reformas/`). Forzar palabras clave para subir esa nota sería relleno.
+- «Faltan palabras del título en el H1 o en la URL»: el H1 y las URL están escritos para leerse con naturalidad («Yesista en Jaén: paredes lisas, reformas sin complicaciones», `/reformas/`). Forzar palabras clave para subir esa nota sería relleno.
+- «Título corto» (SEOquake pide 50–60 caracteres; el de inicio tiene 48): no es un problema. Google corta los títulos largos, no los cortos, y este lleva primero lo que se busca («Yesista y Reformas en Jaén») y la marca después. Lo que sí importa es no pasar de unos **60 caracteres**: todos los títulos están entre 48 y 60.
+- «La meta description puede cortarse» (SEOquake avisa por encima de 135 caracteres): las de las páginas públicas tienen entre 139 y 152. Google corta por ancho en píxeles, no por caracteres, y lo importante va al principio, así que, aunque se corte en el móvil, se entiende. No conviene recortarlas quitando palabras útiles como «reformas integrales».
+- «Meta robots / noindex: revisar»: es un aviso automático. Las páginas públicas llevan `index, follow, max-image-preview:large`, que es lo correcto; la última parte solo permite a Google mostrar las fotos en grande. Las páginas legales, la 404 y `/admin/` llevan `noindex` a propósito: no aportan nada en los resultados de búsqueda.
+- «Google Analytics no detectado»: es lo esperado. Mientras el campo `googleAnalytics` de `empresa.json` esté vacío no hay medición, y aunque se active, el código solo se carga cuando el visitante acepta las cookies, así que los analizadores no lo verán (ver [Cookies y consentimiento](#cookies-y-consentimiento)).
+- «Sin hreflang»: la web está solo en español; `hreflang` solo hace falta si hay versiones en otros idiomas o países.
 
 ---
 
