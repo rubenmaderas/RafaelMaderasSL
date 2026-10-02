@@ -547,6 +547,13 @@ html.nav-open .mobile-cta {
   transform: translateY(110%);
 }
 
+/* Fondo bloqueado mientras el menú está abierto (patrón de cuadro de diálogo):
+   si la página no se puede desplazar, la capa oscura y el menú siempre van juntos. */
+html.nav-open,
+html.nav-open body {
+  overflow: hidden;
+}
+
 .js .site-nav__list {
   grid-column: 1 / -1;
   flex-direction: column;
