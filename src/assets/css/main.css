@@ -1587,8 +1587,23 @@ html.nav-open body {
 
 .contact-card .btn {
   margin-top: auto;
-  align-self: flex-start;
+  align-self: stretch;
   word-break: break-word;
+}
+
+/* Con pantalla estrecha, letra y padding algo menores para que el correo
+   («rafaelmaderas@hotmail.es») y el teléfono quepan en una sola línea. */
+@media (max-width: 25em) {
+  .contact-card .btn {
+    padding-inline: 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 21.25em) {
+  .contact-card .btn {
+    font-size: 0.9rem;
+  }
 }
 
 .contact-data {
