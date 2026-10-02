@@ -104,14 +104,18 @@ const escapeHtml = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 /**
- * Título con una palabra destacada entre asteriscos: «Trabajos de yeso y reformas en *Jaén*».
+ * Título con una palabra destacada entre asteriscos: «Yesista en *Jaén*: alisados, …».
  * Las palabras de una letra (y, o, a, e, u) se unen a la siguiente con un espacio duro para
- * que no queden colgando al final de una línea.
+ * que no queden colgando al final de una línea, y las dos últimas palabras van juntas (si son
+ * cortas) para que la última línea no se quede con una sola palabra («sin / complicaciones»).
  */
 export function renderHighlight(value, site) {
   return escapeHtml(applyTokens(value, site).trim())
     .replace(/\s+/g, (space, offset, whole) =>
       /(?:^|\s)[aeouy]$/i.test(whole.slice(0, offset)) ? "&nbsp;" : space
+    )
+    .replace(/(\S+)\s+(\S+)$/, (pair, first, last) =>
+      first.length + last.length < 20 ? `${first}&nbsp;${last}` : pair
     )
     .replace(/\*([^*]+)\*/g, '<span class="highlight">$1</span>');
 }

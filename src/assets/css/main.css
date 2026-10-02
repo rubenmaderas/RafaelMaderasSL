@@ -961,6 +961,13 @@ main:focus {
   margin-inline: auto;
 }
 
+/* Titular largo (más de 45 caracteres; la clase la pone index.njk): algo más pequeño y sin
+   límite de ancho para que se corte por grupos con sentido y los botones queden a la vista. */
+.hero h1.hero__title--long {
+  max-width: none;
+  font-size: min(var(--step-4), 9.2vw);
+}
+
 /* Palabra destacada con un trazo coral, como la firma del rótulo. */
 .highlight {
   padding-bottom: 0.12em;
@@ -1114,8 +1121,8 @@ main:focus {
     margin-inline: 0;
   }
 
-  /* En tablet la columna de texto es estrecha: el título se ajusta a su ancho para quedarse
-     en dos líneas naturales («Trabajos de yeso / y reformas en Jaén») en vez de partirse en tres. */
+  /* En tablet la columna de texto es estrecha: el título se ajusta a su ancho para que sus
+     líneas no se partan de forma rara. Con titular largo se reduce algo más (4 líneas en vez de 5). */
   @supports (container-type: inline-size) {
     .hero__text {
       container-type: inline-size;
@@ -1123,6 +1130,10 @@ main:focus {
 
     .hero h1 {
       font-size: min(var(--step-4), 11.25cqi);
+    }
+
+    .hero h1.hero__title--long {
+      font-size: min(calc(var(--step-4) * 0.88), 9.75cqi);
     }
   }
 

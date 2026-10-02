@@ -11,7 +11,10 @@ faqGroup: inicio
   <div class="container hero__grid">
     <div class="hero__text">
       <p class="eyebrow">{{ c.portada.antetitulo | t }}</p>
-      <h1 id="titulo-principal">{{ c.portada.titulo | highlight | safe }}</h1>
+      {#- Con titulares largos (p. ej. «Yesista en Jaén: alisados, proyectados y…») se reduce un poco
+          la letra para que «Llamar ahora» siga visible sin desplazarse en portátiles de 1366×768. -#}
+      {%- set tituloLargo = (c.portada.titulo | t | replace("*", "") | length) > 45 %}
+      <h1 id="titulo-principal"{% if tituloLargo %} class="hero__title--long"{% endif %}>{{ c.portada.titulo | highlight | safe }}</h1>
       <p class="hero__subtitle">{{ c.portada.entradilla | mdi | safe }}</p>
       <div class="btn-group hero__actions" data-hides-mobile-cta>
         <a class="btn btn--primary" href="{{ site.phone.href }}">{{ icon("phone") }}<span>Llamar ahora</span></a>
