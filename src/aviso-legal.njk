@@ -59,7 +59,7 @@ breadcrumb: "Aviso legal"
 <p>La web enlaza con servicios de terceros, como WhatsApp, para facilitar el contacto. Al usarlos, se aplican sus propias condiciones y políticas de privacidad, sobre las que {{ site.legalName }} no tiene control.</p>
 {%- set activeSocial = site.social | selectattr("url") %}
 {%- if activeSocial.length %}
-<p><strong>Perfiles en redes sociales:</strong> {% for s in activeSocial %}<a href="{{ s.url }}" rel="noopener">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>
+<p><strong>Perfiles de la empresa en internet:</strong> {% for s in activeSocial %}<a href="{{ s.url }}" rel="noopener">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>
 {%- endif %}
 
 <h2>7. Protección de datos y cookies</h2>
