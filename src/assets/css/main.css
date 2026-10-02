@@ -564,6 +564,9 @@ main:focus {
 .js .site-nav__cta {
   display: inline-flex;
   min-height: 3rem;
+  /* Botones apilados a toda la anchura dentro del menú desplegable: así el
+     número de teléfono nunca se parte en dos líneas en pantallas estrechas. */
+  grid-column: 1 / -1;
 }
 
 @media (min-width: 60em) {
