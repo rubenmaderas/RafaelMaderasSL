@@ -523,6 +523,30 @@ main:focus {
   }
 }
 
+/* Página atenuada detrás del menú desplegable: evita ver dos veces los botones
+   de contacto (menú + contenido). La clase nav-open la pone main.js. Queda por
+   debajo de la cabecera (z-index 20) y por encima del resto del contenido. */
+html.nav-open body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  background: rgb(38 36 31 / 0.45);
+  transition: opacity 0.25s ease;
+}
+
+@starting-style {
+  html.nav-open body::after {
+    opacity: 0;
+  }
+}
+
+/* Con el menú abierto, la barra fija inferior se esconde: sus botones ya están
+   en el menú y no deben quedar por encima de la capa oscura. */
+html.nav-open .mobile-cta {
+  transform: translateY(110%);
+}
+
 .js .site-nav__list {
   grid-column: 1 / -1;
   flex-direction: column;

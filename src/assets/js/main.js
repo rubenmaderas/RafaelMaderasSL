@@ -17,6 +17,8 @@
     const setOpen = (open) => {
       toggle.setAttribute("aria-expanded", String(open));
       nav.classList.toggle("is-open", open);
+      /* Atenua el resto de la página detrás del menú (ver main.css). */
+      document.documentElement.classList.toggle("nav-open", open);
     };
 
     toggle.addEventListener("click", () => {
