@@ -511,6 +511,12 @@ main:focus {
 
 .js .site-nav.is-open {
   display: grid;
+  /* En pantallas bajas (móvil horizontal) el menú puede ser más alto que la
+     pantalla: rueda dentro de sí mismo, siempre bajo la cabecera. */
+  max-height: calc(100vh - 100%);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
   transition: opacity 0.2s ease, transform 0.2s ease;
