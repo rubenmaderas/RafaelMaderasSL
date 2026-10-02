@@ -1601,7 +1601,13 @@ html.nav-open body {
 }
 
 @media (max-width: 21.25em) {
+  .contact-card {
+    padding: 1rem;
+  }
+
   .contact-card .btn {
+    gap: 0.45rem;
+    padding-inline: 0.6rem;
     font-size: 0.9rem;
   }
 }
