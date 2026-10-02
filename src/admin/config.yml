@@ -652,6 +652,19 @@ collections:
             fields:
               - {label: Nombre, name: nombre, widget: string}
               - {label: "Dirección (https://…)", name: url, widget: string, required: false, pattern: ['^(https://\S+)?$', "Escribe la dirección completa, empezando por https://"]}
+          - label: Fichas en portales y directorios
+            name: perfiles
+            widget: list
+            collapsed: true
+            required: false
+            summary: "{{fields.nombre}}"
+            hint: >-
+              Fichas de la empresa en otras webs (Empresite, Milanuncios, Habitissimo…). No se ven en la web:
+              solo se indican a Google, en los datos estructurados, como perfiles de la misma empresa.
+              Borra la ficha de aquí si el anuncio caduca o se elimina.
+            fields:
+              - {label: Portal, name: nombre, widget: string}
+              - {label: "Dirección de la ficha (https://…)", name: url, widget: string, pattern: ['^https://\S+$', "Escribe la dirección completa, empezando por https://"]}
           - label: Analítica web (Google Analytics)
             name: analitica
             widget: object

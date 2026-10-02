@@ -29,7 +29,11 @@
   "redes": [
     { "nombre": "Facebook", "url": "" },
     { "nombre": "Instagram", "url": "" },
-    { "nombre": "Perfil de Empresa de Google", "url": "" }
+    { "nombre": "Perfil de Empresa de Google", "url": "https://www.google.com/search?kgmid=/g/11zy0mhnvy" }
+  ],
+  "perfiles": [
+    { "nombre": "Empresite (elEconomista)", "url": "https://empresite.eleconomista.es/RAFAEL-MADERAS.html" },
+    { "nombre": "Milanuncios", "url": "https://www.milanuncios.com/reformas/yeso-reformas-y-quitar-gotele-en-jaen-617879846.htm" }
   ],
   "analitica": {
     "googleAnalytics": ""

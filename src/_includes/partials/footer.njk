@@ -40,7 +40,7 @@
       </ul>
       {%- set activeSocial = site.social | selectattr("url") %}
       {%- if activeSocial.length %}
-      <h2 class="site-footer__title site-footer__title--spaced">Síguenos</h2>
+      <h2 class="site-footer__title site-footer__title--spaced">Encuéntranos</h2>
       <ul class="site-footer__list">
         {%- for s in activeSocial %}
         <li><a href="{{ s.url }}" rel="noopener me" target="_blank">{{ s.name }}<span class="visually-hidden"> (se abre en una nueva pestaña)</span></a></li>

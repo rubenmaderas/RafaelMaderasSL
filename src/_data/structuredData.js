@@ -11,7 +11,7 @@ import { applyTokens, plainText } from "../_lib/text.js";
 
 function business(site, abs, businessId) {
   const services = getServices();
-  const sameAs = site.social.filter((s) => s.url).map((s) => s.url);
+  const sameAs = [...new Set([...site.social, ...site.profiles].filter((s) => s.url).map((s) => s.url))];
 
   const node = {
     "@type": "GeneralContractor",

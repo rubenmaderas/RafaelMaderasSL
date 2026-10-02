@@ -388,6 +388,7 @@
       ["Alojamiento web", legal.hosting],
       ["Textos legales actualizados el", legal.ultimaActualizacion],
       ["Redes sociales", list(data.redes).filter((red) => red.url).map((red) => red.nombre).join(", ") || "Ninguna (no se muestran)"],
+      ["Fichas en portales (solo para Google)", list(data.perfiles).filter((p) => p.url).map((p) => p.nombre).join(", ") || "Ninguna"],
       ["Google Analytics", String((data.analitica || {}).googleAnalytics || "").trim() || "Desactivado (sin cookies ni aviso de cookies)"],
     ];
     return h(

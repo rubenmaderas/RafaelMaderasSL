@@ -240,7 +240,7 @@ Están **todos completos** y se guardan en `src/_data/contenido/empresa.json`. L
 | Alojamiento (`hosting`) | Netlify, Inc. (EE. UU., adherida al Marco de Privacidad de Datos UE-EE. UU.) | Política de privacidad |
 | Última actualización (`ultimaActualizacion`) | 30 de septiembre de 2026 | Las tres páginas legales |
 
-- **Redes sociales:** se ha decidido no publicar ninguna. El aviso legal solo muestra el apartado de perfiles si alguna red tiene URL.
+- **Redes sociales:** solo está publicado el Perfil de Empresa de Google. El aviso legal solo muestra el apartado de perfiles si alguna red tiene URL.
 - **Cookies:** mientras no se active Google Analytics, la política de cookies indica que la web no instala ninguna para los visitantes. Netlify no añade cookies a un sitio estático como este; compruébalo tras publicar en DevTools → Application → Cookies. La única excepción es el acceso a **/admin**: Netlify Identity guarda una cookie técnica de sesión (`nf_jwt`) y la sesión en el almacenamiento local, solo a quien inicia sesión. Ya figura en la política. Si se activa Google Analytics, las políticas de cookies y de privacidad se completan solas (ver [Cookies y consentimiento](#cookies-y-consentimiento)). Si se activan otras funciones de Netlify que usen cookies (pruebas A/B…), hay que añadirlas a `src/politica-de-cookies.njk`.
 - **Aviso «Texto provisional»:** ya no aparece porque no queda ningún `PENDIENTE`. Vuelve a salir solo si se vacía algún dato legal.
 
@@ -252,7 +252,9 @@ Está configurado como URL canónica (sin `www`) en `src/_lib/site.js` y en `src
 
 ### 3. Redes sociales (/admin → «Datos de la empresa» → «Redes sociales»)
 
-Se ha decidido **no mostrar redes sociales**: Facebook, Instagram y Perfil de Empresa de Google están sin URL. Si en el futuro se pone una URL real, aparecerá en el pie y en el aviso legal, y se añadirá a `sameAs` en los datos estructurados.
+Facebook e Instagram están sin URL y no se muestran. El **Perfil de Empresa de Google** sí está enlazado (`https://www.google.com/search?kgmid=/g/11zy0mhnvy`, el identificador permanente de la ficha): aparece en el pie («Encuéntranos») y en el aviso legal, y se añade a `sameAs` en los datos estructurados. Cualquier red con URL real se muestra igual.
+
+**Fichas en portales** (/admin → «Datos de la empresa» → «Fichas en portales y directorios»): las fichas de la empresa en Empresite y Milanuncios se añaden a `sameAs` para que Google las relacione con la web, pero no se muestran en ella. Si un anuncio caduca o se borra, quítalo de esa lista.
 
 ### 4. Imágenes (/admin → «Fotos de la web»)
 
@@ -403,7 +405,7 @@ La cookie técnica de sesión de /admin (solo para quien edita la web) está exe
 - `title`, meta description y canonical únicos en cada página. Título principal: «Yesista y Reformas en Jaén | Rafael Maderas S.L.».
 - URLs legibles en español, un único H1 por página y encabezados jerárquicos.
 - Open Graph y Twitter Card con imagen propia.
-- JSON-LD: `GeneralContractor` (nombre, teléfono, email, área de servicio, catálogo de servicios, `sameAs` solo con redes reales), `WebSite`, `WebPage`, `BreadcrumbList` y `FAQPage` en la portada, Servicios y Reformas, cada una con sus propias preguntas. El FAQ se genera desde `preguntas.json` (/admin → «Preguntas frecuentes»), igual que el HTML visible, así que siempre coinciden. Google solo muestra resultados enriquecidos de FAQ para sitios muy concretos, pero el marcado es correcto y no perjudica.
+- JSON-LD: `GeneralContractor` (nombre, teléfono, email, área de servicio, catálogo de servicios, `sameAs` con las redes reales y las fichas en portales), `WebSite`, `WebPage`, `BreadcrumbList` y `FAQPage` en la portada, Servicios y Reformas, cada una con sus propias preguntas. El FAQ se genera desde `preguntas.json` (/admin → «Preguntas frecuentes»), igual que el HTML visible, así que siempre coinciden. Google solo muestra resultados enriquecidos de FAQ para sitios muy concretos, pero el marcado es correcto y no perjudica.
 - `sitemap.xml` (sin legales ni 404) y `robots.txt`. Las páginas legales llevan `noindex, follow`.
 - Una única página de zonas con contenido útil, sin páginas duplicadas por municipio (evita las «páginas puerta»).
 
