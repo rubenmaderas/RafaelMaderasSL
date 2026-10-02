@@ -254,6 +254,8 @@ Está configurado como URL canónica (sin `www`) en `src/_lib/site.js` y en `src
 
 Se ha decidido **no mostrar redes sociales**: Facebook, Instagram y Perfil de Empresa de Google están sin URL. Si en el futuro se pone una URL real, aparecerá en el pie y en el aviso legal, y se añadirá a `sameAs` en los datos estructurados.
 
+**Fichas en portales** (/admin → «Datos de la empresa» → «Fichas en portales y directorios»): las fichas de la empresa en Empresite y Milanuncios se añaden a `sameAs` para que Google las relacione con la web, pero no se muestran en ella. Si un anuncio caduca o se borra, quítalo de esa lista.
+
 ### 4. Imágenes (/admin → «Fotos de la web»)
 
 La **foto principal de la portada es real**: un yesista de la empresa en obra (`principal.jpg`, encuadre «Arriba»). No lleva etiqueta ni créditos. Las demás fotos son **provisionales**, de Unsplash (licencia Unsplash, apta para uso comercial sin atribución obligatoria). Se muestran con la etiqueta «Imagen ilustrativa» y hay un aviso en el pie que indica que no son obras de la empresa. En el Aviso legal figuran los créditos.
@@ -403,7 +405,7 @@ La cookie técnica de sesión de /admin (solo para quien edita la web) está exe
 - `title`, meta description y canonical únicos en cada página. Título principal: «Yesista y Reformas en Jaén | Rafael Maderas S.L.».
 - URLs legibles en español, un único H1 por página y encabezados jerárquicos.
 - Open Graph y Twitter Card con imagen propia.
-- JSON-LD: `GeneralContractor` (nombre, teléfono, email, área de servicio, catálogo de servicios, `sameAs` solo con redes reales), `WebSite`, `WebPage`, `BreadcrumbList` y `FAQPage` en la portada, Servicios y Reformas, cada una con sus propias preguntas. El FAQ se genera desde `preguntas.json` (/admin → «Preguntas frecuentes»), igual que el HTML visible, así que siempre coinciden. Google solo muestra resultados enriquecidos de FAQ para sitios muy concretos, pero el marcado es correcto y no perjudica.
+- JSON-LD: `GeneralContractor` (nombre, teléfono, email, área de servicio, catálogo de servicios, `sameAs` con las redes reales y las fichas en portales), `WebSite`, `WebPage`, `BreadcrumbList` y `FAQPage` en la portada, Servicios y Reformas, cada una con sus propias preguntas. El FAQ se genera desde `preguntas.json` (/admin → «Preguntas frecuentes»), igual que el HTML visible, así que siempre coinciden. Google solo muestra resultados enriquecidos de FAQ para sitios muy concretos, pero el marcado es correcto y no perjudica.
 - `sitemap.xml` (sin legales ni 404) y `robots.txt`. Las páginas legales llevan `noindex, follow`.
 - Una única página de zonas con contenido útil, sin páginas duplicadas por municipio (evita las «páginas puerta»).
 

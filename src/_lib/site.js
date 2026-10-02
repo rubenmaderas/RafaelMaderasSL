@@ -188,6 +188,12 @@ export function buildSite() {
       .map((s) => ({ name: text(s.nombre), url: text(s.url) }))
       .filter((s) => s.name),
 
+    // Fichas de la empresa en portales y directorios. No se muestran en la web: solo se
+    // añaden a "sameAs" para que Google relacione esas fichas con la empresa.
+    profiles: (data.perfiles || [])
+      .map((p) => ({ name: text(p.nombre), url: text(p.url) }))
+      .filter((p) => p.name && p.url),
+
     legal: {
       pendingMark: PENDING_MARK,
       domicilio,
