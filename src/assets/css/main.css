@@ -897,7 +897,7 @@ html.nav-open body {
   margin: 0;
   overflow: hidden;
   border-radius: var(--radius-l);
-  background: var(--color-sand-100);
+  /* background: var(--color-sand-100); */
 }
 
 .media img {
@@ -1047,7 +1047,7 @@ html.nav-open body {
 }
 
 .hero .media {
-  box-shadow: 0 24px 48px -24px rgb(38 36 31 / 0.45);
+  /* box-shadow: 0 24px 48px -24px rgb(38 36 31 / 0.45); */
 }
 
 .hero .media img {
@@ -2061,11 +2061,10 @@ mark.pending {
     animation-delay: 0.24s;
   }
 
-  /* Efecto «llana» de la foto principal: la foto aparece cubierta de yeso
-     rugoso y main.js lo alisa con una llana. Esta capa CSS es la misma
-     textura y tapa la foto desde el primer pintado; si el script no llega a
-     ejecutarse, se retira sola a los 4 s. */
-  .js .hero .media {
+  /* Efecto «llana» de la foto principal, desactivado: la foto se muestra
+     directamente. Si se vuelve a activar, hay que descomentar también los
+     bloques «.js .hero .media» que siguen (textura, capa y filtros). */
+  /* .js .hero .media {
     --plaster: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.045' numOctaves='5' stitchTiles='stitch'/%3E%3CfeDiffuseLighting lighting-color='%23f1ebe1' surfaceScale='3' diffuseConstant='1.05'%3E%3CfeDistantLight azimuth='225' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
   }
 
@@ -2084,25 +2083,17 @@ mark.pending {
     content: none;
   }
 
-  /* En móvil la foto queda debajo del texto: el yeso espera tapándola hasta
-     que aparece en pantalla (el script retira las salvaguardas de tiempo). */
-  .js .hero__visual.is-pending .media::after,
-  .js .hero__visual.is-pending:not(.is-ready) .hero-badge {
-    animation: none;
-  }
-
   .js .hero .media__note {
     z-index: 2;
   }
 
-  /* Mientras se alisa, la foto se ve «húmeda» y después recupera su color. */
   .js .hero .media img {
     transition: filter 1.2s ease;
   }
 
   .js .hero .media.is-troweling img {
     filter: saturate(0.7) brightness(1.08);
-  }
+  } */
 
   /* Las insignias aparecen cuando la pared ya está lisa. */
   .js .hero-badge {
