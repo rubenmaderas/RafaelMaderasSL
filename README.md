@@ -18,14 +18,26 @@ Los textos, las fotos y los datos de la empresa se editan **sin tocar código** 
 ## Uso
 
 ```bash
-npm install          # instala las dependencias (solo la primera vez)
-npm run dev          # servidor local con recarga automática: http://localhost:8080
-npm run build        # genera la web lista para publicar en _site/
-npm run preview      # compila y sirve _site/ como en producción: http://localhost:8090
-npm run clean        # borra _site/
-npm run og           # regenera la imagen para redes sociales y el icono de iOS
-npx decap-server     # (en otra terminal) permite usar /admin en local, sin Netlify
+npm install
+npm run dev
+npm run build
+npm run preview
+npm run clean
+npm run og
+npx decap-server
 ```
+
+| Comando | Para qué sirve |
+| --- | --- |
+| `npm install` | Instala las dependencias (solo la primera vez). |
+| `npm run dev` | Servidor local con recarga automática: http://localhost:8080 |
+| `npm run build` | Genera la web lista para publicar en `_site/`. |
+| `npm run preview` | Compila y sirve `_site/` como en producción: http://localhost:8090 |
+| `npm run clean` | Borra `_site/`. |
+| `npm run og` | Regenera la imagen para redes sociales y el icono de iOS. |
+| `npx decap-server` | En otra terminal: permite usar /admin en local, sin Netlify. |
+
+Los comandos van sin comentarios para poder ejecutarlos desde el botón ▶ del IDE: en Windows, un `# comentario` al final de la línea se pasa como argumento y Eleventy falla con «We don’t know what '#' is».
 
 > **Para medir con Lighthouse usa `npm run preview`, no `npm run dev`.** El servidor de desarrollo no comprime, no envía cabeceras de caché e inyecta un script de recarga automática, así que Lighthouse avisaría de problemas que en producción no existen. `preview` aplica las mismas cabeceras (`_headers`) y la compresión que tendrá la web publicada. Mantén la pestaña en primer plano mientras se analiza; si no, Chrome no pinta la página y Lighthouse da el error `NO_FCP`.
 
