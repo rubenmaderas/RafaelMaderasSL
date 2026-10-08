@@ -1108,7 +1108,10 @@ html.nav-open body {
 .hero-badge__ring {
   position: relative;
   display: grid;
+  /* place-items centra cada fila en la suya; place-content evita que las dos
+     filas se estiren para ocupar el aro y quedaran muy separadas. */
   place-items: center;
+  place-content: center;
   width: 3.9rem;
   height: 3.9rem;
   border-radius: 50%;
@@ -1315,6 +1318,11 @@ html.nav-open body {
 .service {
   padding-block: var(--space-l);
   border-top: 1px solid var(--color-sand-100);
+  scroll-margin-top: 6rem;
+}
+
+/* Tarjetas enlazadas con #ancla (tipos de reforma): que la cabecera fija no las tape. */
+.card--anchor {
   scroll-margin-top: 6rem;
 }
 
@@ -1981,6 +1989,248 @@ mark.pending {
   }
 }
 
+/* --------------------------------------------------------------------------
+   Chat de WhatsApp (partials/whatsapp-chat.njk). Solo aparece cuando main.js
+   lo prepara (.is-ready). En escritorio, botón flotante abajo a la derecha;
+   en móvil lo abre el botón «WhatsApp» de la barra inferior.
+   -------------------------------------------------------------------------- */
+
+.wa-chat {
+  --wa-chat-edge: 1.25rem;
+  --wa-chat-launcher: 3.5rem;
+  display: none;
+}
+
+.wa-chat.is-ready {
+  display: block;
+}
+
+html.nav-open .wa-chat {
+  display: none;
+}
+
+.wa-chat__launcher {
+  position: fixed;
+  right: var(--wa-chat-edge);
+  bottom: calc(var(--wa-chat-edge) + env(safe-area-inset-bottom));
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: var(--wa-chat-launcher);
+  padding: 0 1.25rem 0 1rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.975rem;
+  box-shadow: var(--shadow-lift);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s var(--ease-out);
+}
+
+.wa-chat__launcher:hover {
+  background: var(--color-accent-strong);
+  transform: translateY(-2px);
+}
+
+.wa-chat__launcher:focus-visible,
+.wa-chat__close:focus-visible,
+.wa-chat__option:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.wa-chat.is-open .wa-chat__launcher {
+  background: var(--color-graphite);
+}
+
+.wa-chat__panel {
+  position: fixed;
+  right: var(--wa-chat-edge);
+  bottom: calc(var(--wa-chat-edge) + var(--wa-chat-launcher) + 0.75rem + env(safe-area-inset-bottom));
+  z-index: 31;
+  display: flex;
+  flex-direction: column;
+  width: min(23rem, calc(100vw - 2 * var(--wa-chat-edge)));
+  max-height: calc(100dvh - var(--wa-chat-launcher) - 4rem);
+  overflow: hidden;
+  border: 1px solid var(--color-sand-100);
+  border-radius: var(--radius-l);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-lift);
+  transform-origin: bottom right;
+}
+
+.wa-chat__panel[hidden] {
+  display: none;
+}
+
+.wa-chat__panel:focus {
+  outline: none;
+}
+
+.wa-chat__panel:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wa-chat__panel,
+  .wa-chat__launcher {
+    animation: wa-chat-in 0.25s var(--ease-out);
+  }
+}
+
+@keyframes wa-chat-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.97);
+  }
+}
+
+.wa-chat__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 0.75rem 0.9rem 1rem;
+  background: var(--color-graphite);
+  color: var(--color-on-dark);
+}
+
+.wa-chat__avatar {
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.35rem;
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+
+.wa-chat__who {
+  flex: 1;
+  min-width: 0;
+}
+
+.wa-chat__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: inherit;
+}
+
+.wa-chat__status {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--color-on-dark-soft);
+}
+
+.wa-chat__close {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.wa-chat__close:hover {
+  background: var(--color-graphite-soft);
+}
+
+.wa-chat__body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1rem;
+}
+
+.wa-chat__bubble {
+  margin: 0 2rem 1rem 0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 4px var(--radius-m) var(--radius-m) var(--radius-m);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  font-size: 0.975rem;
+  line-height: 1.5;
+}
+
+.wa-chat__options {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wa-chat__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.9rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.wa-chat__option:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.wa-chat__option .icon {
+  flex: none;
+}
+
+.wa-chat__foot {
+  margin: 0;
+  padding: 0.65rem 1rem 0.8rem;
+  border-top: 1px solid var(--color-sand-100);
+  font-size: var(--step--1);
+  color: var(--color-ink-soft);
+}
+
+/* Escritorio: hueco al final del pie para que el botón flotante no tape los enlaces legales. */
+@media (min-width: 48em) {
+  .site-footer__bottom {
+    padding-bottom: calc(var(--space-m) + 3.5rem);
+  }
+}
+
+/* Móvil: sin botón flotante (ya está la barra inferior) y panel a todo el ancho,
+   justo encima de la barra. */
+@media (max-width: 47.99em) {
+  .wa-chat {
+    --wa-chat-edge: 0.75rem;
+  }
+
+  .wa-chat__launcher {
+    display: none;
+  }
+
+  .wa-chat__panel {
+    left: var(--wa-chat-edge);
+    width: auto;
+    bottom: calc(var(--mobile-cta-height) + env(safe-area-inset-bottom) + 0.5rem);
+    max-height: calc(100dvh - var(--mobile-cta-height) - 5rem);
+    transform-origin: bottom center;
+  }
+}
+
 /* Los estilos del aviso de cookies están en consent.css y solo se incluyen si el
    aviso está activo (hay ID de Google Analytics en /admin → «Datos de la empresa»). */
 
@@ -2258,6 +2508,7 @@ mark.pending {
 @media print {
   .site-header,
   .mobile-cta,
+  .wa-chat,
   .cta-final,
   .skip-link,
   .plaster-canvas,

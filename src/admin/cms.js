@@ -254,6 +254,7 @@
     ["inicio", "la portada"],
     ["servicios", "Servicios"],
     ["reformas", "Reformas"],
+    ["zonas", "Zonas de servicio"],
   ];
 
   const FaqPreview = (data) => {
@@ -291,6 +292,45 @@
   const CommonPreview = (data) => {
     const cta = data.cta || {};
     const pie = data.pie || {};
+    const chat = data.chatWhatsapp || {};
+    const chatPreview = h(
+      "section",
+      { className: "section" },
+      h(
+        "div",
+        { className: "container stack" },
+        h("p", { className: "eyebrow" }, chat.activo === false ? "Chat de WhatsApp (oculto)" : "Chat de WhatsApp"),
+        h(
+          "div",
+          { className: "wa-chat__panel", style: { position: "static", width: "min(23rem, 100%)", maxHeight: "none", animation: "none" } },
+          h(
+            "div",
+            { className: "wa-chat__head" },
+            h("img", { className: "wa-chat__avatar", src: "/favicon.svg", alt: "", width: 40, height: 40 }),
+            h(
+              "div",
+              { className: "wa-chat__who" },
+              h("p", { className: "wa-chat__title" }, tokens.empresa || ""),
+              chat.estado ? h("p", { className: "wa-chat__status" }, text(chat.estado)) : null
+            )
+          ),
+          h(
+            "div",
+            { className: "wa-chat__body" },
+            html("p", inline(chat.saludo), { className: "wa-chat__bubble" }),
+            h(
+              "ul",
+              { className: "wa-chat__options" },
+              list(chat.opciones).map((option, i) =>
+                h("li", { key: i }, h("span", { className: "wa-chat__option", title: text(option.mensaje) }, text(option.texto)))
+              )
+            )
+          ),
+          chat.nota ? html("p", inline(chat.nota), { className: "wa-chat__foot" }) : null
+        ),
+        h("p", null, h("small", null, "Pasa el ratón sobre una opción para ver el mensaje que se escribirá en WhatsApp."))
+      )
+    );
     return h(
       "div",
       { className: "cms-preview" },
@@ -323,6 +363,7 @@
           html("div", block(cta.texto))
         )
       ),
+      chatPreview,
       h(
         "section",
         { className: "section section--surface" },
@@ -378,7 +419,7 @@
       ["Teléfono y WhatsApp", /^[6789]\d{8}$/.test(digits) ? phone : h("span", { className: "cms-warn" }, `${data.telefono || ""} (revisa el número)`)],
       ["Mensaje de WhatsApp", data.mensajeWhatsapp],
       ["Correo", data.email],
-      ["Sociedad constituida en", data.anoConstitucion],
+      ["Sociedad constituida el", String(data.fechaConstitucion || "").slice(0, 10).split("-").reverse().join("/")],
       ["Fundador", [founder.nombre, founder.cargo].filter(Boolean).join(", ")],
       ["Años de oficio (se calcula solo)", `${years} (desde ${founder.inicioOficio || "?"})`],
       ["Razón social", legal.razonSocial],

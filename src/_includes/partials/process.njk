@@ -2,7 +2,9 @@
 <ol class="process">
   {%- for step in contenido.comun.proceso %}
   <li class="process__step">
-    <h3>{{ step.titulo | t }}</h3>
+    {#- Párrafo y no <h3>: los pasos ya van en una lista numerada, y así la página no
+        acumula encabezados cortos (los analizadores SEO penalizan el exceso). -#}
+    <p class="process__title">{{ step.titulo | t }}</p>
     {{ step.texto | md | safe }}
   </li>
   {%- endfor %}

@@ -3,7 +3,8 @@
   <a class="mobile-cta__btn mobile-cta__btn--call" href="{{ site.phone.href }}">
     {{ icon("phone", 18) }}<span>Llamar</span>
   </a>
-  <a class="mobile-cta__btn mobile-cta__btn--whatsapp" href="{{ site.whatsapp.href }}" target="_blank" rel="noopener">
+  {#- Con JavaScript y el chat activo, abre el chat de WhatsApp (main.js); si no, abre WhatsApp directamente. #}
+  <a class="mobile-cta__btn mobile-cta__btn--whatsapp" href="{{ site.whatsapp.href }}" target="_blank" rel="noopener" data-wa-chat-open>
     {{ icon("whatsapp", 18) }}<span>WhatsApp</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span>
   </a>
 </aside>

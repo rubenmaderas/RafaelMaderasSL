@@ -52,7 +52,7 @@ export function getServices() {
 }
 
 /** Páginas que muestran preguntas frecuentes (campo "pagina" de cada pregunta). */
-export const FAQ_PAGES = ["inicio", "servicios", "reformas"];
+export const FAQ_PAGES = ["inicio", "servicios", "reformas", "zonas"];
 
 /**
  * Preguntas frecuentes en texto plano, con los comodines ya sustituidos. El mismo

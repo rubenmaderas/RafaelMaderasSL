@@ -70,7 +70,7 @@ faqGroup: reformas
     </div>
     <div class="grid grid--3">
       {%- for service in services.reformas %}
-      <article class="card card--accent-top">
+      <article class="card card--accent-top card--anchor" id="{{ service.id }}">
         <h3>{{ service.titulo | t }}</h3>
         {{ service.descripcion | md | safe }}
       </article>

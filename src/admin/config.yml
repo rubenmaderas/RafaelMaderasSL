@@ -91,7 +91,7 @@ collections:
                 widget: string
                 hint: "El título más importante para Google. La palabra entre asteriscos se resalta en color: `Trabajos de yeso y reformas en *Jaén*`."
               - &entradilla {label: Entradilla, name: entradilla, widget: text, hint: Uno o dos párrafos cortos bajo el título.}
-              - {label: Nota bajo los botones, name: nota, widget: string, required: false, hint: "Frase corta bajo «Llamar ahora» y «WhatsApp» que resuelve la última duda antes de contactar. Admite negrita: `**Sin compromiso.** Mándanos unas fotos…`. Déjala vacía para no mostrarla."}
+              - {label: Nota bajo los botones, name: nota, widget: string, required: false, hint: "Frase corta bajo «Llamar ahora» y «WhatsApp» que resuelve la última duda antes de contactar. Admite negrita: `**Calidad asegurada.** Somos perfeccionistas…`. Déjala vacía para no mostrarla."}
               - label: Distintivos junto a la foto
                 name: insignias
                 widget: object
@@ -315,6 +315,12 @@ collections:
             widget: object
             collapsed: true
             fields: [*titulo, *texto_largo]
+          - label: Bloque de preguntas frecuentes
+            name: preguntas
+            widget: object
+            collapsed: true
+            hint: "Aparece al final de la página. Las preguntas se editan en «Preguntas frecuentes» (las asignadas a «Zonas de servicio»)."
+            fields: [*antetitulo, *titulo]
 
       - name: quienes-somos
         label: Quiénes somos
@@ -457,8 +463,8 @@ collections:
   - name: preguntas
     label: Preguntas frecuentes
     description: >-
-      Cada pregunta aparece en la página que elijas (portada, Servicios o Reformas)
-      y se envía a Google exactamente como se ve. Responde primero a lo que se
+      Cada pregunta aparece en la página que elijas (portada, Servicios, Reformas o
+      Zonas de servicio) y se envía a Google exactamente como se ve. Responde primero a lo que se
       pregunta, con frases cortas, y solo con información real y comprobable.
     delete: false
     files:
@@ -482,6 +488,7 @@ collections:
                   - {label: Inicio (portada), value: inicio}
                   - {label: Servicios (trabajos de yeso), value: servicios}
                   - {label: Reformas, value: reformas}
+                  - {label: Zonas de servicio, value: zonas}
 
   # -------------------------------------------------------------------------------
   - name: fotos
@@ -587,6 +594,32 @@ collections:
             fields:
               - *texto_corto
               - {label: Zona de trabajo, name: zona, widget: string}
+          - label: Chat de WhatsApp
+            name: chatWhatsapp
+            widget: object
+            collapsed: true
+            hint: >-
+              Ventana de chat en todas las páginas: en ordenador, con un botón flotante abajo a la derecha;
+              en el móvil, al pulsar «WhatsApp» en la barra inferior. Cada opción abre WhatsApp con su
+              mensaje ya escrito; las respuestas las da una persona desde el móvil de la empresa.
+              No usa cookies ni servicios externos.
+            fields:
+              - {label: Mostrar el chat, name: activo, widget: boolean, default: true, required: false, hint: "Desmárcalo para quitar el chat; los botones de WhatsApp de la web seguirán funcionando."}
+              - {label: Texto del botón flotante, name: boton, widget: string, hint: "Muy corto: «¿Hablamos?»."}
+              - {label: Estado bajo el nombre, name: estado, widget: string, required: false, hint: "Promete solo lo que podáis cumplir: «Solemos responder en el mismo día»."}
+              - {label: Saludo, name: saludo, widget: text, hint: "Primer mensaje del chat. Admite **negrita** y comodines como {empresa}."}
+              - label: Opciones
+                name: opciones
+                widget: list
+                collapsed: true
+                min: 1
+                max: 6
+                summary: "{{fields.texto}}"
+                hint: Entre 2 y 5 opciones. La primera debe ser la consulta más habitual.
+                fields:
+                  - {label: Texto del botón, name: texto, widget: string, hint: Lo que pulsa el cliente. Corto y con sus palabras.}
+                  - {label: Mensaje que se escribe en WhatsApp, name: mensaje, widget: text, hint: "El cliente lo puede cambiar antes de enviarlo. Puedes usar saltos de línea con Intro; acabarlo en «La obra está en: » le invita a completarlo."}
+              - {label: Nota al pie, name: nota, widget: string, required: false, hint: Consejo breve bajo las opciones. Déjala vacía para no mostrarla.}
 
   # -------------------------------------------------------------------------------
   - name: empresa
@@ -613,7 +646,14 @@ collections:
             widget: string
             pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', "Escribe un correo electrónico válido."]
           - {label: Mensaje inicial de WhatsApp, name: mensajeWhatsapp, widget: string, hint: Texto que aparece ya escrito al abrir WhatsApp desde la web.}
-          - {label: Año de constitución de la sociedad, name: anoConstitucion, widget: number, value_type: int, min: 1950, max: 2100}
+          - label: Fecha de constitución de la sociedad
+            name: fechaConstitucion
+            widget: datetime
+            date_format: DD/MM/YYYY
+            time_format: false
+            format: YYYY-MM-DD
+            picker_utc: true
+            hint: "Debe coincidir con la fecha de apertura del Perfil de Empresa de Google. En los textos, {fundacion} muestra solo el año."
           - label: Fundador
             name: fundador
             widget: object
@@ -643,6 +683,32 @@ collections:
               - {label: Inscripción en el Registro Mercantil, name: registroMercantil, widget: text}
               - {label: Proveedor de alojamiento web, name: hosting, widget: text}
               - {label: Fecha de última actualización de los textos legales, name: ultimaActualizacion, widget: string, hint: "Por ejemplo: 30 de septiembre de 2026. Cámbiala cuando modifiques datos legales."}
+          - label: Horario
+            name: horario
+            widget: list
+            collapsed: true
+            required: false
+            summary: "{{fields.dias}}: {{fields.abre}}–{{fields.cierra}}"
+            hint: >-
+              Debe coincidir exactamente con el del Perfil de Empresa de Google; si no, Google desconfía
+              de los dos. Una franja por cada horario distinto (por ejemplo, lunes a viernes y sábado).
+              Los días que no aparezcan se consideran cerrados. Se muestra en Contacto.
+            fields:
+              - label: Días
+                name: dias
+                widget: select
+                multiple: true
+                min: 1
+                options:
+                  - {label: Lunes, value: lunes}
+                  - {label: Martes, value: martes}
+                  - {label: Miércoles, value: miercoles}
+                  - {label: Jueves, value: jueves}
+                  - {label: Viernes, value: viernes}
+                  - {label: Sábado, value: sabado}
+                  - {label: Domingo, value: domingo}
+              - {label: Abre, name: abre, widget: string, pattern: ['^([01][0-9]|2[0-3]):[0-5][0-9]$', "Escribe la hora con dos cifras: 08:00."]}
+              - {label: Cierra, name: cierra, widget: string, pattern: ['^([01][0-9]|2[0-3]):[0-5][0-9]$', "Escribe la hora con dos cifras: 19:00."]}
           - label: Redes sociales
             name: redes
             widget: list

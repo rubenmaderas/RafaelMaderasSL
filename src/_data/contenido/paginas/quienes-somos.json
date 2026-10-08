@@ -14,7 +14,7 @@
   },
   "equipo": {
     "titulo": "Nuestro equipo",
-    "texto": "{fundador}, {cargo}, sigue al frente de la empresa.\n\n**Los trabajos de yeso los hace nuestro propio equipo.** Para el resto de la obra colaboramos con profesionales de confianza —albañilería, alicatado, fontanería, electricidad— a los que coordinamos nosotros. Así tú tratas siempre con la empresa."
+    "texto": "{fundador}, {cargo}, sigue al frente de la empresa.\n\n**Los [trabajos de yeso](/servicios/) los hace nuestro propio equipo.** Para el resto de la obra colaboramos con profesionales de confianza —albañilería, alicatado, fontanería, electricidad— a los que coordinamos nosotros. Así tú tratas siempre con la empresa. Si lo que buscas es una reforma completa, consulta nuestra sección de [reformas en Jaén](/reformas/)."
   },
   "forma": {
     "antetitulo": "Forma de trabajar",

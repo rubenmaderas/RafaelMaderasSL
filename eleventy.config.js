@@ -164,6 +164,13 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("mdiLabel", (value, className) => renderMarkdownInlineLabel(value, className));
   eleventyConfig.addFilter("highlight", (value) => renderHighlight(value));
 
+  // Enlace de WhatsApp con un mensaje ya escrito (admite comodines): {{ texto | whatsappHref }}
+  eleventyConfig.addFilter("whatsappHref", (message) => {
+    const { base, href } = getSite().whatsapp;
+    const text = applyTokens(message).trim();
+    return text ? `${base}?text=${encodeURIComponent(text)}` : href;
+  });
+
   // JSON seguro para incrustar en <script type="application/ld+json">.
   eleventyConfig.addFilter("jsonLd", (value) =>
     JSON.stringify(value, null, 2).replace(/</g, "\\u003c")

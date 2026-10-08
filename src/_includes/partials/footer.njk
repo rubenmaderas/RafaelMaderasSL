@@ -1,4 +1,7 @@
 {%- from "macros/icons.njk" import icon -%}
+{#- Los títulos de columna son párrafos y no <h2>: se repiten en todas las páginas y no
+    describen su contenido, así que no deben contar como encabezados para Google. Las
+    listas de enlaces ya se identifican por sus <nav aria-label>. -#}
 <footer class="site-footer" data-site-footer>
   <div class="container site-footer__grid">
     <div class="site-footer__brand">
@@ -10,7 +13,7 @@
     </div>
 
     <div>
-      <h2 class="site-footer__title">Contacto</h2>
+      <p class="site-footer__title">Contacto</p>
       <ul class="site-footer__list site-footer__list--icons">
         <li><a href="{{ site.phone.href }}">{{ icon("phone", 18) }}<span>{{ site.phone.displayIntl }}</span></a></li>
         <li><a href="{{ site.whatsapp.href }}" target="_blank" rel="noopener">{{ icon("whatsapp", 18) }}<span>WhatsApp</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span></a></li>
@@ -20,7 +23,7 @@
     </div>
 
     <nav aria-label="Pie de página">
-      <h2 class="site-footer__title">La web</h2>
+      <p class="site-footer__title">La web</p>
       <ul class="site-footer__list">
         {%- for item in navigation %}
         <li><a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.footerLabel or item.label }}</a></li>
@@ -29,7 +32,7 @@
     </nav>
 
     <nav aria-label="Información legal">
-      <h2 class="site-footer__title">Legal</h2>
+      <p class="site-footer__title">Legal</p>
       <ul class="site-footer__list">
         <li><a href="/aviso-legal/"{% if page.url == "/aviso-legal/" %} aria-current="page"{% endif %}>Aviso legal</a></li>
         <li><a href="/politica-de-privacidad/"{% if page.url == "/politica-de-privacidad/" %} aria-current="page"{% endif %}>Política de privacidad</a></li>
@@ -40,7 +43,7 @@
       </ul>
       {%- set activeSocial = site.social | selectattr("url") %}
       {%- if activeSocial.length %}
-      <h2 class="site-footer__title site-footer__title--spaced">Encuéntranos</h2>
+      <p class="site-footer__title site-footer__title--spaced">Encuéntranos</p>
       <ul class="site-footer__list">
         {%- for s in activeSocial %}
         <li><a href="{{ s.url }}" rel="noopener me" target="_blank">{{ s.name }}<span class="visually-hidden"> (se abre en una nueva pestaña)</span></a></li>

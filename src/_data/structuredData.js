@@ -21,7 +21,7 @@ function business(site, abs, businessId) {
     taxID: site.taxId,
     description: plainText(site.description, site),
     founder: { "@type": "Person", name: site.founder.name, jobTitle: "Fundador y gerente" },
-    foundingDate: String(site.foundedYear),
+    foundingDate: site.foundingDate,
     url: abs("/"),
     telephone: site.phone.e164,
     email: site.email.address,
@@ -35,17 +35,28 @@ function business(site, abs, businessId) {
       addressCountry: site.address.country,
     },
     areaServed: site.areaServed.map((area) => ({ "@type": area.type, name: area.name })),
+    openingHoursSpecification: site.hours.map((h) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: h.days.map((d) => `https://schema.org/${d}`),
+      opens: h.opens,
+      closes: h.closes,
+    })),
     knowsAbout: [...services.yeso, ...services.reformas].map((s) => applyTokens(s.titulo, site)),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Servicios de yeso y reformas",
-      itemListElement: [...services.yeso, ...services.reformas].map((s) => ({
+      // Cada servicio apunta a la página que lo desarrolla: yeso en /servicios/, reformas en /reformas/.
+      itemListElement: [
+        ...services.yeso.map((s) => [s, "/servicios/"]),
+        ...services.reformas.map((s) => [s, "/reformas/"]),
+      ].map(([s, page]) => ({
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
           name: plainText(s.titulo, site),
           description: plainText(s.resumen, site),
-          url: abs(`/servicios/#${s.id}`),
+          url: abs(`${page}#${s.id}`),
+          areaServed: { "@type": "City", name: "Jaén" },
         },
       })),
     },
@@ -60,6 +71,7 @@ function business(site, abs, businessId) {
   };
 
   if (!site.founder.name) delete node.founder;
+  if (!site.hours.length) delete node.openingHoursSpecification;
   if (sameAs.length) node.sameAs = sameAs;
   return node;
 }

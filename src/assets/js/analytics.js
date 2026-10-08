@@ -8,7 +8,8 @@
  * - Cookies con duración de 1 año (data-cookie-expires) en lugar de los 2 por defecto.
  * - Mide los clics en los botones de contacto como eventos:
  *     clic_telefono · clic_whatsapp · clic_correo
- *   con el parámetro «ubicacion»: cabecera, barra_movil, pie o contenido.
+ *   con el parámetro «ubicacion»: cabecera, barra_movil, pie, chat o contenido
+ *   (en el chat de WhatsApp, también «opcion»: el texto de la opción pulsada).
  *   No se envía el número, el correo ni el mensaje: solo que hubo un clic y dónde.
  */
 (() => {
@@ -66,6 +67,7 @@
   };
 
   const placement = (link) => {
+    if (link.closest("[data-wa-chat]")) return "chat";
     if (link.closest(".site-header")) return "cabecera";
     if (link.closest("[data-mobile-cta]")) return "barra_movil";
     if (link.closest("[data-site-footer]")) return "pie";
@@ -73,9 +75,16 @@
   };
 
   document.addEventListener("click", (event) => {
+    // Enlaces que no salen de la página (p. ej., el botón de WhatsApp de la barra
+    // móvil cuando abre el chat de la web): no son un contacto todavía.
+    if (event.defaultPrevented) return;
     const link = event.target instanceof Element ? event.target.closest("a[href]") : null;
     if (!link) return;
     const name = eventName(link.getAttribute("href"));
-    if (name) gtag("event", name, { ubicacion: placement(link) });
+    if (!name) return;
+    const params = { ubicacion: placement(link) };
+    // Opción elegida en el chat de WhatsApp (su texto visible, nunca el mensaje).
+    if (link.dataset.waOption) params.opcion = link.dataset.waOption;
+    gtag("event", name, params);
   });
 })();

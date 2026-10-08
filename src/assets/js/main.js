@@ -71,6 +71,80 @@
     bar.classList.add("is-ready");
   }
 
+  /* Chat de WhatsApp --------------------------------------------------------
+     Panel con opciones que abren WhatsApp con el mensaje ya escrito (ver
+     partials/whatsapp-chat.njk). Lo abren el botón flotante (escritorio) y el
+     botón «WhatsApp» de la barra móvil, que sin JavaScript abre WhatsApp. */
+  const chat = document.querySelector("[data-wa-chat]");
+  const chatPanel = chat && chat.querySelector("[data-wa-chat-panel]");
+  const chatLauncher = chat && chat.querySelector("[data-wa-chat-toggle]");
+
+  if (chat && chatPanel && chatLauncher) {
+    const openers = Array.from(document.querySelectorAll("[data-wa-chat-open]"));
+    const triggers = [chatLauncher].concat(openers);
+    let returnFocus = null;
+
+    /* Los enlaces que ahora abren el panel dejan de anunciar «nueva pestaña». */
+    openers.forEach((link) => {
+      link.setAttribute("aria-haspopup", "dialog");
+      link.setAttribute("aria-controls", chatPanel.id);
+      link.querySelectorAll(".visually-hidden").forEach((note) => note.remove());
+    });
+
+    const isOpen = () => !chatPanel.hidden;
+    const setOpen = (open, opener, restoreFocus) => {
+      if (open === isOpen()) return;
+      chatPanel.hidden = !open;
+      chat.classList.toggle("is-open", open);
+      triggers.forEach((trigger) => trigger.setAttribute("aria-expanded", String(open)));
+      if (open) {
+        returnFocus = opener || null;
+        chatPanel.focus();
+      } else {
+        if (restoreFocus && returnFocus && returnFocus.isConnected && returnFocus.offsetParent !== null) {
+          returnFocus.focus();
+        }
+        returnFocus = null;
+      }
+    };
+
+    chatLauncher.addEventListener("click", () => setOpen(!isOpen(), chatLauncher, true));
+    openers.forEach((link) =>
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        setOpen(!isOpen(), link, true);
+      })
+    );
+    chat.querySelectorAll("[data-wa-chat-close]").forEach((button) =>
+      button.addEventListener("click", () => setOpen(false, null, true))
+    );
+
+    /* Tras elegir una opción (WhatsApp se abre en otra pestaña), se cierra. */
+    chatPanel.addEventListener("click", (event) => {
+      if (event.target instanceof Element && event.target.closest("a[href]")) {
+        setTimeout(() => setOpen(false, null, false));
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && isOpen()) setOpen(false, null, true);
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        isOpen() &&
+        event.target instanceof Node &&
+        !chat.contains(event.target) &&
+        !openers.some((link) => link.contains(event.target))
+      ) {
+        setOpen(false, null, false);
+      }
+    });
+
+    triggers.forEach((trigger) => trigger.setAttribute("aria-expanded", "false"));
+    chat.classList.add("is-ready");
+  }
+
   /* A partir de aquí, solo movimiento decorativo: nada se ejecuta si el
      dispositivo pide reducir el movimiento. */
   const motionOK = window.matchMedia("(prefers-reduced-motion: no-preference)").matches;

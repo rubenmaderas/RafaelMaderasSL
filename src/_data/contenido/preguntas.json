@@ -41,6 +41,11 @@
       "pagina": "inicio"
     },
     {
+      "pregunta": "¿Yesista o yesero? ¿Es lo mismo?",
+      "respuesta": "Sí. Yesista y yesero son dos nombres para el mismo oficio: el profesional que reviste paredes y techos con yeso, a mano o proyectado a máquina, y los deja lisos y listos para pintar. En Jaén y en buena parte de Andalucía se usan los dos.\n\nNuestro fundador lleva {años} años como yesista, y el yeso lo hace siempre nuestro propio equipo de yeseros.",
+      "pagina": "servicios"
+    },
+    {
       "pregunta": "¿Por qué no dais un precio por metro cuadrado sin ver la pared?",
       "respuesta": "Porque el precio depende sobre todo del estado de la pared. No cuesta lo mismo revestir un tabique nuevo y recto que enderezar una pared antigua o tapar un gotelé de pintura plástica.\n\nAdemás, los metros que cuentan son los de pared y techo, no los de la vivienda. Con unas fotos te orientamos, y viendo la pared te damos un precio ajustado a ella.",
       "pagina": "servicios"
@@ -89,6 +94,21 @@
       "pregunta": "¿Todos los oficios son de vuestra empresa?",
       "respuesta": "El yeso lo hace nuestro propio equipo. Para la albañilería, el alicatado, la fontanería, la electricidad y el resto de oficios trabajamos con profesionales de confianza a los que coordinamos nosotros.\n\nTú tratas con una sola empresa, que organiza a todos y te mantiene informado.",
       "pagina": "reformas"
+    },
+    {
+      "pregunta": "¿Hacéis reformas de baños y cocinas en Jaén?",
+      "respuesta": "Sí. Reformamos baños y cocinas en Jaén capital y en los pueblos de alrededor, tanto si es solo esa estancia como si forma parte de una reforma integral.\n\nCoordinamos la fontanería, la electricidad, la albañilería y el alicatado, impermeabilizamos la zona de ducha antes de alicatar y hacemos el yeso de techos y paredes con nuestro propio equipo. Tú tratas solo con nosotros.",
+      "pagina": "reformas"
+    },
+    {
+      "pregunta": "¿Reformáis pisos y casas antiguas en Jaén?",
+      "respuesta": "Sí. En Jaén hay muchos pisos de los años 70, 80 y 90 y casas antiguas en el casco histórico, y suelen necesitar lo mismo: instalaciones nuevas, quitar el gotelé y enderezar paredes que no están a plomo.\n\nAntes de darte el presupuesto vemos la vivienda, porque en las casas antiguas a veces hay sorpresas. Si durante la obra aparece algo que no se veía, te lo enseñamos y decides tú antes de seguir.",
+      "pagina": "reformas"
+    },
+    {
+      "pregunta": "¿Os desplazáis para reformas o trabajos pequeños a los pueblos de Jaén?",
+      "respuesta": "Sí. Nuestro equipo se desplaza a Martos, Torredelcampo, Mancha Real, Torredonjimeno, Mengíbar, Los Villares y el resto de municipios cercanos a Jaén, y también a Linares, Úbeda, Baeza o Andújar.\n\nPara obras pequeñas basta con enviarnos fotos por WhatsApp; en las mayores -reformas integrales o viviendas completas con yeso proyectado a máquina- vamos a verlas en persona. Cuéntanos la localidad y el tipo de trabajo y te decimos si podemos hacernos cargo.",
+      "pagina": "zonas"
     }
   ]
 }
