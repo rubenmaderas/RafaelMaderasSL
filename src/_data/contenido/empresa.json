@@ -5,14 +5,14 @@
   "telefono": "630505489",
   "email": "rafaelmaderas@hotmail.es",
   "mensajeWhatsapp": "Hola, os escribo desde la web. Quiero consultaros una obra o reforma.",
-  "anoConstitucion": 2012,
+  "fechaConstitucion": "2011-12-27",
   "fundador": {
     "nombre": "Rafael Maderas",
     "cargo": "fundador y gerente",
     "oficio": "yesista",
     "inicioOficio": 1986
   },
-  "descripcion": "Empresa de trabajos de yeso y reformas en Jaén, fundada y dirigida por un yesista con {años} años de oficio. Yeso con equipo propio y reformas integrales con coordinación de gremios en Jaén capital, provincia de Jaén y resto de Andalucía.",
+  "descripcion": "Empresa de yeseros y reformas en Jaén, fundada y dirigida por un yesista con {años} años de oficio. Yeso con equipo propio y reformas integrales con coordinación de gremios en Jaén capital, provincia de Jaén y resto de Andalucía.",
   "legal": {
     "razonSocial": "Rafael Maderas Sociedad Limitada",
     "cif": "B23691108",
@@ -26,6 +26,10 @@
     "hosting": "Netlify, Inc. (101 2nd Street, San Francisco, CA 94105, Estados Unidos), adherida al Marco de Privacidad de Datos UE-EE. UU.",
     "ultimaActualizacion": "30 de septiembre de 2026"
   },
+  "horario": [
+    { "dias": ["lunes", "martes", "miercoles", "jueves", "viernes"], "abre": "08:00", "cierra": "19:00" },
+    { "dias": ["sabado"], "abre": "09:00", "cierra": "14:00" }
+  ],
   "redes": [
     { "nombre": "Facebook", "url": "" },
     { "nombre": "Instagram", "url": "" },

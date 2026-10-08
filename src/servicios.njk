@@ -54,11 +54,14 @@ faqGroup: servicios
     </div>
 
     <div class="services-list">
+      {#- Aquí solo el resumen: la descripción completa está en /reformas/, la página que
+          debe posicionar «reformas en Jaén». Repetirla aquí haría competir a las dos. #}
       {%- for service in services.reformas %}
       <article class="service" id="{{ service.id }}">
         <h3>{{ service.titulo | t }}</h3>
         <div>
-          {{ service.descripcion | md | safe }}
+          <p>{{ service.resumen | mdi | safe }}</p>
+          <p><a class="link-arrow" href="/reformas/#{{ service.id }}">{{ service.titulo | t }} en Jaén {{ icon("arrow", 18) }}</a></p>
         </div>
       </article>
       {%- endfor %}

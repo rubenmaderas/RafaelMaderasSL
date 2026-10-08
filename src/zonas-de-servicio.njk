@@ -3,6 +3,7 @@ layout: layouts/base.njk
 permalink: /zonas-de-servicio/
 pageKey: zonas
 breadcrumb: "Zonas de servicio"
+faqGroup: zonas
 ---
 {#- Textos y localidades: contenido/paginas/zonas.json (/admin → Páginas → Zonas de servicio).
     No se crean páginas independientes por municipio (evita páginas puerta). -#}
@@ -56,3 +57,15 @@ breadcrumb: "Zonas de servicio"
     </div>
   </div>
 </section>
+
+{%- if faq[faqGroup].length %}
+<section class="section" id="preguntas-frecuentes" aria-labelledby="titulo-faq">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ c.preguntas.antetitulo | t }}</p>
+      <h2 id="titulo-faq">{{ c.preguntas.titulo | t }}</h2>
+    </div>
+    {% include "partials/faq.njk" %}
+  </div>
+</section>
+{%- endif %}

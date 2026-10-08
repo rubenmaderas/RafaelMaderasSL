@@ -1,13 +1,13 @@
 {
   "seo": {
-    "titulo": "Yesista y Reformas en Jaén | {empresa}",
-    "descripcion": "Yesista y empresa de reformas en Jaén, con {años} años de oficio: quitamos el gotelé, alisamos paredes y hacemos reformas integrales con un solo interlocutor."
+    "titulo": "Yesista y reformas en Jaén | {empresa}",
+    "descripcion": "Yesista y yesero en Jaén con {años} años de oficio: quitamos el gotelé, alisamos paredes y hacemos reformas en Jaén con un solo interlocutor."
   },
   "portada": {
     "antetitulo": "{empresa}",
     "titulo": "Yesista en *Jaén*: alisados, proyectados y reformas sin complicaciones",
-    "entradilla": "**Quitamos el gotelé** y dejamos paredes y techos lisos, listos para pintar. También hacemos reformas completas, con un solo interlocutor. Empresa familiar con **{años} años de oficio** en Jaén capital, la provincia y Andalucía.",
-    "nota": "**Sin compromiso.** Mándanos unas fotos por WhatsApp y te decimos cómo lo haríamos.",
+    "entradilla": "**Quitamos el gotelé** y dejamos paredes y techos lisos, listos para pintar. También hacemos reformas completas, con un solo interlocutor. Empresa familiar de yeseros con **{años} años de oficio** en Jaén capital, la provincia y Andalucía.",
+    "nota": "**Calidad asegurada.** Somos perfeccionistas: no damos un trabajo por terminado hasta que tú quedes satisfecho con el resultado.",
     "insignias": {
       "oficio": "Experiencia",
       "interlocutor": "**Un único** interlocutor",
@@ -17,24 +17,24 @@
   "servicios": {
     "antetitulo": "Trabajos de yeso",
     "titulo": "Trabajos de yeso en Jaén, con equipo propio",
-    "entradilla": "El yeso es nuestra especialidad y lo hace nuestro propio equipo, a mano o a máquina. Paredes y techos rectos, lisos y listos para pintar.",
+    "entradilla": "El yeso es nuestra especialidad y lo hace nuestro propio equipo de yesistas: alisados a mano, yesos proyectados a máquina, guarnecidos y enlucidos. Paredes y techos rectos, lisos y listos para pintar.",
     "tarjetaReformas": {
       "titulo": "Reformas y obra en general",
       "texto": "Reformas integrales, cocinas y baños. **Coordinamos todos los gremios** y tú hablas solo con nosotros."
     },
-    "enlace": "Ver todos los servicios en detalle"
+    "enlace": "Ver los servicios de yesero en detalle"
   },
   "reformas": {
     "antetitulo": "Reformas integrales",
-    "titulo": "Reformas integrales en Jaén, sin organizar tú a los gremios",
-    "texto": "Una reforma preocupa por tres cosas: **cuánto costará, cuánto durará y quién la organiza**. Te lo explicamos antes de empezar y coordinamos la obra de principio a fin.\n\nTrabajamos con profesionales de confianza —albañilería, alicatado, fontanería, electricidad— y cada uno entra en su momento. El yeso lo hace nuestro propio equipo.",
+    "titulo": "Reformas en Jaén, sin organizar tú a los gremios",
+    "texto": "Una reforma preocupa por tres cosas: **cuánto costará, cuánto durará y quién la organiza**. Te lo explicamos antes de empezar y coordinamos la obra de principio a fin, para que la vivas sin complicaciones.\n\nTrabajamos con profesionales de confianza —albañilería, alicatado, fontanería, electricidad— y cada uno entra en su momento. El yeso lo hace nuestro propio equipo.",
     "lista": [
       "**Un solo interlocutor** durante toda la obra.",
       "**Presupuesto claro** antes de empezar.",
       "**Cada oficio en su orden**, sin esperas innecesarias.",
       "**Si surge un imprevisto**, decides tú antes de seguir."
     ],
-    "enlace": "Cómo se organiza una reforma"
+    "enlace": "Reformas en Jaén: cómo las organizamos"
   },
   "zonas": {
     "antetitulo": "Zonas de servicio",
@@ -68,8 +68,8 @@
       },
       {
         "duda": "«¿Con quién hablo si surge algo?»",
-        "titulo": "Trato directo",
-        "texto": "Hablas directamente con nosotros, de la primera llamada al último repaso. Sin centralitas ni intermediarios."
+        "titulo": "Trato cercano y directo",
+        "texto": "Siempre hablas con nosotros, sin centralitas ni intermediarios. Te escuchamos, te explicamos cada paso con palabras claras y cuidamos tu casa como si fuera la nuestra."
       },
       {
         "duda": "«¿Tendré que organizar yo a los gremios?»",

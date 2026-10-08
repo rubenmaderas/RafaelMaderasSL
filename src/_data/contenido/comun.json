@@ -28,5 +28,30 @@
   "pie": {
     "texto": "Empresa de yeso y reformas en Jaén, con equipo propio para los trabajos de yeso y gremios coordinados para el resto de la obra. Trabajamos en Jaén capital, la provincia de Jaén y el resto de Andalucía.",
     "zona": "Jaén y Andalucía"
+  },
+  "chatWhatsapp": {
+    "activo": true,
+    "boton": "¿Hablamos?",
+    "estado": "Solemos responder en el mismo día",
+    "saludo": "¡Hola! **¿En qué te podemos ayudar?** Elige una opción y se abrirá WhatsApp con el mensaje ya escrito.",
+    "opciones": [
+      {
+        "texto": "Pedir presupuesto de yeso",
+        "mensaje": "Hola, os escribo desde la web.\nQuiero pedir presupuesto para un trabajo de yeso: alisar paredes, quitar gotelé, techos…\nLa obra está en: "
+      },
+      {
+        "texto": "Consultar una reforma",
+        "mensaje": "Hola, os escribo desde la web.\nEstoy pensando en hacer una reforma y me gustaría consultaros.\nLa obra está en: "
+      },
+      {
+        "texto": "¿Trabajáis en mi localidad?",
+        "mensaje": "Hola, os escribo desde la web.\n¿Trabajáis en mi localidad? Es: "
+      },
+      {
+        "texto": "Otra consulta",
+        "mensaje": "Hola, os escribo desde la web.\nQuería consultaros lo siguiente: "
+      }
+    ],
+    "nota": "Con unas fotos de la obra te orientamos mejor."
   }
 }

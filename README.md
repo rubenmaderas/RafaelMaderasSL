@@ -111,7 +111,7 @@ Los textos de las seis páginas principales, su título y su descripción para G
 
 La web habla como **empresa**: «nosotros» (hacemos, coordinamos, te llamamos) y trata al cliente de **tú**. Es lo habitual en las webs de empresas de reformas y de yeso que se analizaron. Rafael aparece por su nombre solo en «Quiénes somos», como **fundador y gerente** (en /admin → «Datos de la empresa» → «Fundador»). En el resto de la web se habla de «nuestro fundador» para explicar los 40 años de oficio.
 
-Los **40 años** son de oficio del fundador, no de la empresa, que se constituyó en 2012 («Año de constitución»). La cifra se calcula al compilar a partir del año en que empezó en el oficio (1986), así que sube sola cada año cuando se vuelve a publicar la web. En los textos se escribe con el comodín `{años}`. Mantén esta distinción si se reescribe algún texto, y no añadas cifras de plantilla, obras u opiniones que no se puedan demostrar.
+Los **40 años** son de oficio del fundador, no de la empresa, que se constituyó el 27/12/2011 («Fecha de constitución»). La cifra se calcula al compilar a partir del año en que empezó en el oficio (1986), así que sube sola cada año cuando se vuelve a publicar la web. En los textos se escribe con el comodín `{años}`. Mantén esta distinción si se reescribe algún texto, y no añadas cifras de plantilla, obras u opiniones que no se puedan demostrar.
 
 ### Estilo de redacción
 
@@ -182,8 +182,10 @@ En **`https://rafaelmaderas.es/admin/`** hay un panel en español, protegido con
 | **Servicios** | Trabajos de yeso, tipos de reforma y gremios que se coordinan |
 | **Preguntas frecuentes** | Preguntas y respuestas de Inicio, Servicios y Reformas; cada pregunta elige su página y se actualiza a la vez en la web y en los datos para Google |
 | **Fotos de la web** | Cada foto, su encuadre, su descripción (texto alternativo), si es ilustrativa y sus créditos |
-| **Textos comunes** | Proceso de trabajo, bloque final de contacto y textos del pie |
+| **Textos comunes** | Proceso de trabajo, bloque final de contacto, textos del pie y chat de WhatsApp |
 | **Datos de la empresa** | Nombre, teléfono, correo, mensaje de WhatsApp, fundador, datos legales y redes sociales |
+
+**Chat de WhatsApp** («Textos comunes → Chat de WhatsApp»): ventana de chat propia, gratuita, sin cookies ni scripts de terceros. En ordenador se abre con un botón flotante abajo a la derecha; en el móvil, con el botón «WhatsApp» de la barra inferior. Muestra un saludo y unas opciones («Pedir presupuesto», «Consultar una reforma»…); cada una abre WhatsApp con su mensaje ya escrito, que el cliente puede completar antes de enviarlo. Sin JavaScript, el botón de la barra abre WhatsApp directamente. Con Google Analytics activo, cada opción pulsada se mide como `clic_whatsapp` con `ubicacion: chat` y `opcion`. Para las respuestas automáticas (bienvenida, ausencia fuera de horario, respuestas rápidas) usa la app gratuita **WhatsApp Business** en el móvil de la empresa: Herramientas para la empresa → Mensaje de bienvenida / Mensaje de ausencia / Respuestas rápidas.
 
 A la derecha de cada formulario hay una **vista previa** con el aspecto de la web y, en las páginas, una simulación del resultado en Google con el recuento de caracteres. En el móvil la vista previa se oculta para dejar sitio al formulario; se puede editar desde el móvil, aunque en una tableta o un ordenador es más cómodo.
 
@@ -425,7 +427,11 @@ La cookie técnica de sesión de /admin (solo para quien edita la web) está exe
 
 **Acciones después de publicar** (ninguna garantiza una posición concreta en Google; el posicionamiento local depende sobre todo de la relevancia, la proximidad y la reputación real):
 1. **Google Search Console**: verifica el dominio, envía `https://rafaelmaderas.es/sitemap.xml` y revisa la cobertura y los errores cada cierto tiempo.
-2. **Perfil de Empresa de Google**: créalo o reclámalo. Categoría principal: yesista (o la más cercana disponible), con reformas como categoría secundaria. Configúralo como empresa de área de servicio (Jaén y alrededores), sin mostrar el domicilio si no se atiende allí al público. Usa **exactamente** el mismo nombre, teléfono y web que en la web y enlaza el perfil en /admin → «Datos de la empresa» → «Redes sociales».
+2. **Perfil de Empresa de Google**: créalo o reclámalo y configúralo así:
+   - **Categoría principal**: Google no ofrece «Yesero» ni «Yesista». Escribe «yeso», «enlucido» o «escayola» en el buscador de categorías y elige la más parecida que salga. Si ninguna encaja, usa «Empresa de reformas» como principal. Añade como secundarias las que encajen con el yeso y con las reformas. Las palabras «yesero» y «yesista» ya están en la web y en la descripción del perfil, así que la categoría no tiene que coincidir con ellas.
+   - **Descripción**: ya está modificada. Si la cambias, que no contradiga la web (yeso con equipo propio, reformas con gremios coordinados, Jaén y alrededores) y no incluyas enlaces, ofertas ni teléfonos.
+   - **Fecha de apertura**: **27/12/2011**, la misma que la «Fecha de constitución» de /admin → «Datos de la empresa», que es la que usa la web («Quiénes somos», inicio y `foundingDate` de los datos estructurados).
+   - Configúralo como empresa de área de servicio (Jaén y alrededores), sin mostrar el domicilio si no se atiende allí al público. Usa **exactamente** el mismo nombre, teléfono y web que en la web y enlaza el perfil en /admin → «Datos de la empresa» → «Redes sociales».
 3. **Fotos reales** de trabajos (antes y después) en la web y en el Perfil de Empresa, sustituyendo las imágenes de stock.
 4. **Reseñas reales**: pídeselas a clientes satisfechos, sin incentivos, y contéstalas. No publiques reseñas en la web que no se puedan verificar.
 5. Opcional: Bing Places / Bing Webmaster Tools, y alta en directorios locales serios con los mismos datos de nombre, dirección y teléfono.
@@ -476,7 +482,7 @@ Los textos se han redactado a partir de la información facilitada. Antes de pub
 
 - **Datos registrales, CIF y domicilio social** (ver la tabla de datos legales). La empresa ha confirmado que la sociedad está activa.
 - **Domicilio en la web**: Calle Perú, 2 A figura en el aviso legal, la política de privacidad y los datos estructurados, pero no en el pie ni en la página de contacto. Si se prefiere no mostrarlo en los datos estructurados, quita `streetAddress` y `postalCode` en `structuredData.js` (el aviso legal sí debe incluirlo).
-- **«Sociedad limitada inscrita en el Registro Mercantil de Jaén», año de constitución 2012**, en «Quiénes somos» (la inscripción es del 18/01/2012 según el BORME) y en los datos estructurados (`foundingDate`).
+- **«Sociedad limitada inscrita en el Registro Mercantil de Jaén», constituida el 27/12/2011** (fecha confirmada por la empresa; la inscripción en el Registro es del 18/01/2012 según el BORME). En «Quiénes somos» y en el inicio se muestra el año (2011), y en los datos estructurados la fecha completa (`foundingDate`). Coincide con la fecha de apertura del Perfil de Empresa de Google.
 - **40 años de oficio del fundador** como yesista (confirmado por la empresa en 2026). Se calcula con el año de inicio en el oficio (1986, en «Datos de la empresa» → «Fundador») y el año de compilación. Aparece en el inicio, en «Quiénes somos», en los datos estructurados y en la imagen para redes sociales. Esa imagen se genera en tu ordenador: ejecuta `npm run og` una vez al año (o al cambiar datos) y publica el resultado. No se genera en Netlify porque el servidor no tiene las mismas fuentes. Si el año de inicio exacto es otro, cámbialo en el gestor.
 - **Rafael Maderas, «fundador y gerente»** («Datos de la empresa» → «Fundador»), en «Quiénes somos» y en los datos estructurados. Según el BORME, es el administrador único desde la constitución. Si prefieres otro cargo o su nombre completo, cámbialo en el gestor.
 - **Servicios de yeso** anunciados (el yeso proyectado coincide con el «Proyectador de yeso» de la furgoneta): yeso proyectado, guarnecido y enlucido, alisado de paredes y gotelé, regularización de paredes antiguas y reparación de grietas, desconchones y rozas (/admin → «Servicios»). *No se anuncian* escayola ni placa de yeso laminado (pladur). Añádelos solo si se hacen.
@@ -514,7 +520,7 @@ Los textos se han redactado a partir de la información facilitada. Antes de pub
     - «si la pared está muy desplomada, te explicamos antes cómo corregirla».
   - Reformas: el orden de obra dice que las tuberías se prueban a la vista antes de taparlas y que la ducha se impermeabiliza antes de alicatar (también en «Cocinas y baños»). Además, si hay que quitar una pared, primero se comprueba si es de carga.
   - Grietas: «si una grieta pudiera tener origen estructural […] si lo vemos, te lo diremos» (Servicios y FAQ).
-- **«Empresa familiar»** (inicio y «Quiénes somos») y que el fundador **creó la empresa en 2012** (inicio).
+- **«Empresa familiar»** (inicio y «Quiénes somos») y que el fundador **creó la empresa en 2011** (inicio).
 - **Propiedades del yeso** en Servicios: material **incombustible (Euroclase A1)** que **ayuda a regular la humedad** (absorbe la humedad que sobra en el ambiente y la devuelve cuando el aire está seco), según el manual de ATEDY. Del yeso proyectado se dice:
   - «menos días de obra»;
   - «sin empalmes» (cada pared de una sola vez, sin empalmes entre amasadas) y «acabado homogéneo»;

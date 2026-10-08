@@ -75,6 +75,42 @@ function text(value) {
   return String(value ?? "").trim();
 }
 
+// Días de la semana: clave del gestor → [nombre visible, nombre en Schema.org].
+const DAYS = {
+  lunes: ["Lunes", "Monday"],
+  martes: ["Martes", "Tuesday"],
+  miercoles: ["Miércoles", "Wednesday"],
+  jueves: ["Jueves", "Thursday"],
+  viernes: ["Viernes", "Friday"],
+  sabado: ["Sábado", "Saturday"],
+  domingo: ["Domingo", "Sunday"],
+};
+const DAY_ORDER = Object.keys(DAYS);
+const TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/;
+
+// Horario (/admin → «Datos de la empresa» → «Horario»): se muestra en Contacto y en
+// los datos estructurados (openingHoursSpecification).
+function parseHours(slots) {
+  return (Array.isArray(slots) ? slots : []).map((slot) => {
+    const days = [...new Set(slot.dias || [])].filter((d) => DAYS[d]);
+    days.sort((a, b) => DAY_ORDER.indexOf(a) - DAY_ORDER.indexOf(b));
+    const opens = text(slot.abre);
+    const closes = text(slot.cierra);
+    if (!days.length) fail("Hay una franja del horario sin días");
+    if (!TIME_PATTERN.test(opens) || !TIME_PATTERN.test(closes) || opens >= closes) {
+      fail(`El horario ${opens}–${closes} no es válido (usa el formato 08:00 y que cierre después de abrir)`);
+    }
+    const names = days.map((d) => DAYS[d][0]);
+    const consecutive = days.every((d, i) => i === 0 || DAY_ORDER.indexOf(d) === DAY_ORDER.indexOf(days[i - 1]) + 1);
+    let label;
+    if (names.length === 1) label = names[0];
+    else if (consecutive && names.length > 2) label = `${names[0]} a ${names.at(-1).toLowerCase()}`;
+    else label = [names[0], ...names.slice(1).map((n) => n.toLowerCase())].join(", ").replace(/, ([^,]+)$/, " y $1");
+    const short = (t) => t.replace(/^0/, "");
+    return { days: days.map((d) => DAYS[d][1]), label, opens, closes, display: `${short(opens)}–${short(closes)}` };
+  });
+}
+
 export function buildSite() {
   const data = readContent("empresa");
   const legal = data.legal || {};
@@ -91,12 +127,16 @@ export function buildSite() {
 
   const currentYear = new Date().getFullYear();
   const tradeStartYear = Number(founder.inicioOficio);
-  const foundedYear = Number(data.anoConstitucion);
+  // Fecha de constitución en formato AAAA-MM-DD (la misma que la fecha de apertura
+  // del Perfil de Empresa de Google).
+  const foundingDate = text(data.fechaConstitucion).slice(0, 10);
+  const foundingMatch = foundingDate.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  const foundedYear = foundingMatch ? Number(foundingMatch[1]) : NaN;
   if (!Number.isInteger(tradeStartYear) || tradeStartYear < 1950 || tradeStartYear > currentYear) {
     fail("El año de inicio en el oficio no es válido");
   }
-  if (!Number.isInteger(foundedYear) || foundedYear < 1950 || foundedYear > currentYear) {
-    fail("El año de constitución no es válido");
+  if (!foundingMatch || Number.isNaN(Date.parse(foundingDate)) || foundedYear < 1950 || foundedYear > currentYear) {
+    fail(`La fecha de constitución «${data.fechaConstitucion}» no es válida (formato AAAA-MM-DD)`);
   }
 
   const name = text(data.nombre);
@@ -141,8 +181,8 @@ export function buildSite() {
     locale: "es_ES",
 
     // Los años de experiencia son los de oficio del fundador como yesista (anteriores
-    // a la empresa) y se calculan con el año de compilación. "foundedYear" es el año
-    // de inscripción de la sociedad.
+    // a la empresa) y se calculan con el año de compilación. "foundingDate" es la fecha
+    // de constitución de la sociedad y "foundedYear", su año.
     founder: {
       name: text(founder.nombre),
       role: text(founder.cargo),
@@ -150,6 +190,7 @@ export function buildSite() {
       tradeStartYear,
       yearsExperience: currentYear - tradeStartYear,
     },
+    foundingDate,
     foundedYear,
 
     phone: {
@@ -163,6 +204,8 @@ export function buildSite() {
     whatsapp: {
       display: phoneDisplay,
       message: whatsappMessage,
+      // Enlace sin mensaje: el chat de la web le añade el texto de cada opción.
+      base: `https://wa.me/34${phoneDigits}`,
       href: `https://wa.me/34${phoneDigits}${whatsappMessage ? `?text=${encodeURIComponent(whatsappMessage)}` : ""}`,
     },
 
@@ -175,6 +218,9 @@ export function buildSite() {
     // no se muestra en la cabecera, el pie ni la página de contacto porque la empresa
     // trabaja en casa del cliente y no atiende al público allí.
     address: siteAddress,
+
+    // Horario de atención (debe coincidir con el del Perfil de Empresa de Google).
+    hours: parseHours(data.horario),
 
     areaServed: [
       { type: "City", name: "Jaén" },

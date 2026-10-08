@@ -1,16 +1,16 @@
 {
   "seo": {
-    "titulo": "Reformas integrales en Jaén | {empresa}",
-    "descripcion": "Empresa de reformas en Jaén: reformas integrales, cocinas y baños con un solo interlocutor. Coordinamos los gremios y hacemos el yeso con equipo propio."
+    "titulo": "Empresa de reformas en Jaén | {empresa}",
+    "descripcion": "Empresa de reformas en Jaén: reformas integrales, cocinas y baños con un solo interlocutor. Coordinamos los gremios y el yeso lo hacen nuestros yesistas."
   },
   "cabecera": {
     "antetitulo": "Reformas",
-    "titulo": "Reformas integrales en Jaén con coordinación de gremios",
-    "entradilla": "Una reforma reúne a muchos oficios. **Con nosotros tratas con una sola empresa**: organizamos la obra, coordinamos cada gremio y hacemos el yeso con nuestro propio equipo."
+    "titulo": "Reformas en Jaén, con todos los gremios coordinados",
+    "entradilla": "Una reforma integral reúne a muchos oficios. **Con nosotros tratas con una sola empresa de reformas en Jaén**: organizamos la obra, coordinamos cada gremio y hacemos el yeso con nuestro propio equipo de yesistas."
   },
   "coordinacion": {
     "antetitulo": "Coordinación",
-    "titulo": "Tu reforma, coordinada de principio a fin",
+    "titulo": "Tu reforma en Jaén, coordinada de principio a fin",
     "texto": "Lo que más retrasa una reforma no suele ser el trabajo, sino **la espera entre un oficio y el siguiente**. Y lo que más cansa es tener que organizarlo todo tú.\n\nCuando una sola empresa coordina a los gremios, cada uno sabe cuándo entra y qué se va a encontrar. Trabajamos con profesionales de confianza y conocemos el orden que necesita cada obra.",
     "lista": [
       "**Un solo interlocutor**, del presupuesto al último repaso.",
@@ -27,7 +27,7 @@
   },
   "tipos": {
     "antetitulo": "Tipos de reforma",
-    "titulo": "Reformas de vivienda, cocinas, baños y obra en general"
+    "titulo": "Reformas en Jaén: viviendas, cocinas, baños y obra en general"
   },
   "orden": {
     "antetitulo": "Orden de obra",

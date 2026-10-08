@@ -70,6 +70,9 @@ hideFinalCta: true
       <div><dt>Teléfono y WhatsApp</dt><dd><a href="{{ site.phone.href }}">{{ site.phone.displayIntl }}</a></dd></div>
       <div><dt>Correo electrónico</dt><dd><a href="{{ site.email.href }}">{{ site.email.address }}</a></dd></div>
       <div><dt>Zona de servicio</dt><dd>{{ c.datos.zona | t }}</dd></div>
+      {%- if site.hours.length %}
+      <div><dt>Horario</dt><dd>{% for h in site.hours %}{{ h.label }}: {{ h.display }}{% if not loop.last %}<br>{% endif %}{% endfor %}</dd></div>
+      {%- endif %}
     </dl>
     {%- if c.datos.nota %}
     <p class="small">{{ c.datos.nota | mdi | safe }}</p>

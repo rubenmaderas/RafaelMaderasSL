@@ -1,0 +1,51 @@
+{%- from "macros/icons.njk" import icon -%}
+{#-
+  Chat de WhatsApp (sin servicios de terceros ni cookies): un botón flotante abre un
+  panel con opciones; cada una abre WhatsApp con el mensaje ya escrito. Se edita en
+  /admin → «Textos comunes → Chat de WhatsApp». Solo se muestra con JavaScript
+  (main.js); sin él siguen funcionando los demás botones de WhatsApp de la web.
+  En móvil no hay botón flotante: lo abre el botón «WhatsApp» de la barra inferior.
+-#}
+{%- set chat = contenido.comun.chatWhatsapp -%}
+{%- if chat and chat.activo and chat.opciones and chat.opciones.length %}
+<div class="wa-chat" data-wa-chat>
+  <button class="wa-chat__launcher" type="button" aria-expanded="false" aria-controls="wa-chat-panel" data-wa-chat-toggle>
+    {{ icon("whatsapp", 24) }}<span class="wa-chat__launcher-label">{{ chat.boton | t }}</span>
+  </button>
+
+  <section class="wa-chat__panel" id="wa-chat-panel" role="dialog" aria-labelledby="wa-chat-titulo" aria-describedby="wa-chat-saludo" tabindex="-1" hidden data-wa-chat-panel>
+    <header class="wa-chat__head">
+      <img class="wa-chat__avatar" src="/favicon.svg" alt="" width="40" height="40">
+      <div class="wa-chat__who">
+        {#- Párrafo y no <h2>: la ventana se nombra con aria-labelledby y no debe
+            contar como encabezado de la página. -#}
+        <p class="wa-chat__title" id="wa-chat-titulo">{{ site.shortName }}</p>
+        {%- if chat.estado %}
+        <p class="wa-chat__status">{{ chat.estado | t }}</p>
+        {%- endif %}
+      </div>
+      <button class="wa-chat__close" type="button" data-wa-chat-close>
+        {{ icon("close", 20) }}<span class="visually-hidden">Cerrar el chat</span>
+      </button>
+    </header>
+
+    <div class="wa-chat__body">
+      <p class="wa-chat__bubble" id="wa-chat-saludo">{{ chat.saludo | mdi | safe }}</p>
+      <ul class="wa-chat__options" role="list">
+        {%- for opcion in chat.opciones %}
+        <li>
+          <a class="wa-chat__option" href="{{ opcion.mensaje | whatsappHref }}" target="_blank" rel="noopener" data-wa-option="{{ opcion.texto | t }}">
+            <span>{{ opcion.texto | t }}</span>{{ icon("arrow", 16) }}<span class="visually-hidden"> (abre WhatsApp en una nueva pestaña)</span>
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </div>
+
+    {%- if chat.nota %}
+    <p class="wa-chat__foot">{{ chat.nota | mdi | safe }}</p>
+    {%- endif %}
+  </section>
+</div>
+{%- endif %}
+

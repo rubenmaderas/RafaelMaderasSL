@@ -10,8 +10,8 @@
   },
   "capital": {
     "antetitulo": "Zona principal",
-    "titulo": "Yeso y reformas en Jaén capital",
-    "texto": "Es nuestra zona de trabajo habitual: pisos y casas en cualquier barrio, del casco antiguo al Bulevar.\n\nCada vivienda pide un enfoque distinto:\n\n- **Casas antiguas del casco histórico:** paredes irregulares o con parches que conviene regularizar.\n- **Pisos de los años 70, 80 y 90:** quitar el gotelé para modernizar la casa.\n- **Obra nueva y reformas integrales:** yeso proyectado para revestir muchos metros con un acabado uniforme."
+    "titulo": "Yesista y reformas en Jaén capital",
+    "texto": "Es nuestra zona de trabajo habitual: como [yeseros](/servicios/) y [empresa de reformas en Jaén](/reformas/), trabajamos en pisos y casas de cualquier barrio, del casco antiguo al Bulevar.\n\nCada vivienda pide un enfoque distinto:\n\n- **Casas antiguas del casco histórico:** paredes irregulares o con parches que conviene regularizar.\n- **Pisos de los años 70, 80 y 90:** quitar el gotelé para modernizar la casa.\n- **Obra nueva y reformas integrales:** yeso proyectado para revestir muchos metros con un acabado uniforme."
   },
   "cercanias": {
     "antetitulo": "Cerca de Jaén",
@@ -64,5 +64,9 @@
   "otraLocalidad": {
     "titulo": "¿Tu localidad no aparece en la lista?",
     "texto": "La lista recoge solo algunas localidades: no es cerrada. Si tu obra está en otro municipio de Jaén o de Andalucía, llámanos o escríbenos igualmente y te diremos si podemos hacernos cargo."
+  },
+  "preguntas": {
+    "antetitulo": "Preguntas frecuentes",
+    "titulo": "Dudas sobre cómo trabajamos en cada zona"
   }
 }
